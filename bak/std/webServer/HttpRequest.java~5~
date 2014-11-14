@@ -1,0 +1,123 @@
+package std.webServer;
+
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import util.*;
+
+final class HttpRequest implements Runnable {
+
+  final static String CRLF = "\r\n";
+  SocketManager sockManager;
+
+  // Constructor
+  public HttpRequest(SocketManager sockMan) throws Exception {
+    sockManager = sockMan;
+  }
+
+  // Implement the run() method of the Runnable interface.
+  public void run() {
+    try {
+      processRequest();
+    }
+    catch (Exception e) {
+      System.out.println(e);
+    }
+  }
+
+  private void processRequest() throws Exception {
+    // Get the request line of the HTTP request message.
+    String requestLine = sockManager.Leer();
+    System.out.println("RequestLine: " + requestLine);
+
+    // Display the request line.
+    //System.out.println();
+    //System.out.println(requestLine);
+
+    // Extract the filename from the request line.
+    StringTokenizer tokens = new StringTokenizer(requestLine);
+    tokens.nextToken(); // skip over the method, which should be "GET"
+    //System.out.println("Next Token: "+tokens.nextToken());
+    String fileName = tokens.nextToken();
+
+    // Prepend a "." so that file request is within the current directory.
+    fileName = "C:/Alumno/Practica2WebServer/src/std/webServer" + fileName;
+
+    // Open the requested file.
+    FileInputStream fis = null;
+    boolean fileExists = true;
+    try {
+      fis = new FileInputStream(fileName);
+    }
+    catch (FileNotFoundException e) {
+      fileExists = false;
+    }
+
+    System.out.println("Incoming!!!");
+    System.out.println("1.............." + requestLine);
+
+    // Get and display the header lines.
+    String headerLine = null;
+    while ( (headerLine = sockManager.Leer()).length() != 0) {
+      System.out.println("2.............." + headerLine);
+    }
+
+    // Construct the response message.
+    String statusLine = null;
+    String contentTypeLine = null;
+    String entityBody = null;
+    if (fileExists) {
+      statusLine = "HTTP/1.0 200 OK" + CRLF;
+      contentTypeLine = "Content-type: " + contentType(fileName) + CRLF;
+    }
+    else {
+      statusLine = "HTTP/1.0 404 Not Found" + CRLF;
+      contentTypeLine = "Content-Type: text/html" + CRLF;
+      //entityBody = "<HTML>" + "<HEAD><TITLE>Not Found</TITLE></HEAD>" + "<BODY>Not Found</BODY></HTML>";
+      entityBody = "<HTML><HEAD><TITLE>Not Found</TITLE></HEAD><BODY>El fichero no ha sido encontrado. Puedes ver cómo puedes dar formato al texto poniendolo, por ejemplo, en <b>negrita</b> o <i>cursiva</i>.</BODY></HTML>";
+    }
+
+    // Send the status line.
+    sockManager.Escribir(statusLine);
+
+    // Send the content type line.
+    sockManager.Escribir(contentTypeLine);
+
+    // Send a blank line to indicate the end of the header lines.
+    sockManager.Escribir(CRLF);
+
+    // Send the entity body.
+    if (fileExists) {
+      sendBytes(fis);
+      fis.close();
+    }
+    else {
+      sockManager.Escribir(entityBody);
+    }
+
+    // Close streams and socket.
+    sockManager.CerrarStreams();
+    sockManager.CerrarSocket();
+  }
+
+  private void sendBytes(FileInputStream fis) throws Exception {
+    // Construct a 1K buffer to hold bytes on their way to the socket.
+    byte[] buffer = new byte[1024];
+    int bytes = 0;
+
+    // Copy requested file into the socket's output stream.
+    while ( (bytes = fis.read(buffer)) != -1) {
+      sockManager.Escribir(buffer, bytes);
+    }
+  }
+
+  private static String contentType(String fileName) {
+    if (fileName.endsWith(".htm") || fileName.endsWith(".html")) {
+      return "text/html";
+    }
+    if (fileName.endsWith(".ram") || fileName.endsWith(".ra")) {
+      return "audio/x-pn-realaudio";
+    }
+    return "application/octet-stream";
+  }
+}

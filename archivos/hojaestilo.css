@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Hoja de Estilo</title>
+<style type="text/css">{  }
+
+BODY {
+	color : #000000;
+	font-family : Verdana;
+	font: normal;
+	font-size: 12px;
+	background-color: #ffffff;
+	margin-left: 8%;
+	margin-right: 8%;
+}
+
+A:LINK, A:VISITED {
+	color : #4786D3;
+	text-decoration : none;
+	font-weight: bold;
+}
+
+A:HOVER {
+	color: #BFD5F0;
+	text-decoration : none;
+	font-weight: bold;
+}
+
+.cabecera{
+	color: #4786D3;
+	font-size : 25px;
+	font-weight: bold;
+	margin-top: 0;
+	margin-bottom: 0;
+	text-align: center;
+}
+
+.titulo {
+	color: #BFD5F0;
+	font-size : 15px;
+	font-weight: bold;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.subtitulo {
+	color: #4786D3;
+	font-size : 13px;
+	font-weight: bold;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.peque {
+	color: #4786D3;
+	font-weight: bold;
+	font-size : 8px;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+table { 
+	width: 100%; 
+	color : #000000;
+	font-family : Verdana;
+	font: normal;
+	font-size: 12px;
+	text-align:justify;
+}
+
+
+
+</style>
+</head>
+<body>
+</body>
+</html>
