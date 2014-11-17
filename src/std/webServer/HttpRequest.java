@@ -26,7 +26,7 @@ final class HttpRequest implements Runnable {
   }
 
   private void processRequest() throws Exception {
-    // Get the request line of the HTTP request message.
+    // lee la palabra que e has pasado por socket desde el cliente
     String requestLine = sockManager.Leer();
     System.out.println("RequestLine: " + requestLine);
 
@@ -35,14 +35,12 @@ final class HttpRequest implements Runnable {
     //System.out.println(requestLine);
 
     // Extract the filename from the request line.
-    StringTokenizer tokens = new StringTokenizer(requestLine);
-    tokens.nextToken(); // skip over the method, which should be "GET"
+   //  StringTokenizer tokens = new StringTokenizer(requestLine);
+   //  tokens.nextToken(); // skip over the method, which should be "GET"
     //System.out.println("Next Token: "+tokens.nextToken());
-   
     
-    String palabraCambiada=sockManager.Leer(); 
-    sockManager.Escribir(palabraCambiada.toUpperCase());
-    
+    // cambia la palabra metida a mayusculas y la envia a traves del socket
+    sockManager.Escribir(requestLine.toUpperCase()); 
     // Close streams and socket.
     sockManager.CerrarStreams();
     sockManager.CerrarSocket();
