@@ -3,18 +3,8 @@ import util.*;
 import java.net.*;
 import java.io.*;
 
-/**
- * <p>Title: practica1</p>
- *
- * <p>Description: Introduccion a los sockets</p>
- *
- * <p>Copyright: Copyright (c) 2005</p>
- *
- * <p>Company: ESIDE</p>
- *
- * @author Susana Pérez
- * @version 1.0
- */
+
+
 public class TCPClient {
     public static void main(String[] args) throws Exception {
     	
