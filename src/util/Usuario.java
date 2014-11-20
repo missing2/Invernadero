@@ -10,6 +10,10 @@ public Usuario(String nick, int contrasena) {
 	this.contrasena = contrasena;
 }
 
+public Usuario() {
+	
+}
+
 public String getNick() {
 	return nick;
 }

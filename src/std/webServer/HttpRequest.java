@@ -34,7 +34,7 @@ final class HttpRequest implements Runnable {
     int estado=0;
 	String comando="";
 	Data_base_controler base = new Data_base_controler();
-	
+	Usuario user = new Usuario();
   while (estado!=4){
    
 		switch (estado) {
@@ -51,7 +51,7 @@ final class HttpRequest implements Runnable {
 					estado=0;
 				}else if (base.consultaUsuario(requestLine)){
 					sockManager.Escribir("200 OK. bienvenido"+"requestLine");
-					
+					user.setNick(requestLine);
 					estado = 2;
 			    }     
 	     	}else if (comando.equals("adios")){
@@ -64,18 +64,20 @@ final class HttpRequest implements Runnable {
 
 		case 1:
 			if (comando.equals("Pass")) {
-				String nombre = requestLine;  //???puedo pasar de un estado a otro y no me cambia el request???
+				
 				sockManager.Escribir("Introduzca su pasword :");
 				requestLine  = sockManager.Leer();
 				int pass = Integer.parseInt(requestLine);
+				
 				if (requestLine==null){
 					sockManager.Escribir("402 ERR.Falta la clave ");
 					estado = 0;
 				}else{
-					if (base.ConsultarPasword(nombre, pass)){
+					if (base.ConsultarPasword(user.getNick(), pass)){
 							sockManager.Escribir("201 OK.Bienvenido al sistema");
 							estado=2;
-					}else if (!base.ConsultarPasword(nombre, pass)){
+							user.setContrasena(pass);
+					}else if (!base.ConsultarPasword(user.getNick(), pass)){
 							sockManager.Escribir("401 ERR.La clave es incorrecta");
 							estado=1;
 					}
