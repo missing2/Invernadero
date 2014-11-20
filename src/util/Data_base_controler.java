@@ -33,23 +33,13 @@ public class Data_base_controler {
 
 	
 	
-	
-	
-	
-	
-	
-	
-	//------------------------- METODOS DE EMPLEADO ---------------------------------------
-	
- 	
-	
      /**
      * Método para CONSULTAR un EMPLEADO por Nombre de empleado (De la lista)
-     * @param nombre -> Atributo de tipo String de Empleado
+     * @param nombre
      * @return boolean
      * @throws SQLException
      */
-    public  boolean consultaUsuario(String nombre) throws SQLException {
+    public boolean consultaUsuario(String nombre) throws SQLException {
     
     	boolean existe=false;
     	
@@ -63,16 +53,15 @@ public class Data_base_controler {
 		return existe;
 	}
      
-     
-
 	 		/**
 	 		 * Método para CONSULTAR la contraseña
+	 		 * @param nombre
+	 		 * @param pass
 	 		 * @return boolean
 	 		 * @throws SQLException
 	 		 */
 	 		public boolean ConsultarPasword(String nombre,int pass)throws SQLException{
-	 			
-	 			
+	 				 			
 	 			boolean existe=false;
 	 	    	
 	 			Statement st = conn.createStatement(); 
@@ -83,10 +72,7 @@ public class Data_base_controler {
 	 		 		
 	 			rs2.close();
 	 			return existe;
-	 		}
-	 		
-	 		
-
+	 		  }
 }
 	 	
 	 	

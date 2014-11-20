@@ -6,13 +6,13 @@ import java.util.*;
 
 import util.*;
 
-final class HttpRequest implements Runnable {
+final class Request implements Runnable {
 
   final static String CRLF = "\r\n";
   SocketManager sockManager;
 
   // Constructor
-  public HttpRequest(SocketManager sockMan) throws Exception {
+  public Request(SocketManager sockMan) throws Exception {
     sockManager = sockMan;
   }
 

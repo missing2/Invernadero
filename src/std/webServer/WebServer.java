@@ -20,7 +20,7 @@ public final class WebServer
 
 			SocketManager sockManager = new SocketManager(wellcomeSocket.accept());
 
-			HttpRequest request = new HttpRequest(sockManager);
+			Request request = new Request(sockManager);
 
 			Thread thre = new Thread(request); 
 
