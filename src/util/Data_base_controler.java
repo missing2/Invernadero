@@ -41,43 +41,26 @@ public class Data_base_controler {
 	
 	//------------------------- METODOS DE EMPLEADO ---------------------------------------
 	
-    /**
-     * Método para INSERTAR un Usuario
-     * @param a -> Objeto de tipo Usuario
-     * @throws SQLException
-     */
-    public void insertarUsuario(Usuario a) throws SQLException {
-				
-	Statement st = conn.createStatement();
-					
-	st.execute("INSERT INTO User VALUES ('"+a.getDni()+"','"+a.getNombre()+"','"+a.getObservaciones()+"')");
-							   
-	System.out.println("-------------------");					
-	System.out.println("USUARIO INSERTADO");
-	System.out.println("-------------------");
-					
-	st.close();
-	}
-	
-	
+ 	
 	
      /**
      * Método para CONSULTAR un EMPLEADO por Nombre de empleado (De la lista)
      * @param nombre -> Atributo de tipo String de Empleado
-     * @return emp -> Objeto de tipo Empleado
+     * @return boolean
      * @throws SQLException
      */
-    public  Usuario consultaUsuario(String nombre) throws SQLException {
+    public  boolean consultaUsuario(String nombre) throws SQLException {
+    
+    	boolean existe=false;
     	
-    	Usuario emp = new Usuario();
-	
 		Statement st = conn.createStatement(); 
 		
-		ResultSet rs2 = st.executeQuery("Select * from User Where Nombre = '"+nombre+"';");                                                                                                                                                     // estado civil es estado, no string
-	 	emp = new Usuario(rs2.getString("DNI"),rs2.getString("Nombre"),rs2.getString("Apellido1"),rs2.getString("Apellido2"),rs2.getString("NSS"),rs2.getString("Dir"),rs2.getString("CP"),rs2.getString("E_civil"),rs2.getInt("N_hijos"),rs2.getString("F_nac"),rs2.getString("F_alta"),rs2.getString("F_rev_med"),arrayNumTel,rs2.getString("observaciones"),rs2.getString("cargo"),rs2.getString("puesto"),rs2.getString("N_cuenta"));
-	 				 
+		ResultSet rs2 = st.executeQuery("Select * from User Where User = '"+nombre+"'");                                                                                                                                                     // estado civil es estado, no string
+	 	if (rs2!=null)
+	 		existe=true;
+	 		
 		rs2.close();
-		return emp;
+		return existe;
 	}
      
      
@@ -87,29 +70,19 @@ public class Data_base_controler {
 	 		 * @return Empleado -> Lista de objetos de tipo Empleado
 	 		 * @throws SQLException
 	 		 */
-	 		public List<Empleado> listaEmpleados()throws SQLException{
-	 			final List<Empleado> Empleado = new ArrayList<Empleado>();
+	 		public boolean ConsultarPasword(String nombre,int pass)throws SQLException{
 	 			
-	 			Statement stat = conn.createStatement();
-	 			ResultSet rs = stat.executeQuery("select * from EMPLEADO");
 	 			
-	 			while (rs.next()) {
-	 				
-	 				String []telf = new String[3];
-	 				telf[0]=rs.getString("Telf1");
-	 				telf[1]=rs.getString("Telf2");
-	 				telf[2]=rs.getString("Telf3");
-	 				
-	 				final Empleado emp = new Empleado(rs.getString("DNI"), rs.getString("Nombre"),rs.getString("Apellido1"),rs.getString("Apellido2"),rs.getString("NSS"),rs.getString("Dir"),rs.getString("CP"),
-	 						rs.getString("E_civil"),rs.getInt("N_hijos"),rs.getString("F_nac"),rs.getString("F_alta"),rs.getString("F_rev_med"),
-	 						telf,rs.getString("Observaciones"),rs.getString("Cargo"),rs.getString("Puesto"),rs.getString("N_cuenta"));
-	 	 	 		Empleado.add(emp);
-	 			}
+	 			boolean existe=false;
+	 	    	
+	 			Statement st = conn.createStatement(); 
 	 			
-	 			rs.close();
-	 			stat.close();
-	 			return Empleado;
-	 			
+	 			ResultSet rs2 = st.executeQuery("Select * from User Where User = "+nombre+"and Where contrasena='"+pass+"'");                                                                                                                                                     // estado civil es estado, no string
+	 		 	if (rs2!=null)
+	 		 		existe=true;
+	 		 		
+	 			rs2.close();
+	 			return existe;
 	 		}
 	 		
 	 		

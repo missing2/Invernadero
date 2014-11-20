@@ -3,6 +3,7 @@ package std.webServer;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+
 import util.*;
 
 final class HttpRequest implements Runnable {
@@ -26,24 +27,101 @@ final class HttpRequest implements Runnable {
   }
 
   private void processRequest() throws Exception {
-    // lee la palabra que e has pasado por socket desde el cliente
-    String requestLine = sockManager.Leer();
+	  
+	 // lee la palabra que e has pasado por socket desde el cliente
+	 String  requestLine  = sockManager.Leer();
     System.out.println("RequestLine: " + requestLine);
+    int estado=0;
+	String comando="";
+	Data_base_controler base = new Data_base_controler();
+	
+  while (estado!=4){
+   
+		switch (estado) {
+	
+		case 0:
+			if (comando.equals("User")) {
+				sockManager.Escribir("Introduzca el nombre de usuario:");
+				requestLine  = sockManager.Leer();
+				if (requestLine!=null){
+					sockManager.Escribir("400 ERR.Falta el nombre de usuario");
+					estado=0;
+				}else if (!base.consultaUsuario(requestLine)){
+					sockManager.Escribir("401ERR.Usuario desconocido");
+					estado=0;
+				}else if (base.consultaUsuario(requestLine)){
+					sockManager.Escribir("200 OK. bienvenido"+"requestLine");
+					
+					estado = 2;
+			    }     
+	     	}else if (comando.equals("adios")){
+	     		estado = 4;
+	    	}else{
+	    		estado=0;
+	    	}
+			
+		break;
 
-    // Display the request line.
-    //System.out.println();
-    //System.out.println(requestLine);
+		case 1:
+			if (comando.equals("Pass")) {
+				String nombre = requestLine;  //???puedo pasar de un estado a otro y no me cambia el request???
+				sockManager.Escribir("Introduzca su pasword :");
+				requestLine  = sockManager.Leer();
+				int pass = Integer.parseInt(requestLine);
+				if (requestLine==null){
+					sockManager.Escribir("402 ERR.Falta la clave ");
+					estado = 0;
+				}else{
+					if (base.ConsultarPasword(nombre, pass)){
+							sockManager.Escribir("201 OK.Bienvenido al sistema");
+							estado=2;
+					}else if (!base.ConsultarPasword(nombre, pass)){
+							sockManager.Escribir("401 ERR.La clave es incorrecta");
+							estado=1;
+					}
+				}
+	    	}else if (comando.equals("adios")){
+	    		estado=4;
+	    	}
+		break;
 
-    // Extract the filename from the request line.
-   //  StringTokenizer tokens = new StringTokenizer(requestLine);
-   //  tokens.nextToken(); // skip over the method, which should be "GET"
-    //System.out.println("Next Token: "+tokens.nextToken());
+		case 2:
+			if (comando.equals("On")) {
+	 		}else if(comando.equals("Off")) {
+	 		}else if(comando.equals("Accion")) {
+			}else if(comando.equals("Listado")) {
+			}else if(comando.equals("Buscar")) {
+			}else if(comando.equals("Obtener_foto")) {
+			}else if(comando.equals("Salir")) {
+			}else {
+				sockManager.Escribir("Error, comando invalido."); //?? igual hay que quitarlo
+			}
+		break;
+
+		case 3:
+		    if (comando.equals("Confirmar_accion")) {
+			}else if(comando.equals("Rechazar_accion")) { 
+			}
+		break;
+
+		case 4:            // va a hacer conflicto con mi while (!4)
+			System.out.println("salir");
+		break;
+			
+		default :
+			sockManager.Escribir("Error, comando invalido."); //?? igual hay que quitarlo
+		break;
+		} 
+	}
+
+   
+ 
+  
     
-    // cambia la palabra metida a mayusculas y la envia a traves del socket
-    sockManager.Escribir(requestLine.toUpperCase()); 
-    // Close streams and socket.
-    sockManager.CerrarStreams();
+     // Close streams and socket.
+      sockManager.CerrarStreams();
     sockManager.CerrarSocket();
+    
   }
 
   private void sendBytes(FileInputStream fis) throws Exception {

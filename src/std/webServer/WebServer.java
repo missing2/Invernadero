@@ -22,56 +22,9 @@ public final class WebServer
 
 			HttpRequest request = new HttpRequest(sockManager);
 
-			Thread thre = new Thread(request);
+			Thread thre = new Thread(request); 
 
 			thre.start();
-
-//			int estado;
-//			String comando="";
-//
-//			switch (estado) {
-//			
-//			case 0:
-//				    if (comando.equals("User")) {
-//					}else {
-//					System.out.println("Error, inserte el usuario.");
-//					}
-//			break;
-//
-//			case 1:
-//				    if (comando.equals("Pass")) {
-//					}else {
-//						System.out.println("Error, inserte la contraseña.");
-//					}
-//			break;
-//
-//			case 2:
-//		  			if (comando.equals("On")) {
-//			   		}else if(comando.equals("Off")) {
-//				    }else if(comando.equals("Accion")) {
-//					}else if(comando.equals("Listado")) {
-//					}else if(comando.equals("Buscar")) {
-//					}else if(comando.equals("Obtener_foto")) {
-//					}else if(comando.equals("Salir")) {
-//					}else {
-//						System.out.println("Error, comando invalido.");
-//					}
-//			 break;
-//
-//			case 3:
-//				    if (comando.equals("Confirmar_accion")) {
-//					}else if(comando.equals("Rechazar_accion")) { 
-//					}
-//			break;
-//
-//			case 4:
-//				    System.out.println("salir");
-//			break;
-//				
-//			default :
-//				System.out.println("Error, comando invalido");
-//			break;
-//			} 
+		  }
 		}
-	}
-}
+   }

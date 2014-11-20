@@ -12,7 +12,7 @@ public class SocketManager {
     public SocketManager(Socket sock) throws IOException {
         this.mySocket = sock;
         InicializaStreams();
-        System.out.println("socket creado 1");
+       
     }
 
     /**
@@ -23,7 +23,7 @@ public class SocketManager {
     public SocketManager(InetAddress address, int port) throws IOException {
         mySocket = new Socket(address, port);
         InicializaStreams();
-        System.out.println("socket creado 2");
+        
     }
 
     /**
@@ -34,7 +34,7 @@ public class SocketManager {
     public SocketManager(String host, int port) throws IOException {
         mySocket = new Socket(host, port);
         InicializaStreams();
-        System.out.println("socket creado 3");
+       
     }
 
     /**
