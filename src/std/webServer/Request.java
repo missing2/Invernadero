@@ -159,8 +159,15 @@ public Data_base_controler base = new Data_base_controler();
     
   }
 
-  private void sacarListado() throws SQLException {
-	base.sacarlista();
+  private void sacarListado() throws SQLException, IOException {
+	  List< Variable> lista =base. sacarlista();
+	  
+	int a= lista.size();
+	for (int i=0; i<a;a++){
+		Variable v = lista.get(i);
+		
+		sockManager.Escribir("ELEM:"+i+1+""); // falta la placa en la bd
+	}
 	
 }
 

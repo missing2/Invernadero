@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JList;
 
@@ -91,12 +93,16 @@ public class Data_base_controler {
 				return estado;
 			}
 
-			public JList sacarlista() throws SQLException {
-				JList lista = new JList();
-				Variable a = new Variable();
+			public List< Variable> sacarlista() throws SQLException {
+				
+				List< Variable> lista = new ArrayList<Variable>();
 				Statement st = conn.createStatement();
 				ResultSet rs2 =  st.executeQuery("Select * from variable");
 				
+				while (rs2.next()) {
+					Variable a = new Variable(Integer.parseInt(rs2.getString("id_variable")),rs2.getString("def_variable"),rs2.getString("estado_variable"));
+					lista.add(a);
+				}
 				
 				return lista;
 				
