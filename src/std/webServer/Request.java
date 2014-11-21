@@ -89,12 +89,44 @@ final class Request implements Runnable {
 
 		case 2:
 			if (comando.equals("On")) {
+				sockManager.Escribir("Insertar id variable");
+				requestLine  = sockManager.Leer();
+				int id = Integer.parseInt(requestLine);
+				if (base.ConsultarIdVariable(id)){
+					if (base.consultarEstadoVariable(id).equals("off")){
+						sockManager.Escribir("203 OK.Control de variable activo");
+					}else if (base.consultarEstadoVariable(id).equals("on")) {
+						sockManager.Escribir("404ERR."+id+" en estado ON");
+					}
+					
+				}else{
+					sockManager.Escribir("405 ERR."+id+" no existe");
+				}
+				
 	 		}else if(comando.equals("Off")) {
+	 			sockManager.Escribir("Insertar id variable");
+				requestLine  = sockManager.Leer();
+				int id = Integer.parseInt(requestLine);
+				if (base.ConsultarIdVariable(id)){
+					if (base.consultarEstadoVariable(id).equals("off")){
+						sockManager.Escribir("204 OK.Control de variable desactivo");
+					}else if (base.consultarEstadoVariable(id).equals("on")) {
+						sockManager.Escribir("406ERR."+id+" en estado OFF");
+					}
+					
+				}else{
+					sockManager.Escribir("405 ERR."+id+" no existe");
+				}
 	 		}else if(comando.equals("Accion")) {
+	 
 			}else if(comando.equals("Listado")) {
+				
 			}else if(comando.equals("Buscar")) {
+				
 			}else if(comando.equals("Obtener_foto")) {
+				
 			}else if(comando.equals("Salir")) {
+				estado=4;
 			}else {
 				sockManager.Escribir("Error, comando invalido."); //?? igual hay que quitarlo
 			}
@@ -102,12 +134,14 @@ final class Request implements Runnable {
 
 		case 3:
 		    if (comando.equals("Confirmar_accion")) {
+		    	
 			}else if(comando.equals("Rechazar_accion")) { 
+				estado=2;
 			}
 		break;
 
 		case 4:            // va a hacer conflicto con mi while (!4)
-			System.out.println("salir");
+			sockManager.Escribir("208 OK.Adios.");
 		break;
 			
 		default :
@@ -116,10 +150,6 @@ final class Request implements Runnable {
 		} 
 	}
 
-   
- 
-  
-    
      // Close streams and socket.
       sockManager.CerrarStreams();
     sockManager.CerrarSocket();

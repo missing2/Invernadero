@@ -73,6 +73,21 @@ public class Data_base_controler {
 	 			rs2.close();
 	 			return existe;
 	 		  }
+
+			public boolean ConsultarIdVariable(int id) throws SQLException {
+				boolean existe = false;
+				Statement st = conn.createStatement();
+				ResultSet rs2 = st.executeQuery("Select * from variable Where id_variable = '"+id+"'");
+				return existe;
+			}
+
+			public String consultarEstadoVariable(int id) throws SQLException {
+				String estado;
+				Statement st = conn.createStatement();
+				ResultSet rs2 = st.executeQuery("Select estado_variable from variable Where id_variable = '"+id+"'");
+				estado=rs2.toString();
+				return estado;
+			}
 }
 	 	
 	 	
