@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JList;
+
 public class Data_base_controler {
 	private static Data_base_controler instance = null;
 	private Connection conn;
@@ -87,6 +89,17 @@ public class Data_base_controler {
 				ResultSet rs2 = st.executeQuery("Select estado_variable from variable Where id_variable = '"+id+"'");
 				estado=rs2.toString();
 				return estado;
+			}
+
+			public JList sacarlista() throws SQLException {
+				JList lista = new JList();
+				Variable a = new Variable();
+				Statement st = conn.createStatement();
+				ResultSet rs2 =  st.executeQuery("Select * from variable");
+				
+				
+				return lista;
+				
 			}
 }
 	 	

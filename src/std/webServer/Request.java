@@ -2,12 +2,15 @@ package std.webServer;
 
 import java.io.*;
 import java.net.*;
+import java.sql.SQLException;
 import java.util.*;
 
 import util.*;
 
 final class Request implements Runnable {
-
+	
+public Data_base_controler base = new Data_base_controler();
+	
   final static String CRLF = "\r\n";
   SocketManager sockManager;
 
@@ -33,7 +36,7 @@ final class Request implements Runnable {
     System.out.println("RequestLine: " + requestLine);
     int estado=0;
 	String comando="";
-	Data_base_controler base = new Data_base_controler();
+	
 	Usuario user = new Usuario();
   while (estado!=4){
    
@@ -120,7 +123,7 @@ final class Request implements Runnable {
 	 		}else if(comando.equals("Accion")) {
 	 
 			}else if(comando.equals("Listado")) {
-				
+				sacarListado();
 			}else if(comando.equals("Buscar")) {
 				
 			}else if(comando.equals("Obtener_foto")) {
@@ -156,7 +159,12 @@ final class Request implements Runnable {
     
   }
 
-  private void sendBytes(FileInputStream fis) throws Exception {
+  private void sacarListado() throws SQLException {
+	base.sacarlista();
+	
+}
+
+private void sendBytes(FileInputStream fis) throws Exception {
     // Construct a 1K buffer to hold bytes on their way to the socket.
     byte[] buffer = new byte[1024];
     int bytes = 0;
