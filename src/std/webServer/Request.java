@@ -123,9 +123,14 @@ public Data_base_controler base = new Data_base_controler();
 	 		}else if(comando.equals("Accion")) {
 	 
 			}else if(comando.equals("Listado")) {
-				sacarListado();
+				sacarListado();       //se puede quedar en bucle??
+				estado=2;
 			}else if(comando.equals("Buscar")) {
-				
+				sockManager.Escribir("Insertar lo que deseas buscar");
+				requestLine  = sockManager.Leer();
+				String a = requestLine.toString();
+				sacarBusqueda(a);       //se puede quedar en bucle??
+				estado=2;
 			}else if(comando.equals("Obtener_foto")) {
 				
 			}else if(comando.equals("Salir")) {
@@ -166,8 +171,26 @@ public Data_base_controler base = new Data_base_controler();
 	for (int i=0; i<a;a++){
 		Variable v = lista.get(i);
 		
-		sockManager.Escribir("ELEM:"+i+1+""); // falta la placa en la bd
+		sockManager.Escribir("ELEM:"+i+1+":"+v.getDef()+" ; "+v.getFuncion()+" ; "+v.getEstado()+" ; "+v.getUltima_accion());
+				
 	}
+	sockManager.Escribir("      ");
+	sockManager.Escribir("202 FINLISTA");
+	
+}
+  
+  private void sacarBusqueda(String palabra) throws SQLException, IOException {
+	  List< Variable> lista =base. sacarBusqueda(palabra);
+	  
+	int a= lista.size();
+	for (int i=0; i<a;a++){
+		Variable v = lista.get(i);
+		
+		sockManager.Escribir("ELEM:"+i+1+":"+v.getDef()+" ; "+v.getFuncion()+" ; "+v.getEstado()+" ; "+v.getUltima_accion());
+				
+	}
+	sockManager.Escribir("      ");
+	sockManager.Escribir("202 FINLISTA");
 	
 }
 

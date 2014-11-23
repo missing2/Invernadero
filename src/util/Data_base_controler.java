@@ -81,14 +81,14 @@ public class Data_base_controler {
 			public boolean ConsultarIdVariable(int id) throws SQLException {
 				boolean existe = false;
 				Statement st = conn.createStatement();
-				ResultSet rs2 = st.executeQuery("Select * from variable Where id_variable = '"+id+"'");
+				ResultSet rs2 = st.executeQuery("Select * from variable Where id_variable = "+id+"");
 				return existe;
 			}
 
 			public String consultarEstadoVariable(int id) throws SQLException {
 				String estado;
 				Statement st = conn.createStatement();
-				ResultSet rs2 = st.executeQuery("Select estado_variable from variable Where id_variable = '"+id+"'");
+				ResultSet rs2 = st.executeQuery("Select estado_variable from variable Where id_variable = "+id+"");
 				estado=rs2.toString();
 				return estado;
 			}
@@ -100,9 +100,46 @@ public class Data_base_controler {
 				ResultSet rs2 =  st.executeQuery("Select * from variable");
 				
 				while (rs2.next()) {
-					Variable a = new Variable(Integer.parseInt(rs2.getString("id_variable")),rs2.getString("def_variable"),rs2.getString("estado_variable"));
+					Variable a = new Variable(rs2.getString("id_variable"),rs2.getString("def_variable"),
+							rs2.getString("estado_variable"),rs2.getString("id_placa"),rs2.getString("funcion"),
+							rs2.getString("ultima_funcion"));
 					lista.add(a);
 				}
+				
+				return lista;
+				
+			}
+
+			public List<Variable> sacarBusqueda(String nombre) throws SQLException { // mirar
+
+				List< Variable> lista = new ArrayList<Variable>();
+				Statement st = conn.createStatement();
+				
+				
+				if(nombre.contentEquals('*')){ //-----------------contiene cierto char??
+					
+					ResultSet rs2 =  st.executeQuery("Select * from variable Where def_variable = "+-----e+"");
+					
+					while (rs2.next()){
+						Variable a = new Variable(rs2.getString("id_variable"),rs2.getString("def_variable"),
+								rs2.getString("estado_variable"),rs2.getString("id_placa"),rs2.getString("funcion"),
+								rs2.getString("ultima_funcion"));
+						lista.add(a);
+					}
+				
+				
+			   }else if(nombre.contentEquals('?')){
+				   				   
+					ResultSet rs2 =  st.executeQuery("Select * from variable Where def_variable = "+-----+"");
+					
+					while (rs2.next()) {
+						Variable a = new Variable(rs2.getString("id_variable"),rs2.getString("def_variable"),
+								rs2.getString("estado_variable"),rs2.getString("id_placa"),rs2.getString("funcion"),
+								rs2.getString("ultima_funcion"));
+						lista.add(a);
+			        }
+				  			
+			   }
 				
 				return lista;
 				
