@@ -37,12 +37,7 @@ public class Data_base_controler {
 
 	
 	
-     /**
-     * Método para CONSULTAR un EMPLEADO por Nombre de empleado (De la lista)
-     * @param nombre
-     * @return boolean
-     * @throws SQLException
-     */
+  
     public boolean consultaUsuario(String nombre) throws SQLException {
     
     	boolean existe=false;
@@ -57,13 +52,7 @@ public class Data_base_controler {
 		return existe;
 	}
      
-	 		/**
-	 		 * Método para CONSULTAR la contraseña
-	 		 * @param nombre
-	 		 * @param pass
-	 		 * @return boolean
-	 		 * @throws SQLException
-	 		 */
+	 		
 	 		public boolean ConsultarPasword(String nombre,int pass)throws SQLException{
 	 				 			
 	 			boolean existe=false;
@@ -110,15 +99,15 @@ public class Data_base_controler {
 				
 			}
 
-			public List<Variable> sacarBusqueda(String nombre) throws SQLException { // mirar
+			public List<Variable> sacarBusqueda(String nombre) throws SQLException { // mirar completo
 
 				List< Variable> lista = new ArrayList<Variable>();
 				Statement st = conn.createStatement();
 				
 				
-				if(nombre.contentEquals('*')){ //-----------------contiene cierto char??
+				if(nombre.contentEquals("*")){ //-----------------contiene cierto char??
 					
-					ResultSet rs2 =  st.executeQuery("Select * from variable Where def_variable = "+-----e+"");
+					ResultSet rs2 =  st.executeQuery("Select * from variable Where def_variable = "+nombre+""); // esta bien????
 					
 					while (rs2.next()){
 						Variable a = new Variable(rs2.getString("id_variable"),rs2.getString("def_variable"),
@@ -128,9 +117,9 @@ public class Data_base_controler {
 					}
 				
 				
-			   }else if(nombre.contentEquals('?')){
+			   }else if(nombre.contentEquals("?")){
 				   				   
-					ResultSet rs2 =  st.executeQuery("Select * from variable Where def_variable = "+-----+"");
+					ResultSet rs2 =  st.executeQuery("Select * from variable Where def_variable = "+nombre+"");
 					
 					while (rs2.next()) {
 						Variable a = new Variable(rs2.getString("id_variable"),rs2.getString("def_variable"),
@@ -142,6 +131,17 @@ public class Data_base_controler {
 			   }
 				
 				return lista;
+				
+			}
+
+			public void encenderVariable(int id) throws SQLException {
+				Statement st = conn.createStatement();
+				ResultSet rs2 =  st.executeQuery("---------------------------");
+				
+			}
+			public void apagarVariable(int id) throws SQLException {
+				Statement st = conn.createStatement();
+				ResultSet rs2 =  st.executeQuery("--------------");
 				
 			}
 }

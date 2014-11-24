@@ -31,11 +31,11 @@ public Data_base_controler base = new Data_base_controler();
 
   private void processRequest() throws Exception {
 	  
-	 // lee la palabra que e has pasado por socket desde el cliente
-	 String  requestLine  = sockManager.Leer();
-    System.out.println("RequestLine: " + requestLine);
+	 // lee el comando que e has pasado por socket desde el cliente
+	String  requestLine  = sockManager.Leer();
+    System.out.println("RequestLine: " + requestLine); // empezara con user...
     int estado=0;
-	String comando="";
+	String comando=requestLine.toString();
 	
 	Usuario user = new Usuario();
   while (estado!=4){
@@ -98,6 +98,7 @@ public Data_base_controler base = new Data_base_controler();
 				if (base.ConsultarIdVariable(id)){
 					if (base.consultarEstadoVariable(id).equals("off")){
 						sockManager.Escribir("203 OK.Control de variable activo");
+						base.encenderVariable(id);
 					}else if (base.consultarEstadoVariable(id).equals("on")) {
 						sockManager.Escribir("404ERR."+id+" en estado ON");
 					}
