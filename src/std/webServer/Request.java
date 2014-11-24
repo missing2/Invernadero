@@ -43,7 +43,7 @@ public Data_base_controler base = new Data_base_controler();
 		switch (estado) {
 	
 		case 0:
-			if (comando.equals("User")) {
+			if (comando.contains("User")) {// mirarrrr
 				sockManager.Escribir("Introduzca el nombre de usuario:");
 				requestLine  = sockManager.Leer();
 				if (requestLine!=null){
