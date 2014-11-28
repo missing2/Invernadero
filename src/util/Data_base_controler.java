@@ -67,17 +67,17 @@ public class Data_base_controler {
 	 			return existe;
 	 		  }
 
-			public boolean ConsultarIdVariable(int id) throws SQLException {
+			public boolean ConsultarIdVariable(String idp,String idv) throws SQLException {
 				boolean existe = false;
 				Statement st = conn.createStatement();
-				ResultSet rs2 = st.executeQuery("Select * from variable Where id_variable = "+id+"");
+				ResultSet rs2 = st.executeQuery("Select * from variable Where def_variable = "+idv+"and Where id_placa="+idp+"");
 				return existe;
 			}
 
-			public String consultarEstadoVariable(int id) throws SQLException {
+			public String consultarEstadoVariable(String idp,String idv) throws SQLException {
 				String estado;
 				Statement st = conn.createStatement();
-				ResultSet rs2 = st.executeQuery("Select estado_variable from variable Where id_variable = "+id+"");
+				ResultSet rs2 = st.executeQuery("Select estado_variable from variable Where def_variable = "+idv+" and Where id_placa="+idp+"");
 				estado=rs2.toString();
 				return estado;
 			}
@@ -134,12 +134,12 @@ public class Data_base_controler {
 				
 			}
 
-			public void encenderVariable(int id) throws SQLException {
+			public void encenderVariable(String idp,String idv) throws SQLException {
 				Statement st = conn.createStatement();
 				ResultSet rs2 =  st.executeQuery("---------------------------");
 				
 			}
-			public void apagarVariable(int id) throws SQLException {
+			public void apagarVariable(String idp,String idv) throws SQLException {
 				Statement st = conn.createStatement();
 				ResultSet rs2 =  st.executeQuery("--------------");
 				

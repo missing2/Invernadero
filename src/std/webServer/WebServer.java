@@ -9,15 +9,14 @@ public final class WebServer
 {
 	public static void main(String argv[]) throws Exception
 	{
-		// Set the port number.
-		int port = 6789; //(new Integer(argv[0])).intValue();
+		
+		int port = 6789; 
 
 		ServerSocket wellcomeSocket = new ServerSocket(port);
 
 		while (true)
 		{
-			//Socket conn = sock.accept();
-
+			
 			SocketManager sockManager = new SocketManager(wellcomeSocket.accept());
 
 			Request request = new Request(sockManager);

@@ -9,11 +9,12 @@ import util.*;
 
 final class Request implements Runnable {
 	
-public Data_base_controler base = new Data_base_controler();
+
 	
   final static String CRLF = "\r\n";
   SocketManager sockManager;
-
+  public Data_base_controler base = new Data_base_controler();
+  
   // Constructor
   public Request(SocketManager sockMan) throws Exception {
     sockManager = sockMan;
@@ -31,98 +32,119 @@ public Data_base_controler base = new Data_base_controler();
 
   private void processRequest() throws Exception {
 	  
-	 // lee el comando que e has pasado por socket desde el cliente
-	String  requestLine  = sockManager.Leer();
-    System.out.println("RequestLine: " + requestLine); // empezara con user...
-    int estado=0;
-	String comando=requestLine.toString();
 	
+	String comando ="";
+    int estado=0;
 	Usuario user = new Usuario();
+	
   while (estado!=4){
    
 		switch (estado) {
 	
-		case 0:
-			if (comando.contains("User")) {// mirarrrr
-				sockManager.Escribir("Introduzca el nombre de usuario:");
-				requestLine  = sockManager.Leer();
-				if (requestLine!=null){
-					sockManager.Escribir("400 ERR.Falta el nombre de usuario");
+		case 0://(USER)
+			String  requestLine  = sockManager.Leer();// lee el user que le has pasado por socket desde el cliente
+			
+			if (! requestLine.equals("adios")) {
+				
+				if (requestLine.equals("")){// se esta vacia
+					sockManager.Escribir("400 ERR.Falta el nombre de usuario"+'\n');
+					System.out.println("falta usuario");
 					estado=0;
-				}else if (!base.consultaUsuario(requestLine)){
-					sockManager.Escribir("401ERR.Usuario desconocido");
-					estado=0;
-				}else if (base.consultaUsuario(requestLine)){
-					sockManager.Escribir("200 OK. bienvenido"+"requestLine");
-					user.setNick(requestLine);
-					estado = 2;
-			    }     
-	     	}else if (comando.equals("adios")){
+					
+				}else{//requestLine!=null)
+					 if (!base.consultaUsuario(requestLine)){
+						sockManager.Escribir("401ERR.Usuario desconocido"+'\n');
+						System.out.println("user desconocido");
+						estado=0;
+					}else {//(base.consultaUsuario(requestLine))
+						sockManager.Escribir("200 OK. bienvenido"+"requestLine"+'\n');
+						System.out.println("user correncto");
+						user.setNick(requestLine);
+						estado = 1;					
+					}
+				}   
+	     	}else { // request = adios
 	     		estado = 4;
-	    	}else{
-	    		estado=0;
 	    	}
 			
 		break;
 
-		case 1:
-			if (comando.equals("Pass")) {
+		case 1://(PASS)
+			 requestLine  = sockManager.Leer();// lee el pasword que le has pasado por socket desde el cliente
+			 
+			if (!requestLine.equals("adios")) {
 				
-				sockManager.Escribir("Introduzca su pasword :");
-				requestLine  = sockManager.Leer();
+				requestLine  = sockManager.Leer();//pasword :
 				int pass = Integer.parseInt(requestLine);
 				
-				if (requestLine==null){
-					sockManager.Escribir("402 ERR.Falta la clave ");
+				if (requestLine.equals("")){ // si esta vacia la pasword...
+					sockManager.Escribir("402 ERR.Falta la clave "+'\n');
 					estado = 0;
-				}else{
+					System.out.println("falta clave");
+				}else{// !requestLine.equals(""))
 					if (base.ConsultarPasword(user.getNick(), pass)){
-							sockManager.Escribir("201 OK.Bienvenido al sistema");
+							sockManager.Escribir("201 OK.Bienvenido al sistema"+user.getNick()+'\n');
 							estado=2;
+							System.out.println("contraseña bien");
 							user.setContrasena(pass);
 					}else if (!base.ConsultarPasword(user.getNick(), pass)){
-							sockManager.Escribir("401 ERR.La clave es incorrecta");
+							sockManager.Escribir("401 ERR.La clave es incorrecta"+'\n');
+							System.out.println("clave erronea");
 							estado=1;
 					}
 				}
-	    	}else if (comando.equals("adios")){
+	    	}else if (requestLine.equals("adios")){
 	    		estado=4;
 	    	}
 		break;
 
-		case 2:
-			if (comando.equals("On")) {
-				sockManager.Escribir("Insertar id variable");
-				requestLine  = sockManager.Leer();
-				int id = Integer.parseInt(requestLine);
-				if (base.ConsultarIdVariable(id)){
-					if (base.consultarEstadoVariable(id).equals("off")){
-						sockManager.Escribir("203 OK.Control de variable activo");
-						base.encenderVariable(id);
-					}else if (base.consultarEstadoVariable(id).equals("on")) {
-						sockManager.Escribir("404ERR."+id+" en estado ON");
-					}
+		case 2:  // ACTION
+			 requestLine  = sockManager.Leer();// lee el comando que e has pasado por socket desde el cliente
+			 
+			 if (!requestLine.equals("adios")) {
 					
+				 if (requestLine.equals ("aaaaaa")){
+				sockManager.Escribir("Insertar id Placa");
+				requestLine  = sockManager.Leer();
+				String idp = requestLine.toString();
+				
+				sockManager.Escribir("Insertar definicion de la variable");
+				requestLine  = sockManager.Leer();
+				String defv = requestLine.toString();
+				
+				if (base.ConsultarIdVariable(idp,defv)){
+					if (base.consultarEstadoVariable(idp,defv).equals("off")){
+						sockManager.Escribir("203 OK.Control de variable activo");
+						base.encenderVariable(idp,defv);
+					}else if (base.consultarEstadoVariable(idp,defv).equals("on")) {
+						sockManager.Escribir("404ERR."+defv+" en estado ON");
+					}
+				}
 				}else{
-					sockManager.Escribir("405 ERR."+id+" no existe");
+					sockManager.Escribir("405 ERR."+1+" no existe");
 				}
 				
 	 		}else if(comando.equals("Off")) {
-	 			sockManager.Escribir("Insertar id variable");
+	 			sockManager.Escribir("Insertar id Placa");
 				requestLine  = sockManager.Leer();
-				int id = Integer.parseInt(requestLine);
-				if (base.ConsultarIdVariable(id)){
-					if (base.consultarEstadoVariable(id).equals("off")){
-						sockManager.Escribir("204 OK.Control de variable desactivo");
-					}else if (base.consultarEstadoVariable(id).equals("on")) {
-						sockManager.Escribir("406ERR."+id+" en estado OFF");
+				String idp = requestLine.toString();
+				sockManager.Escribir("Insertar id variable");
+				requestLine  = sockManager.Leer();
+				String defv = requestLine.toString();
+				
+				if (base.ConsultarIdVariable(idp,defv)){
+					if (base.consultarEstadoVariable(idp,defv).equals("on")){
+						sockManager.Escribir("203 OK.Control de variable activo");
+						base.apagarVariable(idp,defv);
+					}else if (base.consultarEstadoVariable(idp,defv).equals("off")) {
+						sockManager.Escribir("404ERR."+defv+" en estado OFF");
 					}
 					
 				}else{
-					sockManager.Escribir("405 ERR."+id+" no existe");
+					sockManager.Escribir("405 ERR."+defv+" no existe");
 				}
 	 		}else if(comando.equals("Accion")) {
-	 
+	 			//---------------------------
 			}else if(comando.equals("Listado")) {
 				sacarListado();       //se puede quedar en bucle??
 				estado=2;
@@ -133,7 +155,7 @@ public Data_base_controler base = new Data_base_controler();
 				sacarBusqueda(a);       //se puede quedar en bucle??
 				estado=2;
 			}else if(comando.equals("Obtener_foto")) {
-				
+				//--------------------------
 			}else if(comando.equals("Salir")) {
 				estado=4;
 			}else {
@@ -143,8 +165,9 @@ public Data_base_controler base = new Data_base_controler();
 
 		case 3:
 		    if (comando.equals("Confirmar_accion")) {
-		    	
+		    	//--------------------------------
 			}else if(comando.equals("Rechazar_accion")) { 
+				sockManager.Escribir("207 OK Acción cancelada");
 				estado=2;
 			}
 		break;

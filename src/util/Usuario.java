@@ -1,6 +1,8 @@
 package util;
 
 public class Usuario {
+
+
 private String nick;
 private int contrasena;
 
@@ -29,4 +31,5 @@ public int getContrasena() {
 public void setContrasena(int contrasena) {
 	this.contrasena = contrasena;
 }
+
 }
