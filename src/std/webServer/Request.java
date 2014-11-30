@@ -104,44 +104,44 @@ final class Request implements Runnable {
 			 if (!requestLine.equals("adios")) {
 					
 				 if (requestLine.equals ("aaaaaa")){
-				sockManager.Escribir("Insertar id Placa");
+				sockManager.Escribir("Insertar id Placa"+'\n');
 				requestLine  = sockManager.Leer();
 				String idp = requestLine.toString();
 				
-				sockManager.Escribir("Insertar definicion de la variable");
+				sockManager.Escribir("Insertar definicion de la variable"+'\n');
 				requestLine  = sockManager.Leer();
 				String defv = requestLine.toString();
 				
 				if (base.ConsultarIdVariable(idp,defv)){
 					if (base.consultarEstadoVariable(idp,defv).equals("off")){
-						sockManager.Escribir("203 OK.Control de variable activo");
+						sockManager.Escribir("203 OK.Control de variable activo"+'\n');
 						base.encenderVariable(idp,defv);
 					}else if (base.consultarEstadoVariable(idp,defv).equals("on")) {
-						sockManager.Escribir("404ERR."+defv+" en estado ON");
+						sockManager.Escribir("404ERR."+defv+" en estado ON"+'\n');
 					}
 				}
 				}else{
-					sockManager.Escribir("405 ERR."+1+" no existe");
+					sockManager.Escribir("405 ERR."+1+" no existe"+'\n');
 				}
 				
 	 		}else if(comando.equals("Off")) {
-	 			sockManager.Escribir("Insertar id Placa");
+	 			sockManager.Escribir("Insertar id Placa"+'\n');
 				requestLine  = sockManager.Leer();
 				String idp = requestLine.toString();
-				sockManager.Escribir("Insertar id variable");
+				sockManager.Escribir("Insertar id variable"+'\n');
 				requestLine  = sockManager.Leer();
 				String defv = requestLine.toString();
 				
 				if (base.ConsultarIdVariable(idp,defv)){
 					if (base.consultarEstadoVariable(idp,defv).equals("on")){
-						sockManager.Escribir("203 OK.Control de variable activo");
+						sockManager.Escribir("203 OK.Control de variable activo"+'\n');
 						base.apagarVariable(idp,defv);
 					}else if (base.consultarEstadoVariable(idp,defv).equals("off")) {
-						sockManager.Escribir("404ERR."+defv+" en estado OFF");
+						sockManager.Escribir("404ERR."+defv+" en estado OFF"+'\n');
 					}
 					
 				}else{
-					sockManager.Escribir("405 ERR."+defv+" no existe");
+					sockManager.Escribir("405 ERR."+defv+" no existe"+'\n');
 				}
 	 		}else if(comando.equals("Accion")) {
 	 			//---------------------------
@@ -149,7 +149,7 @@ final class Request implements Runnable {
 				sacarListado();       //se puede quedar en bucle??
 				estado=2;
 			}else if(comando.equals("Buscar")) {
-				sockManager.Escribir("Insertar lo que deseas buscar");
+				sockManager.Escribir("Insertar lo que deseas buscar"+'\n');
 				requestLine  = sockManager.Leer();
 				String a = requestLine.toString();
 				sacarBusqueda(a);       //se puede quedar en bucle??
@@ -159,7 +159,7 @@ final class Request implements Runnable {
 			}else if(comando.equals("Salir")) {
 				estado=4;
 			}else {
-				sockManager.Escribir("Error, comando invalido."); //?? igual hay que quitarlo
+				sockManager.Escribir("Error, comando invalido."+'\n'); //?? igual hay que quitarlo
 			}
 		break;
 
@@ -167,17 +167,17 @@ final class Request implements Runnable {
 		    if (comando.equals("Confirmar_accion")) {
 		    	//--------------------------------
 			}else if(comando.equals("Rechazar_accion")) { 
-				sockManager.Escribir("207 OK Acción cancelada");
+				sockManager.Escribir("207 OK Acción cancelada"+'\n');
 				estado=2;
 			}
 		break;
 
 		case 4:            // va a hacer conflicto con mi while (!4)
-			sockManager.Escribir("208 OK.Adios.");
+			sockManager.Escribir("208 OK.Adios."+'\n');
 		break;
 			
 		default :
-			sockManager.Escribir("Error, comando invalido."); //?? igual hay que quitarlo
+			sockManager.Escribir("Error, comando invalido."+'\n'); //?? igual hay que quitarlo
 		break;
 		} 
 	}
@@ -195,11 +195,11 @@ final class Request implements Runnable {
 	for (int i=0; i<a;a++){
 		Variable v = lista.get(i);
 		
-		sockManager.Escribir("ELEM:"+i+1+":"+v.getDef()+" ; "+v.getFuncion()+" ; "+v.getEstado()+" ; "+v.getUltima_accion());
+		sockManager.Escribir("ELEM:"+i+1+":"+v.getDef()+" ; "+v.getFuncion()+" ; "+v.getEstado()+" ; "+v.getUltima_accion()+'\n');
 				
 	}
-	sockManager.Escribir("      ");
-	sockManager.Escribir("202 FINLISTA");
+	sockManager.Escribir("      "+'\n');
+	sockManager.Escribir("202 FINLISTA"+'\n');
 	
 }
   
@@ -210,11 +210,11 @@ final class Request implements Runnable {
 	for (int i=0; i<a;a++){
 		Variable v = lista.get(i);
 		
-		sockManager.Escribir("ELEM:"+i+1+":"+v.getDef()+" ; "+v.getFuncion()+" ; "+v.getEstado()+" ; "+v.getUltima_accion());
+		sockManager.Escribir("ELEM:"+i+1+":"+v.getDef()+" ; "+v.getFuncion()+" ; "+v.getEstado()+" ; "+v.getUltima_accion()+'\n');
 				
 	}
 	sockManager.Escribir("      ");
-	sockManager.Escribir("202 FINLISTA");
+	sockManager.Escribir("202 FINLISTA"+'\n');
 	
 }
 

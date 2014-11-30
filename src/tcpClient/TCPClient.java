@@ -73,14 +73,7 @@ public class TCPClient {
             		System.exit(0); 
                 break;
             	}
-                System.out.print("String a enviar: ");
-                sentence = inFromUser.readLine();
-                //El método Escribir, pone en el socket lo introducido por teclado
-                sm.Escribir(sentence + '\n');
-                //El método Leer, lee del socket lo enviado por el Servidor
-                respuesta = sm.Leer();
-                //Saca por consola la frase modificada enviada por el servidor
-                System.out.println("Desde el servidor: " + respuesta);
+                             
             }
             	
             System.out.println("Fin de la práctica");
