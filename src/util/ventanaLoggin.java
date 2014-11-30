@@ -24,12 +24,13 @@ public ventanaLoggin(){
 	getContentPane().setBackground(Color.BLACK);	
 	getContentPane().setLayout(null);
 	lblUser.setFont(new Font("Tahoma", Font.BOLD, 19));
-	lblUser.setForeground(Color.WHITE);
+	lblUser.setForeground(Color.CYAN);
 	lblUser.setBackground(Color.BLACK);
 	lblUser.setBounds(26, 68, 76, 31);
 	getContentPane().add(lblUser);
 	
 	txtFUser = new JTextField();
+	txtFUser.setBackground(Color.LIGHT_GRAY);
 	txtFUser.setBounds(97, 77, 171, 20);
 	getContentPane().add(txtFUser);
 	txtFUser.setColumns(10);
@@ -37,12 +38,13 @@ public ventanaLoggin(){
 	JLabel lblPasword = new JLabel("PASWORD:");
 	lblPasword.setBackground(Color.BLACK);
 	lblPasword.setFont(new Font("Tahoma", Font.BOLD, 20));
-	lblPasword.setForeground(Color.WHITE);
+	lblPasword.setForeground(Color.CYAN);
 	lblPasword.setBounds(26, 160, 128, 31);
 	getContentPane().add(lblPasword);
 	
 	txtFPasword = new JTextField();
-	txtFPasword.setBounds(167, 169, 171, 20);
+	txtFPasword.setBackground(Color.LIGHT_GRAY);
+	txtFPasword.setBounds(156, 169, 171, 20);
 	getContentPane().add(txtFPasword);
 	txtFPasword.setColumns(10);
 	
@@ -52,11 +54,11 @@ public ventanaLoggin(){
 			boton=1;
 		}
 	});
-	btnLoggin.setBounds(415, 168, 89, 23);
+	btnLoggin.setBounds(395, 94, 108, 43);
 	getContentPane().add(btnLoggin);
 	
 	JButton btnSalir = new JButton("Salir");
-	btnSalir.setBounds(415, 123, 89, 23);
+	btnSalir.setBounds(412, 148, 76, 31);
 	getContentPane().add(btnSalir);
 	btnSalir.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
