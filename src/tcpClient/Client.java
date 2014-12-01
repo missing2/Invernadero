@@ -4,14 +4,16 @@ import util.*;
 import java.net.*;
 import java.io.*;
 
+import javax.swing.JOptionPane;
 
 
-public class TCPClient {
+
+public class Client {
     public static void main(String[] args) throws Exception {
     	
         String sentence=""; //Variable dnd se almacena la frase introducida por el usuario
         
-        String respuesta=""; //Variable donde se recibe la frase capitalizada
+        
         try {
             //Se crea el socket, pasando el nombre del servidor y el puerto de conexión
             SocketManager sm = new SocketManager("127.0.0.1", 6789);  
@@ -29,37 +31,45 @@ public class TCPClient {
             	case 0: // comprobar user
             		ventanaLoggin ventanaloggin = new ventanaLoggin();
             		while (ventanaloggin.boton==0){
-            			// espero a que haga loggin
+            			// espero a que rellene los datos y pulse boton loggin
             		}
-            		if(ventanaloggin.boton==1){ // me loggeo
+            		if(ventanaloggin.boton==1){ // pulso boton loggearme
             			
 	            		user.setNick(ventanaloggin.txtFUser.getText()); 
 	                  	user.setContrasena(Integer.parseInt(ventanaloggin.txtFPasword.getText()));
 	            		
 	            		sm.Escribir(user.getNick()+'\n'); // mando nick al server
 	       
-	            		if (sm.Leer().contains("200 OK. bienvenido")){ // lo que me responde....
+	            		if (sm.Leer().contains("200 OK. bienvenido")){ // lo que me responde es todo ok
 	            			ventanaloggin.dispose();
 	            			estado=1;
-	            		}else{
+	            		}else if (sm.Leer().contains("400 ERR")){ // si me responde que esta vacio 
+	            			JOptionPane.showMessageDialog(ventanaloggin,"Campo User vacio");
+	            			ventanaloggin.dispose();
+	            			estado=0;
+	            		}else{ // si me responde que esta mal introducido/no existe 
+	            			JOptionPane.showMessageDialog(ventanaloggin,"El User que has introducido no es correcto");
 	            			ventanaloggin.dispose();
 	            			estado=0;
 	            		}
-            		}else if(ventanaloggin.boton==2){
+            		}else if(ventanaloggin.boton==2){// pulso boton salir
             			ventanaloggin.dispose();// salgo de la app
-            			sm.Escribir("adios"+'\n');
+            			sm.Escribir("adios"+'\n'); // mando al server que quiere salir
             			estado= 4;
             		}
             	break;
             	case 1:// comprobar pass
             		String a = Integer.toString(user.getContrasena());
-            		sm.Escribir(a+'\n'); 
+            		sm.Escribir(a+'\n');  // mando la pass al server
             		if (sm.Leer().contains("201 OK.")){ 
             			estado=2;
             			System.out.println("entra");
-            		}else{
+            		}else if (sm.Leer().contains("402 ERR.")){ // falta la pass
             			estado=0;
-            			System.out.println("no entra");
+            			System.out.println("no entra por falta de pass ");
+            		}else  { //  pass erronea
+            			estado=0;
+            			System.out.println("no entra por pass incorrecta");
             		}
                 break;
             	case 2:

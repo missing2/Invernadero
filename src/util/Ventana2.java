@@ -35,6 +35,7 @@ import java.awt.Dimension;
 public class Ventana2 extends JFrame implements ActionListener, ComponentListener{
 	private JTextField txtPalabraABuscar;
 	public Ventana2() {
+		this.setTitle("M&V");
 		getContentPane().setBackground(Color.BLACK);
 		getContentPane().setLayout(null);
 		
@@ -44,7 +45,7 @@ public class Ventana2 extends JFrame implements ActionListener, ComponentListene
 		rdbtnVariable.setFont(new Font("Tahoma", Font.BOLD, 14));
 		rdbtnVariable.setBackground(Color.BLACK);
 		rdbtnVariable.setForeground(Color.CYAN);
-		rdbtnVariable.setBounds(22, 48, 100, 30);
+		rdbtnVariable.setBounds(22, 88, 100, 30);
 		grupo.add(rdbtnVariable);
 		getContentPane().add(rdbtnVariable);
 		
@@ -52,7 +53,7 @@ public class Ventana2 extends JFrame implements ActionListener, ComponentListene
 		rdbtnPlaca.setFont(new Font("Tahoma", Font.BOLD, 14));
 		rdbtnPlaca.setForeground(Color.CYAN);
 		rdbtnPlaca.setBackground(Color.BLACK);
-		rdbtnPlaca.setBounds(22, 88, 100, 30);
+		rdbtnPlaca.setBounds(22, 48, 100, 30);
 		grupo.add(rdbtnPlaca);
 		getContentPane().add(rdbtnPlaca);
 		
@@ -68,7 +69,7 @@ public class Ventana2 extends JFrame implements ActionListener, ComponentListene
 		rdbtnTodo.setFont(new Font("Tahoma", Font.BOLD, 14));
 		rdbtnTodo.setForeground(Color.CYAN);
 		rdbtnTodo.setBackground(Color.BLACK);
-		rdbtnTodo.setBounds(22, 168, 100, 30);
+		rdbtnTodo.setBounds(22, 208, 100, 30);
 		grupo.add(rdbtnTodo);
 		getContentPane().add(rdbtnTodo);
 		
@@ -76,7 +77,7 @@ public class Ventana2 extends JFrame implements ActionListener, ComponentListene
 		rdbtnFuncion.setFont(new Font("Tahoma", Font.BOLD, 14));
 		rdbtnFuncion.setForeground(Color.CYAN);
 		rdbtnFuncion.setBackground(Color.BLACK);
-		rdbtnFuncion.setBounds(22, 208, 100, 30);
+		rdbtnFuncion.setBounds(22, 168, 100, 30);
 		grupo.add(rdbtnFuncion);
 		getContentPane().add(rdbtnFuncion);
 		

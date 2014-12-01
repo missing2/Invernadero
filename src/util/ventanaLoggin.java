@@ -65,7 +65,7 @@ public ventanaLoggin(){
 			boton=2;
 		}
 	});
-		this.setTitle("Invernadero");
+		this.setTitle("M&V");
 		this.setBounds(Toolkit.getDefaultToolkit().getScreenSize().width/2-800/2,Toolkit.getDefaultToolkit().getScreenSize().height/2-600/2, 800, 600);
 		this.setSize(546,273);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -75,30 +75,25 @@ public ventanaLoggin(){
 	@Override
 	public void componentResized(ComponentEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void componentMoved(ComponentEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void componentShown(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public void componentHidden(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 }
