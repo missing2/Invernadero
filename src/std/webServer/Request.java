@@ -189,11 +189,11 @@ final class Request implements Runnable {
   }
 
   private void sacarListado() throws SQLException, IOException {
-	  List< Variable> lista =base. sacarlista();
+	  List< Sensor> lista =base. sacarlista();
 	  
 	int a= lista.size();
 	for (int i=0; i<a;a++){
-		Variable v = lista.get(i);
+		Sensor v = lista.get(i);
 		
 		sockManager.Escribir("ELEM:"+i+1+":"+v.getDef()+" ; "+v.getFuncion()+" ; "+v.getEstado()+" ; "+v.getUltima_accion()+'\n');
 				
@@ -204,11 +204,11 @@ final class Request implements Runnable {
 }
   
   private void sacarBusqueda(String palabra) throws SQLException, IOException {
-	  List< Variable> lista =base. sacarBusqueda(palabra);
+	  List< Sensor> lista =base. sacarBusqueda(palabra);
 	  
 	int a= lista.size();
 	for (int i=0; i<a;a++){
-		Variable v = lista.get(i);
+		Sensor v = lista.get(i);
 		
 		sockManager.Escribir("ELEM:"+i+1+":"+v.getDef()+" ; "+v.getFuncion()+" ; "+v.getEstado()+" ; "+v.getUltima_accion()+'\n');
 				

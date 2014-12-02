@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 public class Client {
     public static void main(String[] args) throws Exception {
     	
-        String sentence=""; //Variable dnd se almacena la frase introducida por el usuario
+        String sentence=""; //Sensor dnd se almacena la frase introducida por el usuario
         
         
         try {

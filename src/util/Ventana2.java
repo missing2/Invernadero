@@ -53,7 +53,7 @@ public class Ventana2 extends JFrame implements ActionListener, ComponentListene
 		grupo.add(rdbtnPlaca);
 		getContentPane().add(rdbtnPlaca);
 		
-		JRadioButton rdbtnVariable = new JRadioButton("Variable");
+		JRadioButton rdbtnVariable = new JRadioButton("Sensor");
 		rdbtnVariable.setFont(new Font("Tahoma", Font.BOLD, 14));
 		rdbtnVariable.setBackground(Color.BLACK);
 		rdbtnVariable.setForeground(Color.CYAN);

@@ -82,16 +82,21 @@ public class Data_base_controler {
 				return estado;
 			}
 
-			public List< Variable> sacarlista() throws SQLException {
+			public List< Object> sacarlista() throws SQLException {// saca una lista en la ventana de accion con todos los sensores y sus atributos
 				
-				List< Variable> lista = new ArrayList<Variable>();
+				List< Object> lista = new ArrayList<Object>();
 				Statement st = conn.createStatement();
-				ResultSet rs2 =  st.executeQuery("Select * from variable");
 				
+				ResultSet rs2 =  st.executeQuery("Select * from Sensor");
 				while (rs2.next()) {
-					Variable a = new Variable(rs2.getString("id_variable"),rs2.getString("def_variable"),
-							rs2.getString("estado_variable"),rs2.getString("id_placa"),rs2.getString("funcion"),
-							rs2.getString("ultima_funcion"));
+					Sensor a = new Sensor(rs2.getString("id_sensor"),rs2.getString("id_placa"),
+							rs2.getString("def"),rs2.getString("ultima_accion"));
+					lista.add(a);
+				}
+				
+				rs2 =  st.executeQuery("Select * from Placa");
+				while (rs2.next()) {
+					Placa a = new Placa(rs2.getString("id_placa"),rs2.getString("estado_placa"),rs2.getString("imagen"));
 					lista.add(a);
 				}
 				
@@ -99,36 +104,18 @@ public class Data_base_controler {
 				
 			}
 
-			public List<Variable> sacarBusqueda(String nombre) throws SQLException { // mirar completo
+			public List<Sensor> sacarBusqueda(String nombre, String donde ) throws SQLException { 
 
-				List< Variable> lista = new ArrayList<Variable>();
+				List< Sensor> lista = new ArrayList<Sensor>();
 				Statement st = conn.createStatement();
 				
-				
-				if(nombre.contentEquals("*")){ //-----------------contiene cierto char??
-					
-					ResultSet rs2 =  st.executeQuery("Select * from variable Where def_variable = "+nombre+""); // esta bien????
+					ResultSet rs2 =  st.executeQuery("Select * from "+donde+" Where def_variable = "+nombre+""); // esta bien????
 					
 					while (rs2.next()){
-						Variable a = new Variable(rs2.getString("id_variable"),rs2.getString("def_variable"),
-								rs2.getString("estado_variable"),rs2.getString("id_placa"),rs2.getString("funcion"),
-								rs2.getString("ultima_funcion"));
+						Sensor a = new Sensor(rs2.getString("id_sensor"),rs2.getString("id_placa"),
+								rs2.getString("def"),rs2.getString("ultima_accion"));
 						lista.add(a);
 					}
-				
-				
-			   }else if(nombre.contentEquals("?")){
-				   				   
-					ResultSet rs2 =  st.executeQuery("Select * from variable Where def_variable = "+nombre+"");
-					
-					while (rs2.next()) {
-						Variable a = new Variable(rs2.getString("id_variable"),rs2.getString("def_variable"),
-								rs2.getString("estado_variable"),rs2.getString("id_placa"),rs2.getString("funcion"),
-								rs2.getString("ultima_funcion"));
-						lista.add(a);
-			        }
-				  			
-			   }
 				
 				return lista;
 				
