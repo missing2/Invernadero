@@ -72,7 +72,7 @@ public class Client {
             			System.out.println("no entra por pass incorrecta");
             		}
                 break;
-            	case 2:
+            	case 2:// accion
             		
             		
             		

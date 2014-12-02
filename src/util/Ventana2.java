@@ -33,23 +33,19 @@ import javax.swing.Box;
 import java.awt.Dimension;
 
 public class Ventana2 extends JFrame implements ActionListener, ComponentListener{
-	private JTextField txtPalabraABuscar;
+	public JTextField txtPalabraABuscar;
+	public int opcion = 0; // controlador de que opcion de checks se va a escojer
+	public int termina = 0; // si esta a 0 es que sigue metiendo datos/ 1 le a dado a buscar/ 2 le a dado a salir
+	
 	public Ventana2() {
+		
 		this.setTitle("M&V");
 		getContentPane().setBackground(Color.BLACK);
 		getContentPane().setLayout(null);
 		
-		ButtonGroup grupo = new ButtonGroup();
+		ButtonGroup grupo = new ButtonGroup();	
 		
-		JRadioButton rdbtnVariable = new JRadioButton("variable");
-		rdbtnVariable.setFont(new Font("Tahoma", Font.BOLD, 14));
-		rdbtnVariable.setBackground(Color.BLACK);
-		rdbtnVariable.setForeground(Color.CYAN);
-		rdbtnVariable.setBounds(22, 88, 100, 30);
-		grupo.add(rdbtnVariable);
-		getContentPane().add(rdbtnVariable);
-		
-		JRadioButton rdbtnPlaca = new JRadioButton("placa");
+		JRadioButton rdbtnPlaca = new JRadioButton("Placa");
 		rdbtnPlaca.setFont(new Font("Tahoma", Font.BOLD, 14));
 		rdbtnPlaca.setForeground(Color.CYAN);
 		rdbtnPlaca.setBackground(Color.BLACK);
@@ -57,7 +53,15 @@ public class Ventana2 extends JFrame implements ActionListener, ComponentListene
 		grupo.add(rdbtnPlaca);
 		getContentPane().add(rdbtnPlaca);
 		
-		JRadioButton rdbtnSensor = new JRadioButton("sensor");
+		JRadioButton rdbtnVariable = new JRadioButton("Variable");
+		rdbtnVariable.setFont(new Font("Tahoma", Font.BOLD, 14));
+		rdbtnVariable.setBackground(Color.BLACK);
+		rdbtnVariable.setForeground(Color.CYAN);
+		rdbtnVariable.setBounds(22, 88, 100, 30);
+		grupo.add(rdbtnVariable);
+		getContentPane().add(rdbtnVariable);
+		
+		JRadioButton rdbtnSensor = new JRadioButton("Sensor");
 		rdbtnSensor.setFont(new Font("Tahoma", Font.BOLD, 14));
 		rdbtnSensor.setBackground(Color.BLACK);
 		rdbtnSensor.setForeground(Color.CYAN);
@@ -65,15 +69,7 @@ public class Ventana2 extends JFrame implements ActionListener, ComponentListene
 		grupo.add(rdbtnSensor);
 		getContentPane().add(rdbtnSensor);
 		
-		JRadioButton rdbtnTodo = new JRadioButton("todo");
-		rdbtnTodo.setFont(new Font("Tahoma", Font.BOLD, 14));
-		rdbtnTodo.setForeground(Color.CYAN);
-		rdbtnTodo.setBackground(Color.BLACK);
-		rdbtnTodo.setBounds(22, 208, 100, 30);
-		grupo.add(rdbtnTodo);
-		getContentPane().add(rdbtnTodo);
-		
-		JRadioButton rdbtnFuncion = new JRadioButton("funcion");
+		JRadioButton rdbtnFuncion = new JRadioButton("Funci\u00F3n");
 		rdbtnFuncion.setFont(new Font("Tahoma", Font.BOLD, 14));
 		rdbtnFuncion.setForeground(Color.CYAN);
 		rdbtnFuncion.setBackground(Color.BLACK);
@@ -81,13 +77,31 @@ public class Ventana2 extends JFrame implements ActionListener, ComponentListene
 		grupo.add(rdbtnFuncion);
 		getContentPane().add(rdbtnFuncion);
 		
+		JRadioButton rdbtnUltimaAccion = new JRadioButton("Ultima acci\u00F3n");
+		rdbtnUltimaAccion.setFont(new Font("Tahoma", Font.BOLD, 14));
+		rdbtnUltimaAccion.setForeground(Color.CYAN);
+		rdbtnUltimaAccion.setBackground(Color.BLACK);
+		rdbtnUltimaAccion.setBounds(22, 208, 139, 30);
+		grupo.add(rdbtnUltimaAccion);
+		getContentPane().add(rdbtnUltimaAccion);
+		
 		JButton btnBuscar = new JButton("buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				termina = 1;
+			}
+		});
 		btnBuscar.setBackground(Color.LIGHT_GRAY);
 		btnBuscar.setForeground(Color.BLACK);
 		btnBuscar.setBounds(322, 123, 109, 44);
 		getContentPane().add(btnBuscar);
 		
 		JButton btnSalir = new JButton("salir");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				termina = 2;
+			}
+		});
 		btnSalir.setBounds(332, 180, 89, 23);
 		getContentPane().add(btnSalir);
 		
@@ -99,8 +113,20 @@ public class Ventana2 extends JFrame implements ActionListener, ComponentListene
 		getContentPane().add(txtPalabraABuscar);
 		txtPalabraABuscar.setColumns(10);
 		
-		
-	} 
+		while(1==1){ // buble infinito que controlara el check elegido
+			if (rdbtnPlaca.isSelected()){   
+				opcion = 1;
+			}else if(rdbtnVariable.isSelected()){
+				opcion = 2;
+			}else if(rdbtnSensor.isSelected()){
+				opcion = 3;
+			}else if(rdbtnFuncion.isSelected()){
+				opcion = 4;
+			}else if (rdbtnUltimaAccion.isSelected()){
+				opcion = 5;
+			}
+		} 
+	}		
 
 
 
