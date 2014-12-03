@@ -122,19 +122,22 @@ public class Data_base_controler {
 				
 			}
 			//Necesitamos cosas de placa para hacer busquedas?? si es asi habria que hacer algo asi
-			public Placa buscarPlaca(String nombrePlaca) throws SQLException {
+			public List<Placa> buscarPlaca(String nombrePlaca) throws SQLException {
+				
+				List<Placa> lista = new ArrayList<Placa>();
 	 	 		Statement stat = conn.createStatement();
 	 	 		ResultSet rs = stat.executeQuery("Select P.,P. from PLACA P,SENSOR S where ='"+nombrePlaca+"'");
 	 	 		Placa placa = null;
 	 	 		
 	 	 		while (rs.next()) {
 	 	 			//placa = new Placa(rs.getString("Cod_obra"), rs.getString("Concepto"), rs.getDouble("Num_horas"), rs.getString("Lugar"), rs.getString("Estado"), rs.getString("F_inicio"), rs.getString("F_fin"), rs.getString("Cod_ped"),rs.getDouble("Presupuesto"));
+	 	 			lista.add(placa);
 	 	 		}
 	 	 		
 	 	 		rs.close();
 	 	 		stat.close();
 	 	 		
-	 			return placa;
+	 			return lista;
 	 		}
 
 			public void encenderVariable(String idp,String idv) throws SQLException {
