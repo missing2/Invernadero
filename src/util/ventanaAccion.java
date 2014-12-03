@@ -5,15 +5,21 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JList;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
+import java.awt.Image;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -45,8 +51,11 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  JButton bListar;
  
  JTextField palabraBuscar;
+ JLabel lLab;
 
  public ventanaAccion(){
+
+ String cads[]={"/img/duck.gif","/img/luigi.png","/img/mario.jpg"};
  
  panelInferior = new JPanel();
  panelCentral = new JPanel();
@@ -100,6 +109,8 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  bListar.addActionListener(this);
  bSalir.addActionListener(this);
  setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+ 
+ //cargarTabla();
 
  }
  private boolean enActivado = false;
@@ -161,7 +172,15 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		 
 	 }else if(e.getSource().equals(bImagenPlaca)){
 		 boton = 4;
-		 
+//		 int ra= 2; //aqui habria que seleccionarla dependiendo de la placa que sea
+//		 URL url=this.getClass().getResource(cads[ra]);
+//		 try {
+//			 Image img=ImageIO.read(url); //leemos la imagen
+//			 lLab.setIcon(new ImageIcon(img)); //la asignamos al JLabel de Java
+//		 } catch (IOException e1) {
+//			 e1.printStackTrace();
+//		 }
+//		 
 	 }else if(e.getSource().equals(bListar)){
 		 boton = 5;
 		 
@@ -172,15 +191,17 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 
  
  }
- public DefaultListModel cambiarTabla(ArrayList lista) {
- DefaultListModel a = new DefaultListModel();
+ public DefaultListModel cambiarTabla(ArrayList lista) 
+ {
+	 DefaultListModel a = new DefaultListModel();
  
- for (int i = 0; i<=lista.size();i++ ){
- a.add(i, lista.get(i));
- } 
+	 for (int i = 0; i<=lista.size();i++ ){
+		 a.add(i, lista.get(i));
+	 } 
  
- return a;
+	 return a;
  }
+
  public static void main(String[] args)
  {
 	ventanaAccion v= new ventanaAccion();
