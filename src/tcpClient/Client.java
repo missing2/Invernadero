@@ -2,6 +2,7 @@ package tcpClient;
 import util.*;
 
 import java.net.*;
+import java.util.ArrayList;
 import java.awt.List;
 import java.io.*;
 
@@ -76,7 +77,8 @@ public class Client {
                 break;
             	case 2:// accion
             		sm.Escribir("sacalista"+'\n'); // manda al server un comando para que me mande la lista
-            		String stringLista = sm.Leer();
+            		String stringLista = sm.Leer(); // recibe la lista en string
+            		
             		DefaultListModel lista = cargarLista(stringLista);
             		ventanaAccion vent = new ventanaAccion();
             		vent.cambiarTabla(lista); // cargo la tabla principal principal de la vent
@@ -126,7 +128,17 @@ public class Client {
 	private static DefaultListModel cargarLista(String stringLista) {
 		// TODO Auto-generated method stub
 		DefaultListModel df = new DefaultListModel();
-		stringLista.
+		
+		String palabra;
+		ArrayList [] cadena = new ArrayList[12];
+		char j;
+		j= stringLista.charAt(0);
+		int conta =1;
+		while (stringLista.charAt(conta)!=','){
+			cadena[0]=stringLista.charAt(conta);
+		}
+		
+		
 		return null;
 	}
 

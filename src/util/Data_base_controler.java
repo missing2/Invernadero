@@ -83,7 +83,7 @@ public class Data_base_controler {
 				return estado;
 			}
 
-			public List< Object> sacarlista() throws SQLException {// saca una lista en la ventana de accion con todos los sensores y sus atributos
+			public List< Object> sacarlista() throws SQLException {// saca una lista en la ventana de accion con todos los sensores y placas
 				
 				List< Object> lista = new ArrayList<Object>();
 				Statement st = conn.createStatement();
@@ -93,14 +93,16 @@ public class Data_base_controler {
 					Sensor a = new Sensor(rs2.getString("id_sensor"),rs2.getString("id_placa"),
 							rs2.getString("def"),rs2.getString("ultima_accion"),rs2.getString("estado"),rs2.getString("on_off"));
 					lista.add(a);
+					lista.add(",");
 				}
-				
+				lista.add("----");
 				rs2 =  st.executeQuery("Select * from Placa");
 				while (rs2.next()) {
 					Placa a = new Placa(rs2.getString("id_placa"),rs2.getString("estado_placa"),rs2.getString("imagen"));
 					lista.add(a);
+					lista.add(",");
 				}
-				
+				lista.add("----");
 				return lista;
 				
 			}

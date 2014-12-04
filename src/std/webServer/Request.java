@@ -102,7 +102,7 @@ final class Request implements Runnable {
 			 requestLine  = sockManager.Leer();// mandar la lista de la tabla principal
 			 if (requestLine.contains("sacalista")){
 				 String lista = sacarListado ();
-				 sockManager.Escribir("--------------------"+'\n');
+				 sockManager.Escribir(lista+'\n'); // mando la lista al cliente
 			 }
 			
 			 requestLine  = sockManager.Leer();// lee el comando que e has pasado por socket desde el cliente
@@ -147,12 +147,11 @@ final class Request implements Runnable {
 
  
 
-private String sacarListado() throws SQLException, IOException {
+private String sacarListado() throws SQLException, IOException { // cambia de lista a string
 	String rrrr = "";
 	  List< Object> lista =base. sacarlista();
 	  rrrr = lista.toString();
-	
-	return rrrr;
+      return rrrr;
 }
   
   private void sacarBusqueda(String palabra) throws SQLException, IOException {
