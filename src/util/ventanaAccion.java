@@ -42,7 +42,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  JScrollPane scrollLista; 
  JList listaVariables;
  
- int boton = 0;
+ public int boton = 0;
  JButton bActivar;
  JButton bImagenPlaca;
  JButton bActuar;
@@ -110,7 +110,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  bSalir.addActionListener(this);
  setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
  
- cambiarTabla();
+ 
 
  }
  private boolean enActivado = false;
@@ -191,15 +191,12 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 
  
  }
- public DefaultListModel cambiarTabla() 
+ public void cambiarTabla (DefaultListModel a) 
  {
-	 DefaultListModel a = new DefaultListModel();
+	
+	
  
-	 for (int i = 0; i<=lista.size();i++ ){
-		 a.add(i, lista.get(i));
-	 } 
- 
-	 return a;
+	
  }
 
  public static void main(String[] args)

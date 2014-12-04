@@ -91,7 +91,7 @@ public class Data_base_controler {
 				ResultSet rs2 =  st.executeQuery("Select * from Sensor");
 				while (rs2.next()) {
 					Sensor a = new Sensor(rs2.getString("id_sensor"),rs2.getString("id_placa"),
-							rs2.getString("def"),rs2.getString("ultima_accion"));
+							rs2.getString("def"),rs2.getString("ultima_accion"),rs2.getString("estado"),rs2.getString("on_off"));
 					lista.add(a);
 				}
 				
@@ -114,7 +114,7 @@ public class Data_base_controler {
 					
 					while (rs2.next()){
 						Sensor a = new Sensor(rs2.getString("id_sensor"),rs2.getString("id_placa"),
-								rs2.getString("def"),rs2.getString("ultima_accion"));
+								rs2.getString("def"),rs2.getString("ultima_accion"),rs2.getString("estado"),rs2.getString("on_off"));
 						lista.add(a);
 					}
 				

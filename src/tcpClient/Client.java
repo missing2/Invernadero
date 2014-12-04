@@ -2,8 +2,10 @@ package tcpClient;
 import util.*;
 
 import java.net.*;
+import java.awt.List;
 import java.io.*;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 
@@ -73,7 +75,27 @@ public class Client {
             		}
                 break;
             	case 2:// accion
+            		DefaultListModel lista = cargarLista();
+            		ventanaAccion vent = new ventanaAccion();
+            		vent.cambiarTabla(lista); // cargo la tabla principal principal de la vent
+            		while (vent.boton==0){
+            			//estoy en la vent sin mas
+            		}if (vent.boton==1){
+            			
+            		}else if(vent.boton==2){
+            			
             		
+            	    }else if(vent.boton==3){
+        			
+        		
+            	    }else if(vent.boton==4){
+    			
+            	    }else if(vent.boton==5){
+            			
+            	    }else if(vent.boton==6){// salir
+            			estado=4;
+            			sm.Escribir("adios"+'\n'); // mando al server que quiere salir
+            		}
             		
             		
                 break;
@@ -81,6 +103,7 @@ public class Client {
                 break;
             	case 4:// salir
             		System.exit(0); 
+            		sm.Escribir("adios"+'\n'); // mando al server que quiere salir
                 break;
             	}
                              
@@ -94,4 +117,9 @@ public class Client {
         }
 
     }
+
+	private static DefaultListModel cargarLista() {
+		// TODO Auto-generated method stub
+		return null;
+	}
     }
