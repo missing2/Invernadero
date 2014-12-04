@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -54,7 +55,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  JTextField palabraBuscar;
  JLabel lLab;
 
- public ventanaAccion(){
+ public ventanaAccion(JList lista){
 
  String cads[]={"/img/duck.gif","/img/luigi.png","/img/mario.jpg"};
  
@@ -111,7 +112,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  bSalir.addActionListener(this);
  setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
  
- 
+ cargarTabla(lista);
 
  }
  
@@ -172,38 +173,41 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 
  
  }
- public void cambiarTabla (DefaultListModel a) 
- {
-	
-	
  
-	
- }
 
  public static void main(String[] args)
  {
-	ventanaAccion v= new ventanaAccion();
-	v.setVisible(true);
+//	ventanaAccion v= new ventanaAccion();
+//	v.setVisible(true);
  }
 
- public void cargarTabla(){
- 
-	 Data_base_controler prueba = Data_base_controler.getInstance();
-
-	 try {
-		 prueba.conectar();
-		 ArrayList as = prueba.sacarlista();
-		 prueba.desconectar();
-		 TableModel modelo = table.getModel();
+ public void cargarTabla(JList a){
+	 TableModel modelo = table.getModel();
+	 DefaultListModel lista = (DefaultListModel) a.getModel();
+	 
+	 ArrayList array= new ArrayList();
+	 
+	int conta = 0;
+	while(lista.get(conta)!=null){
+		array.add(lista.get(conta));
+		conta++;
+	}
+	 
+	 
+     
 		 int fila=0;
 	
-	for (Placa p:as) // cargo la tabla con la jlist devuelta por la bd
+	for (Object o :array) // cargo la tabla con la jlist devuelta por la bd
 	{
-		modelo.setValueAt(p.getId_placa(), fila, 0);
-		modelo.setValueAt(s.getDef(), fila, 1);
-		modelo.setValueAt(p.getEstado_placa(), fila, 3);
-		modelo.setValueAt(p.getImagen(), fila, 2);
-		
+		if(o instanceof Sensor){
+			modelo.setValueAt(((Sensor) o).getId_sensor(), fila, 1);
+			modelo.setValueAt(((Sensor) o).getUltima_accion(), fila, 4);
+			//modelo.setValueAt(((Sensor) o).get, fila, 3); AÑADIR ACCION PRINCIPAL
+		}else if(o instanceof Placa){
+			modelo.setValueAt(((Placa) o).getId_placa(), fila, 0);
+			modelo.setValueAt(((Placa) o).getEstado_placa(), fila, 2);
+			
+		}
 		fila++;
 	}// refresco de los datos de las filas restantes vacias
 	while(fila<modelo.getRowCount()){ 
@@ -217,12 +221,6 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		modelo.setValueAt("", fila, 7);
 		modelo.setValueAt("", fila, 8);
 		fila++;
-	}
-	
-	} catch (ClassNotFoundException | SQLException e) {
-		// TODO Auto-generated catch block
-		System.out.println("Algun error con la conexion BD");
-		e.printStackTrace();
 	}
 
 	}

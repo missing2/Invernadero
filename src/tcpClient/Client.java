@@ -8,6 +8,7 @@ import java.awt.List;
 import java.io.*;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 
@@ -80,9 +81,9 @@ public class Client {
             		sm.Escribir("sacalista"+'\n'); // manda al server un comando para que me mande la lista
             		String stringLista = sm.Leer(); // recibe la lista en string
             		
-            		DefaultListModel lista = cargarLista(stringLista);
-            		ventanaAccion vent = new ventanaAccion();
-            		vent.cambiarTabla(lista); // cargo la tabla principal principal de la vent
+            		JList lista = cargarLista(stringLista);
+            		ventanaAccion vent = new ventanaAccion(lista);
+            		
             		
             		while (vent.boton==0){
             			//estoy en la vent sin mas
@@ -126,25 +127,42 @@ public class Client {
 
     }
 
-	private static DefaultListModel cargarLista(String stringLista) {
+	private static JList cargarLista(String stringLista) {
 		// TODO Auto-generated method stub
 		DefaultListModel df = new DefaultListModel();
 		
-		String palabra;
-		ArrayList [] cadena = new ArrayList[12];
-		char j;
-		j= stringLista.charAt(0);
-		int conta =1;
-		while (stringLista.charAt(conta)!=','){
-			cadena[0]=stringLista.charAt(conta);
+		//Placa P =  new Placa();
+		
+		String sensoresYPlacas[]  = stringLista.split("/");// separo placas de sensores
+		String stringSensores = sensoresYPlacas[0].toString(); 
+		String Sensor[] = stringSensores.split(";");// separo sensores
+		int conta=0;
+		while(Sensor[conta].isEmpty()!=false){
+		String stringAtributos= Sensor[conta].toString();
+		String Atributo[]=stringAtributos.split(",");// separo atributos
+		Sensor a = new Sensor(Atributo[0],Atributo[1],Atributo[2],Atributo[3],Atributo[4],Atributo[5]);
+		df.addElement(a);
 		}
+		//----------PLACAS-----------------
+		String stringPlacas = sensoresYPlacas[1].toString();
+		String Placa[] = stringPlacas.split(";");// separo placas
+	    conta=0;
+		while(Placa[conta].isEmpty()!=false){
+		String stringAtributos= Placa[conta].toString();
+		String Atributo[]=stringAtributos.split(",");// separo atributos
+		Placa a = new Placa(Atributo[0],Atributo[1],Atributo[2]);
+		df.addElement(a);
+		}
+		JList lista= new JList(df);
+			
+	   }
 		
 		
-		return null;
-	}
+		
+		
+	
 
-	private List<Sensor,Placa> ();
-    }
+	
 
 
 private boolean enActivado = false;

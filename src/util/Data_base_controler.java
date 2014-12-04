@@ -101,11 +101,11 @@ public class Data_base_controler {
 				rs2 =  st.executeQuery("Select * from Placa");
 				while (rs2.next()) {
 					Placa a = new Placa(rs2.getString("id_placa"),rs2.getString("estado_placa"),rs2.getString("imagen"));
-					String temp =(""+a.id_placa+","+a.getEstado_placa()+","+a.imagen);
+					String temp =(""+a.id_placa+","+a.getEstado_placa()+","+a.imagen+";");
 					lista.add(temp);
 					
 				}
-				lista.add("-");
+				
 				return lista;
 				
 			}
