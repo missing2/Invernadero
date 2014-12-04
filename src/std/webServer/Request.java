@@ -99,12 +99,25 @@ final class Request implements Runnable {
 		break;
 
 		case 2:  // ACTION
-			// mandar la lista de la tabla principal??
+			 requestLine  = sockManager.Leer();// mandar la lista de la tabla principal
+			 if (requestLine.contains("sacalista")){
+				 String lista = sacarListado ();
+				 sockManager.Escribir("--------------------"+'\n');
+			 }
 			
 			 requestLine  = sockManager.Leer();// lee el comando que e has pasado por socket desde el cliente
-			 if (!requestLine.equals("adios")) {
-					
-				
+			 
+			 while (!requestLine.equals("adios")) { // queda en bucle para poder seguir haciendo cosas
+					if (requestLine.contains("activar")){
+						
+					}else if (requestLine.contains("buscar")){
+						
+					}if (requestLine.contains("imagen")){
+						
+					}if (requestLine.contains("listar")){
+						
+					}
+			 }
 		break;
 
 		case 3:
@@ -132,19 +145,14 @@ final class Request implements Runnable {
     
   }
 
-  private void sacarListado() throws SQLException, IOException {
-	  List< Sensor> lista =base. sacarlista();
-	  
-	int a= lista.size();
-	for (int i=0; i<a;a++){
-		Sensor v = lista.get(i);
-		
-		sockManager.Escribir("ELEM:"+i+1+":"+v.getDef()+" ; "+v.getFuncion()+" ; "+v.getEstado()+" ; "+v.getUltima_accion()+'\n');
-				
-	}
-	sockManager.Escribir("      "+'\n');
-	sockManager.Escribir("202 FINLISTA"+'\n');
+ 
+
+private String sacarListado() throws SQLException, IOException {
+	String rrrr = "";
+	  List< Object> lista =base. sacarlista();
+	  rrrr = lista.toString();
 	
+	return rrrr;
 }
   
   private void sacarBusqueda(String palabra) throws SQLException, IOException {

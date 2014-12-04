@@ -75,24 +75,28 @@ public class Client {
             		}
                 break;
             	case 2:// accion
-            		DefaultListModel lista = cargarLista();
+            		sm.Escribir("sacalista"+'\n'); // manda al server un comando para que me mande la lista
+            		String stringLista = sm.Leer();
+            		DefaultListModel lista = cargarLista(stringLista);
             		ventanaAccion vent = new ventanaAccion();
             		vent.cambiarTabla(lista); // cargo la tabla principal principal de la vent
+            		
             		while (vent.boton==0){
             			//estoy en la vent sin mas
             		}if (vent.boton==1){//Activar
+            			sm.Escribir("activar"+'\n');
             			
             			
             		}else if(vent.boton==2){//bActuar
-            			
+            			sm.Escribir("actuar"+'\n');
             		
             	    }else if(vent.boton==3){//bBuscar
-        			
+            	    	sm.Escribir("buscar"+'\n');
         		
-            	    }else if(vent.boton==4){
-    			
-            	    }else if(vent.boton==5){
-            			
+            	    }else if(vent.boton==4){// imagen
+            	    	sm.Escribir("imagen"+'\n');
+            	    }else if(vent.boton==5){//listar 
+            	    	sm.Escribir("listar"+'\n');
             	    }else if(vent.boton==6){// salir
             			estado=4;
             			sm.Escribir("adios"+'\n'); // mando al server que quiere salir
@@ -119,8 +123,12 @@ public class Client {
 
     }
 
-	private static DefaultListModel cargarLista() {
+	private static DefaultListModel cargarLista(String stringLista) {
 		// TODO Auto-generated method stub
+		DefaultListModel df = new DefaultListModel();
+		stringLista.
 		return null;
 	}
+
+	
     }
