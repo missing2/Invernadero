@@ -83,26 +83,29 @@ public class Data_base_controler {
 				return estado;
 			}
 
-			public List< Object> sacarlista() throws SQLException {// saca una lista en la ventana de accion con todos los sensores y placas
+			public List< String> sacarlista() throws SQLException {// saca una lista en la ventana de accion con todos los sensores y placas
 				
-				List< Object> lista = new ArrayList<Object>();
+				List<String> lista = new ArrayList<String>();
 				Statement st = conn.createStatement();
 				
 				ResultSet rs2 =  st.executeQuery("Select * from Sensor");
 				while (rs2.next()) {
 					Sensor a = new Sensor(rs2.getString("id_sensor"),rs2.getString("id_placa"),
 							rs2.getString("def"),rs2.getString("ultima_accion"),rs2.getString("estado"),rs2.getString("on_off"));
-					lista.add(a);
-					lista.add(",");
+					
+					String temp = (""+a.getId_sensor()+","+a.id_placa+","+a.def+","+a.getUltima_accion()+","+a.estado+","+a.on_off+";");
+					lista.add(temp);
+					lista.add("/");
 				}
-				lista.add("----");
+				
 				rs2 =  st.executeQuery("Select * from Placa");
 				while (rs2.next()) {
 					Placa a = new Placa(rs2.getString("id_placa"),rs2.getString("estado_placa"),rs2.getString("imagen"));
-					lista.add(a);
-					lista.add(",");
+					String temp =(""+a.id_placa+","+a.getEstado_placa()+","+a.imagen);
+					lista.add(temp);
+					
 				}
-				lista.add("----");
+				lista.add("-");
 				return lista;
 				
 			}

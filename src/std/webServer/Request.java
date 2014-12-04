@@ -149,8 +149,8 @@ final class Request implements Runnable {
 
 private String sacarListado() throws SQLException, IOException { // cambia de lista a string
 	String rrrr = "";
-	  List< Object> lista =base. sacarlista();
-	  rrrr = lista.toString();
+	  List< String> lista =base. sacarlista();
+	   rrrr = lista.toString(); // cambio de lista a String
       return rrrr;
 }
   

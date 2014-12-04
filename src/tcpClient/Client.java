@@ -142,5 +142,5 @@ public class Client {
 		return null;
 	}
 
-	
+	private List<Sensor,Placa> ();
     }
