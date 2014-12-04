@@ -80,12 +80,13 @@ public class Client {
             		vent.cambiarTabla(lista); // cargo la tabla principal principal de la vent
             		while (vent.boton==0){
             			//estoy en la vent sin mas
-            		}if (vent.boton==1){
+            		}if (vent.boton==1){//Activar
             			
-            		}else if(vent.boton==2){
+            			
+            		}else if(vent.boton==2){//bActuar
             			
             		
-            	    }else if(vent.boton==3){
+            	    }else if(vent.boton==3){//bBuscar
         			
         		
             	    }else if(vent.boton==4){

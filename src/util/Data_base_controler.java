@@ -27,7 +27,7 @@ public class Data_base_controler {
 		Class.forName("org.sqlite.JDBC");
 		
 		//Creo la conexion con la BD
-		conn = DriverManager.getConnection("jdbc:sqlite:Data_base/ProyectoRedesBds.s3bd"); // esta bien??
+		conn = DriverManager.getConnection("jdbc:sqlite:Data_base/ProyectoRedesBds.sqlite"); // esta bien??
 		//el problema es que estas usando una bd s3db y has puesto sqlite
 	}
 	

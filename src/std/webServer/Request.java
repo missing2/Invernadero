@@ -99,68 +99,12 @@ final class Request implements Runnable {
 		break;
 
 		case 2:  // ACTION
-			sendBytes();
+			// mandar la lista de la tabla principal??
+			
 			 requestLine  = sockManager.Leer();// lee el comando que e has pasado por socket desde el cliente
 			 if (!requestLine.equals("adios")) {
 					
-				 if (requestLine.equals ("aaaaaa")){
-				sockManager.Escribir("Insertar id Placa"+'\n');
-				requestLine  = sockManager.Leer();
-				String idp = requestLine.toString();
 				
-				sockManager.Escribir("Insertar definicion de la variable"+'\n');
-				requestLine  = sockManager.Leer();
-				String defv = requestLine.toString();
-				
-				if (base.ConsultarIdVariable(idp,defv)){
-					if (base.consultarEstadoVariable(idp,defv).equals("off")){
-						sockManager.Escribir("203 OK.Control de variable activo"+'\n');
-						base.encenderVariable(idp,defv);
-					}else if (base.consultarEstadoVariable(idp,defv).equals("on")) {
-						sockManager.Escribir("404ERR."+defv+" en estado ON"+'\n');
-					}
-				}
-				}else{
-					sockManager.Escribir("405 ERR."+1+" no existe"+'\n');
-				}
-				
-	 		}else if(comando.equals("Off")) {
-	 			sockManager.Escribir("Insertar id Placa"+'\n');
-				requestLine  = sockManager.Leer();
-				String idp = requestLine.toString();
-				sockManager.Escribir("Insertar id variable"+'\n');
-				requestLine  = sockManager.Leer();
-				String defv = requestLine.toString();
-				
-				if (base.ConsultarIdVariable(idp,defv)){
-					if (base.consultarEstadoVariable(idp,defv).equals("on")){
-						sockManager.Escribir("203 OK.Control de variable activo"+'\n');
-						base.apagarVariable(idp,defv);
-					}else if (base.consultarEstadoVariable(idp,defv).equals("off")) {
-						sockManager.Escribir("404ERR."+defv+" en estado OFF"+'\n');
-					}
-					
-				}else{
-					sockManager.Escribir("405 ERR."+defv+" no existe"+'\n');
-				}
-	 		}else if(comando.equals("Accion")) {
-	 			//---------------------------
-			}else if(comando.equals("Listado")) {
-				sacarListado();       //se puede quedar en bucle??
-				estado=2;
-			}else if(comando.equals("Buscar")) {
-				sockManager.Escribir("Insertar lo que deseas buscar"+'\n');
-				requestLine  = sockManager.Leer();
-				String a = requestLine.toString();
-				sacarBusqueda(a);       //se puede quedar en bucle??
-				estado=2;
-			}else if(comando.equals("Obtener_foto")) {
-				//--------------------------
-			}else if(comando.equals("Salir")) {
-				estado=4;
-			}else {
-				sockManager.Escribir("Error, comando invalido."+'\n'); //?? igual hay que quitarlo
-			}
 		break;
 
 		case 3:
