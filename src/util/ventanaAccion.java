@@ -114,22 +114,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  
 
  }
- private boolean enActivado = false;
-
-	// Método privado utilizado para activar o desactivar los componentes de acuerdo al modo de activación
-	private void setModoActivado( boolean on ) {
-		enActivado = on;
-		bActuar.setEnabled( !on );
-		bImagenPlaca.setEnabled( !on );
-		bBuscar.setEnabled( !on );
-		bListar.setEnabled( !on );
-		listaVariables.setEnabled( !on );
-		//nick.setEnabled( on );
-		if (on)
-			bActivar.setText( "OFF" );
-		else
-			bActivar.setText( "ON" );
-	}
+ 
  @Override
  public void componentResized(ComponentEvent e) {
  // TODO Auto-generated method stub
@@ -157,41 +142,9 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  @Override
  public void actionPerformed(ActionEvent e) {
  // TODO Auto-generated method stub
-	 boton = 1;
+
 	 if(e.getSource().equals(bActivar)){
-		 if(!enActivado){
-			 setModoActivado(true);
-			 //aqui cambiar el valor de la tabla a off
-			 int index = table.getSelectedRow();
-			 String  idv = (String) table.getValueAt(index, 1);
-			 Data_base_controler prueba = Data_base_controler.getInstance();
-			 try {
-				prueba.conectar();
-				prueba.apagarVariable(idv);
-				prueba.desconectar();
-					
-			} catch (ClassNotFoundException | SQLException e1) {
-				// TODO Auto-generated catch block
-				System.out.println("Algun error con la conexion BD");
-				e1.printStackTrace();
-			}
-		 }else{
-			 //aqui a on
-			 int index = table.getSelectedRow();
-			 String  idv = (String) table.getValueAt(index, 1);
-			 Data_base_controler prueba = Data_base_controler.getInstance();
-				
-				try {
-					prueba.conectar();
-					prueba.encenderVariable(idv);
-					prueba.desconectar();
-					
-				} catch (ClassNotFoundException | SQLException e1) {
-					// TODO Auto-generated catch block
-					System.out.println("Algun error con la conexion BD");
-					e1.printStackTrace();
-				}
-		 }
+		 boton = 1;
 		 
 	 }else if(e.getSource().equals(bActuar)){
 		 boton = 2;
@@ -233,30 +186,24 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 	v.setVisible(true);
  }
 
-}
-
-/*// listener de la lista  lo que hace es crear la tabla de la derecha
-public void cargarTabla(){
-
- int index = table.getSelectedRow();
- String  nombre = (String) table.getValueAt(index, 1);
- String  nombre1 = (String) table.getValueAt(index, 0);
+ public void cargarTabla(){
  
-ConexBD prueba = ConexBD.getInstance();
+	 Data_base_controler prueba = Data_base_controler.getInstance();
 
-try {
-	prueba.conectar();
-	 ArrayList = prueba.datosObras(nombre); prueba.metodo
-	prueba.desconectar();
-	TableModel modelo = table.getModel();
-	int fila=0;
+	 try {
+		 prueba.conectar();
+		 ArrayList as = prueba.sacarlista();
+		 prueba.desconectar();
+		 TableModel modelo = table.getModel();
+		 int fila=0;
 	
-	for (Placa p:ArrayList || Sensor s:ArrayList) // cargo la tabla con la jlist devuelta por la bd
+	for (Placa p:as) // cargo la tabla con la jlist devuelta por la bd
 	{
-		modelo.setValueAt(p.get..., fila, 0);
-		modelo.setValueAt(p.get..., fila, 1);
-		modelo.setValueAt(p.get..., fila, 2);
-		modelo.setValueAt(o.getLugarRealizacion(), fila, 3);
+		modelo.setValueAt(p.getId_placa(), fila, 0);
+		modelo.setValueAt(s.getDef(), fila, 1);
+		modelo.setValueAt(p.getEstado_placa(), fila, 3);
+		modelo.setValueAt(p.getImagen(), fila, 2);
+		
 		fila++;
 	}// refresco de los datos de las filas restantes vacias
 	while(fila<modelo.getRowCount()){ 
@@ -272,11 +219,11 @@ try {
 		fila++;
 	}
 	
-} catch (ClassNotFoundException | SQLException e) {
-	// TODO Auto-generated catch block
-	System.out.println("Algun error con la conexion BD");
-	e.printStackTrace();
-}
+	} catch (ClassNotFoundException | SQLException e) {
+		// TODO Auto-generated catch block
+		System.out.println("Algun error con la conexion BD");
+		e.printStackTrace();
+	}
 
+	}
 }
-*/

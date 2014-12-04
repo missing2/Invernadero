@@ -2,6 +2,7 @@ package tcpClient;
 import util.*;
 
 import java.net.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.List;
 import java.io.*;
@@ -144,3 +145,55 @@ public class Client {
 
 	private List<Sensor,Placa> ();
     }
+
+
+private boolean enActivado = false;
+
+// Método privado utilizado para activar o desactivar los componentes de acuerdo al modo de activación
+private void setModoActivado( boolean on ) {
+	enActivado = on;
+	bActuar.setEnabled( !on );
+	bImagenPlaca.setEnabled( !on );
+	bBuscar.setEnabled( !on );
+	bListar.setEnabled( !on );
+	listaVariables.setEnabled( !on );
+	//nick.setEnabled( on );
+	if (on)
+		bActivar.setText( "OFF" );
+	else
+		bActivar.setText( "ON" );
+}
+//dentro del actioner boton 1
+if(!enActivado){
+	 setModoActivado(true);
+	 //aqui cambiar el valor de la tabla a off
+	 int index = table.getSelectedRow();
+	 String  idv = (String) table.getValueAt(index, 1);
+	 Data_base_controler prueba = Data_base_controler.getInstance();
+	 try {
+		prueba.conectar();
+		prueba.apagarVariable(idv);
+		prueba.desconectar();
+			
+	} catch (ClassNotFoundException | SQLException e1) {
+		// TODO Auto-generated catch block
+		System.out.println("Algun error con la conexion BD");
+		e1.printStackTrace();
+	}
+}else{
+	 //aqui a on
+	 int index = table.getSelectedRow();
+	 String  idv = (String) table.getValueAt(index, 1);
+	 Data_base_controler prueba = Data_base_controler.getInstance();
+		
+		try {
+			prueba.conectar();
+			prueba.encenderVariable(idv);
+			prueba.desconectar();
+			
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			System.out.println("Algun error con la conexion BD");
+			e1.printStackTrace();
+		}
+}
