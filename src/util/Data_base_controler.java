@@ -27,7 +27,7 @@ public class Data_base_controler {
 		Class.forName("org.sqlite.JDBC");
 		
 		//Creo la conexion con la BD
-		conn = DriverManager.getConnection("jdbc:sqlite:Data_base/ProyectoRedesBds.sqlite"); // esta bien??
+		conn = DriverManager.getConnection("jdbc:sqlite:Data_base/ProyectoRedesBds.s3bd"); // esta bien??
 		//el problema es que estas usando una bd s3db y has puesto sqlite
 	}
 	
@@ -140,15 +140,21 @@ public class Data_base_controler {
 	 			return lista;
 	 		}
 
-			public void encenderVariable(String idp,String idv) throws SQLException {
-				Statement st = conn.createStatement();
-				ResultSet rs2 =  st.executeQuery("---------------------------");
+			public void encenderVariable(String idv) throws SQLException {
 				
+				Statement st = conn.createStatement();
+				String sql = "UPDATE SENSOR SET"+" on_off ='ON' WHERE  id_sensor='" +idv+"'";
+				System.out.println(sql);
+	 	 		st.execute(sql);
+	 	 		st.close();
 			}
-			public void apagarVariable(String idp,String idv) throws SQLException {
-				Statement st = conn.createStatement();
-				ResultSet rs2 =  st.executeQuery("--------------");
+			public void apagarVariable(String idv) throws SQLException {
 				
+				Statement st = conn.createStatement();
+				String sql = "UPDATE SENSOR SET"+" on_off ='OFF' WHERE  id_sensor='" +idv+"'";
+				System.out.println(sql);
+	 	 		st.execute(sql);
+	 	 		st.close();
 			}
 }
 	 	
