@@ -110,7 +110,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  bSalir.addActionListener(this);
  setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
  
- //cargarTabla();
+ cambiarTabla();
 
  }
  private boolean enActivado = false;
@@ -191,7 +191,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 
  
  }
- public DefaultListModel cambiarTabla(ArrayList lista) 
+ public DefaultListModel cambiarTabla() 
  {
 	 DefaultListModel a = new DefaultListModel();
  

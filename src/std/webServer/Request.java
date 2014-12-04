@@ -46,7 +46,7 @@ final class Request implements Runnable {
 			
 			if (! requestLine.equals("adios")) {
 				
-				if (requestLine.equals("")){// se esta vacia
+				if (requestLine.equals("")){// si esta vacia
 					sockManager.Escribir("400 ERR.Falta el nombre de usuario"+'\n');
 					System.out.println("falta usuario");
 					estado=0;
@@ -99,8 +99,8 @@ final class Request implements Runnable {
 		break;
 
 		case 2:  // ACTION
+			sendBytes();
 			 requestLine  = sockManager.Leer();// lee el comando que e has pasado por socket desde el cliente
-			 
 			 if (!requestLine.equals("adios")) {
 					
 				 if (requestLine.equals ("aaaaaa")){
