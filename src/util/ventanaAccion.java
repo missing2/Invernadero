@@ -15,6 +15,7 @@ import java.awt.BorderLayout;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -161,8 +162,35 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		 if(!enActivado){
 			 setModoActivado(true);
 			 //aqui cambiar el valor de la tabla a off
+			 int index = table.getSelectedRow();
+			 String  idv = (String) table.getValueAt(index, 1);
+			 Data_base_controler prueba = Data_base_controler.getInstance();
+			 try {
+				prueba.conectar();
+				prueba.apagarVariable(idv);
+				prueba.desconectar();
+					
+			} catch (ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				System.out.println("Algun error con la conexion BD");
+				e1.printStackTrace();
+			}
 		 }else{
 			 //aqui a on
+			 int index = table.getSelectedRow();
+			 String  idv = (String) table.getValueAt(index, 1);
+			 Data_base_controler prueba = Data_base_controler.getInstance();
+				
+				try {
+					prueba.conectar();
+					prueba.encenderVariable(idv);
+					prueba.desconectar();
+					
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					System.out.println("Algun error con la conexion BD");
+					e1.printStackTrace();
+				}
 		 }
 		 
 	 }else if(e.getSource().equals(bActuar)){
@@ -210,8 +238,10 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 /*// listener de la lista  lo que hace es crear la tabla de la derecha
 public void cargarTabla(){
 
-String nombre= (String) lnombres.getSelectedValue();	aqui en vez de la lista de nombres seria el campo de la tabla
-	
+ int index = table.getSelectedRow();
+ String  nombre = (String) table.getValueAt(index, 1);
+ String  nombre1 = (String) table.getValueAt(index, 0);
+ 
 ConexBD prueba = ConexBD.getInstance();
 
 try {
