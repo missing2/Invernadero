@@ -36,7 +36,17 @@ public class Data_base_controler {
 	public void desconectar() throws SQLException {
 	conn.close();
 	}
-
+	
+	public Data_base_controler()
+	 {
+	 try {
+	 conectar();
+	 } catch (ClassNotFoundException e) {
+	 e.printStackTrace();
+	 } catch (SQLException e) {
+	 e.printStackTrace();
+	 }
+	 }
 	
 	
   

@@ -106,7 +106,7 @@ final class Request implements Runnable {
 			 requestLine  = sockManager.Leer();// mandar la lista de la tabla principal
 			 if (requestLine.contains("sacalista")){
 				 String lista = sacarListado ();
-				 sockManager.Escribir(lista+'\n'); // mando la lista al cliente
+				 sockManager.Escribir(lista+'\n'); // mando la lista al cliente para que inicie la ventana
 			 }
 			
 			 requestLine  = sockManager.Leer();// lee el comando que e has pasado por socket desde el cliente
