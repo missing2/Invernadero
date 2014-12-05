@@ -115,6 +115,7 @@ final class Request implements Runnable {
 					if (requestLine.contains("activar")){
 						
 					}else if (requestLine.contains("buscar")){
+						requestLine = sockManager.Leer(); // recivo que se quiere buscar en la bd
 						
 					}if (requestLine.contains("imagen")){
 						

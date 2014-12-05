@@ -126,7 +126,7 @@ public class Data_base_controler {
 				List< Sensor> lista = new ArrayList<Sensor>();
 				Statement st = conn.createStatement();
 				
-					ResultSet rs2 =  st.executeQuery("Select * from "+donde+" Where def_variable = "+nombre+""); // esta bien????
+					ResultSet rs2 =  st.executeQuery("Select * from Placa Where ---------"); // esta bien????
 					
 					while (rs2.next()){
 						Sensor a = new Sensor(rs2.getString("id_sensor"),rs2.getString("id_placa"),

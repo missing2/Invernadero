@@ -96,7 +96,8 @@ public class Client {
 	            		
 	            	    }else if(vent.boton==3){//bBuscar
 	            	    	sm.Escribir("buscar"+'\n');
-	        		
+	            	    	sm.Escribir(vent.palabraBuscar.toString()+'\n');
+	            	    	
 	            	    }else if(vent.boton==4){// imagen
 	            	    	sm.Escribir("imagen"+'\n');
 	            	    	

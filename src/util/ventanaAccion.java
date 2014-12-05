@@ -53,7 +53,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  JButton bBuscar;
  JButton bListar;
  
- JTextField palabraBuscar;
+ public JTextField palabraBuscar;
  JLabel lLab;
  
  public JList lista;
@@ -149,12 +149,13 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 
 	 if(e.getSource().equals(bActivar)){
 		 boton = 1;
-		 
+		 // necesito saber la variable o algo de la fila seleccionada
 	 }else if(e.getSource().equals(bActuar)){
 		 boton = 2;
+		// necesito saber la variable o algo de la fila seleccionada
 	 }else if(e.getSource().equals(bBuscar)){
 		 boton = 3;
-		 
+		// necesito botones para saber en que columna buscar o que variable
 	 }else if(e.getSource().equals(bImagenPlaca)){
 		 boton = 4;
 //		 int ra= 2; //aqui habria que seleccionarla dependiendo de la placa que sea
@@ -168,7 +169,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 //		 
 	 }else if(e.getSource().equals(bListar)){
 		 boton = 5;
-		 
+		 // creo que ya esta hecho por defecto en la tabla principal
 	 }else if(e.getSource().equals(bSalir)){
 		 boton = 6;
 		 System.exit(0);
