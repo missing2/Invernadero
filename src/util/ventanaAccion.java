@@ -27,6 +27,7 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -184,21 +185,16 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  }
 
  public TableModel cargarTabla(JList a){
-	 TableModel modelo = table.getModel();
-	 DefaultListModel lista = (DefaultListModel) a.getModel();
 	 
-	 ArrayList array= new ArrayList();
-	 
-	int conta = 0;
-	while(lista.get(conta)!=null){
-		array.add(lista.get(conta));
-		conta++;
-	}
-	 
-	 
+	// cambiamos de nuestro jlist al array que usaremos para cargar la tabla
+	  ArrayList array= new ArrayList();
+	 for (int i=0;i<=a.getModel().getSize();i++){
+		array.add(a.getModel().getElementAt(i)) ;
+	 }
+	 	 
      
 		 int fila=0;
-	
+	TableModel modelo = table.getModel();
 	for (Object o :array) // cargo la tabla con la jlist devuelta por la bd
 	{
 		if(o instanceof Sensor){
