@@ -82,7 +82,7 @@ public class Client {
             		String stringLista = sm.Leer(); // recibe la lista en string
             		
             		JList lista = cargarLista(stringLista);
-            		ventanaAccion vent = new ventanaAccion(lista);
+            		ventanaAccion vent = new ventanaAccion();
             		
             		
             		while (vent.boton==0){
@@ -140,7 +140,7 @@ public class Client {
 		while(Sensor[conta].isEmpty()!=false){
 		String stringAtributos= Sensor[conta].toString();
 		String Atributo[]=stringAtributos.split(",");// separo atributos
-		Sensor a = new Sensor(Atributo[0],Atributo[1],Atributo[2],Atributo[3],Atributo[4],Atributo[5]);
+		Sensor a = new Sensor(Atributo[0],Atributo[1],Atributo[2],Atributo[3],Atributo[4],Atributo[5],Atributo[6]);
 		df.addElement(a);
 		}
 		//----------PLACAS-----------------
@@ -154,7 +154,7 @@ public class Client {
 		df.addElement(a);
 		}
 		JList lista= new JList(df);
-			
+			return lista;
 	   }
 		
 		
@@ -165,53 +165,53 @@ public class Client {
 	
 
 
-private boolean enActivado = false;
-
-// Método privado utilizado para activar o desactivar los componentes de acuerdo al modo de activación
-private void setModoActivado( boolean on ) {
-	enActivado = on;
-	bActuar.setEnabled( !on );
-	bImagenPlaca.setEnabled( !on );
-	bBuscar.setEnabled( !on );
-	bListar.setEnabled( !on );
-	listaVariables.setEnabled( !on );
-	//nick.setEnabled( on );
-	if (on)
-		bActivar.setText( "OFF" );
-	else
-		bActivar.setText( "ON" );
-}
-//dentro del actioner boton 1
-if(!enActivado){
-	 setModoActivado(true);
-	 //aqui cambiar el valor de la tabla a off
-	 int index = table.getSelectedRow();
-	 String  idv = (String) table.getValueAt(index, 1);
-	 Data_base_controler prueba = Data_base_controler.getInstance();
-	 try {
-		prueba.conectar();
-		prueba.apagarVariable(idv);
-		prueba.desconectar();
-			
-	} catch (ClassNotFoundException | SQLException e1) {
-		// TODO Auto-generated catch block
-		System.out.println("Algun error con la conexion BD");
-		e1.printStackTrace();
-	}
-}else{
-	 //aqui a on
-	 int index = table.getSelectedRow();
-	 String  idv = (String) table.getValueAt(index, 1);
-	 Data_base_controler prueba = Data_base_controler.getInstance();
-		
-		try {
-			prueba.conectar();
-			prueba.encenderVariable(idv);
-			prueba.desconectar();
-			
-		} catch (ClassNotFoundException | SQLException e1) {
-			// TODO Auto-generated catch block
-			System.out.println("Algun error con la conexion BD");
-			e1.printStackTrace();
-		}
+//private boolean enActivado = false;
+//
+//// Método privado utilizado para activar o desactivar los componentes de acuerdo al modo de activación
+//private void setModoActivado( boolean on ) {
+//	enActivado = on;
+//	bActuar.setEnabled( !on );
+//	bImagenPlaca.setEnabled( !on );
+//	bBuscar.setEnabled( !on );
+//	bListar.setEnabled( !on );
+//	listaVariables.setEnabled( !on );
+//	//nick.setEnabled( on );
+//	if (on)
+//		bActivar.setText( "OFF" );
+//	else
+//		bActivar.setText( "ON" );
+//}
+////dentro del actioner boton 1
+//if(!enActivado){
+//	 setModoActivado(true);
+//	 //aqui cambiar el valor de la tabla a off
+//	 int index = table.getSelectedRow();
+//	 String  idv = (String) table.getValueAt(index, 1);
+//	 Data_base_controler prueba = Data_base_controler.getInstance();
+//	 try {
+//		prueba.conectar();
+//		prueba.apagarVariable(idv);
+//		prueba.desconectar();
+//			
+//	} catch (ClassNotFoundException | SQLException e1) {
+//		// TODO Auto-generated catch block
+//		System.out.println("Algun error con la conexion BD");
+//		e1.printStackTrace();
+//	}
+//}else{
+//	 //aqui a on
+//	 int index = table.getSelectedRow();
+//	 String  idv = (String) table.getValueAt(index, 1);
+//	 Data_base_controler prueba = Data_base_controler.getInstance();
+//		
+//		try {
+//			prueba.conectar();
+//			prueba.encenderVariable(idv);
+//			prueba.desconectar();
+//			
+//		} catch (ClassNotFoundException | SQLException e1) {
+//			// TODO Auto-generated catch block
+//			System.out.println("Algun error con la conexion BD");
+//			e1.printStackTrace();
+//		}
 }

@@ -27,7 +27,7 @@ public class Data_base_controler {
 		Class.forName("org.sqlite.JDBC");
 		
 		//Creo la conexion con la BD
-		conn = DriverManager.getConnection("jdbc:sqlite:Data_base/ProyectoRedesBds.s3bd");
+		conn = DriverManager.getConnection("jdbc:sqlite:Data_base/ProyectoRedesBds.sqlite");
 		//el problema es que estas usando una bd s3db y has puesto sqlite
 	}
 	
@@ -91,9 +91,9 @@ public class Data_base_controler {
 				ResultSet rs2 =  st.executeQuery("Select * from Sensor");
 				while (rs2.next()) {
 					Sensor a = new Sensor(rs2.getString("id_sensor"),rs2.getString("id_placa"),
-							rs2.getString("def"),rs2.getString("ultima_accion"),rs2.getString("estado"),rs2.getString("on_off"));
+							rs2.getString("def"),rs2.getString("ultima_accion"),rs2.getString("estado"),rs2.getString("on_off"),rs2.getString("func_principal"));
 					
-					String temp = (""+a.getId_sensor()+","+a.id_placa+","+a.def+","+a.getUltima_accion()+","+a.estado+","+a.on_off+";");
+					String temp = (""+a.getId_sensor()+","+a.id_placa+","+a.def+","+a.getUltima_accion()+","+a.estado+","+a.on_off+","+a.funcion_principal+";");
 					lista.add(temp);
 					lista.add("/");
 				}
@@ -119,7 +119,7 @@ public class Data_base_controler {
 					
 					while (rs2.next()){
 						Sensor a = new Sensor(rs2.getString("id_sensor"),rs2.getString("id_placa"),
-								rs2.getString("def"),rs2.getString("ultima_accion"),rs2.getString("estado"),rs2.getString("on_off"));
+								rs2.getString("def"),rs2.getString("ultima_accion"),rs2.getString("estado"),rs2.getString("on_off"),rs2.getString("func_principal"));
 						lista.add(a);
 					}
 				
