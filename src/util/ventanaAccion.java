@@ -204,7 +204,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		if(o instanceof Sensor){
 			modelo.setValueAt(((Sensor) o).getId_sensor(), fila, 1);
 			modelo.setValueAt(((Sensor) o).getUltima_accion(), fila, 4);
-			//modelo.setValueAt(((Sensor) o).get, fila, 3); AÑADIR ACCION PRINCIPAL
+			modelo.setValueAt(((Sensor) o).getFuncion_principal(), fila, 3); 
 		}else if(o instanceof Placa){
 			modelo.setValueAt(((Placa) o).getId_placa(), fila, 0);
 			modelo.setValueAt(((Placa) o).getEstado_placa(), fila, 2);
