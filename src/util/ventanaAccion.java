@@ -54,8 +54,10 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  
  JTextField palabraBuscar;
  JLabel lLab;
+ 
+ JList lista;
 
- public ventanaAccion(JList lista){
+ public ventanaAccion(){
 
  String cads[]={"/img/duck.gif","/img/luigi.png","/img/mario.jpg"};
  

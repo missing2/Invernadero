@@ -165,7 +165,7 @@ public class Client {
 	
 
 
-private boolean enActivado = false;
+/*private boolean enActivado = false;
 
 // Método privado utilizado para activar o desactivar los componentes de acuerdo al modo de activación
 private void setModoActivado( boolean on ) {
@@ -215,3 +215,4 @@ if(!enActivado){
 			e1.printStackTrace();
 		}
 }
+	*/

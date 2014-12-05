@@ -15,6 +15,7 @@ import javax.swing.JButton;
 
 public class ventanaLoggin extends JFrame implements ActionListener, ComponentListener{
 	private static final long serialVersionUID = -2914651660379733387L;
+	ventanaAccion vA;
 	private final JLabel lblUser = new JLabel("USER:");
 	public JTextField txtFUser;
 	public JTextField txtFPasword;
@@ -52,6 +53,7 @@ public ventanaLoggin(){
 	btnLoggin.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			boton=1;
+			vA = new ventanaAccion() ;
 		}
 	});
 	btnLoggin.setBounds(395, 94, 108, 43);
