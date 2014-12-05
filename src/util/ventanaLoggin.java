@@ -20,6 +20,8 @@ public class ventanaLoggin extends JFrame implements ActionListener, ComponentLi
 	public JTextField txtFUser;
 	public JTextField txtFPasword;
 	public int boton = 0;
+	JButton btnLoggin;
+	JButton btnSalir;
 	
 public ventanaLoggin(){
 	getContentPane().setBackground(Color.BLACK);	
@@ -49,24 +51,15 @@ public ventanaLoggin(){
 	getContentPane().add(txtFPasword);
 	txtFPasword.setColumns(10);
 	
-	JButton btnLoggin = new JButton("Loggin");
-	btnLoggin.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			boton=1;
-			vA = new ventanaAccion() ;
-		}
-	});
+	btnLoggin = new JButton("Loggin");
+	btnLoggin.addActionListener(this);
 	btnLoggin.setBounds(395, 94, 108, 43);
 	getContentPane().add(btnLoggin);
 	
-	JButton btnSalir = new JButton("Salir");
+	btnSalir = new JButton("Salir");
 	btnSalir.setBounds(412, 148, 76, 31);
 	getContentPane().add(btnSalir);
-	btnSalir.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			boton=2;
-		}
-	});
+	btnSalir.addActionListener(this);
 		this.setTitle("M&V");
 		this.setBounds(Toolkit.getDefaultToolkit().getScreenSize().width/2-800/2,Toolkit.getDefaultToolkit().getScreenSize().height/2-600/2, 800, 600);
 		this.setSize(546,273);
@@ -97,5 +90,12 @@ public ventanaLoggin(){
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub	
+		if(e.getSource().equals(btnLoggin)){
+			boton=1;
+			vA = new ventanaAccion() ;
+			this.setVisible(false);
+		}else if(e.getSource().equals(btnSalir)){
+			boton=2;
+		}
 	}
 }
