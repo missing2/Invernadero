@@ -114,7 +114,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  bSalir.addActionListener(this);
  setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
  
- cargarTabla(lista);
+ table.setModel(cargarTabla(lista));
 
  }
  
@@ -183,7 +183,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 //	v.setVisible(true);
  }
 
- public void cargarTabla(JList a){
+ public TableModel cargarTabla(JList a){
 	 TableModel modelo = table.getModel();
 	 DefaultListModel lista = (DefaultListModel) a.getModel();
 	 
@@ -224,6 +224,6 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		modelo.setValueAt("", fila, 8);
 		fila++;
 	}
-
+ return modelo;
 	}
 }
