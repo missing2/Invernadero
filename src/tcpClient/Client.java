@@ -81,9 +81,9 @@ public class Client {
             		sm.Escribir("sacalista"+'\n'); // manda al server un comando para que me mande la lista
             		String stringLista = sm.Leer(); // recibe la lista en string
             		
-            		JList lista = cargarLista(stringLista);
+            		JList listae = cargarLista(stringLista);
             		ventanaAccion vent = new ventanaAccion();
-            		
+            		vent.lista=listae;
             		
             		while (vent.boton==0){
             			//estoy en la vent sin mas

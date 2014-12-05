@@ -27,8 +27,9 @@ public class Data_base_controler {
 		Class.forName("org.sqlite.JDBC");
 		
 		//Creo la conexion con la BD
-		conn = DriverManager.getConnection("jdbc:sqlite:Data_base/ProyectoRedesBds.sqlite");
+		conn = DriverManager.getConnection("jdbc:sqlite:res/ProyectoRedesBds.s3db");
 		//el problema es que estas usando una bd s3db y has puesto sqlite
+		 
 	}
 	
 	//Método para cerrar la conexion de la BD
@@ -45,7 +46,7 @@ public class Data_base_controler {
     	
 		Statement st = conn.createStatement(); 
 		
-		ResultSet rs2 = st.executeQuery("Select * from User Where User = "+nombre+"");                                                                                                                                                     // estado civil es estado, no string
+		ResultSet rs2 = st.executeQuery("Select * from User Where User = "+nombre+";");                                                                                                                                                     // estado civil es estado, no string
 	 	if (rs2!=null)
 	 		existe=true;
 	 		
@@ -60,7 +61,7 @@ public class Data_base_controler {
 	 	    	
 	 			Statement st = conn.createStatement(); 
 	 			
-	 			ResultSet rs2 = st.executeQuery("Select * from User Where User = "+nombre+"and Where contrasena='"+pass+"'");                                                                                                                                                     // estado civil es estado, no string
+	 			ResultSet rs2 = st.executeQuery("Select * from User Where User = "+nombre+"and Where contrasena='"+pass+"';");                                                                                                                                                     // estado civil es estado, no string
 	 		 	if (rs2!=null)
 	 		 		existe=true;
 	 		 		
@@ -88,7 +89,7 @@ public class Data_base_controler {
 				List<String> lista = new ArrayList<String>();
 				Statement st = conn.createStatement();
 				
-				ResultSet rs2 =  st.executeQuery("Select * from Sensor");
+				ResultSet rs2 =  st.executeQuery("Select * from Sensor;");
 				while (rs2.next()) {
 					Sensor a = new Sensor(rs2.getString("id_sensor"),rs2.getString("id_placa"),
 							rs2.getString("def"),rs2.getString("ultima_accion"),rs2.getString("estado"),rs2.getString("on_off"),rs2.getString("func_principal"));
@@ -96,14 +97,14 @@ public class Data_base_controler {
 					String temp = (""+a.getId_sensor()+","+a.id_placa+","+a.def+","+a.getUltima_accion()+","+a.estado+","+a.on_off+","+a.funcion_principal+";");
 					lista.add(temp);
 					lista.add("/");
+					
 				}
 				
-				rs2 =  st.executeQuery("Select * from Placa");
+				rs2 =  st.executeQuery("Select * from Placa;");
 				while (rs2.next()) {
 					Placa a = new Placa(rs2.getString("id_placa"),rs2.getString("estado_placa"),rs2.getString("imagen"));
 					String temp =(""+a.id_placa+","+a.getEstado_placa()+","+a.imagen+";");
 					lista.add(temp);
-					
 				}
 				
 				return lista;

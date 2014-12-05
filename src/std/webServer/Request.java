@@ -26,7 +26,7 @@ final class Request implements Runnable {
       processRequest();
     }
     catch (Exception e) {
-      System.out.println(e);
+      e.printStackTrace();
     }
   }
 
@@ -52,6 +52,7 @@ final class Request implements Runnable {
 					estado=0;
 					
 				}else{//requestLine!=null)
+					base.conectar();
 					 if (!base.consultaUsuario(requestLine)){
 						sockManager.Escribir("401ERR.Usuario desconocido"+'\n');
 						System.out.println("user desconocido");
@@ -82,16 +83,19 @@ final class Request implements Runnable {
 					estado = 0;
 					System.out.println("falta clave");
 				}else{// !requestLine.equals(""))
+					base.conectar();
 					if (base.ConsultarPasword(user.getNick(), pass)){
 							sockManager.Escribir("201 OK.Bienvenido al sistema"+user.getNick()+'\n');
 							estado=2;
 							System.out.println("contraseña bien");
+							
 							user.setContrasena(pass);
 					}else if (!base.ConsultarPasword(user.getNick(), pass)){
 							sockManager.Escribir("401 ERR.La clave es incorrecta"+'\n');
 							System.out.println("clave erronea");
 							estado=1;
 					}
+					base.desconectar();
 				}
 	    	}else if (requestLine.equals("adios")){
 	    		estado=4;
@@ -147,27 +151,30 @@ final class Request implements Runnable {
 
  
 
-private String sacarListado() throws SQLException, IOException { // cambia de lista a string
-	String rrrr = "";
-	  List< String> lista =base. sacarlista();
-	   rrrr = lista.toString(); // cambio de lista a String
-      return rrrr;
+private String sacarListado() throws SQLException, IOException, ClassNotFoundException { // cambia de lista a string
+	base.conectar();
+	String string = "";
+	 List<String> lista =base. sacarlista();
+	   string = lista. toString(); // cambio de lista a String
+	   base.desconectar();
+	   return string;
+	   
 }
-  
-  private void sacarBusqueda(String palabra) throws SQLException, IOException {
-	  List< Sensor> lista =base. sacarBusqueda(palabra);
-	  
-	int a= lista.size();
-	for (int i=0; i<a;a++){
-		Sensor v = lista.get(i);
-		
-		sockManager.Escribir("ELEM:"+i+1+":"+v.getDef()+" ; "+v.getFuncion()+" ; "+v.getEstado()+" ; "+v.getUltima_accion()+'\n');
-				
-	}
-	sockManager.Escribir("      ");
-	sockManager.Escribir("202 FINLISTA"+'\n');
-	
-}
+//  
+//  private void sacarBusqueda(String palabra) throws SQLException, IOException {
+//	  List< Sensor> lista =base. sacarBusqueda(palabra);
+//	  
+//	int a= lista.size();
+//	for (int i=0; i<a;a++){
+//		Sensor v = lista.get(i);
+//		
+//		sockManager.Escribir("ELEM:"+i+1+":"+v.getDef()+" ; "+v.getFuncion()+" ; "+v.getEstado()+" ; "+v.getUltima_accion()+'\n');
+//				
+//	}
+//	sockManager.Escribir("      ");
+//	sockManager.Escribir("202 FINLISTA"+'\n');
+//	
+//}
 
 private void sendBytes(FileInputStream fis) throws Exception {
     // Construct a 1K buffer to hold bytes on their way to the socket.
