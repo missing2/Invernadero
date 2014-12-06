@@ -31,6 +31,7 @@ import javax.swing.ListModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.JRadioButton;
 
 public class ventanaAccion extends JFrame implements ActionListener, ComponentListener{
  
@@ -53,16 +54,18 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  JButton bBuscar;
  JButton bListar;
  
+ JRadioButton rdbPlaca;
+ JRadioButton rdbSensor;
+
+ 
  public JTextField palabraBuscar;
  JLabel lLab;
  
  public JList lista;
  
- public String  id_onoff;
-
+ public String  id;
+ 
  public ventanaAccion(){
-
- String cads[]={"/img/duck.gif","/img/luigi.png","/img/mario.jpg"};
  
  panelInferior = new JPanel();
  panelCentral = new JPanel();
@@ -86,6 +89,12 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  
  panelInferior.setLayout(new FlowLayout());
  panelInferior.add(palabraBuscar);
+ 
+ rdbPlaca = new JRadioButton("Placa");
+ panelInferior.add(rdbPlaca);
+ 
+ rdbSensor = new JRadioButton("Sensor");
+ panelInferior.add(rdbSensor);
  panelInferior.add(bBuscar);
  panelInferior.add(bListar);
  panelInferior.add(bSalir);
@@ -153,16 +162,21 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		 boton = 1;
 		 // necesito saber la variable o algo de la fila seleccionada
 		 int index = table.getSelectedRow();
-		 id_onoff = (String) table.getValueAt(index, 1);
+		 id = (String) table.getValueAt(index, 1);
 	 }else if(e.getSource().equals(bActuar)){
 		 boton = 2;
 		// necesito saber la variable o algo de la fila seleccionada
+		 int index = table.getSelectedRow();
+		 id = (String) table.getValueAt(index, 2);
 	 }else if(e.getSource().equals(bBuscar)){
 		 boton = 3;
 		// necesito botones para saber en que columna buscar o que variable
 	 }else if(e.getSource().equals(bImagenPlaca)){
 		 boton = 4;
-//		 int ra= 2; //aqui habria que seleccionarla dependiendo de la placa que sea
+		 int index = table.getSelectedRow();
+		 id = (String) table.getValueAt(index, 1);
+//		String cads[]={imagenes de las placas};
+//		 int ra= id; //aqui habria que seleccionarla dependiendo de la placa que sea
 //		 URL url=this.getClass().getResource(cads[ra]);
 //		 try {
 //			 Image img=ImageIO.read(url); //leemos la imagen
