@@ -46,7 +46,21 @@ final class Request implements Runnable {
 			
 			if (! requestLine.equals("adios")) {
 				
-				if (requestLine.equals("")){// si esta vacia
+				if (requestLine.equals("alta")){// estoy en la ventana altas bajas
+					base.conectar();
+					String nick= sockManager.Leer();
+					String pass= sockManager.Leer();
+					base.alta(nick,pass);
+					base.desconectar();
+				}
+				else if (requestLine.equals("baja")){
+					base.conectar();
+					String nick= sockManager.Leer();
+					String pass= sockManager.Leer();
+					base.baja(nick,pass);
+					base.desconectar();
+				}
+				else if (requestLine.equals("")){// si esta vacia
 					sockManager.Escribir("400 ERR.Falta el nombre de usuario"+'\n');
 					System.out.println("falta usuario");
 					estado=0;

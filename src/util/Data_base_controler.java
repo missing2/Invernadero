@@ -172,6 +172,16 @@ public class Data_base_controler {
 	 	 		st.execute(sql);
 	 	 		st.close();
 			}
+			
+			public void  alta(String nick,String pass) throws SQLException{
+				Statement st = conn.createStatement();
+				String sql = "insert into User values("+nick+","+pass+");";
+				
+			}
+			public void  baja(String nick,String pass) throws SQLException{
+				Statement st = conn.createStatement();
+				String sql = "delete from User where User ="+nick+" and where contrasena ="+pass+";";
+			}
 }
 	 	
 	 	

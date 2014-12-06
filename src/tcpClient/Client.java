@@ -61,7 +61,30 @@ public class Client {
             			ventanaloggin.dispose();// salgo de la app
             			sm.Escribir("adios"+'\n'); // mando al server que quiere salir
             			estado= 4;
+            			
+            		}else if (ventanaloggin.boton==3){// pulso para altas bajas
+            			ventanaloggin.dispose();
+            			VentanaAltasBajas vent = new VentanaAltasBajas();
+            			
+            			while (ventanaloggin.boton==0){
+                			// espero a que rellene los datos y pulse boton loggin
+                		}
+            			if (vent.boton==1){// Alta
+            				sm.Escribir("alta"+'\n');
+            				String nick = vent.textNick.toString();
+            				String pass = vent.textPass.toString();
+            				
+            			}else if (vent.boton==2){// Salir
+            				estado=4;
+	            			sm.Escribir("adios"+'\n'); // mando al server que quiere salir
+            			}else if (vent.boton==3){ //Baja
+            				sm.Escribir("baja"+'\n');
+            				String nick = vent.textNick.toString();
+            				String pass = vent.textPass.toString();
+            			}
             		}
+            		
+            		
             	break;
             	case 1:// comprobar pass
             		String a = Integer.toString(user.getContrasena());

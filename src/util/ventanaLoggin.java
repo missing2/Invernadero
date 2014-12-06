@@ -22,6 +22,7 @@ public class ventanaLoggin extends JFrame implements ActionListener, ComponentLi
 	public int boton = 0;
 	JButton btnLoggin;
 	JButton btnSalir;
+	JButton btnAltasBajas;
 	
 public ventanaLoggin(){
 	getContentPane().setBackground(Color.BLACK);	
@@ -57,9 +58,15 @@ public ventanaLoggin(){
 	getContentPane().add(btnLoggin);
 	
 	btnSalir = new JButton("Salir");
-	btnSalir.setBounds(412, 148, 76, 31);
+	btnSalir.setBounds(395, 148, 108, 31);
 	getContentPane().add(btnSalir);
 	btnSalir.addActionListener(this);
+	
+	btnAltasBajas = new JButton("Altas/bajas");
+	btnAltasBajas.setBounds(395, 52, 108, 31);
+	getContentPane().add(btnAltasBajas);
+	btnAltasBajas.addActionListener(this);
+	
 		this.setTitle("M&V");
 		this.setBounds(Toolkit.getDefaultToolkit().getScreenSize().width/2-800/2,Toolkit.getDefaultToolkit().getScreenSize().height/2-600/2, 800, 600);
 		this.setSize(546,273);
@@ -92,10 +99,11 @@ public ventanaLoggin(){
 		// TODO Auto-generated method stub	
 		if(e.getSource().equals(btnLoggin)){
 			boton=1;
-			vA = new ventanaAccion() ;
-			this.setVisible(false);
+		
 		}else if(e.getSource().equals(btnSalir)){
 			boton=2;
+		}else if(e.getSource().equals(btnAltasBajas)){
+			boton=3;
 		}
 	}
 }
