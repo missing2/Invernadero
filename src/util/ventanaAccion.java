@@ -58,12 +58,13 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  JRadioButton rdbSensor;
 
  
- public JTextField palabraBuscar;
+ public JTextField palabra;
  JLabel lLab;
  
  public JList lista;
  
  public String  id;
+ public String txt;
  
  public ventanaAccion(){
  
@@ -72,7 +73,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  panelBotonera = new JPanel();
  panelListas = new JPanel();
  
- palabraBuscar = new JTextField(10);
+ palabra = new JTextField(10);
  
  bActivar = new JButton ("On");
  bImagenPlaca = new JButton ("Imagen Placa"); 
@@ -88,7 +89,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 
  
  panelInferior.setLayout(new FlowLayout());
- panelInferior.add(palabraBuscar);
+ panelInferior.add(palabra);
  
  rdbPlaca = new JRadioButton("Placa");
  panelInferior.add(rdbPlaca);
@@ -168,6 +169,8 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		// necesito saber la variable o algo de la fila seleccionada
 		 int index = table.getSelectedRow();
 		 id = (String) table.getValueAt(index, 2);
+		 txt = palabra.getText();
+		 
 	 }else if(e.getSource().equals(bBuscar)){
 		 boton = 3;
 		// necesito botones para saber en que columna buscar o que variable
