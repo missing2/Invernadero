@@ -57,6 +57,8 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  JLabel lLab;
  
  public JList lista;
+ 
+ public String  id_onoff;
 
  public ventanaAccion(){
 
@@ -150,6 +152,8 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 	 if(e.getSource().equals(bActivar)){
 		 boton = 1;
 		 // necesito saber la variable o algo de la fila seleccionada
+		 int index = table.getSelectedRow();
+		 id_onoff = (String) table.getValueAt(index, 1);
 	 }else if(e.getSource().equals(bActuar)){
 		 boton = 2;
 		// necesito saber la variable o algo de la fila seleccionada
