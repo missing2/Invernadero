@@ -111,9 +111,11 @@ public class Client {
             		while (vent.boton==0){
             			//estoy en la vent sin mas
 	                }
-            			if (vent.boton==1){//Activar
+            			if (vent.boton==1){//Activar/ desactivar
+            				if ()
 	            			sm.Escribir("activar"+'\n');
-	            			
+	            			String id = vent.id; //id del sensor que tengo que activar 
+	            			sm.Escribir("id"+'\n');
 	               		}else if(vent.boton==2){//bActuar
 	            			sm.Escribir("actuar"+'\n');
 	            		

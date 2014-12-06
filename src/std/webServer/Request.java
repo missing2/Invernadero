@@ -127,7 +127,11 @@ final class Request implements Runnable {
 			 
 			 while (!requestLine.equals("adios")) { // queda en bucle para poder seguir haciendo cosas
 					if (requestLine.contains("activar")){
-						
+						String id = sockManager.Leer(); // id del sensor que voy a activar
+						base.encenderSensor(id);
+					}else if (requestLine.contains("desactivar")){
+						String id = sockManager.Leer(); // id del sensor que voy a desactivar
+						base.encenderSensor(id);
 					}else if (requestLine.contains("buscar")){
 						requestLine = sockManager.Leer(); // recivo que se quiere buscar en la bd
 						

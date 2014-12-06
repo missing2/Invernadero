@@ -156,15 +156,15 @@ public class Data_base_controler {
 	 			return lista;
 	 		}
 
-			public void encenderVariable(String idv) throws SQLException {
+			public void encenderSensor(String idv) throws SQLException {
 				
 				Statement st = conn.createStatement();
-				String sql = "UPDATE SENSOR SET"+" on_off ='ON' WHERE  id_sensor='" +idv+"'";
+				String sql = "UPDATE Sensor SET"+" on_off ='ON' WHERE  id_sensor='" +idv+"'";
 				System.out.println(sql);
 	 	 		st.execute(sql);
 	 	 		st.close();
 			}
-			public void apagarVariable(String idv) throws SQLException {
+			public void apagarSensor(String idv) throws SQLException {
 				
 				Statement st = conn.createStatement();
 				String sql = "UPDATE SENSOR SET"+" on_off ='OFF' WHERE  id_sensor='" +idv+"'";
