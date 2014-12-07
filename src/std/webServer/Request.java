@@ -33,7 +33,7 @@ final class Request implements Runnable {
   private void processRequest() throws Exception {
 	  
 	
-	String comando ="";
+	
     int estado=0;
 	Usuario user = new Usuario();
 	
@@ -42,8 +42,9 @@ final class Request implements Runnable {
 		switch (estado) {
 	
 		case 0://(USER)
-			String  requestLine  = sockManager.Leer();// lee el user que le has pasado por socket desde el cliente
 			
+			String  requestLine  = sockManager.Leer();// lee el user que le has pasado por socket desde el cliente
+			System.out.println(requestLine);
 			if (! requestLine.equals("adios")) {
 				
 				if (requestLine.equals("alta")){// estoy en la ventana altas bajas
@@ -149,9 +150,12 @@ final class Request implements Runnable {
 						}
 						
 						
-					}if (requestLine.contains("imagen")){
-						
+					}else if (requestLine.contains("imagen")){
+						// ni idea de pasar de la bd a aqui una imagen...
 					
+					}else if (requestLine.contains("actuar")){
+						requestLine = sockManager.Leer(); // recivo el id que quiero camn¡biar de accion
+						base.cambiarEstado(requestLine);
 					}
 			 }
 		break;

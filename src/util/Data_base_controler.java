@@ -222,6 +222,15 @@ public class Data_base_controler {
 					e.printStackTrace();
 				}
 			}
+
+			public void cambiarEstado(String id) throws SQLException {
+				// TODO Auto-generated method stub
+				//no que que tendria que hacer este metodo, ya que solo puedo cambiar en la bd la ultima accion
+				// lo demas seria mecanico del propio sensor...
+				Statement st = conn.createStatement();
+				String sql = "Select * from Sensor where id_sensor ="+st+";";
+				
+			}
 }
 	 	
 	 	

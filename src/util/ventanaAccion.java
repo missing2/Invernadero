@@ -46,7 +46,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  JList listaVariables;
  
  public int boton = 0;
- JButton bActivar;
+ public JButton bActivar;
  JButton bImagenPlaca;
  JButton bActuar;
  JButton bSalir;
