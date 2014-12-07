@@ -126,26 +126,39 @@ final class Request implements Runnable {
 			 requestLine  = sockManager.Leer();// lee el comando que e has pasado por socket desde el cliente
 			 
 			 while (!requestLine.equals("adios")) { // queda en bucle para poder seguir haciendo cosas
+				 
 					if (requestLine.contains("activar")){
 						String id = sockManager.Leer(); // id del sensor que voy a activar
 						base.encenderSensor(id);
 					}else if (requestLine.contains("desactivar")){
 						String id = sockManager.Leer(); // id del sensor que voy a desactivar
-						base.encenderSensor(id);
+						base.apagarSensor(id);
+						
 					}else if (requestLine.contains("buscar")){
-						requestLine = sockManager.Leer(); // recivo que se quiere buscar en la bd
+						requestLine  = sockManager.Leer();// recivo si quiero sensor o de placa
+						if (requestLine.contains("placa")){
+							requestLine = sockManager.Leer(); // recivo que se placa quiere buscar en la bd
+							List<Placa> lista = base.buscarPlaca(requestLine);
+							String amandar = pasarAStringPlaca(lista);
+							 sockManager.Escribir(amandar+'\n');
+						}else{
+							requestLine = sockManager.Leer(); // recivo que se sensor quiere buscar en la bd
+							List<Sensor> lista=base.buscarSensor(requestLine);
+							String amandar = pasarAStringSensor(lista);
+							sockManager.Escribir(amandar+'\n');
+						}
+						
 						
 					}if (requestLine.contains("imagen")){
 						
-					}if (requestLine.contains("listar")){
-						
+					
 					}
 			 }
 		break;
 
 		case 3:
 		    if (comando.equals("Confirmar_accion")) {
-		    	//--------------------------------
+		    	//------------------falta--------------
 			}else if(comando.equals("Rechazar_accion")) { 
 				sockManager.Escribir("207 OK Acción cancelada"+'\n');
 				estado=2;
@@ -174,6 +187,22 @@ private String sacarListado() throws SQLException, IOException, ClassNotFoundExc
 	base.conectar();
 	String string = "";
 	 List<String> lista =base. sacarlista();
+	   string = lista. toString(); // cambio de lista a String
+	   base.desconectar();
+	   return string;
+	   
+}
+private String pasarAStringPlaca(List <Placa>lista) throws SQLException, IOException, ClassNotFoundException { // cambia de lista a string
+	
+	String string = "";
+	   string = lista. toString(); // cambio de lista a String
+	   base.desconectar();
+	   return string;
+	   
+}
+private String pasarAStringSensor(List <Sensor>lista) throws SQLException, IOException, ClassNotFoundException { // cambia de lista a string
+	
+	String string = "";
 	   string = lista. toString(); // cambio de lista a String
 	   base.desconectar();
 	   return string;

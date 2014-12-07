@@ -112,23 +112,43 @@ public class Client {
             			//estoy en la vent sin mas
 	                }
             			if (vent.boton==1){//Activar/ desactivar
-            				if ()
+            				
+            			
+            				if (vent){ // el boton esta en on y quiero activar
 	            			sm.Escribir("activar"+'\n');
 	            			String id = vent.id; //id del sensor que tengo que activar 
 	            			sm.Escribir("id"+'\n');
+            				}else {// quiero desactivar 
+            					sm.Escribir("desactivar"+'\n');
+    	            			String id = vent.id; //id del sensor que tengo que activar 
+    	            			sm.Escribir("id"+'\n');
+    	            			
+            				}	
 	               		}else if(vent.boton==2){//bActuar
 	            			sm.Escribir("actuar"+'\n');
-	            		
+	            	    	// ----------------------------falta-----------------
 	            	    }else if(vent.boton==3){//bBuscar
 	            	    	sm.Escribir("buscar"+'\n');
-	            	    	sm.Escribir(vent.palabraBuscar.toString()+'\n');
+	            	    	
+	               	    	if (vent.rdbPlaca.isSelected()){ // busco por placa
+	            	    		sm.Escribir(vent.palabra.toString()+'\n');
+	            	    		sm.Escribir("placa"+'\n');
+	            	    	    String recibido=sm.Leer();
+	            	    	    vent.cargarTabla( cargarLista(recibido)); // muestro en la tabla los resultados
+	            	    	    
+	            	    	}else { // busco por sensor
+	            	    		sm.Escribir("sensor"+'\n');
+	            	    		sm.Escribir(vent.palabra.toString()+'\n');
+	            	    		String recibido=sm.Leer();
+	            	    		cargarLista(recibido);
+	            	    		vent.cargarTabla( cargarLista(recibido)); // muestro en la tabla los resultados
+	            	    	}
+	            	    	
 	            	    	
 	            	    }else if(vent.boton==4){// imagen
 	            	    	sm.Escribir("imagen"+'\n');
 	            	    	
-	            	    }else if(vent.boton==5){//listar 
-	            	    	sm.Escribir("listar"+'\n');
-	            	    	
+	            	 	            	    	
 	            	    }else if(vent.boton==6){// salir
 	            			estado=4;
 	            			sm.Escribir("adios"+'\n'); // mando al server que quiere salir

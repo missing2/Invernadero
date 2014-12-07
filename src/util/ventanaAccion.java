@@ -41,7 +41,6 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  JPanel panelInferior;
  JPanel panelCentral;
  JPanel panelBotonera;
- JPanel panelListas;
  
  JScrollPane scrollLista; 
  JList listaVariables;
@@ -52,10 +51,9 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  JButton bActuar;
  JButton bSalir;
  JButton bBuscar;
- JButton bListar;
  
- JRadioButton rdbPlaca;
- JRadioButton rdbSensor;
+ public JRadioButton rdbPlaca;
+ public JRadioButton rdbSensor;
 
  
  public JTextField palabra;
@@ -71,7 +69,6 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  panelInferior = new JPanel();
  panelCentral = new JPanel();
  panelBotonera = new JPanel();
- panelListas = new JPanel();
  
  palabra = new JTextField(10);
  
@@ -79,7 +76,6 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  bImagenPlaca = new JButton ("Imagen Placa"); 
  bActuar = new JButton("Actuar");
  bBuscar = new JButton("Buscar");
- bListar = new JButton("Listado");
  bSalir = new JButton("Salir");
  
  panelBotonera.setLayout(new FlowLayout());
@@ -97,10 +93,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  rdbSensor = new JRadioButton("Sensor");
  panelInferior.add(rdbSensor);
  panelInferior.add(bBuscar);
- panelInferior.add(bListar);
  panelInferior.add(bSalir);
- 
- panelCentral.add(panelListas, "Center");
  
  String[] columTitulo =	{"Placa", "Sensor","Estado","Función","Ultima acción"};
  Object [][]data = new Object[15][5];	
@@ -123,7 +116,6 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  bActuar.addActionListener(this);
  bBuscar.addActionListener(this);
  bImagenPlaca.addActionListener(this);
- bListar.addActionListener(this);
  bSalir.addActionListener(this);
  setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
  

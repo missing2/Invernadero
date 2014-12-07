@@ -142,12 +142,28 @@ public class Data_base_controler {
 				
 				List<Placa> lista = new ArrayList<Placa>();
 	 	 		Statement stat = conn.createStatement();
-	 	 		ResultSet rs = stat.executeQuery("Select P.,P. from PLACA P,SENSOR S where ='"+nombrePlaca+"'");
+	 	 		ResultSet rs = stat.executeQuery("Select * from Placa where id_placa = "+nombrePlaca+";");
 	 	 		Placa placa = null;
 	 	 		
 	 	 		while (rs.next()) {
-	 	 			//placa = new Placa(rs.getString("Cod_obra"), rs.getString("Concepto"), rs.getDouble("Num_horas"), rs.getString("Lugar"), rs.getString("Estado"), rs.getString("F_inicio"), rs.getString("F_fin"), rs.getString("Cod_ped"),rs.getDouble("Presupuesto"));
+	 	 			placa = new Placa(rs.getString("id_placa"), rs.getString("estado_placa"), rs.getString("imagen"));
 	 	 			lista.add(placa);
+	 	 		}
+	 	 		
+	 	 		rs.close();
+	 	 		stat.close();
+	 	 		
+	 			return lista;
+	 		}
+			public List<Sensor> buscarSensor(String requestLine) throws SQLException {
+				List<Sensor> lista = new ArrayList<Sensor>();
+	 	 		Statement stat = conn.createStatement();
+	 	 		ResultSet rs = stat.executeQuery("Select * from Sensor where id_sensor = "+requestLine+";");
+	 	 		Sensor sensor = null;
+	 	 		
+	 	 		while (rs.next()) {
+	 	 		    sensor = new Sensor(requestLine, requestLine, requestLine, requestLine, requestLine, requestLine, requestLine);
+	 	 			lista.add(sensor);
 	 	 		}
 	 	 		
 	 	 		rs.close();
@@ -182,6 +198,8 @@ public class Data_base_controler {
 				Statement st = conn.createStatement();
 				String sql = "delete from User where User ="+nick+" and where contrasena ="+pass+";";
 			}
+
+			
 }
 	 	
 	 	
