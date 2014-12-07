@@ -180,9 +180,9 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 //			 e1.printStackTrace();
 //		 }
 //		 
-	 }else if(e.getSource().equals(bListar)){
-		 boton = 5;
-		 // creo que ya esta hecho por defecto en la tabla principal
+//	 }else if(e.getSource().equals(bListar)){
+//		 boton = 5;
+//		 // creo que ya esta hecho por defecto en la tabla principal
 	 }else if(e.getSource().equals(bSalir)){
 		 boton = 6;
 		 System.exit(0);
