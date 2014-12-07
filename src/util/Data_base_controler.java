@@ -28,6 +28,11 @@ public class Data_base_controler {
 		
 		//Creo la conexion con la BD
 		conn = DriverManager.getConnection("jdbc:sqlite:res/ProyectoRedesBds.s3db");
+		System.out.println("connection done!");
+		//Statement state = conn.createStatement();
+		//String sql = "CREATE TABLE TEST (test int)";
+		//state.executeUpdate(sql);
+
 		//el problema es que estas usando una bd s3db y has puesto sqlite
 		 
 	}
@@ -51,6 +56,7 @@ public class Data_base_controler {
 	
   
     public boolean consultaUsuario(String nombre) throws SQLException {
+    	System.out.println("checking user");
     
     	boolean existe=false;
     	
@@ -66,12 +72,14 @@ public class Data_base_controler {
      
 	 		
 	 		public boolean ConsultarPasword(String nombre,int pass)throws SQLException{
+	 			
+	 			System.out.println("checking password");
 	 				 			
 	 			boolean existe=false;
 	 	    	
 	 			Statement st = conn.createStatement(); 
 	 			
-	 			ResultSet rs2 = st.executeQuery("Select * from User Where User = "+nombre+"and Where contrasena='"+pass+"';");                                                                                                                                                     // estado civil es estado, no string
+	 			ResultSet rs2 = st.executeQuery("SELECT * from User WHERE User = \""+nombre+"\" AND contrasena = '"+pass+"';");                                                                                                                                                     // estado civil es estado, no string
 	 		 	if (rs2!=null)
 	 		 		existe=true;
 	 		 		
@@ -102,7 +110,7 @@ public class Data_base_controler {
 				ResultSet rs2 =  st.executeQuery("Select * from Sensor;");
 				while (rs2.next()) {
 					Sensor a = new Sensor(rs2.getString("id_sensor"),rs2.getString("id_placa"),
-							rs2.getString("def"),rs2.getString("ultima_accion"),rs2.getString("estado"),rs2.getString("on_off"),rs2.getString("func_principal"));
+							rs2.getString("def_variable"),rs2.getString("ultima_accion"),rs2.getString("estado"),rs2.getString("on_off"),rs2.getString("func_principal"));
 					
 					String temp = (""+a.getId_sensor()+","+a.id_placa+","+a.def+","+a.getUltima_accion()+","+a.estado+","+a.on_off+","+a.funcion_principal+";");
 					lista.add(temp);
@@ -112,7 +120,7 @@ public class Data_base_controler {
 				
 				rs2 =  st.executeQuery("Select * from Placa;");
 				while (rs2.next()) {
-					Placa a = new Placa(rs2.getString("id_placa"),rs2.getString("estado_placa"),rs2.getString("imagen"));
+					Placa a = new Placa(rs2.getString("id_placa"),rs2.getString("estado_placa"),rs2.getString("foto"));
 					String temp =(""+a.id_placa+","+a.getEstado_placa()+","+a.imagen+";");
 					lista.add(temp);
 				}
@@ -199,7 +207,21 @@ public class Data_base_controler {
 				String sql = "delete from User where User ="+nick+" and where contrasena ="+pass+";";
 			}
 
-			
+			public static void main(String[] args){
+				Data_base_controler dbc = getInstance();
+				try {
+					System.out.println(dbc.ConsultarPasword("vero", 654321));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try {
+					System.out.println(dbc.sacarlista());
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 }
 	 	
 	 	
