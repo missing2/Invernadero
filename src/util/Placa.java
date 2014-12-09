@@ -31,4 +31,9 @@ public String getImagen() {
 public void setImagen(String imagen) {
 	this.imagen = imagen;
 }
+@Override
+public String toString() {
+	return id_placa + "," + estado_placa+ "," + imagen;
+}
+
 }

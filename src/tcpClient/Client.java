@@ -184,42 +184,44 @@ public class Client {
 	private static JList cargarLista(String stringLista) {
 		// TODO Auto-generated method stub
 		DefaultListModel df = new DefaultListModel();
+		System.out.println("Modelo lista en el inicio: "+df);
 		
 		//Placa P =  new Placa();
 		
-		String sensoresYPlacas[]  = stringLista.split("/,");// separo placas de sensores
+		String sensoresYPlacas[]  = stringLista.split("/");// separo placas de sensores
 		String stringSensores = sensoresYPlacas[0].toString(); 
 		String Sensor[] = stringSensores.split(",");// separo sensores
-		System.out.println("lista entera separada ;"+Sensor);
+		System.out.println("lista entera sensores "+stringSensores);
 		int conta=0;
-		while(!Sensor[conta].isEmpty()){
-		//String stringAtributos= Sensor[conta].toString();
-		//String Atributo[]=stringAtributos.split(",");// separo atributos
-		System.out.println("lista separada ;"+Sensor[conta]);
-		String Atributo[]=Sensor[conta].split("-");
-		System.out.println("lista -"+Atributo);
-		Sensor a = new Sensor(Atributo[0],Atributo[1],Atributo[2],Atributo[3],Atributo[4],Atributo[5],Atributo[6]);
-		System.out.println("sensor"+ a.toString());
-		df.addElement(a);
-		System.out.println(a);
-		conta++;
+		for(int i=0;i<Sensor.length-1;i++){
+			String stringAtributos= Sensor[conta].toString();
+		System.out.println("lista separada ,"+Sensor[conta]);
+			String Atributo[]=stringAtributos.split("-");// separo atributos
+			Sensor a = new Sensor(Atributo[0],Atributo[1],Atributo[2],Atributo[3],Atributo[4],Atributo[5],Atributo[6]);
+		System.out.println("sensor "+ Atributo[0]+", "+Atributo[1]+", "+Atributo[2]+", "+Atributo[3]+", "+Atributo[4]+", "+Atributo[5]+", "+Atributo[6]);
+			df.addElement(a.toString());
+			conta++;
 		}
+		System.out.println(df);
 		//----------PLACAS-----------------
 		String stringPlacas = sensoresYPlacas[1].toString();
 		String Placa[] = stringPlacas.split(",");// separo placas
-	    conta=0;
+		System.out.println("lista entera placas "+stringPlacas);
+	    conta=1;
 	    //AQUI HAY UN BUCLE INFINITO, ARREGLALO, ANIMAL ;)
-		while(!Placa[conta].isEmpty()){
+		for(int i=1;i<Placa.length;i++){
 		//String stringAtributos= Placa[conta].toString();
 		//String Atributo[]=stringAtributos.split(",");// separo atributos
-		String Atributo[]=Placa[conta].split("-");
-		Placa a = new Placa(Atributo[0],Atributo[1],Atributo[2]);
-		df.addElement(a);
-		conta++;
+			String Atributo[]=Placa[conta].split("-");
+			Placa a = new Placa(Atributo[0],Atributo[1],Atributo[2]);
+			df.addElement(a.toString());
+			conta++;
 		}
 		System.out.println(df);
-		JList lista= new JList(df);
-			return lista;
+		JList lista= new JList();
+		lista.setModel(df);
+		System.out.println("Lista final: "+lista);
+		return lista;
 	   }
 		
 		

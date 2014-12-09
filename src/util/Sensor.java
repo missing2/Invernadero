@@ -71,6 +71,14 @@ public class Sensor {
 	public void setUltima_accion(String ultima_accion) {
 		this.ultima_accion = ultima_accion;
 	}
+
+	@Override
+	public String toString() {
+		return  id_placa + "," + id_sensor
+				+ "," + def + "," + ultima_accion
+				+ "," + estado + "," + on_off
+				+ "," + funcion_principal;
+	}
 	
 	
 	
