@@ -187,16 +187,18 @@ public class Client {
 		
 		//Placa P =  new Placa();
 		
-		String sensoresYPlacas[]  = stringLista.split("/");// separo placas de sensores
+		String sensoresYPlacas[]  = stringLista.split(",");// separo placas de sensores
 		String stringSensores = sensoresYPlacas[0].toString(); 
 		String Sensor[] = stringSensores.split(";");// separo sensores
 		int conta=0;
 		while(!Sensor[conta].isEmpty()){
 		//String stringAtributos= Sensor[conta].toString();
 		//String Atributo[]=stringAtributos.split(",");// separo atributos
-		System.out.println(Sensor[conta]);
-		String Atributo[]=Sensor[conta].split(",");
+		System.out.println("lista separada ;"+Sensor[conta]);
+		String Atributo[]=Sensor[conta].split("-");
+		System.out.println("lista -"+Atributo);
 		Sensor a = new Sensor(Atributo[0],Atributo[1],Atributo[2],Atributo[3],Atributo[4],Atributo[5],Atributo[6]);
+		System.out.println("sensor"+ a.toString());
 		df.addElement(a);
 		System.out.println(a);
 		conta++;
@@ -209,7 +211,7 @@ public class Client {
 		while(!Placa[conta].isEmpty()){
 		//String stringAtributos= Placa[conta].toString();
 		//String Atributo[]=stringAtributos.split(",");// separo atributos
-		String Atributo[]=Placa[conta].split(",");
+		String Atributo[]=Placa[conta].split("-");
 		Placa a = new Placa(Atributo[0],Atributo[1],Atributo[2]);
 		df.addElement(a);
 		conta++;

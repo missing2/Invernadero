@@ -107,24 +107,26 @@ public class DataBaseControler {
 				List<String> lista = new ArrayList<String>();
 				Statement st = conn.createStatement();
 				
+				String temp;
+				
 				ResultSet rs2 =  st.executeQuery("Select * from Sensor;");
 				while (rs2.next()) {
 					Sensor a = new Sensor(rs2.getString("id_sensor"),rs2.getString("id_placa"),
 							rs2.getString("def_variable"),rs2.getString("ultima_accion"),rs2.getString("estado"),rs2.getString("on_off"),rs2.getString("func_principal"));
 					
-					String temp = (""+a.getId_sensor()+","+a.id_placa+","+a.def+","+a.getUltima_accion()+","+a.estado+","+a.on_off+","+a.funcion_principal+";");
+					temp = (a.getId_sensor()+"-"+a.id_placa+"-"+a.def+"-"+a.getUltima_accion()+"-"+a.estado+"-"+a.on_off+"-"+a.funcion_principal+";");
 					lista.add(temp);
-					lista.add("/");
+					//lista.add("/");
 					
 				}
-				
+				System.out.println("sensor:"+lista);
 				rs2 =  st.executeQuery("Select * from Placa;");
 				while (rs2.next()) {
 					Placa a = new Placa(rs2.getString("id_placa"),rs2.getString("estado_placa"),rs2.getString("foto"));
-					String temp =(""+a.id_placa+","+a.getEstado_placa()+","+a.imagen+";");
+					temp =(""+a.id_placa+"-"+a.getEstado_placa()+"-"+a.imagen+";");
 					lista.add(temp);
 				}
-				
+				System.out.println("completa"+lista);
 				return lista;
 				
 			}
