@@ -160,14 +160,7 @@ final class Request implements Runnable {
 			 }
 		break;
 
-		case 3:
-		    if (comando.equals("Confirmar_accion")) {
-		    	//------------------falta--------------
-			}else if(comando.equals("Rechazar_accion")) { 
-				sockManager.Escribir("207 OK Acción cancelada"+'\n');
-				estado=2;
-			}
-		break;
+		
 
 		case 4:            // va a hacer conflicto con mi while (!4)
 			sockManager.Escribir("208 OK.Adios."+'\n');
