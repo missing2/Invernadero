@@ -187,9 +187,10 @@ public class Client {
 		
 		//Placa P =  new Placa();
 		
-		String sensoresYPlacas[]  = stringLista.split(",");// separo placas de sensores
+		String sensoresYPlacas[]  = stringLista.split("/,");// separo placas de sensores
 		String stringSensores = sensoresYPlacas[0].toString(); 
-		String Sensor[] = stringSensores.split(";");// separo sensores
+		String Sensor[] = stringSensores.split(",");// separo sensores
+		System.out.println("lista entera separada ;"+Sensor);
 		int conta=0;
 		while(!Sensor[conta].isEmpty()){
 		//String stringAtributos= Sensor[conta].toString();
@@ -205,7 +206,7 @@ public class Client {
 		}
 		//----------PLACAS-----------------
 		String stringPlacas = sensoresYPlacas[1].toString();
-		String Placa[] = stringPlacas.split(";");// separo placas
+		String Placa[] = stringPlacas.split(",");// separo placas
 	    conta=0;
 	    //AQUI HAY UN BUCLE INFINITO, ARREGLALO, ANIMAL ;)
 		while(!Placa[conta].isEmpty()){
