@@ -108,6 +108,7 @@ public class Client {
             	case 2:// accion
             		sm.Escribir("sacalista"+'\n'); // manda al server un comando para que me mande la lista
             		String stringLista = sm.Leer(); // recibe la lista en string
+            		System.out.println(stringLista);
             		JList listae = cargarLista(stringLista);
             		ventanaAccion vent = new ventanaAccion();
             		vent.lista=listae;
@@ -191,10 +192,14 @@ public class Client {
 		String Sensor[] = stringSensores.split(";");// separo sensores
 		int conta=0;
 		while(!Sensor[conta].isEmpty()){
-		String stringAtributos= Sensor[conta].toString();
-		String Atributo[]=stringAtributos.split(",");// separo atributos
+		//String stringAtributos= Sensor[conta].toString();
+		//String Atributo[]=stringAtributos.split(",");// separo atributos
+		System.out.println(Sensor[conta]);
+		String Atributo[]=Sensor[conta].split(",");
 		Sensor a = new Sensor(Atributo[0],Atributo[1],Atributo[2],Atributo[3],Atributo[4],Atributo[5],Atributo[6]);
 		df.addElement(a);
+		System.out.println(a);
+		conta++;
 		}
 		//----------PLACAS-----------------
 		String stringPlacas = sensoresYPlacas[1].toString();
@@ -202,10 +207,12 @@ public class Client {
 	    conta=0;
 	    //AQUI HAY UN BUCLE INFINITO, ARREGLALO, ANIMAL ;)
 		while(!Placa[conta].isEmpty()){
-		String stringAtributos= Placa[conta].toString();
-		String Atributo[]=stringAtributos.split(",");// separo atributos
+		//String stringAtributos= Placa[conta].toString();
+		//String Atributo[]=stringAtributos.split(",");// separo atributos
+		String Atributo[]=Placa[conta].split(",");
 		Placa a = new Placa(Atributo[0],Atributo[1],Atributo[2]);
 		df.addElement(a);
+		conta++;
 		}
 		System.out.println(df);
 		JList lista= new JList(df);
