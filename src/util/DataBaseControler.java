@@ -10,13 +10,13 @@ import java.util.List;
 
 import javax.swing.JList;
 
-public class Data_base_controler {
-	private static Data_base_controler instance = null;
+public class DataBaseControler {
+	private static DataBaseControler instance = null;
 	private Connection conn;
 			
-	public static Data_base_controler getInstance() {
+	public static DataBaseControler getInstance() {
 		if (instance == null)
-			instance = new Data_base_controler();
+			instance = new DataBaseControler();
 		return instance;
 	}
 
@@ -42,7 +42,7 @@ public class Data_base_controler {
 	conn.close();
 	}
 	
-	public Data_base_controler()
+	public DataBaseControler()
 	 {
 	 try {
 	 conectar();
@@ -90,7 +90,7 @@ public class Data_base_controler {
 			public boolean ConsultarIdVariable(String idp,String idv) throws SQLException {
 				boolean existe = false;
 				Statement st = conn.createStatement();
-				ResultSet rs2 = st.executeQuery("Select * from variable Where def_variable = "+idv+" and Where id_placa = "+idp+"");
+				ResultSet rs2 = st.executeQuery("Select * from variable Where def_variable = "+idv+"and Where id_placa="+idp+"");
 				return existe;
 			}
 
@@ -208,13 +208,7 @@ public class Data_base_controler {
 			}
 
 			public static void main(String[] args){
-				Data_base_controler dbc = getInstance();
-				try {
-					System.out.println(dbc.consultaUsuario("vero"));
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				DataBaseControler dbc = getInstance();
 				try {
 					System.out.println(dbc.ConsultarPasword("vero", 654321));
 				} catch (SQLException e) {
