@@ -13,7 +13,7 @@ final class Request implements Runnable {
 	
   final static String CRLF = "\r\n";
   SocketManager sockManager;
-  public Data_base_controler base = new Data_base_controler();
+  public DataBaseControler base = DataBaseControler.getInstance();
   
   // Constructor
   public Request(SocketManager sockMan) throws Exception {
@@ -23,6 +23,7 @@ final class Request implements Runnable {
   // Implement the run() method of the Runnable interface.
   public void run() {
     try {
+    	System.out.println("run");
       processRequest();
     }
     catch (Exception e) {
@@ -32,7 +33,7 @@ final class Request implements Runnable {
 
   private void processRequest() throws Exception {
 	  
-	
+	System.out.println("processRequest");
 	
     int estado=0;
 	Usuario user = new Usuario();
@@ -42,7 +43,7 @@ final class Request implements Runnable {
 		switch (estado) {
 	
 		case 0://(USER)
-			
+			System.out.println("Lo que sea");
 			String  requestLine  = sockManager.Leer();// lee el user que le has pasado por socket desde el cliente
 			System.out.println(requestLine);
 			if (! requestLine.equals("adios")) {
@@ -86,11 +87,12 @@ final class Request implements Runnable {
 		break;
 
 		case 1://(PASS)
+			System.out.println("case 1");
 			 requestLine  = sockManager.Leer();// lee el pasword que le has pasado por socket desde el cliente
-			 
+			 System.out.println("no soy analfabeto");
 			if (!requestLine.equals("adios")) {
 				
-				requestLine  = sockManager.Leer();//pasword :
+				//requestLine  = sockManager.Leer();//pasword :
 				int pass = Integer.parseInt(requestLine);
 				
 				if (requestLine.equals("")){ // si esta vacia la pasword...
@@ -239,4 +241,15 @@ private void sendBytes(FileInputStream fis) throws Exception {
     }
     return "application/octet-stream";
   }
+  public static void main(String argv[]) throws Exception
+	{
+	  System.out.println("main");
+	  ServerSocket s = new ServerSocket(2345);
+	  SocketManager sockManager =  new SocketManager(s.accept());
+	  System.out.println("socket manager creado");
+	  Request r = new Request(sockManager);
+	  System.out.println("ejecutando run");
+	  r.run();
+	  System.out.println();
+	}
 }

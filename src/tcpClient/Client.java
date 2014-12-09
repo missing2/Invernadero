@@ -21,7 +21,7 @@ public class Client {
         
         try {
             //Se crea el socket, pasando el nombre del servidor y el puerto de conexión
-            SocketManager sm = new SocketManager("127.0.0.1", 6789);  
+            SocketManager sm = new SocketManager("127.0.0.1", 2345);  
             //Se inicializan los streams de lectura y escritura del socket
 
             //Se declara un buffer de lectura del dato escrito por el usuario por teclado
@@ -36,16 +36,18 @@ public class Client {
             	case 0: // comprobar user
             		ventanaLoggin ventanaloggin = new ventanaLoggin();
             		while (ventanaloggin.boton==0){
+            			System.out.println("while");
             			// espero a que rellene los datos y pulse boton loggin
             		}
             		if(ventanaloggin.boton==1){ // pulso boton loggearme
-            			
+            			System.out.println("log");
 	            		user.setNick(ventanaloggin.txtFUser.getText()); 
 	                  	user.setContrasena(Integer.parseInt(ventanaloggin.txtFPasword.getText()));
 	            		
 	            		sm.Escribir(user.getNick()+'\n'); // mando nick al server
 	       
 	            		if (sm.Leer().contains("200 OK. bienvenido")){ // lo que me responde es todo ok
+	            			System.out.println("user comprobado, correcto");
 	            			ventanaloggin.dispose();
 	            			estado=1;
 	            		}else if (sm.Leer().contains("400 ERR")){ // si me responde que esta vacio 
@@ -87,8 +89,11 @@ public class Client {
             		
             	break;
             	case 1:// comprobar pass
+            		System.out.println("case 1");
             		String a = Integer.toString(user.getContrasena());
             		sm.Escribir(a+'\n');  // mando la pass al server
+            		System.out.println("escribir");
+            		Thread.sleep(1000);
             		if (sm.Leer().contains("201 OK.")){ 
             			estado=2;
             			System.out.println("entra");
@@ -185,7 +190,7 @@ public class Client {
 		String stringSensores = sensoresYPlacas[0].toString(); 
 		String Sensor[] = stringSensores.split(";");// separo sensores
 		int conta=0;
-		while(Sensor[conta].isEmpty()!=false){
+		while(!Sensor[conta].isEmpty()){
 		String stringAtributos= Sensor[conta].toString();
 		String Atributo[]=stringAtributos.split(",");// separo atributos
 		Sensor a = new Sensor(Atributo[0],Atributo[1],Atributo[2],Atributo[3],Atributo[4],Atributo[5],Atributo[6]);
@@ -195,12 +200,14 @@ public class Client {
 		String stringPlacas = sensoresYPlacas[1].toString();
 		String Placa[] = stringPlacas.split(";");// separo placas
 	    conta=0;
-		while(Placa[conta].isEmpty()!=false){
+	    //AQUI HAY UN BUCLE INFINITO, ARREGLALO, ANIMAL ;)
+		while(!Placa[conta].isEmpty()){
 		String stringAtributos= Placa[conta].toString();
 		String Atributo[]=stringAtributos.split(",");// separo atributos
 		Placa a = new Placa(Atributo[0],Atributo[1],Atributo[2]);
 		df.addElement(a);
 		}
+		System.out.println(df);
 		JList lista= new JList(df);
 			return lista;
 	   }

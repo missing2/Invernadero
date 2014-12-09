@@ -10,7 +10,7 @@ public final class WebServer
 	public static void main(String argv[]) throws Exception
 	{
 		
-		int port = 6789; 
+		int port = 2345; 
 
 		ServerSocket wellcomeSocket = new ServerSocket(port);
 

@@ -62,7 +62,7 @@ public class Data_base_controler {
     	
 		Statement st = conn.createStatement(); 
 		
-		ResultSet rs2 = st.executeQuery("Select * from User Where User = "+nombre+";");                                                                                                                                                     // estado civil es estado, no string
+		ResultSet rs2 = st.executeQuery("Select * from User Where User = \""+nombre+"\";");                                                                                                                                                     // estado civil es estado, no string
 	 	if (rs2!=null)
 	 		existe=true;
 	 		
@@ -90,7 +90,7 @@ public class Data_base_controler {
 			public boolean ConsultarIdVariable(String idp,String idv) throws SQLException {
 				boolean existe = false;
 				Statement st = conn.createStatement();
-				ResultSet rs2 = st.executeQuery("Select * from variable Where def_variable = "+idv+"and Where id_placa="+idp+"");
+				ResultSet rs2 = st.executeQuery("Select * from variable Where def_variable = "+idv+" and Where id_placa = "+idp+"");
 				return existe;
 			}
 
@@ -209,6 +209,12 @@ public class Data_base_controler {
 
 			public static void main(String[] args){
 				Data_base_controler dbc = getInstance();
+				try {
+					System.out.println(dbc.consultaUsuario("vero"));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				try {
 					System.out.println(dbc.ConsultarPasword("vero", 654321));
 				} catch (SQLException e) {

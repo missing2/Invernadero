@@ -199,7 +199,8 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  }
 
  public TableModel cargarTabla(JList a){
-	 
+	 if(a==null)
+		 System.out.println("null y tal");
 	// cambiamos de nuestro jlist al array que usaremos para cargar la tabla
 	  ArrayList<Object> array= new ArrayList();
 	 for (int i=0;i<a.getModel().getSize();i++){
