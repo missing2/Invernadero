@@ -36,7 +36,8 @@ public class Client {
             	case 0: // comprobar user
             		ventanaLoggin ventanaloggin = new ventanaLoggin();
             		while (ventanaloggin.boton==0){
-            		
+            			//Thread.sleep(1000);
+            			System.out.println("while");
             			// espero a que rellene los datos y pulse boton loggin
             		}
             		if(ventanaloggin.boton==1){ // pulso boton loggearme
@@ -106,10 +107,11 @@ public class Client {
             		}
                 break;
             	case 2:// accion
+            		System.out.println("case 2");
             		sm.Escribir("sacalista"+'\n'); // manda al server un comando para que me mande la lista
             		String stringLista = sm.Leer(); // recibe la lista en string
-            		System.out.println(stringLista);
             		JList listae = cargarLista(stringLista);
+            		System.out.println("Lista.."+listae);
             		ventanaAccion vent = new ventanaAccion();
             		vent.lista=listae;
             		
@@ -183,41 +185,26 @@ public class Client {
 
 	private static JList cargarLista(String stringLista) {
 		// TODO Auto-generated method stub
+		System.out.println(stringLista);
 		DefaultListModel df = new DefaultListModel();
 		System.out.println("Modelo lista en el inicio: "+df);
 		
-		String sensoresYPlacas[]  = stringLista.split("/");// separo placas de sensores	
-		
-		String stringSensores = sensoresYPlacas[0].toString(); 
-		String Sensor[] = stringSensores.split(","); // separo sensores
-		System.out.println("lista entera sensores "+stringSensores);
+		JList lista= new JList();
+		 
+		String Sensor[] = stringLista.split(",");// separo sensores
+		System.out.println("lista entera sensores "+stringLista);
 		int conta=0;
-		for(int i=0;i<Sensor.length-1;i++){
+		for(int i=0;i<Sensor.length;i++){
 			String stringAtributos= Sensor[conta].toString();
 		System.out.println("lista separada ,"+Sensor[conta]);
 			String Atributo[]=stringAtributos.split("-");// separo atributos
-			Sensor a = new Sensor(Atributo[0],Atributo[1],Atributo[2],Atributo[3],Atributo[4],Atributo[5],Atributo[6]);
-		System.out.println("sensor "+ Atributo[0]+", "+Atributo[1]+", "+Atributo[2]+", "+Atributo[3]+", "+Atributo[4]+", "+Atributo[5]+", "+Atributo[6]);
+			Sensor a = new Sensor(Atributo[0],Atributo[1],Atributo[2],Atributo[3],Atributo[4]);
+		System.out.println("sensor "+ Atributo[0]+", "+Atributo[1]+", "+Atributo[2]+", "+Atributo[3]+", "+Atributo[4]);
 			df.addElement(a.toString());
 			conta++;
 		}
 		System.out.println(df);
-		//----------PLACAS-----------------
-		String stringPlacas = sensoresYPlacas[1].toString();
-		String Placa[] = stringPlacas.split(",");// separo placas
-		System.out.println("lista entera placas "+stringPlacas);
-	    conta=1;
-	    //AQUI HAY UN BUCLE INFINITO, ARREGLALO, ANIMAL ;)
-		for(int i=1;i<Placa.length;i++){
-		//String stringAtributos= Placa[conta].toString();
-		//String Atributo[]=stringAtributos.split(",");// separo atributos
-			String Atributo[]=Placa[conta].split("-");
-			Placa a = new Placa(Atributo[0],Atributo[1],Atributo[2]);
-			df.addElement(a.toString());
-			conta++;
-		}
-		System.out.println(df);
-		JList lista= new JList();
+
 		lista.setModel(df);
 		System.out.println("Lista final: "+lista);
 		return lista;

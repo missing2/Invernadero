@@ -122,7 +122,8 @@ final class Request implements Runnable {
 		case 2:  // ACTION
 			 requestLine  = sockManager.Leer();// mandar la lista de la tabla principal
 			 if (requestLine.contains("sacalista")){
-				 String lista = sacarListado ();
+				 //String lista = sacarListado ();
+				 String lista = sacarListado();
 				 sockManager.Escribir(lista+'\n'); // mando la lista al cliente para que inicie la ventana
 			 }
 			
@@ -182,15 +183,26 @@ final class Request implements Runnable {
 
  
 
-private String sacarListado() throws SQLException, IOException, ClassNotFoundException { // cambia de lista a string
+/*
+  private String sacarListado() throws SQLException, IOException, ClassNotFoundException { // cambia de lista a string
 	base.conectar();
 	String string = "";
-	 List<String> lista =base. sacarlista();
-	   string = lista. toString(); // cambio de lista a String
-	   base.desconectar();
-	   return string;
+	List<String> lista =base. sacarlista();
+	string = lista. toString(); // cambio de lista a String
+	string.substring(1, string.length()-2);
+	 base.desconectar();
+	 return string;
 	   
-}
+	}
+*/
+  private String sacarListado() throws SQLException,IOException,ClassNotFoundException
+  {
+	  base.conectar();
+	  String lista = base.sacarlista();
+	  base.desconectar();
+	  return lista;
+  }
+
 private String pasarAStringPlaca(List <Placa>lista) throws SQLException, IOException, ClassNotFoundException { // cambia de lista a string
 	
 	String string = "";

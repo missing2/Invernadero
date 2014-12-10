@@ -7,19 +7,25 @@ public class Sensor {
 	public String def;
 	public String ultima_accion;
 	public String estado;
-	public String on_off;
 	public String funcion_principal;
 	
 	
 	public Sensor(String id_placa, String id_sensor, String def,
-			String ultima_accion, String estado, String on_off, String funcion_principal) {
+			String ultima_accion, String estado, String funcion_principal) {
 		super();
 		this.id_placa = id_placa;
 		this.id_sensor = id_sensor;
 		this.def = def;
 		this.ultima_accion = ultima_accion;
 		this.estado = estado;
-		this.on_off = on_off;
+		this.funcion_principal = funcion_principal;
+	}
+	public Sensor(String id_placa, String def,String funcion_principal, String estado,String ultima_accion) {
+		super();
+		this.id_placa = id_placa;
+		this.def = def;
+		this.ultima_accion = ultima_accion;
+		this.estado = estado;
 		this.funcion_principal = funcion_principal;
 	}
 	
@@ -37,14 +43,6 @@ public class Sensor {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
-	}
-
-	public String getOn_off() {
-		return on_off;
-	}
-
-	public void setOn_off(String on_off) {
-		this.on_off = on_off;
 	}
 
 	public String getId_sensor() {
@@ -76,8 +74,7 @@ public class Sensor {
 	public String toString() {
 		return  id_placa + "," + id_sensor
 				+ "," + def + "," + ultima_accion
-				+ "," + estado + "," + on_off
-				+ "," + funcion_principal;
+				+ "," + estado + "," + "," + funcion_principal;
 	}
 	
 	

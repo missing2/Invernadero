@@ -202,25 +202,21 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 	 if(a==null)
 		 System.out.println("null y tal");
 	// cambiamos de nuestro jlist al array que usaremos para cargar la tabla
-	  ArrayList<Object> array= new ArrayList();
+	  ArrayList<Sensor> array= new ArrayList();
 	 for (int i=0;i<a.getModel().getSize();i++){
-		array.add(a.getModel().getElementAt(i)) ;
+		array.add((Sensor) a.getModel().getElementAt(i)) ;
 	 }
 	 	 
      
 		 int fila=0;
 	TableModel modelo = table.getModel();
-	for (Object o :array) // cargo la tabla con la jlist devuelta por la bd
+	for (Sensor s :array) // cargo la tabla con la jlist devuelta por la bd
 	{
-		if(o instanceof Sensor){
-			modelo.setValueAt(((Sensor) o).getId_sensor(), fila, 1);
-			modelo.setValueAt(((Sensor) o).getUltima_accion(), fila, 4);
-			modelo.setValueAt(((Sensor) o).getFuncion_principal(), fila, 3); 
-		}else if(o instanceof Placa){
-			modelo.setValueAt(((Placa) o).getId_placa(), fila, 0);
-			modelo.setValueAt(((Placa) o).getEstado_placa(), fila, 2);
-			
-		}
+		modelo.setValueAt(s.getId_placa(), fila, 0);
+		modelo.setValueAt(s.getId_sensor(), fila, 1);
+		modelo.setValueAt(s.getEstado(), fila, 2);
+		modelo.setValueAt(s.getFuncion_principal(), fila, 3);
+		modelo.setValueAt(s.getUltima_accion(), fila, 4); 	
 		fila++;
 	}// refresco de los datos de las filas restantes vacias
 	while(fila<modelo.getRowCount()){ 
@@ -229,10 +225,6 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		modelo.setValueAt("", fila, 2);
 		modelo.setValueAt("", fila, 3);
 		modelo.setValueAt("", fila, 4);
-		modelo.setValueAt("", fila, 5);
-		modelo.setValueAt("", fila, 6);
-		modelo.setValueAt("", fila, 7);
-		modelo.setValueAt("", fila, 8);
 		fila++;
 	}
  return modelo;

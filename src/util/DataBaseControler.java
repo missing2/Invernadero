@@ -102,32 +102,27 @@ public class DataBaseControler {
 				return estado;
 			}
 
-			public List< String> sacarlista() throws SQLException {// saca una lista en la ventana de accion con todos los sensores y placas
+			public String sacarlista() throws SQLException {// saca una lista en la ventana de accion con todos los sensores y placas
 				
-				List<String> lista = new ArrayList<String>();
 				Statement st = conn.createStatement();
 				
 				String temp;
+				String fin="";
 				
 				ResultSet rs2 =  st.executeQuery("Select * from Sensor;");
 				while (rs2.next()) {
 					Sensor a = new Sensor(rs2.getString("id_sensor"),rs2.getString("id_placa"),
-							rs2.getString("def_variable"),rs2.getString("ultima_accion"),rs2.getString("estado"),rs2.getString("on_off"),rs2.getString("func_principal"));
+							rs2.getString("def_variable"),rs2.getString("func_principal"),rs2.getString("estado"),rs2.getString("ultima_accion"));
 					
-					temp = (a.getId_sensor()+"-"+a.id_placa+"-"+a.def+"-"+a.getUltima_accion()+"-"+a.estado+"-"+a.on_off+"-"+a.funcion_principal);
-					lista.add(temp);
-									
+					temp = (a.getId_placa()+"-"+a.getDef()+"-"+a.getFuncion_principal()+"-"+a.getEstado()+"-"+a.getUltima_accion());
+					
+					fin=fin+temp+",";
+					
 				}
-				lista.add("/"); // separo sensores de placas
-				System.out.println("sensor:"+lista);
-				rs2 =  st.executeQuery("Select * from Placa;");
-				while (rs2.next()) {
-					Placa a = new Placa(rs2.getString("id_placa"),rs2.getString("estado_placa"),rs2.getString("foto"));
-					temp =(""+a.id_placa+"-"+a.getEstado_placa()+"-"+a.imagen);
-					lista.add(temp);
-				}
-				System.out.println("completa"+lista);
-				return lista;
+				
+				System.out.println("fin "+fin);
+
+				return fin;
 				
 			}
 
@@ -140,7 +135,7 @@ public class DataBaseControler {
 					
 					while (rs2.next()){
 						Sensor a = new Sensor(rs2.getString("id_sensor"),rs2.getString("id_placa"),
-								rs2.getString("def"),rs2.getString("ultima_accion"),rs2.getString("estado"),rs2.getString("on_off"),rs2.getString("func_principal"));
+								rs2.getString("def"),rs2.getString("ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
 						lista.add(a);
 					}
 				
@@ -173,7 +168,7 @@ public class DataBaseControler {
 	 	 		Sensor sensor = null;
 	 	 		
 	 	 		while (rs.next()) {
-	 	 		    sensor = new Sensor(requestLine, requestLine, requestLine, requestLine, requestLine, requestLine, requestLine);
+	 	 		    sensor = new Sensor(requestLine, requestLine, requestLine, requestLine, requestLine, requestLine);
 	 	 			lista.add(sensor);
 	 	 		}
 	 	 		
