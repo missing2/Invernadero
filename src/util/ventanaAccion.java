@@ -200,6 +200,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 
  public TableModel cargarTabla(JList a){
 	 if(a==null)
+		 System.out.println(a);
 		 System.out.println("null y tal");
 	// cambiamos de nuestro jlist al array que usaremos para cargar la tabla
 	  ArrayList<Sensor> array= new ArrayList();

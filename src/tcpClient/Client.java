@@ -183,13 +183,13 @@ public class Client {
 
     }
 
-	private static JList cargarLista(String stringLista) {
+	private static JList<String> cargarLista(String stringLista) {
 		// TODO Auto-generated method stub
 		System.out.println(stringLista);
-		DefaultListModel df = new DefaultListModel();
+		DefaultListModel<String> df = new DefaultListModel<String>();
 		System.out.println("Modelo lista en el inicio: "+df);
 		
-		JList lista= new JList();
+		JList<String> lista= new JList<String>();
 		 
 		String Sensor[] = stringLista.split(",");// separo sensores
 		System.out.println("lista entera sensores "+stringLista);
@@ -198,9 +198,9 @@ public class Client {
 			String stringAtributos= Sensor[conta].toString();
 		System.out.println("lista separada ,"+Sensor[conta]);
 			String Atributo[]=stringAtributos.split("-");// separo atributos
-			Sensor a = new Sensor(Atributo[0],Atributo[1],Atributo[2],Atributo[3],Atributo[4]);
 		System.out.println("sensor "+ Atributo[0]+", "+Atributo[1]+", "+Atributo[2]+", "+Atributo[3]+", "+Atributo[4]);
-			df.addElement(a.toString());
+		String tt= (Atributo[0]+" "+Atributo[1]+" "+Atributo[2]+" "+Atributo[3]+" "+Atributo[4]);
+			df.addElement(tt);
 			conta++;
 		}
 		System.out.println(df);
