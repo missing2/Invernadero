@@ -60,7 +60,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  public JTextField palabra;
  JLabel lLab;
  
- public ArrayList<String> lista;
+ public String lista = new String ("");
  
  public String  id;
  public String txt;
@@ -199,17 +199,36 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 //	v.setVisible(true);
  }
 
- public DefaultTableModel cargarTabla(ArrayList<String> a){
-	 if(a==null)
+ public DefaultTableModel cargarTabla(String a){
+	 
+	 if(a.isEmpty()){
 		 System.out.println(a);
 		 System.out.println("null y tal");
-	 	 
-     
-		 int fila=0;
-	DefaultTableModel modelo = (DefaultTableModel) table.getModel();
-	Object[] o ={a.get(0),a.get(1),a.get(2),a.get(3),a.get(4),a.get(5)};
-	modelo.addRow(o);
-	return modelo;
+	 }
+	 
+	 System.out.println("en el inicio de la ventana"+a);
+		ArrayList<String> df = new ArrayList<String>();
+		System.out.println("Array lista en el inicio: "+df);
+		 
+		String Sensor[] = a.split(",");// separo sensores
+		
+		for(int i=0;i<Sensor.length;i++){
+			String stringAtributos= Sensor[i]; // separo los atributos de cada sensor
+		System.out.println("lista separada ,"+Sensor[i]);
+			String Atributo[]=stringAtributos.split("-");// separo atributos en el array
+		System.out.println("sensor "+ Atributo[0]+", "+Atributo[1]+", "+Atributo[2]+", "+Atributo[3]+", "+Atributo[4]);
+			df.add(Atributo[0]+Atributo[1]+Atributo[2]+Atributo[3]+Atributo[4]); // añado los atributos al arraylist
+		}
+		System.out.println(df);
+		
+	
+	 	 int fila=0;
+	 	 DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+	 	 System.out.println("dentro de la ventana creando la tabla"+df.get(0));
+	 	 Object[] o ={df.get(0),df.get(1),df.get(2),df.get(3),df.get(4),df.get(5)};
+	 	 modelo.addRow(o);
+	 	 return modelo;
+	
 	 
  }
 }

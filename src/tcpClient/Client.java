@@ -113,7 +113,7 @@ public class Client {
             		ArrayList<String> listae = cargarLista(stringLista);
             		System.out.println("Lista.."+listae);
             		ventanaAccion vent = new ventanaAccion();
-            		vent.lista=listae;
+            	    vent.lista = stringLista; // -----------------AQUI PETAAAAAAA, NO SABE COPIAR UN LIST A OTRO
             		
             	while (vent.boton!=6){
             		while (vent.boton==0){
@@ -142,14 +142,14 @@ public class Client {
 	            	    		sm.Escribir(vent.palabra.toString()+'\n');
 	            	    		sm.Escribir("placa"+'\n');
 	            	    	    String recibido=sm.Leer();
-	            	    	    vent.cargarTabla( cargarLista(recibido)); // muestro en la tabla los resultados
+	            	    	  //  vent.cargarTabla( cargarLista(recibido)); // muestro en la tabla los resultados
 	            	    	    
 	            	    	}else { // busco por sensor
 	            	    		sm.Escribir("sensor"+'\n');
 	            	    		sm.Escribir(vent.palabra.toString()+'\n');
 	            	    		String recibido=sm.Leer();
 	            	    		cargarLista(recibido);
-	            	    		vent.cargarTabla( cargarLista(recibido)); // muestro en la tabla los resultados
+	            	    		//vent.cargarTabla( cargarLista(recibido)); // muestro en la tabla los resultados
 	            	    	}
 	            	    	
 	            	    	
@@ -191,20 +191,20 @@ public class Client {
 		 
 		String Sensor[] = stringLista.split(",");// separo sensores
 		System.out.println("lista entera sensores "+stringLista);
-		int conta=0;
+		
 		for(int i=0;i<Sensor.length;i++){
-			String stringAtributos= Sensor[conta].toString();
-		System.out.println("lista separada ,"+Sensor[conta]);
-			String Atributo[]=stringAtributos.split("-");// separo atributos
+			String stringAtributos= Sensor[i]; // separo los atributos de cada sensor
+		System.out.println("lista separada ,"+Sensor[i]);
+			String Atributo[]=stringAtributos.split("-");// separo atributos en el array
 		System.out.println("sensor "+ Atributo[0]+", "+Atributo[1]+", "+Atributo[2]+", "+Atributo[3]+", "+Atributo[4]);
-			df.add(Atributo[i]);
-			conta++;
+			df.add(Atributo[0]+Atributo[1]+Atributo[2]+Atributo[3]+Atributo[4]); // añado los atributos al arraylist
+			
 		}
 		System.out.println(df);
 		
 		return df;
 	   }
-		
+}
 		
 		
 		
@@ -262,4 +262,3 @@ public class Client {
 //			System.out.println("Algun error con la conexion BD");
 //			e1.printStackTrace();
 //		}
-}
