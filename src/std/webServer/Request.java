@@ -142,12 +142,12 @@ final class Request implements Runnable {
 						requestLine  = sockManager.Leer();// recivo si quiero sensor o de placa
 						if (requestLine.contains("placa")){
 							requestLine = sockManager.Leer(); // recivo que se placa quiere buscar en la bd
-							List<Placa> lista = base.buscarPlaca(requestLine);
+							String lista = base.buscarPlaca(requestLine);
 							String amandar = pasarAStringPlaca(lista);
 							 sockManager.Escribir(amandar+'\n');
 						}else{
 							requestLine = sockManager.Leer(); // recivo que se sensor quiere buscar en la bd
-							List<Sensor> lista=base.buscarSensor(requestLine);
+							String lista=base.buscarSensor(requestLine);
 							String amandar = pasarAStringSensor(lista);
 							sockManager.Escribir(amandar+'\n');
 						}
@@ -204,16 +204,16 @@ final class Request implements Runnable {
   }
 
 private String pasarAStringPlaca(List <Placa>lista) throws SQLException, IOException, ClassNotFoundException { // cambia de lista a string
-	
-	String string = "";
+		base.conectar();
+	 	String string = "";
 	   string = lista. toString(); // cambio de lista a String
 	   base.desconectar();
 	   return string;
 	   
 }
 private String pasarAStringSensor(List <Sensor>lista) throws SQLException, IOException, ClassNotFoundException { // cambia de lista a string
-	
-	String string = "";
+		base.conectar();
+		String string = "";
 	   string = lista. toString(); // cambio de lista a String
 	   base.desconectar();
 	   return string;

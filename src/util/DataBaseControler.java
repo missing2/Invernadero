@@ -160,23 +160,24 @@ public class DataBaseControler {
 	 	 		lista=lista+"/";		
 	 			return lista;
 	 		}
+
 			public String buscarSensor(String requestLine) throws SQLException {
 				String temp="";
 				String fin="";
 	 	 		Statement stat = conn.createStatement();
-	 	 		ResultSet rs = stat.executeQuery("Select * from Sensor where id_sensor = "+requestLine+";");
-	 	 		Sensor sensor = null;
-	 	 		
-	 	 		while (rs.next()) {
-	 	 		    sensor = new Sensor(requestLine, requestLine, requestLine, requestLine, requestLine, requestLine);
-	 	 			lista.add(sensor);
+	 	 		ResultSet rs2 = stat.executeQuery("Select * from Sensor where id_sensor = "+requestLine+";");
+	 	 		while (rs2.next()) {
+	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
+	 	 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
+	 	 			 
+	 	 			 temp = (a.getId_placa()+"-"+a.getDef()+"-"+a.getFuncion_principal()+"-"+a.getEstado()+"-"+a.getUltima_accion());
+	 	 			 
+	 	 			 fin=fin+temp+",";
 	 	 		}
-	 	 		
-	 	 		rs.close();
-	 	 		stat.close();
-	 	 		
-	 			return lista;
+	 	 		fin=fin+"/";		
+	 			return fin;
 	 		}
+			
 			
 
 			public void encenderSensor(String idv) throws SQLException {
