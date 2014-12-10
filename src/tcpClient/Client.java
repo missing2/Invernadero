@@ -36,7 +36,7 @@ public class Client {
             	case 0: // comprobar user
             		ventanaLoggin ventanaloggin = new ventanaLoggin();
             		while (ventanaloggin.boton==0){
-            			System.out.println("while");
+            		
             			// espero a que rellene los datos y pulse boton loggin
             		}
             		if(ventanaloggin.boton==1){ // pulso boton loggearme
@@ -186,11 +186,10 @@ public class Client {
 		DefaultListModel df = new DefaultListModel();
 		System.out.println("Modelo lista en el inicio: "+df);
 		
-		//Placa P =  new Placa();
+		String sensoresYPlacas[]  = stringLista.split("/");// separo placas de sensores	
 		
-		String sensoresYPlacas[]  = stringLista.split("/");// separo placas de sensores
 		String stringSensores = sensoresYPlacas[0].toString(); 
-		String Sensor[] = stringSensores.split(",");// separo sensores
+		String Sensor[] = stringSensores.split(","); // separo sensores
 		System.out.println("lista entera sensores "+stringSensores);
 		int conta=0;
 		for(int i=0;i<Sensor.length-1;i++){

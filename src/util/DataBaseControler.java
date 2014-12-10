@@ -116,8 +116,7 @@ public class DataBaseControler {
 					
 					temp = (a.getId_sensor()+"-"+a.id_placa+"-"+a.def+"-"+a.getUltima_accion()+"-"+a.estado+"-"+a.on_off+"-"+a.funcion_principal);
 					lista.add(temp);
-					//lista.add("/");
-					
+									
 				}
 				lista.add("/");
 				System.out.println("sensor:"+lista);
