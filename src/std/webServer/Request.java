@@ -120,6 +120,7 @@ final class Request implements Runnable {
 		break;
 
 		case 2:  // ACTION
+			
 			 requestLine  = sockManager.Leer();// mandar la lista de la tabla principal
 			 if (requestLine.contains("sacalista")){
 				 //String lista = sacarListado ();
@@ -133,23 +134,28 @@ final class Request implements Runnable {
 				 
 					if (requestLine.contains("activar")){
 						String id = sockManager.Leer(); // id del sensor que voy a activar
-						base.encenderSensor(id);
+						 base.conectar();
+						 base.encenderSensor(id);
+						 base.desconectar();
 					}else if (requestLine.contains("desactivar")){
 						String id = sockManager.Leer(); // id del sensor que voy a desactivar
-						base.apagarSensor(id);
-						
+						 base.conectar();
+						 base.apagarSensor(id);
+						 base.desconectar();
 					}else if (requestLine.contains("buscar")){
 						requestLine  = sockManager.Leer();// recivo si quiero sensor o de placa
 						if (requestLine.contains("placa")){
 							requestLine = sockManager.Leer(); // recivo que se placa quiere buscar en la bd
-							String lista = base.buscarPlaca(requestLine);
-							String amandar = pasarAStringPlaca(lista);
-							 sockManager.Escribir(amandar+'\n');
+							 base.conectar();
+							 String lista = base.buscarPlaca(requestLine);
+							 base.desconectar();
+							 sockManager.Escribir(lista+'\n');
 						}else{
 							requestLine = sockManager.Leer(); // recivo que se sensor quiere buscar en la bd
-							String lista=base.buscarSensor(requestLine);
-							String amandar = pasarAStringSensor(lista);
-							sockManager.Escribir(amandar+'\n');
+							 base.conectar();
+							 String lista=base.buscarSensor(requestLine);
+							 base.desconectar();
+							sockManager.Escribir(lista+'\n');
 						}
 						
 						
@@ -158,9 +164,12 @@ final class Request implements Runnable {
 					
 					}else if (requestLine.contains("actuar")){
 						requestLine = sockManager.Leer(); // recivo el id que quiero camn¡biar de accion
+						base.conectar();
 						base.cambiarEstado(requestLine);
+						base.desconectar();
 					}
 			 }
+			
 		break;
 
 		
@@ -203,22 +212,9 @@ final class Request implements Runnable {
 	  return lista;
   }
 
-private String pasarAStringPlaca(List <Placa>lista) throws SQLException, IOException, ClassNotFoundException { // cambia de lista a string
-		base.conectar();
-	 	String string = "";
-	   string = lista. toString(); // cambio de lista a String
-	   base.desconectar();
-	   return string;
+
 	   
-}
-private String pasarAStringSensor(List <Sensor>lista) throws SQLException, IOException, ClassNotFoundException { // cambia de lista a string
-		base.conectar();
-		String string = "";
-	   string = lista. toString(); // cambio de lista a String
-	   base.desconectar();
-	   return string;
-	   
-}
+
 //  
 //  private void sacarBusqueda(String palabra) throws SQLException, IOException {
 //	  List< Sensor> lista =base. sacarBusqueda(palabra);
