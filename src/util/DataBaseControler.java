@@ -118,7 +118,7 @@ public class DataBaseControler {
 					lista.add(temp);
 									
 				}
-				lista.add("/");
+				lista.add("/"); // separo sensores de placas
 				System.out.println("sensor:"+lista);
 				rs2 =  st.executeQuery("Select * from Placa;");
 				while (rs2.next()) {
