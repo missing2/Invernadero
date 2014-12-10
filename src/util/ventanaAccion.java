@@ -14,6 +14,7 @@ import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import java.awt.Image;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -59,7 +60,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  public JTextField palabra;
  JLabel lLab;
  
- public JList lista;
+ public ArrayList<String> lista;
  
  public String  id;
  public String txt;
@@ -198,36 +199,17 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 //	v.setVisible(true);
  }
 
- public TableModel cargarTabla(JList a){
+ public DefaultTableModel cargarTabla(ArrayList<String> a){
 	 if(a==null)
 		 System.out.println(a);
 		 System.out.println("null y tal");
-	// cambiamos de nuestro jlist al array que usaremos para cargar la tabla
-	  ArrayList<Sensor> array= new ArrayList();
-	 for (int i=0;i<a.getModel().getSize();i++){
-		array.add((Sensor) a.getModel().getElementAt(i)) ;
-	 }
 	 	 
      
 		 int fila=0;
-	TableModel modelo = table.getModel();
-	for (Sensor s :array) // cargo la tabla con la jlist devuelta por la bd
-	{
-		modelo.setValueAt(s.getId_placa(), fila, 0);
-		modelo.setValueAt(s.getId_sensor(), fila, 1);
-		modelo.setValueAt(s.getEstado(), fila, 2);
-		modelo.setValueAt(s.getFuncion_principal(), fila, 3);
-		modelo.setValueAt(s.getUltima_accion(), fila, 4); 	
-		fila++;
-	}// refresco de los datos de las filas restantes vacias
-	while(fila<modelo.getRowCount()){ 
-		modelo.setValueAt("", fila, 0);
-		modelo.setValueAt("", fila, 1);
-		modelo.setValueAt("", fila, 2);
-		modelo.setValueAt("", fila, 3);
-		modelo.setValueAt("", fila, 4);
-		fila++;
-	}
- return modelo;
-	}
+	DefaultTableModel modelo = (DefaultTableModel) table.getModel();
+	Object[] o ={a.get(0),a.get(1),a.get(2),a.get(3),a.get(4),a.get(5)};
+	modelo.addRow(o);
+	return modelo;
+	 
+ }
 }
