@@ -36,7 +36,7 @@ import javax.swing.JRadioButton;
 
 public class ventanaAccion extends JFrame implements ActionListener, ComponentListener{
  
- private JTable table;
+ public JTable table;
  JScrollPane scroll;
 
  JPanel panelInferior;
@@ -65,7 +65,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  public String  id;
  public String txt;
  
- public ventanaAccion(){
+ public ventanaAccion(String lista){
  
  panelInferior = new JPanel();
  panelCentral = new JPanel();
@@ -120,8 +120,8 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
  bSalir.addActionListener(this);
  setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
  
- table.setModel(cargarTabla(lista));
 
+ table.setModel(cargarTabla(lista));
  }
  
  @Override

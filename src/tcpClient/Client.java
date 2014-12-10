@@ -110,10 +110,12 @@ public class Client {
             		System.out.println("case 2");
             		sm.Escribir("sacalista"+'\n'); // manda al server un comando para que me mande la lista
             		String stringLista = sm.Leer(); // recibe la lista en string
+            		System.out.println("mi request es::"+stringLista);
             		ArrayList<String> listae = cargarLista(stringLista);
             		System.out.println("Lista.."+listae);
-            		ventanaAccion vent = new ventanaAccion();
-            	    vent.lista = stringLista; // -----------------AQUI PETAAAAAAA, NO SABE COPIAR UN LIST A OTRO
+            		ventanaAccion vent = new ventanaAccion(stringLista);
+            	     
+            	    
             		
             	while (vent.boton!=6){
             		while (vent.boton==0){
