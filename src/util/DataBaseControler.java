@@ -147,26 +147,27 @@ public class DataBaseControler {
 				return lista;
 				
 			}
-			//Necesitamos cosas de placa para hacer busquedas?? si es asi habria que hacer algo asi
-			public List<Placa> buscarPlaca(String nombrePlaca) throws SQLException {
+		
+			public String buscarPlaca(String nombrePlaca) throws SQLException {
 				
-				List<Placa> lista = new ArrayList<Placa>();
+				String lista ="";
+				String temp="";
 	 	 		Statement stat = conn.createStatement();
 	 	 		ResultSet rs = stat.executeQuery("Select * from Placa where id_placa = "+nombrePlaca+";");
 	 	 		Placa placa = null;
 	 	 		
 	 	 		while (rs.next()) {
 	 	 			placa = new Placa(rs.getString("id_placa"), rs.getString("estado_placa"), rs.getString("imagen"));
-	 	 			lista.add(placa);
+	 	 			temp = (placa.getId_placa()+"-"+placa.getEstado_placa()+"-"+placa.getImagen());
+	 	 			
+	 	 			lista=lista+temp+",";
 	 	 		}
-	 	 		
-	 	 		rs.close();
-	 	 		stat.close();
-	 	 		
+	 	 		lista=lista+"/";		
 	 			return lista;
 	 		}
-			public List<Sensor> buscarSensor(String requestLine) throws SQLException {
-				List<Sensor> lista = new ArrayList<Sensor>();
+			public String buscarSensor(String requestLine) throws SQLException {
+				String temp="";
+				String fin="";
 	 	 		Statement stat = conn.createStatement();
 	 	 		ResultSet rs = stat.executeQuery("Select * from Sensor where id_sensor = "+requestLine+";");
 	 	 		Sensor sensor = null;
@@ -181,6 +182,7 @@ public class DataBaseControler {
 	 	 		
 	 			return lista;
 	 		}
+			
 
 			public void encenderSensor(String idv) throws SQLException {
 				
