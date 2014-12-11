@@ -35,200 +35,200 @@ import javax.swing.table.TableModel;
 import javax.swing.JRadioButton;
 
 public class ventanaAccion extends JFrame implements ActionListener, ComponentListener{
- 
- public JTable table;
- JScrollPane scroll;
 
- JPanel panelInferior;
- JPanel panelCentral;
- JPanel panelBotonera;
- 
- JScrollPane scrollLista; 
- JList listaVariables;
- 
- public int boton = 0;
- public JButton bActivar;
- JButton bImagenPlaca;
- JButton bActuar;
- JButton bSalir;
- JButton bBuscar;
- 
- public JRadioButton rdbPlaca;
- public JRadioButton rdbSensor;
+	public JTable table;
+	JScrollPane scroll;
 
- 
- public JTextField palabra;
- JLabel lLab;
- 
- public String lista = new String ("");
- 
- public String  id;
- public String txt;
- 
- public ventanaAccion(String lista){
- 
- panelInferior = new JPanel();
- panelCentral = new JPanel();
- panelBotonera = new JPanel();
- 
- palabra = new JTextField(10);
- 
- bActivar = new JButton ("On");
- bImagenPlaca = new JButton ("Imagen Placa"); 
- bActuar = new JButton("Actuar");
- bBuscar = new JButton("Buscar");
- bSalir = new JButton("Salir");
- 
- panelBotonera.setLayout(new FlowLayout());
- panelBotonera.add(bActivar);
- panelBotonera.add(bImagenPlaca);
- panelBotonera.add(bActuar);
+	JPanel panelInferior;
+	JPanel panelCentral;
+	JPanel panelBotonera;
 
- 
- panelInferior.setLayout(new FlowLayout());
- panelInferior.add(palabra);
- 
- rdbPlaca = new JRadioButton("Placa");
- panelInferior.add(rdbPlaca);
- 
- rdbSensor = new JRadioButton("Sensor");
- panelInferior.add(rdbSensor);
- panelInferior.add(bBuscar);
- panelInferior.add(bSalir);
- 
- String[] columTitulo =	{"Placa", "Sensor","Estado","Función","Ultima acción"};
- Object [][]data = new Object[15][5];	
- table = new JTable(data, columTitulo);
- scroll = new JScrollPane(table, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
- panelCentral.add(scroll);
- scroll.setVisible(true);
- 
- 
- this.getContentPane().setLayout(new BorderLayout());
- this.getContentPane().add(panelBotonera,"North");
- this.getContentPane().add(panelCentral,"Center");
- this.getContentPane().add(panelInferior,"South");
- 
- this.setSize(600,320);
- this.setResizable(false);
- this.setVisible(true);
+	JScrollPane scrollLista; 
+	JList listaVariables;
 
- bActivar.addActionListener(this);
- bActuar.addActionListener(this);
- bBuscar.addActionListener(this);
- bImagenPlaca.addActionListener(this);
- bSalir.addActionListener(this);
- setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
- 
+	public int boton = 0;
+	public JButton bActivar;
+	JButton bImagenPlaca;
+	JButton bActuar;
+	JButton bSalir;
+	JButton bBuscar;
 
- table.setModel(cargarTabla(lista));
- }
- 
- @Override
- public void componentResized(ComponentEvent e) {
- // TODO Auto-generated method stub
- 
- }
+	public JRadioButton rdbPlaca;
+	public JRadioButton rdbSensor;
 
- @Override
- public void componentMoved(ComponentEvent e) {
- // TODO Auto-generated method stub
- 
- }
 
- @Override
- public void componentShown(ComponentEvent e) {
- // TODO Auto-generated method stub
- 
- }
+	public JTextField palabra;
+	JLabel lLab;
 
- @Override
- public void componentHidden(ComponentEvent e) {
- // TODO Auto-generated method stub
- 
- }
+	public String lista = new String ("");
 
- @Override
- public void actionPerformed(ActionEvent e) {
- // TODO Auto-generated method stub
+	public String  id;
+	public String txt;
 
-	 if(e.getSource().equals(bActivar)){
-		 boton = 1;
-		 // necesito saber la variable o algo de la fila seleccionada
-		 int index = table.getSelectedRow();
-		 id = (String) table.getValueAt(index, 1);
-	 }else if(e.getSource().equals(bActuar)){
-		 boton = 2;
-		// necesito saber la variable o algo de la fila seleccionada
-		 int index = table.getSelectedRow();
-		 id = (String) table.getValueAt(index, 2);
-		 txt = palabra.getText();
-		 
-	 }else if(e.getSource().equals(bBuscar)){
-		 boton = 3;
-		// necesito botones para saber en que columna buscar o que variable
-	 }else if(e.getSource().equals(bImagenPlaca)){
-		 boton = 4;
-		 int index = table.getSelectedRow();
-		 id = (String) table.getValueAt(index, 1);
-//		String cads[]={imagenes de las placas};
-//		 int ra= id; //aqui habria que seleccionarla dependiendo de la placa que sea
-//		 URL url=this.getClass().getResource(cads[ra]);
-//		 try {
-//			 Image img=ImageIO.read(url); //leemos la imagen
-//			 lLab.setIcon(new ImageIcon(img)); //la asignamos al JLabel de Java
-//		 } catch (IOException e1) {
-//			 e1.printStackTrace();
-//		 }
-//		 
-//	 }else if(e.getSource().equals(bListar)){
-//		 boton = 5;
-//		 // creo que ya esta hecho por defecto en la tabla principal
-	 }else if(e.getSource().equals(bSalir)){
-		 boton = 6;
-		 System.exit(0);
-	 }
+	public ventanaAccion(ArrayList<String> listae){
 
- 
- }
- 
+		panelInferior = new JPanel();
+		panelCentral = new JPanel();
+		panelBotonera = new JPanel();
 
- public static void main(String[] args)
- {
-//	ventanaAccion v= new ventanaAccion();
-//	v.setVisible(true);
- }
+		palabra = new JTextField(10);
 
- public DefaultTableModel cargarTabla(String a){
-	 
-	 if(a.isEmpty()){
-		 System.out.println(a);
-		 System.out.println("null y tal");
-	 }
-	 
-	 System.out.println("en el inicio de la ventana"+a);
-		ArrayList<String> df = new ArrayList<String>();
-		System.out.println("Array lista en el inicio: "+df);
-		 
-		String Sensor[] = a.split(",");// separo sensores
-		
-		for(int i=0;i<Sensor.length;i++){
-			String stringAtributos= Sensor[i]; // separo los atributos de cada sensor
-		System.out.println("lista separada ,"+Sensor[i]);
-			String Atributo[]=stringAtributos.split("-");// separo atributos en el array
-		System.out.println("sensor "+ Atributo[0]+", "+Atributo[1]+", "+Atributo[2]+", "+Atributo[3]+", "+Atributo[4]);
-			df.add(Atributo[0]+Atributo[1]+Atributo[2]+Atributo[3]+Atributo[4]); // añado los atributos al arraylist
+		bActivar = new JButton ("On");
+		bImagenPlaca = new JButton ("Imagen Placa"); 
+		bActuar = new JButton("Actuar");
+		bBuscar = new JButton("Buscar");
+		bSalir = new JButton("Salir");
+
+		panelBotonera.setLayout(new FlowLayout());
+		panelBotonera.add(bActivar);
+		panelBotonera.add(bImagenPlaca);
+		panelBotonera.add(bActuar);
+
+
+		panelInferior.setLayout(new FlowLayout());
+		panelInferior.add(palabra);
+
+		rdbPlaca = new JRadioButton("Placa");
+		panelInferior.add(rdbPlaca);
+
+		rdbSensor = new JRadioButton("Sensor");
+		panelInferior.add(rdbSensor);
+		panelInferior.add(bBuscar);
+		panelInferior.add(bSalir);
+
+
+		table = new JTable();
+		scroll = new JScrollPane(table, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		panelCentral.add(scroll);
+		scroll.setVisible(true);
+
+
+		this.getContentPane().setLayout(new BorderLayout());
+		this.getContentPane().add(panelBotonera,"North");
+		this.getContentPane().add(panelCentral,"Center");
+		this.getContentPane().add(panelInferior,"South");
+
+		this.setSize(600,320);
+		this.setResizable(false);
+		this.setVisible(true);
+
+		bActivar.addActionListener(this);
+		bActuar.addActionListener(this);
+		bBuscar.addActionListener(this);
+		bImagenPlaca.addActionListener(this);
+		bSalir.addActionListener(this);
+		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+
+
+		table.setModel(cargarTabla(listae));
+	}
+
+	@Override
+	public void componentResized(ComponentEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void componentMoved(ComponentEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void componentShown(ComponentEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void componentHidden(ComponentEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+
+		if(e.getSource().equals(bActivar)){
+			boton = 1;
+			// necesito saber la variable o algo de la fila seleccionada
+			int index = table.getSelectedRow();
+			id = (String) table.getValueAt(index, 1);
+		}else if(e.getSource().equals(bActuar)){
+			boton = 2;
+			// necesito saber la variable o algo de la fila seleccionada
+			int index = table.getSelectedRow();
+			id = (String) table.getValueAt(index, 2);
+			txt = palabra.getText();
+
+		}else if(e.getSource().equals(bBuscar)){
+			boton = 3;
+			// necesito botones para saber en que columna buscar o que variable
+		}else if(e.getSource().equals(bImagenPlaca)){
+			boton = 4;
+			int index = table.getSelectedRow();
+			id = (String) table.getValueAt(index, 1);
+			//		String cads[]={imagenes de las placas};
+			//		 int ra= id; //aqui habria que seleccionarla dependiendo de la placa que sea
+			//		 URL url=this.getClass().getResource(cads[ra]);
+			//		 try {
+			//			 Image img=ImageIO.read(url); //leemos la imagen
+			//			 lLab.setIcon(new ImageIcon(img)); //la asignamos al JLabel de Java
+			//		 } catch (IOException e1) {
+			//			 e1.printStackTrace();
+			//		 }
+			//		 
+			//	 }else if(e.getSource().equals(bListar)){
+			//		 boton = 5;
+			//		 // creo que ya esta hecho por defecto en la tabla principal
+		}else if(e.getSource().equals(bSalir)){
+			boton = 6;
+			System.exit(0);
 		}
-		System.out.println(df);
+
+
+	}
+
+
+	public static void main(String[] args)
+	{
+		//	ventanaAccion v= new ventanaAccion();
+		//	v.setVisible(true);
+	}
+
+	public DefaultTableModel cargarTabla(ArrayList<String> listae){
+
+		if(listae.isEmpty()){
+			System.out.println(listae);
+			System.out.println("null y tal");
+		}
+
+		System.out.println("en el inicio de la ventana"+listae);
+		DefaultTableModel modelo = new DefaultTableModel();
+		String[] columTitulo =	{"Placa", "Sensor","Estado","Función","Ultima acción"};
+		modelo.setColumnIdentifiers(columTitulo);
+		String[] Sensor = new String[listae.size()];
+		Sensor = listae.toArray(Sensor);
+		System.out.println("sensor "+Sensor);
+		String stringAtributos="";
 		
-	
-	 	 int fila=0;
-	 	 DefaultTableModel modelo = (DefaultTableModel) table.getModel();
-	 	 System.out.println("dentro de la ventana creando la tabla"+df.get(0));
-	 	 Object[] o ={df.get(0),df.get(1),df.get(2),df.get(3),df.get(4),df.get(5)};
-	 	 modelo.addRow(o);
-	 	 return modelo;
-	
-	 
- }
+
+		for(int i=0;i<Sensor.length;i++){
+			stringAtributos= Sensor[i]; // separo los atributos de cada sensor
+			String Atributo[]=stringAtributos.split(";");// separo atributos en el array
+			Object[] o ={Atributo[0],Atributo[1],Atributo[2],Atributo[3],Atributo[4]};
+			modelo.addRow(o);
+		}
+		System.out.println(stringAtributos);
+
+		
+		modelo.fireTableDataChanged();
+		table.setModel(modelo);
+		repaint();
+		return modelo;
+
+
+	}
 }

@@ -113,7 +113,7 @@ public class Client {
             		System.out.println("mi request es::"+stringLista);
             		ArrayList<String> listae = cargarLista(stringLista);
             		System.out.println("Lista.."+listae);
-            		ventanaAccion vent = new ventanaAccion(stringLista);
+            		ventanaAccion vent = new ventanaAccion(listae);
             	     
             	    
             		
@@ -195,12 +195,7 @@ public class Client {
 		System.out.println("lista entera sensores "+stringLista);
 		
 		for(int i=0;i<Sensor.length;i++){
-			String stringAtributos= Sensor[i]; // separo los atributos de cada sensor
-		System.out.println("lista separada ,"+Sensor[i]);
-			String Atributo[]=stringAtributos.split("-");// separo atributos en el array
-		System.out.println("sensor "+ Atributo[0]+", "+Atributo[1]+", "+Atributo[2]+", "+Atributo[3]+", "+Atributo[4]);
-			df.add(Atributo[0]+Atributo[1]+Atributo[2]+Atributo[3]+Atributo[4]); // añado los atributos al arraylist
-			
+			df.add(Sensor[i]);
 		}
 		System.out.println(df);
 		

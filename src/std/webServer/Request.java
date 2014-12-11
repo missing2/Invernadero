@@ -125,8 +125,8 @@ final class Request implements Runnable {
 			 if (requestLine.contains("sacalista")){
 				 //String lista = sacarListado ();
 				 String lista = sacarListado();
-				 //sockManager.Escribir(lista+'\n'); // mando la lista al cliente para que inicie la ventana
-				 sockManager.Escribir("p1-temperatura-encender calefaccion-off-apagar calefaccion,p2-luz-subir intensidad luz-off-bajar intensidad\n");
+				 sockManager.Escribir(lista+'\n'); // mando la lista al cliente para que inicie la ventana
+				 //sockManager.Escribir("p1;temperatura;encender calefaccion;off;apagar calefaccion,p2;luz;subir intensidad luz;off;bajar intensidad\n");
 			 }
 			
 			 requestLine  = sockManager.Leer();// lee el comando que e has pasado por socket desde el cliente
