@@ -120,29 +120,38 @@ final class Request implements Runnable {
 		break;
 
 		case 2:  // ACTION
-			System.out.println("Case 2");
 			 requestLine  = sockManager.Leer();// mandar la lista de la tabla principal
 			 if (requestLine.contains("sacalista")){
-				 //String lista = sacarListado ();
 				 String lista = sacarListado();
 				 sockManager.Escribir(lista+'\n'); // mando la lista al cliente para que inicie la ventana
-				 //sockManager.Escribir("p1;temperatura;encender calefaccion;off;apagar calefaccion,p2;luz;subir intensidad luz;off;bajar intensidad\n");
+				
 			 }
 			
-			 requestLine  = sockManager.Leer();// lee el comando que e has pasado por socket desde el cliente
+			 requestLine  = sockManager.Leer();// lee el comando (boton) que e has pasado por socket desde el cliente
 			 
 			 while (!requestLine.equals("adios")) { // queda en bucle para poder seguir haciendo cosas
-				 
+				 System.out.println("esperando ");
 					if (requestLine.contains("activar")){
 						String id = sockManager.Leer(); // id del sensor que voy a activar
 						 base.conectar();
+						 System.out.println("id que recivo para cambiarlo...");
 						 base.encenderSensor(id);
 						 base.desconectar();
+						 base.conectar();
+						 String listaActualizada= base.sacarlista();
+						 base.desconectar();
+						 sockManager.Escribir(listaActualizada+'\n'); //mando lista actualizada al cliente
+						
 					}else if (requestLine.contains("desactivar")){
 						String id = sockManager.Leer(); // id del sensor que voy a desactivar
 						 base.conectar();
 						 base.apagarSensor(id);
 						 base.desconectar();
+						 base.conectar();
+						 String listaActualizada= base.sacarlista();
+						 base.desconectar();
+						 sockManager.Escribir(listaActualizada+'\n');
+						
 					}else if (requestLine.contains("buscar")){
 						requestLine  = sockManager.Leer();// recivo si quiero sensor o de placa
 						if (requestLine.contains("placa")){
@@ -151,6 +160,7 @@ final class Request implements Runnable {
 							 String lista = base.buscarPlaca(requestLine);
 							 base.desconectar();
 							 sockManager.Escribir(lista+'\n');
+							 System.out.println("mando la busqueda..."+lista);
 						}else{
 							requestLine = sockManager.Leer(); // recivo que se sensor quiere buscar en la bd
 							 base.conectar();
@@ -175,7 +185,7 @@ final class Request implements Runnable {
 
 		
 
-		case 4:            // va a hacer conflicto con mi while (!4)
+		case 4:  // va a hacer conflicto con mi while (!4)
 			sockManager.Escribir("208 OK.Adios."+'\n');
 		break;
 			

@@ -20,14 +20,6 @@ public class Sensor {
 		this.estado = estado;
 		this.funcion_principal = funcion_principal;
 	}
-	public Sensor(String id_placa, String def,String funcion_principal, String estado,String ultima_accion) {
-		super();
-		this.id_placa = id_placa;
-		this.def = def;
-		this.ultima_accion = ultima_accion;
-		this.estado = estado;
-		this.funcion_principal = funcion_principal;
-	}
 	
 	public String getFuncion_principal() {
 		return funcion_principal;

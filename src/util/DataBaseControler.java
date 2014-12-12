@@ -111,59 +111,51 @@ public class DataBaseControler {
 				
 				ResultSet rs2 =  st.executeQuery("Select * from Sensor;");
 				while (rs2.next()) {
-					Sensor a = new Sensor(rs2.getString("id_placa"),
-							rs2.getString("def_variable"),rs2.getString("func_principal"),rs2.getString("estado"),rs2.getString("ultima_accion"));
+					Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
+							rs2.getString("func_principal"),rs2.getString("estado"),rs2.getString("ultima_accion"));
 					
-					temp = (a.getId_placa()+";"+a.getDef()+";"+a.getFuncion_principal()+";"+a.getEstado()+";"+a.getUltima_accion());
+					temp = (a.getId_placa()+";"+a.getId_sensor()+";"+a.getDef()+";"+a.getFuncion_principal()+";"+a.getEstado()+";"+a.getUltima_accion());
 					
 					fin=fin+temp+",";
 					
 				}
-				
-				System.out.println("fin "+fin);
 
 				return fin;
 				
 			}
 
-			public List<Sensor> sacarBusqueda(String nombre, String donde ) throws SQLException { 
-
-				List< Sensor> lista = new ArrayList<Sensor>();
-				Statement st = conn.createStatement();
-				
-					ResultSet rs2 =  st.executeQuery("Select * from Placa Where ---------"); // esta bien????
-					
-					while (rs2.next()){
-						Sensor a = new Sensor(rs2.getString("id_sensor"),rs2.getString("id_placa"),
-								rs2.getString("def"),rs2.getString("ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
-						lista.add(a);
-					}
-				
-				return lista;
-				
-			}
 		
-			public String buscarPlaca(String nombrePlaca) throws SQLException {
+			public String buscarPlaca(String nombre) throws SQLException {
 				
 				String lista ="";
 				String temp="";
 	 	 		Statement stat = conn.createStatement();
-	 	 		ResultSet rs = stat.executeQuery("Select * from Placa where id_placa = "+nombrePlaca+";");
+	 	 		ResultSet rs = stat.executeQuery("Select * from Placa where id_placa = "+nombre+";");
 	 	 		Placa placa = null;
 	 	 		
 	 	 		while (rs.next()) {
 	 	 			placa = new Placa(rs.getString("id_placa"), rs.getString("estado_placa"), rs.getString("imagen"));
 	 	 			temp = (placa.getId_placa()+"-"+placa.getEstado_placa()+"-"+placa.getImagen());
-	 	 			
 	 	 			lista=lista+temp+",";
+	 	 		}
+	 	 		 stat = conn.createStatement();
+	 	 		 rs = stat.executeQuery("Select * from Placa where estado_placa = "+nombre+";");
+	 	 		 
+	 	 		while (rs.next()) {
+	 	 			placa = new Placa(rs.getString("id_placa"), rs.getString("estado_placa"), rs.getString("imagen"));
+	 	 			temp = (placa.getId_placa()+"-"+placa.getEstado_placa()+"-"+placa.getImagen());
+	 	 			if (!lista.contains(temp)){ // si no esta insertado ya por la anterior consulta
+	 	 			lista=lista+temp+",";
+	 	 			}
 	 	 		}
 	 	 		lista=lista+"/";		
 	 			return lista;
 	 		}
-
+			// metodo buscar por sensor
 			public String buscarSensor(String requestLine) throws SQLException {
 				String temp="";
 				String fin="";
+				
 	 	 		Statement stat = conn.createStatement();
 	 	 		ResultSet rs2 = stat.executeQuery("Select * from Sensor where id_sensor = "+requestLine+";");
 	 	 		while (rs2.next()) {
@@ -172,26 +164,90 @@ public class DataBaseControler {
 	 	 			 
 	 	 			 temp = (a.getId_placa()+"-"+a.getDef()+"-"+a.getFuncion_principal()+"-"+a.getEstado()+"-"+a.getUltima_accion());
 	 	 			 
-	 	 			 fin=fin+temp+",";
+	 	 			if (!fin.contains(temp)){ // si no esta insertado ya por la anterior consulta
+	 	 				fin=fin+temp+",";
+		 	 			}
+		 	 		}
+	 	 	
+	 	 		stat = conn.createStatement();
+	 	 		rs2 = stat.executeQuery("Select * from Sensor where id_Placa = "+requestLine+";");
+	 	 		while (rs2.next()) {
+	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
+	 	 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
+	 	 			 
+	 	 			 temp = (a.getId_placa()+"-"+a.getDef()+"-"+a.getFuncion_principal()+"-"+a.getEstado()+"-"+a.getUltima_accion());
+	 	 			 
+	 	 			if (!fin.contains(temp)){ // si no esta insertado ya por la anterior consulta
+	 	 				fin=fin+temp+",";
+		 	 			}
 	 	 		}
+	 	 		stat = conn.createStatement();
+	 	 		rs2 = stat.executeQuery("Select * from Sensor where def_variable = "+requestLine+";");
+	 	 		while (rs2.next()) {
+	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
+	 	 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
+	 	 			 
+	 	 			 temp = (a.getId_placa()+"-"+a.getDef()+"-"+a.getFuncion_principal()+"-"+a.getEstado()+"-"+a.getUltima_accion());
+	 	 			 
+	 	 			if (!fin.contains(temp)){ // si no esta insertado ya por la anterior consulta
+	 	 				fin=fin+temp+",";
+		 	 			}
+	 	 		}
+	 	 		rs2 = stat.executeQuery("Select * from Sensor where Ultima_accion = "+requestLine+";");
+	 	 		while (rs2.next()) {
+	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
+	 	 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
+	 	 			 
+	 	 			 temp = (a.getId_placa()+"-"+a.getDef()+"-"+a.getFuncion_principal()+"-"+a.getEstado()+"-"+a.getUltima_accion());
+	 	 			 
+	 	 			if (!fin.contains(temp)){ // si no esta insertado ya por la anterior consulta
+	 	 				fin=fin+temp+",";
+		 	 			}
+	 	 		}
+	 	 		
+	 	 		rs2 = stat.executeQuery("Select * from Sensor where estado = "+requestLine+";");
+	 	 		while (rs2.next()) {
+	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
+	 	 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
+	 	 			 
+	 	 			 temp = (a.getId_placa()+"-"+a.getDef()+"-"+a.getFuncion_principal()+"-"+a.getEstado()+"-"+a.getUltima_accion());
+	 	 			 
+	 	 			if (!fin.contains(temp)){ // si no esta insertado ya por la anterior consulta
+	 	 				fin=fin+temp+",";
+		 	 			}
+	 	 		}
+	 	 		rs2 = stat.executeQuery("Select * from Sensor where func_principal = "+requestLine+";");
+	 	 		while (rs2.next()) {
+	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
+	 	 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
+	 	 			 
+	 	 			 temp = (a.getId_placa()+"-"+a.getDef()+"-"+a.getFuncion_principal()+"-"+a.getEstado()+"-"+a.getUltima_accion());
+	 	 			 
+	 	 			if (!fin.contains(temp)){ // si no esta insertado ya por la anterior consulta
+	 	 				fin=fin+temp+",";
+		 	 			}
+	 	 		}
+	 	 		
 	 	 		fin=fin+"/";		
 	 			return fin;
 	 		}
 			
 			
 
-			public void encenderSensor(String idv) throws SQLException {
+			public void encenderSensor(String ids) throws SQLException {
 				
 				Statement st = conn.createStatement();
-				String sql = "UPDATE Sensor SET"+" on_off ='ON' WHERE  id_sensor='" +idv+"'";
+				System.out.println("me pasan el id sensor: "+ids);
+				String sql ="UPDATE Sensor SET estado ='on' WHERE id_sensor='"+ids+"';";
 				System.out.println(sql);
 	 	 		st.execute(sql);
 	 	 		st.close();
 			}
-			public void apagarSensor(String idv) throws SQLException {
+			public void apagarSensor(String ids) throws SQLException {
 				
 				Statement st = conn.createStatement();
-				String sql = "UPDATE SENSOR SET"+" on_off ='OFF' WHERE  id_sensor='" +idv+"'";
+				System.out.println("me pasan el id sensor: "+ids);
+				String sql ="UPDATE Sensor SET estado ='off' WHERE id_sensor='"+ids+"';";
 				System.out.println(sql);
 	 	 		st.execute(sql);
 	 	 		st.close();

@@ -34,6 +34,7 @@ public ventanaLoggin(){
 	getContentPane().add(lblUser);
 	
 	txtFUser = new JTextField();
+	txtFUser.setText("mikel");
 	txtFUser.setBackground(Color.LIGHT_GRAY);
 	txtFUser.setBounds(97, 77, 171, 20);
 	getContentPane().add(txtFUser);
@@ -47,6 +48,7 @@ public ventanaLoggin(){
 	getContentPane().add(lblPasword);
 	
 	txtFPasword = new JTextField();
+	txtFPasword.setText("123456");
 	txtFPasword.setBackground(Color.LIGHT_GRAY);
 	txtFPasword.setBounds(156, 169, 171, 20);
 	getContentPane().add(txtFPasword);

@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JList;
 
+import java.awt.CheckboxGroup;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
@@ -20,6 +21,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -36,6 +38,7 @@ import javax.swing.JRadioButton;
 
 public class ventanaAccion extends JFrame implements ActionListener, ComponentListener{
 
+	
 	public JTable table;
 	JScrollPane scroll;
 
@@ -60,13 +63,13 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 	public JTextField palabra;
 	JLabel lLab;
 
-	public String lista = new String ("");
+	public ArrayList<String> lista = new ArrayList<String>() ;
 
 	public String  id;
 	public String txt;
 
 	public ventanaAccion(ArrayList<String> listae){
-
+		
 		panelInferior = new JPanel();
 		panelCentral = new JPanel();
 		panelBotonera = new JPanel();
@@ -194,8 +197,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 
 	public static void main(String[] args)
 	{
-		//	ventanaAccion v= new ventanaAccion();
-		//	v.setVisible(true);
+	
 	}
 
 	public DefaultTableModel cargarTabla(ArrayList<String> listae){
@@ -205,30 +207,25 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 			System.out.println("null y tal");
 		}
 
-		System.out.println("en el inicio de la ventana"+listae);
 		DefaultTableModel modelo = new DefaultTableModel();
-		String[] columTitulo =	{"Placa", "Sensor","Estado","Función","Ultima acción"};
+		String[] columTitulo =	{"Placa","Id sensor", "Sensor","Estado","Función","Ultima acción"};
 		modelo.setColumnIdentifiers(columTitulo);
 		String[] Sensor = new String[listae.size()];
 		Sensor = listae.toArray(Sensor);
-		System.out.println("sensor "+Sensor);
 		String stringAtributos="";
 		
 
 		for(int i=0;i<Sensor.length;i++){
 			stringAtributos= Sensor[i]; // separo los atributos de cada sensor
 			String Atributo[]=stringAtributos.split(";");// separo atributos en el array
-			Object[] o ={Atributo[0],Atributo[1],Atributo[2],Atributo[3],Atributo[4]};
+			Object[] o ={Atributo[0],Atributo[1],Atributo[2],Atributo[3],Atributo[4],Atributo[5]};
 			modelo.addRow(o);
 		}
-		System.out.println(stringAtributos);
-
 		
 		modelo.fireTableDataChanged();
 		table.setModel(modelo);
 		repaint();
 		return modelo;
-
 
 	}
 }
