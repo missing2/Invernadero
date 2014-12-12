@@ -235,12 +235,6 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 	
 	// Método privado utilizado para activar o desactivar los componentes de acuerdo al modo de activación
 	private void setModoActivado( boolean on ) {
-		enActivado = on;
-		bActuar.setEnabled( !on );
-		bImagenPlaca.setEnabled( !on );
-		bBuscar.setEnabled( !on );
-		listaVariables.setEnabled( !on );
-		//nick.setEnabled( on );
 		if (on)
 			bActivar.setText( "OFF" );
 		else
