@@ -102,6 +102,9 @@ public class Client {
             			System.out.println("no entra por pass incorrecta");
             		}
                 break;
+                
+                
+                
             	case 2:// accion
                		sm.Escribir("sacalista"+'\n'); // manda al server un comando para que me mande la lista
             		String stringLista = sm.Leer(); // recibe la lista en string
@@ -117,9 +120,7 @@ public class Client {
             				
             				if (vent.bActivar.getText().equals("ON")){ // el boton esta en on y quiero activar
 		            			sm.Escribir("activar"+'\n');
-		            			System.out.println("entra");
 		               			String id = vent.id; //id del sensor que tengo que activar  
-		               			System.out.println("ID:"+id);
 		            			sm.Escribir(id+'\n');
 		                		stringLista = sm.Leer(); // recibe la lista en string
 		                		listae = cargarLista(stringLista);
@@ -128,12 +129,11 @@ public class Client {
 	                		
             				}else if(vent.bActivar.getText().equals("OFF")) { // quiero desactivar 
             					sm.Escribir("desactivar"+'\n');
-            					
     	            			String id = vent.id; //id del sensor que tengo que activar 
-    	            			System.out.println("entra desactivar"+id);
     	            			sm.Escribir(id+'\n');
     	                      	stringLista = sm.Leer(); // recibe la lista en string
     	                		listae = cargarLista(stringLista);
+    	                		
     	                		vent.cargarTabla(listae);
             				}	
 	               		}else if(vent.boton==2){//bActuar

@@ -273,6 +273,19 @@ public class DataBaseControler {
 				if ( !rs2.getString("Ultima_accion").equals(rs2.getString("func_principal"))){
 					String accion= rs2.getString("func_principal");
 					rs2 = st.executeQuery ("UPDATE Sensor SET UltimaAccion ='"+accion+"' WHERE id_sensor='"+id+"';");
+				}else {
+					if (id.equals("s1"))
+						rs2 = st.executeQuery ("UPDATE Sensor SET UltimaAccion ='subir calefaccion' WHERE id_sensor='"+id+"';");
+					else if (id.equals("s2"))
+						rs2 = st.executeQuery ("UPDATE Sensor SET UltimaAccion ='apagar calefaccion' WHERE id_sensor='"+id+"';");
+					else if (id.equals("s3"))
+						rs2 = st.executeQuery ("UPDATE Sensor SET UltimaAccion ='bajar intensidad luz' WHERE id_sensor='"+id+"';");
+					else if (id.equals("s4"))
+						rs2 = st.executeQuery ("UPDATE Sensor SET UltimaAccion ='apagar luz' WHERE id_sensor='"+id+"';");
+					else if (id.equals("s5"))
+						rs2 = st.executeQuery ("UPDATE Sensor SET UltimaAccion ='bajar aire acondicionado' WHERE id_sensor='"+id+"';");
+					else if (id.equals("s6"))
+						rs2 = st.executeQuery ("UPDATE Sensor SET UltimaAccion ='apagar aire acondicionado' WHERE id_sensor='"+id+"';");
 				}
 				
 				
