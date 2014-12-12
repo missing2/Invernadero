@@ -76,7 +76,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 
 		palabra = new JTextField(10);
 
-		bActivar = new JButton ("On");
+		bActivar = new JButton ("ON");
 		bImagenPlaca = new JButton ("Imagen Placa"); 
 		bActuar = new JButton("Actuar");
 		bBuscar = new JButton("Buscar");
@@ -162,6 +162,8 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 			if(!enActivado)
 //				aqui cambiar el valor de la tabla a off
 				setModoActivado(true);
+			else
+				setModoActivado(false);
 		}else if(e.getSource().equals(bActuar)){
 			boton = 2;
 			// necesito saber la variable o algo de la fila seleccionada
@@ -211,7 +213,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		}
 
 		DefaultTableModel modelo = new DefaultTableModel();
-		String[] columTitulo =	{"Placa","Id sensor", "Sensor","Estado","Función","Ultima acción"};
+		String[] columTitulo =	{"Placa","Id sensor", "Sensor","Función","Estado","Ultima acción"};
 		modelo.setColumnIdentifiers(columTitulo);
 		String[] Sensor = new String[listae.size()];
 		Sensor = listae.toArray(Sensor);

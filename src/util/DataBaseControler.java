@@ -182,7 +182,7 @@ public class DataBaseControler {
 		 	 			}
 	 	 		}
 	 	 		stat = conn.createStatement();
-	 	 		rs2 = stat.executeQuery("Select * from Sensor where def_variable = "+requestLine+";");
+	 	 		rs2 = stat.executeQuery("Select * from Sensor where def_variable = '"+requestLine+"';");
 	 	 		while (rs2.next()) {
 	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
 	 	 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
@@ -193,7 +193,7 @@ public class DataBaseControler {
 	 	 				fin=fin+temp+",";
 		 	 			}
 	 	 		}
-	 	 		rs2 = stat.executeQuery("Select * from Sensor where Ultima_accion = "+requestLine+";");
+	 	 		rs2 = stat.executeQuery("Select * from Sensor where Ultima_accion = '"+requestLine+"';");
 	 	 		while (rs2.next()) {
 	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
 	 	 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
@@ -205,7 +205,7 @@ public class DataBaseControler {
 		 	 			}
 	 	 		}
 	 	 		
-	 	 		rs2 = stat.executeQuery("Select * from Sensor where estado = "+requestLine+";");
+	 	 		rs2 = stat.executeQuery("Select * from Sensor where estado = '"+requestLine+"';");
 	 	 		while (rs2.next()) {
 	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
 	 	 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
@@ -216,7 +216,7 @@ public class DataBaseControler {
 	 	 				fin=fin+temp+",";
 		 	 			}
 	 	 		}
-	 	 		rs2 = stat.executeQuery("Select * from Sensor where func_principal = "+requestLine+";");
+	 	 		rs2 = stat.executeQuery("Select * from Sensor where func_principal = '"+requestLine+"';");
 	 	 		while (rs2.next()) {
 	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
 	 	 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
@@ -255,36 +255,32 @@ public class DataBaseControler {
 			
 			public void  alta(String nick,String pass) throws SQLException{
 				Statement st = conn.createStatement();
-				String sql = "insert into User values("+nick+","+pass+");";
+				String sql = "insert into User values('"+nick+"','"+pass+"');";
 				
 			}
 			public void  baja(String nick,String pass) throws SQLException{
 				Statement st = conn.createStatement();
-				String sql = "delete from User where User ="+nick+" and where contrasena ="+pass+";";
+				String sql = "delete from User where User ='"+nick+"' and where contrasena ='"+pass+"';";
 			}
 
-			public static void main(String[] args){
-				DataBaseControler dbc = getInstance();
-				try {
-					System.out.println(dbc.ConsultarPasword("vero", 654321));
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				try {
-					System.out.println(dbc.sacarlista());
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+			
 
 			public void cambiarEstado(String id) throws SQLException {
 				// TODO Auto-generated method stub
-				//no que que tendria que hacer este metodo, ya que solo puedo cambiar en la bd la ultima accion
-				// lo demas seria mecanico del propio sensor...
+				
 				Statement st = conn.createStatement();
-				String sql = "Select * from Sensor where id_sensor ="+st+";";
+				ResultSet rs2 = st.executeQuery ( "Select * from Sensor WHERE id_sensor='"+id+"';");// Saco la info del sensor que quieren que cambie
+				if ( !rs2.getString("Ultima_accion").equals(rs2.getString("func_principal"))){
+					String accion= rs2.getString("func_principal");
+					rs2 = st.executeQuery ("UPDATE Sensor SET UltimaAccion ='"+accion+"' WHERE id_sensor='"+id+"';");
+				}
+				
+				
+				
+	 	 		st.close();
+				
+			}
+			public static void main(String[] args){
 				
 			}
 }

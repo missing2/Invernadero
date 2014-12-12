@@ -115,7 +115,7 @@ public class Client {
             			if (vent.boton==1){//Activar/ desactivar
             				vent.boton=0;
             				
-            				if (vent.bActivar.getText().equals("On")){ // el boton esta en on y quiero activar
+            				if (vent.bActivar.getText().equals("ON")){ // el boton esta en on y quiero activar
 		            			sm.Escribir("activar"+'\n');
 		            			System.out.println("entra");
 		               			String id = vent.id; //id del sensor que tengo que activar  
@@ -126,7 +126,7 @@ public class Client {
 		                		
 		                		vent.cargarTabla(listae);
 	                		
-            				}else if(vent.bActivar.getText().equals("off")) { // quiero desactivar 
+            				}else if(vent.bActivar.getText().equals("OFF")) { // quiero desactivar 
             					sm.Escribir("desactivar"+'\n');
             					
     	            			String id = vent.id; //id del sensor que tengo que activar 
