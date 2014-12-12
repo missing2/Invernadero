@@ -157,8 +157,15 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		if(e.getSource().equals(bActivar)){
 			boton = 1;
 			// necesito saber la variable o algo de la fila seleccionada
-			int index = table.getSelectedRow();
-			id = (String) table.getValueAt(index, 1);
+			if(!enActivado){
+				setModoActivado(true);
+//			aqui cambiar el valor de la tabla a off
+				int index = table.getSelectedRow();
+				id = (String) table.getValueAt(index, 1);
+			}else{
+				int index = table.getSelectedRow();
+				id = (String) table.getValueAt(index, 1);
+			}
 		}else if(e.getSource().equals(bActuar)){
 			boton = 2;
 			// necesito saber la variable o algo de la fila seleccionada
@@ -227,5 +234,20 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		repaint();
 		return modelo;
 
+	}
+	private boolean enActivado = false;
+	
+	// Método privado utilizado para activar o desactivar los componentes de acuerdo al modo de activación
+	private void setModoActivado( boolean on ) {
+		enActivado = on;
+		bActuar.setEnabled( !on );
+		bImagenPlaca.setEnabled( !on );
+		bBuscar.setEnabled( !on );
+		listaVariables.setEnabled( !on );
+		//nick.setEnabled( on );
+		if (on)
+			bActivar.setText( "OFF" );
+		else
+			bActivar.setText( "ON" );
 	}
 }
