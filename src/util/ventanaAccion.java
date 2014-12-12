@@ -159,11 +159,16 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 			// necesito saber la variable o algo de la fila seleccionada
 			int index = table.getSelectedRow();
 			id = (String) table.getValueAt(index, 1);
-			if(!enActivado)
+			if(!enActivado){
 //				aqui cambiar el valor de la tabla a off
 				setModoActivado(true);
-			else
+				enActivado=true;
+			}
+			else{
 				setModoActivado(false);
+				enActivado=false;
+			}
+		
 		}else if(e.getSource().equals(bActuar)){
 			boton = 2;
 			// necesito saber la variable o algo de la fila seleccionada
