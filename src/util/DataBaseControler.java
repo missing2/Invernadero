@@ -156,8 +156,14 @@ public class DataBaseControler {
 				String temp="";
 				String fin="";
 				
+				 if (requestLine.contains("*")){    // cambio los chars que hacen especial la busqueda y los cambio por otros que 
+					 requestLine.replace("*", "%"); // sql admita
+				 }else if(requestLine.contains("?")){
+					 requestLine.replace("?", "___"); 
+				 }
+				 
 	 	 		Statement stat = conn.createStatement();
-	 	 		ResultSet rs2 = stat.executeQuery("Select * from Sensor where id_sensor = "+requestLine+";");
+	 	 		ResultSet rs2 = stat.executeQuery("Select * from Sensor where id_sensor = '"+requestLine+"';");
 	 	 		while (rs2.next()) {
 	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
 	 	 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
