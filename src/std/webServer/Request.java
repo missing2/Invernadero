@@ -43,9 +43,9 @@ final class Request implements Runnable {
 		switch (estado) {
 	
 		case 0://(USER)
-			System.out.println("Lo que sea");
+		
 			String  requestLine  = sockManager.Leer();// lee el user que le has pasado por socket desde el cliente
-			System.out.println(requestLine);
+			
 			if (! requestLine.equals("adios")) {
 				
 				if (requestLine.equals("alta")){// estoy en la ventana altas bajas

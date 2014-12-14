@@ -56,14 +56,14 @@ public class DataBaseControler {
 	
   
     public boolean consultaUsuario(String nombre) throws SQLException {
-    	System.out.println("checking user");
+    	
     
     	boolean existe=false;
     	
 		Statement st = conn.createStatement(); 
 		
 		ResultSet rs2 = st.executeQuery("Select * from User Where User = \""+nombre+"\";");                                                                                                                                                     // estado civil es estado, no string
-	 	if (rs2!=null)
+	 	if (!rs2.getString("User").equals(""))
 	 		existe=true;
 	 		
 		rs2.close();
@@ -80,7 +80,7 @@ public class DataBaseControler {
 	 			Statement st = conn.createStatement(); 
 	 			
 	 			ResultSet rs2 = st.executeQuery("SELECT * from User WHERE User = \""+nombre+"\" AND contrasena = '"+pass+"';");                                                                                                                                                     // estado civil es estado, no string
-	 		 	if (rs2!=null)
+	 		 	if (!rs2.equals(null))
 	 		 		existe=true;
 	 		 		
 	 			rs2.close();
@@ -91,6 +91,7 @@ public class DataBaseControler {
 				boolean existe = false;
 				Statement st = conn.createStatement();
 				ResultSet rs2 = st.executeQuery("Select * from variable Where def_variable = "+idv+"and Where id_placa="+idp+"");
+				rs2.close();
 				return existe;
 			}
 
@@ -99,6 +100,7 @@ public class DataBaseControler {
 				Statement st = conn.createStatement();
 				ResultSet rs2 = st.executeQuery("Select estado_variable from variable Where def_variable = "+idv+" and Where id_placa="+idp+"");
 				estado=rs2.toString();
+				rs2.close();
 				return estado;
 			}
 
@@ -119,7 +121,7 @@ public class DataBaseControler {
 					fin=fin+temp+",";
 					
 				}
-
+				rs2.close();
 				return fin;
 				
 			}
@@ -148,7 +150,8 @@ public class DataBaseControler {
 	 	 			lista=lista+temp+",";
 	 	 			}
 	 	 		}
-	 	 		lista=lista+"/";		
+	 	 		lista=lista+"/";
+	 	 		rs.close();
 	 			return lista;
 	 		}
 			// metodo buscar por sensor
@@ -157,6 +160,7 @@ public class DataBaseControler {
 				String fin="";
 				
 	 	 		Statement stat = conn.createStatement();
+	 	 		
 	 	 		ResultSet rs2 = stat.executeQuery("Select * from Sensor where id_sensor = "+requestLine+";");
 	 	 		while (rs2.next()) {
 	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
@@ -170,6 +174,7 @@ public class DataBaseControler {
 		 	 		}
 	 	 	
 	 	 		stat = conn.createStatement();
+	 	 		rs2.close();
 	 	 		rs2 = stat.executeQuery("Select * from Sensor where id_Placa = "+requestLine+";");
 	 	 		while (rs2.next()) {
 	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
@@ -182,6 +187,7 @@ public class DataBaseControler {
 		 	 			}
 	 	 		}
 	 	 		stat = conn.createStatement();
+	 	 		rs2.close();
 	 	 		rs2 = stat.executeQuery("Select * from Sensor where def_variable = '"+requestLine+"';");
 	 	 		while (rs2.next()) {
 	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
@@ -193,7 +199,9 @@ public class DataBaseControler {
 	 	 				fin=fin+temp+",";
 		 	 			}
 	 	 		}
+	 	 		rs2.close();
 	 	 		rs2 = stat.executeQuery("Select * from Sensor where Ultima_accion = '"+requestLine+"';");
+	 	 		
 	 	 		while (rs2.next()) {
 	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
 	 	 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
@@ -204,7 +212,7 @@ public class DataBaseControler {
 	 	 				fin=fin+temp+",";
 		 	 			}
 	 	 		}
-	 	 		
+	 	 		rs2.close();
 	 	 		rs2 = stat.executeQuery("Select * from Sensor where estado = '"+requestLine+"';");
 	 	 		while (rs2.next()) {
 	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
@@ -216,6 +224,7 @@ public class DataBaseControler {
 	 	 				fin=fin+temp+",";
 		 	 			}
 	 	 		}
+	 	 		rs2.close();
 	 	 		rs2 = stat.executeQuery("Select * from Sensor where func_principal = '"+requestLine+"';");
 	 	 		while (rs2.next()) {
 	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
@@ -228,7 +237,8 @@ public class DataBaseControler {
 		 	 			}
 	 	 		}
 	 	 		
-	 	 		fin=fin+"/";		
+	 	 		fin=fin+"/";
+	 	 		rs2.close();
 	 			return fin;
 	 		}
 			
