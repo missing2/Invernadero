@@ -107,8 +107,8 @@ public class Client {
                 
             	case 2:// accion
                		sm.Escribir("sacalista"+'\n'); // manda al server un comando para que me mande la lista
-            		String stringLista = sm.Leer(); // recibe la lista en string
-            		ArrayList<String> listae = cargarLista(stringLista);
+            		 // recibe la lista en string
+            		ArrayList<String> listae = cargarLista(sm);
             		ventanaAccion vent = new ventanaAccion(listae);
             	                 		
             		while (vent.boton!=6){
@@ -119,28 +119,41 @@ public class Client {
             				vent.boton=0;
             				
             				if (vent.bActivar.getText().equals("ON")){ // el boton esta en on y quiero activar
-		            			sm.Escribir("activar"+'\n');
-		               			String id = vent.id; //id del sensor que tengo que activar  
-		            			sm.Escribir(id+'\n');
-		                		stringLista = sm.Leer(); // recibe la lista en string
-		                		listae = cargarLista(stringLista);
-		                		
-		                		vent.cargarTabla(listae);
-	                		
+            					int confirmado = JOptionPane.showConfirmDialog(vent,"¿confirmar?");
+
+            							if (JOptionPane.OK_OPTION == confirmado){
+            								sm.Escribir("activar"+'\n');
+        		               			String id = vent.id; //id del sensor que tengo que activar  
+        		            			sm.Escribir(id+'\n');
+        		                		listae = cargarLista(sm);
+        		                		
+        		                		vent.cargarTabla(listae);
+            							}else{
+            								
+            							}
+            						
             				}else if(vent.bActivar.getText().equals("OFF")) { // quiero desactivar 
+            					//--------------------------------------//
+            					int confirmado = JOptionPane.showConfirmDialog(vent, "¿Confirmar?");
+            					if (JOptionPane.OK_OPTION == confirmado){
             					sm.Escribir("desactivar"+'\n');
     	            			String id = vent.id; //id del sensor que tengo que activar 
     	            			sm.Escribir(id+'\n');
-    	                      	stringLista = sm.Leer(); // recibe la lista en string
-    	                		listae = cargarLista(stringLista);
-    	                		
+    	                		listae = cargarLista(sm);
     	                		vent.cargarTabla(listae);
+            					}else{
+            						
+            					}
+            							  
+            					//--------------------------------------//
+            					
             				}	
 	               		}else if(vent.boton==2){//bActuar
 	               			vent.boton=0;
 	               			System.out.println("bot2 clicado");
 	            			sm.Escribir("actuar"+'\n');
 	            	    	sm.Escribir(vent.id+'\n'); // paso el id que voy a cambiar la accion
+	            	    	cargarLista(sm);
 	            	    	
 	            	    }else if(vent.boton==3){//bBuscar
 	            	    	vent.boton=0;
@@ -152,13 +165,23 @@ public class Client {
 	            	    		sm.Escribir("placa"+'\n');
 	            	    	    String recibido=sm.Leer();
 	            	    	    System.out.println("resibida busqueda"+recibido);
-	            	    	    vent.cargarTabla( cargarLista(recibido)); // muestro en la tabla los resultados
 	            	    	    
+	            	    	    ArrayList<String> df = new ArrayList<String>();
+	            	    		String Placa[] = recibido.split(",");// separo sensores
+	            	    		for(int i=0;i<Placa.length;i++){
+	            	    			df.add(Placa[i]);
+	            	    		}
+	            	    		 vent.cargarTabla(df);
 	            	    	}else { // busco por sensor
 	            	    		sm.Escribir("sensor"+'\n');
 	            	    		sm.Escribir(vent.palabra.toString()+'\n');
 	            	    		String recibido=sm.Leer();
-	            	    		vent.cargarTabla(cargarLista(recibido)); // muestro en la tabla los resultados
+	            	    		ArrayList<String> df = new ArrayList<String>();
+	            	    		String Sensor[] = recibido.split(",");// separo sensores
+	            	    		for(int i=0;i<Sensor.length;i++){
+	            	    			df.add(Sensor[i]);
+	            	    		}
+	            	    		 vent.cargarTabla(df);
 	            	    	}
 	            	    	
 	            	    	
@@ -194,14 +217,14 @@ public class Client {
 
     }
 
-	private static ArrayList<String> cargarLista(String stringLista) {
+	private static ArrayList<String> cargarLista(SocketManager sm) throws IOException {
 		// TODO Auto-generated method stub
+		String stringLista = sm.Leer();
 		ArrayList<String> df = new ArrayList<String>();
 		String Sensor[] = stringLista.split(",");// separo sensores
 		for(int i=0;i<Sensor.length;i++){
 			df.add(Sensor[i]);
 		}
-		System.out.println(df);
 		
 		return df;
 	   }
