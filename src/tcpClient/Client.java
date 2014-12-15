@@ -45,7 +45,7 @@ public class Client {
 	            		
 	            		sm.Escribir(user.getNick()+'\n'); // mando nick al server
 	       
-	            		if (sm.Leer().contains("200 OK. bienvenido")){ // lo que me responde es todo ok
+	            		if (sm.Leer().contains("200 OK")){ // lo que me responde es todo ok
 	            			ventanaloggin.dispose();
 	            			estado=1;
 	            		}else if (sm.Leer().contains("400 ERR")){ // si me responde que esta vacio 
@@ -77,6 +77,7 @@ public class Client {
             			}else if (vent.boton==2){// Salir
             				estado=4;
 	            			sm.Escribir("adios"+'\n'); // mando al server que quiere salir
+	            			
             			}else if (vent.boton==3){ //Baja
             				sm.Escribir("baja"+'\n');
             				String nick = vent.textNick.toString();

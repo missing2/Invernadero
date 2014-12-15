@@ -67,7 +67,7 @@ final class Request implements Runnable {
 					System.out.println("falta usuario");
 					estado=0;
 					
-				}else{//requestLine!=null)
+				}else {//requestLine!=null
 					base.conectar();
 					 if (!base.consultaUsuario(requestLine)){
 						sockManager.Escribir("401ERR.Usuario desconocido"+'\n');
@@ -87,9 +87,9 @@ final class Request implements Runnable {
 		break;
 
 		case 1://(PASS)
-			System.out.println("case 1");
+			
 			 requestLine  = sockManager.Leer();// lee el pasword que le has pasado por socket desde el cliente
-			 System.out.println("no soy analfabeto");
+		
 			if (!requestLine.equals("adios")) {
 				
 				//requestLine  = sockManager.Leer();//pasword :
@@ -101,13 +101,13 @@ final class Request implements Runnable {
 					System.out.println("falta clave");
 				}else{// !requestLine.equals(""))
 					base.conectar();
-					if (base.ConsultarPasword(user.getNick(), pass)){
+					if (base.ConsultarPasword(user.getNick(), user.getContrasena())){
 							sockManager.Escribir("201 OK.Bienvenido al sistema"+user.getNick()+'\n');
 							estado=2;
 							System.out.println("contraseña bien");
 							
 							user.setContrasena(pass);
-					}else if (!base.ConsultarPasword(user.getNick(), pass)){
+					}else if (!base.ConsultarPasword(user.getNick(), user.getContrasena())){
 							sockManager.Escribir("401 ERR.La clave es incorrecta"+'\n');
 							System.out.println("clave erronea");
 							estado=1;
@@ -172,6 +172,8 @@ final class Request implements Runnable {
 						
 					}else if (requestLine.contains("imagen")){
 						// ni idea de pasar de la bd a aqui una imagen...
+						
+						// sockManager.Escribir(buffer, bytes);
 					
 					}else if (requestLine.contains("actuar")){
 						requestLine = sockManager.Leer(); // recivo el id que quiero camn¡biar de accion
