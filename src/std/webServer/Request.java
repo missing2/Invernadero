@@ -136,22 +136,25 @@ final class Request implements Runnable {
 			 
 			 while (!requestLine.equals("adios")) { // queda en bucle para poder seguir haciendo cosas
 				 System.out.println("esperando ");
+				 
 					if (requestLine.equals("activar")){
 						String id = sockManager.Leer(); // id del sensor que voy a activar
 						 base.conectar();
-						 System.out.println("id que recivo para cambiarlo...");
 						 base.encenderSensor(id);
 						 base.desconectar();
+						 Thread.sleep(100);
 						 base.conectar();
 						 String listaActualizada= base.sacarlista();
 						 base.desconectar();
 						 sockManager.Escribir(listaActualizada+'\n'); //mando lista actualizada al cliente
 						
 					}else if (requestLine.equals("desactivar")){
+						System.out.println("entroo");
 						String id = sockManager.Leer(); // id del sensor que voy a desactivar
 						 base.conectar();
 						 base.apagarSensor(id);
 						 base.desconectar();
+						 Thread.sleep(100);
 						 base.conectar();
 						 String listaActualizada= base.sacarlista();
 						 base.desconectar();

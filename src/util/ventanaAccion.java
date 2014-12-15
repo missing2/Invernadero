@@ -161,11 +161,12 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 			boton = 1;
 			int index = table.getSelectedRow();
 			id = (String) table.getValueAt(index, 1);
+			
 		}else if(e.getSource().equals(bDesactivar)){
 			boton = 2;
-			
 			int index = table.getSelectedRow();
 			id = (String) table.getValueAt(index, 1);
+			
 		}else if(e.getSource().equals(bActuar)){
 			boton = 3;
 			int index = table.getSelectedRow();
@@ -207,7 +208,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 	}
 
 	public DefaultTableModel cargarTabla(ArrayList<String> listae){
-
+		
 		if(listae.isEmpty()){
 			System.out.println(listae);
 			System.out.println("null y tal");

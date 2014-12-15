@@ -115,22 +115,20 @@ public class Client {
             		while (vent.boton!=6){
             			while (vent.boton==0){
             			//estoy en la vent sin mas
-            				System.out.println("");
+            				Thread.sleep(1000);
             			}
-            			if (vent.boton==1){//Activar/ desactivar
+            			if (vent.boton==1){//Activar
             				vent.boton=0;
             				int confirmado = JOptionPane.showConfirmDialog(vent,"¿confirmar?");
-
             				if (JOptionPane.OK_OPTION == confirmado){
             					sm.Escribir("activar"+'\n');
   								String id = vent.id; //id del sensor que tengo que activar  
            						sm.Escribir(id+'\n');
-            					listae = cargarLista(sm);
-        		                		
+            					listae = cargarLista(sm);	
             					vent.cargarTabla(listae);
             				}
             							
-            			}else if(vent.boton==2){
+            			}else if(vent.boton==2){// desactivar
             				vent.boton=0;
             				int confirmado = JOptionPane.showConfirmDialog(vent, "¿Confirmar?");
         					if (JOptionPane.OK_OPTION == confirmado){

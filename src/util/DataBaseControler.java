@@ -258,7 +258,6 @@ public class DataBaseControler {
 				Statement st = conn.createStatement();
 				System.out.println("me pasan el id sensor: "+ids);
 				String sql ="UPDATE Sensor SET estado ='off' WHERE id_sensor='"+ids+"';";
-				System.out.println(sql);
 	 	 		st.execute(sql);
 	 	 		st.close();
 			}
