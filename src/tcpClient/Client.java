@@ -115,6 +115,7 @@ public class Client {
             		while (vent.boton!=6){
             			while (vent.boton==0){
             			//estoy en la vent sin mas
+            				System.out.println("");
             			}
             			if (vent.boton==1){//Activar/ desactivar
             				vent.boton=0;
@@ -130,6 +131,7 @@ public class Client {
             				}
             							
             			}else if(vent.boton==2){
+            				vent.boton=0;
             				int confirmado = JOptionPane.showConfirmDialog(vent, "¿Confirmar?");
         					if (JOptionPane.OK_OPTION == confirmado){
         						sm.Escribir("desactivar"+'\n');
