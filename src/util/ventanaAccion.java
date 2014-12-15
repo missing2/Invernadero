@@ -50,7 +50,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 	JList listaVariables;
 
 	public int boton = 0;
-	public JButton bActivar;
+	public JButton bActivar,bDesactivar;
 	JButton bImagenPlaca;
 	JButton bActuar;
 	JButton bSalir;
@@ -77,6 +77,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		palabra = new JTextField(10);
 
 		bActivar = new JButton ("ON");
+		bDesactivar = new JButton ("OFF");
 		bImagenPlaca = new JButton ("Imagen Placa"); 
 		bActuar = new JButton("Actuar");
 		bBuscar = new JButton("Buscar");
@@ -84,6 +85,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 
 		panelBotonera.setLayout(new FlowLayout());
 		panelBotonera.add(bActivar);
+		panelBotonera.add(bDesactivar);
 		panelBotonera.add(bImagenPlaca);
 		panelBotonera.add(bActuar);
 
@@ -116,6 +118,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		this.setVisible(true);
 
 		bActivar.addActionListener(this);
+		bDesactivar.addActionListener(this);
 		bActuar.addActionListener(this);
 		bBuscar.addActionListener(this);
 		bImagenPlaca.addActionListener(this);
@@ -156,31 +159,24 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 
 		if(e.getSource().equals(bActivar)){
 			boton = 1;
-			// necesito saber la variable o algo de la fila seleccionada
 			int index = table.getSelectedRow();
 			id = (String) table.getValueAt(index, 1);
-			if(!enActivado){
-//				aqui cambiar el valor de la tabla a off
-				setModoActivado(true);
-				enActivado=true;
-			}
-			else{
-				setModoActivado(false);
-				enActivado=false;
-			}
-		
-		}else if(e.getSource().equals(bActuar)){
+		}else if(e.getSource().equals(bDesactivar)){
 			boton = 2;
-			// necesito saber la variable o algo de la fila seleccionada
+			
+			int index = table.getSelectedRow();
+			id = (String) table.getValueAt(index, 1);
+		}else if(e.getSource().equals(bActuar)){
+			boton = 3;
 			int index = table.getSelectedRow();
 			id = (String) table.getValueAt(index, 2);
 			txt = palabra.getText();
 
 		}else if(e.getSource().equals(bBuscar)){
-			boton = 3;
+			boton = 4;
 			// necesito botones para saber en que columna buscar o que variable
 		}else if(e.getSource().equals(bImagenPlaca)){
-			boton = 4;
+			boton = 5;
 			int index = table.getSelectedRow();
 			id = (String) table.getValueAt(index, 1);
 			//		String cads[]={imagenes de las placas};

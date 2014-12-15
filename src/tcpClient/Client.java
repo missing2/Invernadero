@@ -118,47 +118,36 @@ public class Client {
             			}
             			if (vent.boton==1){//Activar/ desactivar
             				vent.boton=0;
-            				
-            				if (vent.bActivar.getText().equals("ON")){ // el boton esta en on y quiero activar
-            					int confirmado = JOptionPane.showConfirmDialog(vent,"¿confirmar?");
+            				int confirmado = JOptionPane.showConfirmDialog(vent,"¿confirmar?");
 
-            							if (JOptionPane.OK_OPTION == confirmado){
-            								sm.Escribir("activar"+'\n');
-        		               			String id = vent.id; //id del sensor que tengo que activar  
-        		            			sm.Escribir(id+'\n');
-        		                		listae = cargarLista(sm);
+            				if (JOptionPane.OK_OPTION == confirmado){
+            					sm.Escribir("activar"+'\n');
+  								String id = vent.id; //id del sensor que tengo que activar  
+           						sm.Escribir(id+'\n');
+            					listae = cargarLista(sm);
         		                		
-        		                		vent.cargarTabla(listae);
-            							}else{
-            								
-            							}
-            						
-            				}else if(vent.bActivar.getText().equals("OFF")) { // quiero desactivar 
-            					//--------------------------------------//
-            					int confirmado = JOptionPane.showConfirmDialog(vent, "¿Confirmar?");
-            					if (JOptionPane.OK_OPTION == confirmado){
-            					sm.Escribir("desactivar"+'\n');
-    	            			String id = vent.id; //id del sensor que tengo que activar 
-    	            			sm.Escribir(id+'\n');
-    	                		listae = cargarLista(sm);
-    	                		vent.cargarTabla(listae);
-            					}else{
-            						
-            					}
-            							  
-            					//--------------------------------------//
-            					
-            				}	
-	               		}else if(vent.boton==2){//bActuar
+            					vent.cargarTabla(listae);
+            				}
+            							
+            			}else if(vent.boton==2){
+            				int confirmado = JOptionPane.showConfirmDialog(vent, "¿Confirmar?");
+        					if (JOptionPane.OK_OPTION == confirmado){
+        						sm.Escribir("desactivar"+'\n');
+        						String id = vent.id; //id del sensor que tengo que activar 
+        						sm.Escribir(id+'\n');
+        						listae = cargarLista(sm);
+        						vent.cargarTabla(listae);
+        					}
+	               		}else if(vent.boton==3){//bActuar
 	               			vent.boton=0;
-	               			System.out.println("bot2 clicado");
+	               			System.out.println("bot3 clicado");
 	            			sm.Escribir("actuar"+'\n');
 	            	    	sm.Escribir(vent.id+'\n'); // paso el id que voy a cambiar la accion
 	            	    	cargarLista(sm);
 	            	    	
-	            	    }else if(vent.boton==3){//bBuscar
+	            	    }else if(vent.boton==4){//bBuscar
 	            	    	vent.boton=0;
-	            	    	System.out.println("bot3 clicado");
+	            	    	System.out.println("bot4 clicado");
 	            	    	sm.Escribir("buscar"+'\n');
 	           
 	               	    	if (vent.rdbPlaca.isSelected()){ // busco por placa
@@ -186,8 +175,8 @@ public class Client {
 	            	    	}
 	            	    	
 	            	    	
-	            	    }else if(vent.boton==4){// imagen
-	            	    	System.out.println("bot4 clicado");
+	            	    }else if(vent.boton==5){// imagen
+	            	    	System.out.println("bot5 clicado");
 	            	    	vent.boton=0;
 	            	    	sm.Escribir("imagen"+'\n');
 	            	    	
