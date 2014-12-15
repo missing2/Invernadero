@@ -1,9 +1,14 @@
 package std.webServer;
 
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
+import java.nio.Buffer;
 import java.sql.SQLException;
 import java.util.*;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import util.*;
 
@@ -131,7 +136,7 @@ final class Request implements Runnable {
 			 
 			 while (!requestLine.equals("adios")) { // queda en bucle para poder seguir haciendo cosas
 				 System.out.println("esperando ");
-					if (requestLine.contains("activar")){
+					if (requestLine.equals("activar")){
 						String id = sockManager.Leer(); // id del sensor que voy a activar
 						 base.conectar();
 						 System.out.println("id que recivo para cambiarlo...");
@@ -142,7 +147,7 @@ final class Request implements Runnable {
 						 base.desconectar();
 						 sockManager.Escribir(listaActualizada+'\n'); //mando lista actualizada al cliente
 						
-					}else if (requestLine.contains("desactivar")){
+					}else if (requestLine.equals("desactivar")){
 						String id = sockManager.Leer(); // id del sensor que voy a desactivar
 						 base.conectar();
 						 base.apagarSensor(id);
@@ -173,7 +178,9 @@ final class Request implements Runnable {
 					}else if (requestLine.contains("imagen")){
 						// ni idea de pasar de la bd a aqui una imagen...
 						
-						// sockManager.Escribir(buffer, bytes);
+						BufferedImage img = ImageIO.read(new File("src/Icons/placa.gif"));
+					
+						// sockManager.Escribir(img,);
 					
 					}else if (requestLine.contains("actuar")){
 						requestLine = sockManager.Leer(); // recivo el id que quiero camn¡biar de accion
