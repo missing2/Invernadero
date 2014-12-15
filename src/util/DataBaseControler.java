@@ -137,7 +137,7 @@ public class DataBaseControler {
 	 	 		
 	 	 		while (rs.next()) {
 	 	 			placa = new Placa(rs.getString("id_placa"), rs.getString("estado_placa"), rs.getString("imagen"));
-	 	 			temp = (placa.getId_placa()+"-"+placa.getEstado_placa()+"-"+placa.getImagen());
+	 	 			temp = (placa.getId_placa()+";"+placa.getEstado_placa()+";"+placa.getImagen());
 	 	 			lista=lista+temp+",";
 	 	 		}
 	 	 		 stat = conn.createStatement();
@@ -145,7 +145,7 @@ public class DataBaseControler {
 	 	 		 
 	 	 		while (rs.next()) {
 	 	 			placa = new Placa(rs.getString("id_placa"), rs.getString("estado_placa"), rs.getString("imagen"));
-	 	 			temp = (placa.getId_placa()+"-"+placa.getEstado_placa()+"-"+placa.getImagen());
+	 	 			temp = (placa.getId_placa()+";"+placa.getEstado_placa()+";"+placa.getImagen());
 	 	 			if (!lista.contains(temp)){ // si no esta insertado ya por la anterior consulta
 	 	 			lista=lista+temp+",";
 	 	 			}
@@ -166,7 +166,7 @@ public class DataBaseControler {
 	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
 	 	 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
 	 	 			 
-	 	 			 temp = (a.getId_placa()+"-"+a.getDef()+"-"+a.getFuncion_principal()+"-"+a.getEstado()+"-"+a.getUltima_accion());
+	 	 			 temp = (a.getId_placa()+";"+a.getDef()+";"+a.getFuncion_principal()+";"+a.getEstado()+";"+a.getUltima_accion());
 	 	 			 
 	 	 			if (!fin.contains(temp)){ // si no esta insertado ya por la anterior consulta
 	 	 				fin=fin+temp+",";
@@ -180,7 +180,7 @@ public class DataBaseControler {
 	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
 	 	 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
 	 	 			 
-	 	 			 temp = (a.getId_placa()+"-"+a.getDef()+"-"+a.getFuncion_principal()+"-"+a.getEstado()+"-"+a.getUltima_accion());
+	 	 			 temp = (a.getId_placa()+";"+a.getDef()+";"+a.getFuncion_principal()+";"+a.getEstado()+";"+a.getUltima_accion());
 	 	 			 
 	 	 			if (!fin.contains(temp)){ // si no esta insertado ya por la anterior consulta
 	 	 				fin=fin+temp+",";
@@ -193,7 +193,7 @@ public class DataBaseControler {
 	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
 	 	 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
 	 	 			 
-	 	 			 temp = (a.getId_placa()+"-"+a.getDef()+"-"+a.getFuncion_principal()+"-"+a.getEstado()+"-"+a.getUltima_accion());
+	 	 			 temp = (a.getId_placa()+";"+a.getDef()+";"+a.getFuncion_principal()+";"+a.getEstado()+";"+a.getUltima_accion());
 	 	 			 
 	 	 			if (!fin.contains(temp)){ // si no esta insertado ya por la anterior consulta
 	 	 				fin=fin+temp+",";
@@ -206,7 +206,7 @@ public class DataBaseControler {
 	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
 	 	 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
 	 	 			 
-	 	 			 temp = (a.getId_placa()+"-"+a.getDef()+"-"+a.getFuncion_principal()+"-"+a.getEstado()+"-"+a.getUltima_accion());
+	 	 			 temp = (a.getId_placa()+";"+a.getDef()+";"+a.getFuncion_principal()+";"+a.getEstado()+";"+a.getUltima_accion());
 	 	 			 
 	 	 			if (!fin.contains(temp)){ // si no esta insertado ya por la anterior consulta
 	 	 				fin=fin+temp+",";
@@ -218,7 +218,7 @@ public class DataBaseControler {
 	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
 	 	 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
 	 	 			 
-	 	 			 temp = (a.getId_placa()+"-"+a.getDef()+"-"+a.getFuncion_principal()+"-"+a.getEstado()+"-"+a.getUltima_accion());
+	 	 			 temp = (a.getId_placa()+";"+a.getDef()+";"+a.getFuncion_principal()+";"+a.getEstado()+";"+a.getUltima_accion());
 	 	 			 
 	 	 			if (!fin.contains(temp)){ // si no esta insertado ya por la anterior consulta
 	 	 				fin=fin+temp+",";
@@ -230,7 +230,7 @@ public class DataBaseControler {
 	 	 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
 	 	 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
 	 	 			 
-	 	 			 temp = (a.getId_placa()+"-"+a.getDef()+"-"+a.getFuncion_principal()+"-"+a.getEstado()+"-"+a.getUltima_accion());
+	 	 			 temp = (a.getId_placa()+";"+a.getDef()+";"+a.getFuncion_principal()+";"+a.getEstado()+";"+a.getUltima_accion());
 	 	 			 
 	 	 			if (!fin.contains(temp)){ // si no esta insertado ya por la anterior consulta
 	 	 				fin=fin+temp+",";
