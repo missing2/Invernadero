@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
 import java.nio.Buffer;
+import java.sql.Array;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -51,7 +52,7 @@ final class Request implements Runnable {
 		
 			String  requestLine  = sockManager.Leer();// lee el user que le has pasado por socket desde el cliente
 			
-			if (! requestLine.equals("adios")) {
+			if (! requestLine.equals("208Ok.adios")) {
 				
 				if (requestLine.equals("alta")){// estoy en la ventana altas bajas
 					base.conectar();
@@ -66,25 +67,23 @@ final class Request implements Runnable {
 					String pass= sockManager.Leer();
 					base.baja(nick,pass);
 					base.desconectar();
-				}
-				else if (requestLine.equals("")){// si esta vacia
-					sockManager.Escribir("400 ERR.Falta el nombre de usuario"+'\n');
-					System.out.println("falta usuario");
-					estado=0;
-					
-				}else {//requestLine!=null
-					base.conectar();
-					 if (!base.consultaUsuario(requestLine)){
-						sockManager.Escribir("401ERR.Usuario desconocido"+'\n');
-						System.out.println("user desconocido");
-						estado=0;
-					}else {//(base.consultaUsuario(requestLine))
-						sockManager.Escribir("200 OK. bienvenido"+"requestLine"+'\n');
-						System.out.println("user correncto");
-						user.setNick(requestLine);
-						estado = 1;					
+						
+				}else {//requestLine!=null---> contiene un nombre de usuario
+					 base.conectar();
+					 String respuesta = base.consultaUsuario(requestLine);
+					 base.desconectar();
+						if (respuesta.equals("401ERR.Usuario desconocido")){
+							estado=0;
+						}else if (respuesta.contains("200OK.Bienvenido")){
+							String[] a= respuesta.split(":");
+							user.setNick(a[1]); // me dan el nick separado por : por lo que lo saco con un split 
+							estado = 1;
+						}else{//respuesta.contains("400ERR.Falta el nombre de usuario")
+							estado = 0;
+						}
+					sockManager.Escribir(respuesta+'\n');					
 					}
-				}   
+				  
 	     	}else { // request = adios
 	     		estado = 4;
 	    	}

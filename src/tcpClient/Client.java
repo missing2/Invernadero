@@ -15,14 +15,10 @@ import javax.swing.JOptionPane;
 
 public class Client {
     public static void main(String[] args) throws Exception {
-    	
-        String sentence=""; //Sensor dnd se almacena la frase introducida por el usuario
-        
-        
+     
         try {
             //Se crea el socket, pasando el nombre del servidor y el puerto de conexión
-            SocketManager sm = new SocketManager("127.0.0.1", 2345);  
-            //Se inicializan los streams de lectura y escritura del socket
+            SocketManager sm = new SocketManager("127.0.0.1", 2345);   
 
             //Se declara un buffer de lectura del dato escrito por el usuario por teclado
             //es necesario pq no es un buffer propio de los sockets
@@ -36,28 +32,32 @@ public class Client {
             	case 0: // comprobar user
             		ventanaLoggin ventanaloggin = new ventanaLoggin();
             		while (ventanaloggin.boton==0){
-            			System.out.println("");
-            			// espero a que rellene los datos y pulse boton loggin
+            			System.out.println("");// espero a que rellene los datos y pulse boton loggin
             		}
+            		
             		if(ventanaloggin.boton==1){ // pulso boton loggearme
+            			
+            			ventanaloggin.boton=0;
 	            		user.setNick(ventanaloggin.txtFUser.getText()); 
 	                  	user.setContrasena(Integer.parseInt(ventanaloggin.txtFPasword.getText()));
 	            		
 	            		sm.Escribir(user.getNick()+'\n'); // mando nick al server
 	       
-	            		if (sm.Leer().contains("200 OK")){ // lo que me responde es todo ok
+	            		if (sm.Leer().contains("200OK.Bienvenido")){ // lo que me responde es todo ok
 	            			ventanaloggin.dispose();
 	            			estado=1;
-	            		}else if (sm.Leer().contains("400 ERR")){ // si me responde que esta vacio 
+	            		}else if (sm.Leer().equals("400ERR.Falta el nombre de usuario")){ // si me responde que esta vacio 
 	            			JOptionPane.showMessageDialog(ventanaloggin,"Campo User vacio");
 	            			ventanaloggin.dispose();
 	            			estado=0;
-	            		}else{ // si me responde que esta mal introducido/no existe 
+	            		}else if (sm.Leer().equals("401ERR.Usuario desconocido")){ // si me responde que esta mal introducido/no existe 
 	            			JOptionPane.showMessageDialog(ventanaloggin,"El User que has introducido no es correcto");
 	            			ventanaloggin.dispose();
 	            			estado=0;
 	            		}
+	            		
             		}else if(ventanaloggin.boton==2){// pulso boton salir
+            			ventanaloggin.boton=0;
             			ventanaloggin.dispose();// salgo de la app
             			sm.Escribir("adios"+'\n'); // mando al server que quiere salir
             			estado= 4;
