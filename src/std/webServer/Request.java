@@ -96,31 +96,23 @@ final class Request implements Runnable {
 		
 			if (!requestLine.equals("adios")) {
 				
-				//requestLine  = sockManager.Leer();//pasword :
 				int pass = Integer.parseInt(requestLine);
-				
-				if (requestLine.equals("")){ // si esta vacia la pasword...
-					sockManager.Escribir("402 ERR.Falta la clave "+'\n');
+				base.conectar();
+				String respuesta = base.ConsultarPasword(user.getNick(), pass);
+				base.desconectar();
+				sockManager.Escribir(respuesta+'\n');
+				if (respuesta.equals("402 ERR Falta la clave")){ 
 					estado = 0;
-					System.out.println("falta clave");
-				}else{// !requestLine.equals(""))
-					base.conectar();
-					if (base.ConsultarPasword(user.getNick(), user.getContrasena())){
-							sockManager.Escribir("201 OK.Bienvenido al sistema"+user.getNick()+'\n');
-							estado=2;
-							System.out.println("contraseña bien");
-							
-							user.setContrasena(pass);
-					}else if (!base.ConsultarPasword(user.getNick(), user.getContrasena())){
-							sockManager.Escribir("401 ERR.La clave es incorrecta"+'\n');
-							System.out.println("clave erronea");
-							estado=1;
-					}
-					base.desconectar();
+				}else if (respuesta.equals("401 ERR La clave es incorrecta")){
+					estado = 0;
+				}else if (respuesta.equals("201 OK Bienvenido al sistema")){
+					estado = 3;
 				}
+				
 	    	}else if (requestLine.equals("adios")){
 	    		estado=4;
 	    	}
+			
 		break;
 
 		case 2:  // ACTION

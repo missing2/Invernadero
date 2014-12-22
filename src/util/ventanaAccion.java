@@ -68,7 +68,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 	public String  id;
 	public String txt;
 
-	public ventanaAccion(ArrayList<String> listae){
+	public ventanaAccion(){
 		
 		panelInferior = new JPanel();
 		panelCentral = new JPanel();
@@ -126,7 +126,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 
 
-		table.setModel(cargarTabla(listae));
+		
 	}
 
 	@Override
@@ -207,7 +207,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 	
 	}
 
-	public DefaultTableModel cargarTabla(ArrayList<String> listae){
+	public void cargarTabla(ArrayList<String> listae){
 		
 		if(listae.isEmpty()){
 			System.out.println(listae);
@@ -232,7 +232,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		modelo.fireTableDataChanged();
 		table.setModel(modelo);
 		repaint();
-		return modelo;
+		
 
 	}
 	private boolean enActivado = false;

@@ -74,20 +74,26 @@ public class DataBaseControler {
 	}
      
 	 		
-	public boolean ConsultarPasword(String nombre,int pass)throws SQLException{
+	public String ConsultarPasword(String nombre,int pass)throws SQLException{
+			
+		String existe="";
 		
-		System.out.println("checking password");
-			 			
-		boolean existe=false;
+    	if (pass!=0){
+    		
+    		Statement st = conn.createStatement(); 
+			ResultSet rs2 = st.executeQuery("SELECT * from User WHERE nick = '"+nombre+"' AND contrasena = '"+pass+"';");  // falla aqui, no se como comprobar si devuelve algo vacio                                                                                                                                           // estado civil es estado, no string
+		 	if (!rs2.equals(null))
+		 		existe="201 OK Bienvenido al sistema";
+		 	else
+		 		existe="401 ERR La clave es incorrecta";
+			rs2.close();
+	    }else
+			existe="402 ERR Falta la clave";
+		
+    	return existe;
+    		
     	
-		Statement st = conn.createStatement(); 
-		
-		ResultSet rs2 = st.executeQuery("SELECT * from User WHERE nick = \""+nombre+"\" AND contrasena = '"+pass+"';");                                                                                                                                                     // estado civil es estado, no string
-	 	if (!rs2.equals(null))
-	 		existe=true;
-	 		
-		rs2.close();
-		return existe;
+    	
 	  }
 	
 

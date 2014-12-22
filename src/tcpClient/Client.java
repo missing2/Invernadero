@@ -42,15 +42,15 @@ public class Client {
 	                  	user.setContrasena(Integer.parseInt(ventanaloggin.txtFPasword.getText()));
 	            		
 	            		sm.Escribir(user.getNick()+'\n'); // mando nick al server
-	       
-	            		if (sm.Leer().contains("200OK.Bienvenido")){ // lo que me responde es todo ok
+	            		String resp=sm.Leer();
+	            		if (resp.contains("200OK.Bienvenido")){ // lo que me responde es todo ok
 	            			ventanaloggin.dispose();
 	            			estado=1;
-	            		}else if (sm.Leer().equals("400ERR.Falta el nombre de usuario")){ // si me responde que esta vacio 
+	            		}else if (resp.equals("400ERR.Falta el nombre de usuario")){ // si me responde que esta vacio 
 	            			JOptionPane.showMessageDialog(ventanaloggin,"Campo User vacio");
 	            			ventanaloggin.dispose();
 	            			estado=0;
-	            		}else if (sm.Leer().equals("401ERR.Usuario desconocido")){ // si me responde que esta mal introducido/no existe 
+	            		}else if (resp.equals("401ERR.Usuario desconocido")){ // si me responde que esta mal introducido/no existe 
 	            			JOptionPane.showMessageDialog(ventanaloggin,"El User que has introducido no es correcto");
 	            			ventanaloggin.dispose();
 	            			estado=0;
@@ -91,11 +91,11 @@ public class Client {
             		
             		String a = Integer.toString(user.getContrasena());
             		sm.Escribir(a+'\n');  // mando la pass al server
- 		
-            		if (sm.Leer().contains("201 OK.")){ 
+            		String resp=sm.Leer();
+            		if (resp.equals("201 OK Bienvenido al sistema")){ 
             			estado=2;
             			
-            		}else if (sm.Leer().contains("402 ERR.")){ // falta la pass
+            		}else if (resp.equals("402 ERR Falta la clave")){ // falta la pass
             			estado=0;
             			System.out.println("no entra por falta de pass ");
             		}else  { //  pass erronea
@@ -110,8 +110,8 @@ public class Client {
                		sm.Escribir("sacalista"+'\n'); // manda al server un comando para que me mande la lista
             		 // recibe la lista en string
             		ArrayList<String> listae = cargarLista(sm);
-            		ventanaAccion vent = new ventanaAccion(listae);
-            	                 		
+            		ventanaAccion vent = new ventanaAccion();
+            		vent.cargarTabla(listae);
             		while (vent.boton!=6){
             			while (vent.boton==0){
             			//estoy en la vent sin mas
