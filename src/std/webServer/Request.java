@@ -76,7 +76,7 @@ final class Request implements Runnable {
 							estado=0;
 						}else if (respuesta.contains("200OK.Bienvenido")){
 							String[] a= respuesta.split(":");
-							user.setNick(a[1]); // me dan el nick separado por : por lo que lo saco con un split 
+							user.setNick(a[1]); // me dan el nick separado por : por lo que lo saco con un split ("200OK.Bienvenido:"+nombre;)
 							estado = 1;
 						}else{//respuesta.contains("400ERR.Falta el nombre de usuario")
 							estado = 0;
@@ -100,7 +100,6 @@ final class Request implements Runnable {
 				base.conectar();
 				String respuesta = base.ConsultarPasword(user.getNick(), pass);
 				base.desconectar();
-				sockManager.Escribir(respuesta+'\n');
 				if (respuesta.equals("402 ERR Falta la clave")){ 
 					estado = 0;
 				}else if (respuesta.equals("401 ERR La clave es incorrecta")){
@@ -108,6 +107,8 @@ final class Request implements Runnable {
 				}else if (respuesta.equals("201 OK Bienvenido al sistema")){
 					estado = 3;
 				}
+				
+				sockManager.Escribir(respuesta+'\n');
 				
 	    	}else if (requestLine.equals("adios")){
 	    		estado=4;

@@ -78,25 +78,23 @@ public class DataBaseControler {
 			
 		String existe="";
 		
-    	if (pass!=0){
+    	if (pass!=0){// esto no sera asi...
     		
     		Statement st = conn.createStatement(); 
-			ResultSet rs2 = st.executeQuery("SELECT * from User WHERE nick = '"+nombre+"' AND contrasena = '"+pass+"';");  // falla aqui, no se como comprobar si devuelve algo vacio                                                                                                                                           // estado civil es estado, no string
-		 	if (!rs2.equals(null))
+			ResultSet rs2 = st.executeQuery("SELECT * from User WHERE nick = '"+nombre+"';");  
+			int contra = rs2.getInt("contrasena");
+		 	if (contra==pass)
 		 		existe="201 OK Bienvenido al sistema";
 		 	else
 		 		existe="401 ERR La clave es incorrecta";
-			rs2.close();
+		 		rs2.close();
 	    }else
 			existe="402 ERR Falta la clave";
 		
-    	return existe;
-    		
-    	
-    	
+    	return existe;   	
 	  }
 	
-
+//___________________________________VENTANA ACCION________________________________________//
 	/**
      * metodo que retorna un string con todos los sensores de la bd
      * Sensores separados por ,
@@ -138,6 +136,7 @@ public class DataBaseControler {
  			temp = (placa.getId_placa()+";"+placa.getEstado_placa()+";"+placa.getImagen());
  			lista=lista+temp+",";
  		}
+ 		 stat.close();
  		 stat = conn.createStatement();
  		 rs = stat.executeQuery("Select * from Placa where estado_placa = "+nombre+";");
  		 
@@ -152,7 +151,8 @@ public class DataBaseControler {
  		rs.close();
 		return lista;
 	}
-	// metodo buscar por sensor
+	
+	
 	public String buscarSensor(String requestLine) throws SQLException {
 		String temp="";
 		String fin="";
@@ -170,7 +170,7 @@ public class DataBaseControler {
  				fin=fin+temp+",";
  	 			}
  	 		}
- 	
+ 		stat.close();
  		stat = conn.createStatement();
  		rs2.close();
  		rs2 = stat.executeQuery("Select * from Sensor where id_Placa = "+requestLine+";");
@@ -184,6 +184,7 @@ public class DataBaseControler {
  				fin=fin+temp+",";
  	 			}
  		}
+ 		stat.close();
  		stat = conn.createStatement();
  		rs2.close();
  		rs2 = stat.executeQuery("Select * from Sensor where def_variable = '"+requestLine+"';");
@@ -263,7 +264,7 @@ public class DataBaseControler {
 
 	
 
-	public void cambiarEstado(String id) throws SQLException {
+	public void cambiarEstado(String id) throws SQLException { // depurarlo
 		// TODO Auto-generated method stub
 		
 		Statement st = conn.createStatement();
