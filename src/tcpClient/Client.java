@@ -147,31 +147,15 @@ public class Client {
 	            	    	vent.boton=0;
 	            	    	System.out.println("bot4 clicado");
 	            	    	sm.Escribir("buscar"+'\n');
-	           
-	               	    	if (vent.rdbPlaca.isSelected()){ // busco por placa
-	            	    		sm.Escribir(vent.palabra.toString()+'\n');
-	            	    		sm.Escribir("placa"+'\n');
-	            	    	    String recibido=sm.Leer();
-	            	    	    System.out.println("resibida busqueda"+recibido);
-	            	    	    
-	            	    	    ArrayList<String> df = new ArrayList<String>();
-	            	    		String Placa[] = recibido.split(",");// separo sensores
-	            	    		for(int i=0;i<Placa.length;i++){
-	            	    			df.add(Placa[i]);
-	            	    		}
-	            	    		 vent.cargarTabla(df);
-	            	    	}else { // busco por sensor
-	            	    		sm.Escribir("sensor"+'\n');
-	            	    		sm.Escribir(vent.palabra.toString()+'\n');
-	            	    		String recibido=sm.Leer();
-	            	    		ArrayList<String> df = new ArrayList<String>();
-	            	    		String Sensor[] = recibido.split(",");// separo sensores
-	            	    		for(int i=0;i<Sensor.length;i++){
-	            	    			df.add(Sensor[i]);
-	            	    		}
-	            	    		 vent.cargarTabla(df);
+	            	    	sm.Escribir("sensor"+'\n');
+	            	    	sm.Escribir(vent.palabra.toString()+'\n');
+	            	    	String recibido=sm.Leer();
+	            	    	ArrayList<String> df = new ArrayList<String>();
+	            	    	String Sensor[] = recibido.split(",");// separo sensores
+	            	    	for(int i=0;i<Sensor.length;i++){
+	            	    		df.add(Sensor[i]);
 	            	    	}
-	            	    	
+	            	    	vent.cargarTabla(df);
 	            	    	
 	            	    }else if(vent.boton==5){// imagen
 	            	    	System.out.println("bot5 clicado");

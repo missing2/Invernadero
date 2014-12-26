@@ -56,9 +56,6 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 	JButton bSalir;
 	JButton bBuscar;
 
-	public JRadioButton rdbPlaca;
-	public JRadioButton rdbSensor;
-
 
 	public JTextField palabra;
 	JLabel lLab;
@@ -93,11 +90,6 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		panelInferior.setLayout(new FlowLayout());
 		panelInferior.add(palabra);
 
-		rdbPlaca = new JRadioButton("Placa");
-		panelInferior.add(rdbPlaca);
-
-		rdbSensor = new JRadioButton("Sensor");
-		panelInferior.add(rdbSensor);
 		panelInferior.add(bBuscar);
 		panelInferior.add(bSalir);
 
