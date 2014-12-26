@@ -33,8 +33,7 @@ public class Client {
             		ventanaLoggin ventanaloggin = new ventanaLoggin();
             		while (ventanaloggin.boton==0){
             			System.out.println("");// espero a que rellene los datos y pulse boton loggin
-            		}
-            		
+            		}    
             		if(ventanaloggin.boton==1){ // pulso boton loggearme
             			
             			ventanaloggin.boton=0;

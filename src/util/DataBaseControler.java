@@ -53,26 +53,25 @@ public class DataBaseControler {
 
     public String consultaUsuario(String nombre) throws SQLException {
     	
-    	String respuesta="";
+    	String respuesta="401ERR.Usuario desconocido";
+    	
     	if (nombre.isEmpty()){
     		respuesta= "400ERR.Falta el nombre de usuario";
-    	}
-    	else{
+    	}else{
     		Statement st = conn.createStatement(); 
+    		ResultSet rs2 = st.executeQuery("Select * from User;"); 
     		
-    		ResultSet rs2 = st.executeQuery("Select * from User Where nick = '"+nombre+"';"); 
-    		
-
-    		if (rs2.getString("nick").contains("")){ // falla aqui, no se como comprobar si devuelve algo vacio
-    			respuesta = "200OK.Bienvenido:"+nombre;
-    		}else{
-    			respuesta = "401ERR.Usuario desconocido";
+    		while (rs2.next()){
+	    		if (rs2.getString("User").equals(nombre)){ 
+	    			respuesta = "200OK.Bienvenido:"+nombre;
+	    			System.out.println("has entrado"+nombre);
+	    		
+	    			rs2.close();
+	    		}
     		}
-    		rs2.close();
-        }
-		return respuesta;
-	}
-     
+    	}
+    	return respuesta;
+    }
 	 		
 	public String ConsultarPasword(String nombre,int pass)throws SQLException{
 			
@@ -81,11 +80,12 @@ public class DataBaseControler {
     	if (pass!=0){// esto no sera asi...
     		
     		Statement st = conn.createStatement(); 
-			ResultSet rs2 = st.executeQuery("SELECT * from User WHERE nick = '"+nombre+"';");  
+			ResultSet rs2 = st.executeQuery("SELECT * from User WHERE User = '"+nombre+"';");  
 			int contra = rs2.getInt("contrasena");
-		 	if (contra==pass)
+		 	if (contra==pass){
 		 		existe="201 OK Bienvenido al sistema";
-		 	else
+		 		System.out.println("has entrado2");
+		 	}else		 	
 		 		existe="401 ERR La clave es incorrecta";
 		 		rs2.close();
 	    }else
@@ -264,7 +264,7 @@ public class DataBaseControler {
 
 	
 
-	public void cambiarEstado(String id) throws SQLException { // depurarlo
+	public void cambiarEstado(String id) throws SQLException { // depurarlo y mirar consultas...
 		// TODO Auto-generated method stub
 		
 		Statement st = conn.createStatement();
@@ -286,13 +286,8 @@ public class DataBaseControler {
 			else if (id.equals("s6"))
 				rs2 = st.executeQuery ("UPDATE Sensor SET UltimaAccion ='apagar aire acondicionado' WHERE id_sensor='"+id+"';");
 				}
-				
-				
-				
+								
 	 	 		st.close();
-				
-			}
-			public static void main(String[] args){
 				
 			}
 }
