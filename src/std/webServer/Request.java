@@ -103,6 +103,7 @@ final class Request implements Runnable {
 				if (respuesta.equals("402 ERR Falta la clave")){ 
 					estado = 0;
 				}else if (respuesta.equals("401 ERR La clave es incorrecta")){
+					System.out.println("no entra por pass incorrecta");
 					estado = 0;
 				}else if (respuesta.equals("201 OK Bienvenido al sistema")){
 					estado = 3;

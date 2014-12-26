@@ -93,7 +93,6 @@ public class Client {
             		String resp=sm.Leer();
             		if (resp.equals("201 OK Bienvenido al sistema")){ 
             			estado=2;
-            			
             		}else if (resp.equals("402 ERR Falta la clave")){ // falta la pass
             			estado=0;
             			System.out.println("no entra por falta de pass ");
@@ -178,7 +177,6 @@ public class Client {
 	            	    	System.out.println("bot5 clicado");
 	            	    	vent.boton=0;
 	            	    	sm.Escribir("imagen"+'\n');
-	            	    	
 	            	 	            	    	
 	            	    }else if(vent.boton==6){// salir
 	            			estado=4;
@@ -193,8 +191,7 @@ public class Client {
             		System.exit(0); 
             		sm.Escribir("adios"+'\n'); // mando al server que quiere salir
                 break;
-            	}
-                             
+            	}        
             }
             	
             System.out.println("Fin de la práctica");
@@ -214,7 +211,6 @@ public class Client {
 		for(int i=0;i<Sensor.length;i++){
 			df.add(Sensor[i]);
 		}
-		
 		return df;
 	   }
 }

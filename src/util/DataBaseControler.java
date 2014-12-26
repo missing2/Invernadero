@@ -63,9 +63,7 @@ public class DataBaseControler {
     		
     		while (rs2.next()){
 	    		if (rs2.getString("User").equals(nombre)){ 
-	    			respuesta = "200OK.Bienvenido:"+nombre;
-	    			System.out.println("has entrado"+nombre);
-	    		
+	    			respuesta = "200OK.Bienvenido:"+nombre;	    		
 	    			rs2.close();
 	    		}
     		}
@@ -77,14 +75,13 @@ public class DataBaseControler {
 			
 		String existe="";
 		
-    	if (pass!=0){// esto no sera asi...
+    	if (!Integer.toString(pass).isEmpty()){// si la clave no esta vacia...
     		
     		Statement st = conn.createStatement(); 
 			ResultSet rs2 = st.executeQuery("SELECT * from User WHERE User = '"+nombre+"';");  
 			int contra = rs2.getInt("contrasena");
 		 	if (contra==pass){
 		 		existe="201 OK Bienvenido al sistema";
-		 		System.out.println("has entrado2");
 		 	}else		 	
 		 		existe="401 ERR La clave es incorrecta";
 		 		rs2.close();

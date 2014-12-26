@@ -175,24 +175,11 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 
 		}else if(e.getSource().equals(bBuscar)){
 			boton = 4;
-			// necesito botones para saber en que columna buscar o que variable
 		}else if(e.getSource().equals(bImagenPlaca)){
 			boton = 5;
 			int index = table.getSelectedRow();
 			id = (String) table.getValueAt(index, 1);
-			//		String cads[]={imagenes de las placas};
-			//		 int ra= id; //aqui habria que seleccionarla dependiendo de la placa que sea
-			//		 URL url=this.getClass().getResource(cads[ra]);
-			//		 try {
-			//			 Image img=ImageIO.read(url); //leemos la imagen
-			//			 lLab.setIcon(new ImageIcon(img)); //la asignamos al JLabel de Java
-			//		 } catch (IOException e1) {
-			//			 e1.printStackTrace();
-			//		 }
-			//		 
-			//	 }else if(e.getSource().equals(bListar)){
-			//		 boton = 5;
-			//		 // creo que ya esta hecho por defecto en la tabla principal
+			
 		}else if(e.getSource().equals(bSalir)){
 			boton = 6;
 			System.exit(0);
@@ -201,11 +188,6 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 
 	}
 
-
-	public static void main(String[] args)
-	{
-	
-	}
 
 	public void cargarTabla(ArrayList<String> listae){
 		
@@ -234,14 +216,5 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		repaint();
 		
 
-	}
-	private boolean enActivado = false;
-	
-	// Método privado utilizado para activar o desactivar los componentes de acuerdo al modo de activación
-	private void setModoActivado( boolean on ) {
-		if (on)
-			bActivar.setText( "OFF" );
-		else
-			bActivar.setText( "ON" );
 	}
 }
