@@ -105,12 +105,13 @@ public class DataBaseControler {
 		String fin="";
 		
 		ResultSet rs2 =  st.executeQuery("Select * from Sensor;");
+		int conta =1;
 		while (rs2.next()) {
 			Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
 					rs2.getString("func_principal"),rs2.getString("estado"),rs2.getString("ultima_accion"));
 			
-			temp = (a.getId_placa()+";"+a.getId_sensor()+";"+a.getDef()+";"+a.getFuncion_principal()+";"+a.getEstado()+";"+a.getUltima_accion());
-			
+			temp = ("ELEM:"+""+conta+";"+a.getId_placa()+";"+a.getId_sensor()+";"+a.getDef()+";"+a.getFuncion_principal()+";"+a.getEstado()+";"+a.getUltima_accion());
+			conta++;
 			fin=fin+temp+",";
 			
 		}
