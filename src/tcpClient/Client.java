@@ -148,7 +148,6 @@ public class Client {
 	            	    	vent.boton=0;
 	            	    	System.out.println("bot4 clicado");
 	            	    	sm.Escribir("buscar"+'\n');
-	            	    	sm.Escribir("sensor"+'\n');
 	            	    	sm.Escribir(vent.palabra.toString()+'\n');
 	            	    	String recibido=sm.Leer();
 	            	    	ArrayList<String> df = new ArrayList<String>();

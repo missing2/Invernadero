@@ -154,22 +154,12 @@ final class Request implements Runnable {
 						 sockManager.Escribir(listaActualizada+'\n');
 						
 					}else if (requestLine.contains("buscar")){
-						requestLine  = sockManager.Leer();// recivo si quiero sensor o de placa
-						if (requestLine.contains("placa")){
-							requestLine = sockManager.Leer(); // recivo que se placa quiere buscar en la bd
-							 base.conectar();
-							 String lista = base.buscarPlaca(requestLine);
-							 base.desconectar();
-							 sockManager.Escribir(lista+'\n');
-							 System.out.println("mando la busqueda..."+lista);
-						}else{
+						System.out.println("buscando");
 							requestLine = sockManager.Leer(); // recivo que se sensor quiere buscar en la bd
 							 base.conectar();
 							 String lista=base.buscarSensor(requestLine);
 							 base.desconectar();
 							sockManager.Escribir(lista+'\n');
-						}
-						
 						
 					}else if (requestLine.contains("imagen")){
 						// ni idea de pasar de la bd a aqui una imagen...
