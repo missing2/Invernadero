@@ -1,15 +1,10 @@
 package util;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JList;
 
 public class DataBaseControler {
 	private static DataBaseControler instance = null;
@@ -135,6 +130,15 @@ public class DataBaseControler {
 	public String buscarSensor(String requestLine) throws SQLException {
 		String temp="";
 		String fin="";
+		
+		 // adecuo las consultas especiales que me pasan, a consultas adaptadas a sql
+		if (requestLine.contains("*")){
+			requestLine.replace('*','%');
+		} 
+		else if(requestLine.contains("?")){
+			requestLine.replace('?','_');
+			requestLine=requestLine+"__";
+		} 
 		
  		Statement stat = conn.createStatement();
  		
