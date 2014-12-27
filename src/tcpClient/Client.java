@@ -108,6 +108,7 @@ public class Client {
                		sm.Escribir("sacalista"+'\n'); // manda al server un comando para que me mande la lista
             		 // recibe la lista en string
             		ArrayList<String> listae = cargarLista(sm);
+            		System.out.println("lista "+listae);
             		ventanaAccion vent = new ventanaAccion();
             		vent.cargarTabla(listae);
             		while (vent.boton!=6){
@@ -189,14 +190,18 @@ public class Client {
 
 	private static ArrayList<String> cargarLista(SocketManager sm) throws IOException {
 		// TODO Auto-generated method stub
+		System.out.println("Cargo la lista?");
 		String stringLista = sm.Leer();
+		System.out.println(stringLista);
 		ArrayList<String> df = new ArrayList<String>();
 		String Sensor[] = stringLista.split(",");// separo sensores
 		for(int i=0;i<Sensor.length;i++){
 			df.add(Sensor[i]);
 		}
+		System.out.println("los datos de la lista"+df);
 		return df;
 	   }
+	
 }
 		
 		

@@ -37,7 +37,16 @@ public class DataBaseControler {
 	conn.close();
 	}
 	
-	
+	public DataBaseControler()
+	 {
+		try {
+		 conectar();
+		} catch (ClassNotFoundException e) {
+		 e.printStackTrace();
+	 	} catch (SQLException e) {
+		 e.printStackTrace();
+	 	}
+	 }
 	
 	//___________________Altas/bajas/loggin_____________________________//
 	
@@ -116,7 +125,9 @@ public class DataBaseControler {
 			
 		}
 		rs2.close();
+		System.out.println(fin);
 		return fin;
+		
 		
 	}
 
@@ -288,6 +299,9 @@ public class DataBaseControler {
 	 	 		st.close();
 				
 			}
+	public static void main(String[] args){
+		
+	}
 }
 	 	
 	 	

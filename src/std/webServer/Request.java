@@ -106,7 +106,7 @@ final class Request implements Runnable {
 					System.out.println("no entra por pass incorrecta");
 					estado = 0;
 				}else if (respuesta.equals("201 OK Bienvenido al sistema")){
-					estado = 3;
+					estado = 2;
 				}
 				
 				sockManager.Escribir(respuesta+'\n');
@@ -225,6 +225,7 @@ final class Request implements Runnable {
 	  base.conectar();
 	  String lista = base.sacarlista();
 	  base.desconectar();
+	  System.out.println("lista en servidor"+lista);
 	  return lista;
   }
 

@@ -73,8 +73,8 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 
 		palabra = new JTextField(10);
 
-		bActivar = new JButton ("ON");
-		bDesactivar = new JButton ("OFF");
+		bActivar = new JButton ("Activar");
+		bDesactivar = new JButton ("Desactivar");
 		bImagenPlaca = new JButton ("Imagen Placa"); 
 		bActuar = new JButton("Actuar");
 		bBuscar = new JButton("Buscar");
@@ -116,8 +116,6 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		bImagenPlaca.addActionListener(this);
 		bSalir.addActionListener(this);
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
-
-
 		
 	}
 
@@ -189,7 +187,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		}
 
 		DefaultTableModel modelo = new DefaultTableModel();
-		String[] columTitulo =	{"Placa","Id sensor", "Sensor","Función","Estado","Ultima acción"};
+		String[] columTitulo =	{" ","Placa","Id sensor", "Sensor","Función","Estado","Ultima acción"};
 		modelo.setColumnIdentifiers(columTitulo);
 		String[] Sensor = new String[listae.size()];
 		Sensor = listae.toArray(Sensor);
@@ -199,7 +197,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		for(int i=0;i<Sensor.length;i++){
 			stringAtributos= Sensor[i]; // separo los atributos de cada sensor
 			String Atributo[]=stringAtributos.split(";");// separo atributos en el array
-			Object[] o ={Atributo[0],Atributo[1],Atributo[2],Atributo[3],Atributo[4],Atributo[5]};
+			Object[] o ={Atributo[0],Atributo[1],Atributo[2],Atributo[3],Atributo[4],Atributo[5],Atributo[6]};
 			modelo.addRow(o);
 		}
 		
