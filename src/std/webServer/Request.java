@@ -225,7 +225,6 @@ final class Request implements Runnable {
 	  base.conectar();
 	  String lista = base.sacarlista();
 	  base.desconectar();
-	  System.out.println("lista en servidor"+lista);
 	  return lista;
   }
 
