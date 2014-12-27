@@ -150,17 +150,17 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		if(e.getSource().equals(bActivar)){
 			boton = 1;
 			int index = table.getSelectedRow();
-			id = (String) table.getValueAt(index, 1);
+			id = (String) table.getValueAt(index, 2);
 			
 		}else if(e.getSource().equals(bDesactivar)){
 			boton = 2;
 			int index = table.getSelectedRow();
-			id = (String) table.getValueAt(index, 1);
+			id = (String) table.getValueAt(index, 2);
 			
 		}else if(e.getSource().equals(bActuar)){
 			boton = 3;
 			int index = table.getSelectedRow();
-			id = (String) table.getValueAt(index, 2);
+			id = (String) table.getValueAt(index, 3);// este no se si esta bien??
 			txt = palabra.getText();
 
 		}else if(e.getSource().equals(bBuscar)){

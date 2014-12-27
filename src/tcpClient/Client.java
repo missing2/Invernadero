@@ -168,10 +168,7 @@ public class Client {
 	            			sm.Escribir("adios"+'\n'); // mando al server que quiere salir
 	            		}
             	}
-            		
-                break;
-            	case 3:
-                break;
+
             	case 4:// salir
             		System.exit(0); 
             		sm.Escribir("adios"+'\n'); // mando al server que quiere salir
