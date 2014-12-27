@@ -142,7 +142,7 @@ public class DataBaseControler {
 		
  		Statement stat = conn.createStatement();
  		
- 		ResultSet rs2 = stat.executeQuery("Select * from Sensor where id_sensor = "+requestLine+";");
+ 		ResultSet rs2 = stat.executeQuery("Select * from Sensor where id_sensor like '"+requestLine+"';");
  		while (rs2.next()) {
  			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
  					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
@@ -156,7 +156,7 @@ public class DataBaseControler {
  		stat.close();
  		stat = conn.createStatement();
  		rs2.close();
- 		rs2 = stat.executeQuery("Select * from Sensor where id_Placa = "+requestLine+";");
+ 		rs2 = stat.executeQuery("Select * from Sensor where id_Placa like '"+requestLine+"';");
  		while (rs2.next()) {
  			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
  					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
@@ -170,7 +170,7 @@ public class DataBaseControler {
  		stat.close();
  		stat = conn.createStatement();
  		rs2.close();
- 		rs2 = stat.executeQuery("Select * from Sensor where def_variable = '"+requestLine+"';");
+ 		rs2 = stat.executeQuery("Select * from Sensor where def_variable like '"+requestLine+"';");
  		while (rs2.next()) {
  			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
  					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
@@ -182,7 +182,7 @@ public class DataBaseControler {
  	 			}
  		}
  		rs2.close();
- 		rs2 = stat.executeQuery("Select * from Sensor where Ultima_accion = '"+requestLine+"';");
+ 		rs2 = stat.executeQuery("Select * from Sensor where Ultima_accion like '"+requestLine+"';");
  		
  		while (rs2.next()) {
  			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
@@ -195,7 +195,7 @@ public class DataBaseControler {
  	 			}
  		}
  		rs2.close();
- 		rs2 = stat.executeQuery("Select * from Sensor where estado = '"+requestLine+"';");
+ 		rs2 = stat.executeQuery("Select * from Sensor where estado like '"+requestLine+"';");
  		while (rs2.next()) {
  			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
  					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
@@ -207,7 +207,7 @@ public class DataBaseControler {
  	 			}
  		}
  		rs2.close();
- 		rs2 = stat.executeQuery("Select * from Sensor where func_principal = '"+requestLine+"';");
+ 		rs2 = stat.executeQuery("Select * from Sensor where func_principal like '"+requestLine+"';");
  		while (rs2.next()) {
  			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
  					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
