@@ -131,36 +131,6 @@ public class DataBaseControler {
 		
 	}
 
-
-	public String buscarPlaca(String nombre) throws SQLException {
-		
-		String lista ="";
-		String temp="";
- 		Statement stat = conn.createStatement();
- 		ResultSet rs = stat.executeQuery("Select * from Placa where id_placa = "+nombre+";");
- 		Placa placa = null;
- 		
- 		while (rs.next()) {
- 			placa = new Placa(rs.getString("id_placa"), rs.getString("estado_placa"), rs.getString("imagen"));
- 			temp = (placa.getId_placa()+";"+placa.getEstado_placa()+";"+placa.getImagen());
- 			lista=lista+temp+",";
- 		}
- 		 stat.close();
- 		 stat = conn.createStatement();
- 		 rs = stat.executeQuery("Select * from Placa where estado_placa = "+nombre+";");
- 		 
- 		while (rs.next()) {
- 			placa = new Placa(rs.getString("id_placa"), rs.getString("estado_placa"), rs.getString("imagen"));
- 			temp = (placa.getId_placa()+";"+placa.getEstado_placa()+";"+placa.getImagen());
- 			if (!lista.contains(temp)){ // si no esta insertado ya por la anterior consulta
- 			lista=lista+temp+",";
- 			}
- 		}
- 		lista=lista+"/";
- 		rs.close();
-		return lista;
-	}
-	
 	
 	public String buscarSensor(String requestLine) throws SQLException {
 		String temp="";
@@ -255,19 +225,18 @@ public class DataBaseControler {
 	public void encenderSensor(String ids) throws SQLException {
 		
 		Statement st = conn.createStatement();
-		System.out.println("me pasan el id sensor: "+ids);
-		String sql ="UPDATE Sensor SET estado ='on' WHERE id_sensor='"+ids+"';";
-		System.out.println(sql);
- 		st.execute(sql);
+		System.out.println("me pasan el id sensor para encenderlo: "+ids);
+		ResultSet rs2 = st.executeQuery("UPDATE Sensor SET estado ='on' WHERE id_sensor='"+ids+"';");
  		st.close();
+ 		rs2.close();
 	}
 	public void apagarSensor(String ids) throws SQLException {
 		
 		Statement st = conn.createStatement();
-		System.out.println("me pasan el id sensor: "+ids);
-		String sql ="UPDATE Sensor SET estado ='off' WHERE id_sensor='"+ids+"';";
- 		st.execute(sql);
+		System.out.println("me pasan el id sensor para encenderlo: "+ids);
+		ResultSet rs2 = st.executeQuery("UPDATE Sensor SET estado ='off' WHERE id_sensor='"+ids+"';");
  		st.close();
+ 		rs2.close();
 	}
 	
 
