@@ -44,7 +44,7 @@ final class Request implements Runnable {
     int estado=0;
 	Usuario user = new Usuario();
 	
-  while (estado!=4){
+  while (true){
    
 		switch (estado) {
 	
@@ -127,7 +127,7 @@ final class Request implements Runnable {
 			
 			 requestLine  = sockManager.Leer();// lee el comando (boton) que e has pasado por socket desde el cliente
 			 
-			 while (!requestLine.equals("adios")) { // queda en bucle para poder seguir haciendo cosas
+			 while (true) { // queda en bucle para poder seguir haciendo cosas
 				 System.out.println("esperando ");
 				 
 					if (requestLine.equals("activar")){
@@ -175,13 +175,13 @@ final class Request implements Runnable {
 						base.desconectar();
 					}
 			 }
-			
-		break;
-
 		
-
-		case 4:  // va a hacer conflicto con mi while (!4)
-			sockManager.Escribir("208 OK.Adios."+'\n');
+		case 4:  
+			System.exit(0);
+			   // Close streams and socket.
+			sockManager.CerrarStreams();
+		    sockManager.CerrarSocket();
+		    
 		break;
 			
 		default :
@@ -190,26 +190,11 @@ final class Request implements Runnable {
 		} 
 	}
 
-     // Close streams and socket.
-      sockManager.CerrarStreams();
-    sockManager.CerrarSocket();
-    
+  
   }
 
  
 
-/*
-  private String sacarListado() throws SQLException, IOException, ClassNotFoundException { // cambia de lista a string
-	base.conectar();
-	String string = "";
-	List<String> lista =base. sacarlista();
-	string = lista. toString(); // cambio de lista a String
-	string.substring(1, string.length()-2);
-	 base.desconectar();
-	 return string;
-	   
-	}
-*/
   private String sacarListado() throws SQLException,IOException,ClassNotFoundException
   {
 	  base.conectar();
@@ -221,21 +206,6 @@ final class Request implements Runnable {
 
 	   
 
-//  
-//  private void sacarBusqueda(String palabra) throws SQLException, IOException {
-//	  List< Sensor> lista =base. sacarBusqueda(palabra);
-//	  
-//	int a= lista.size();
-//	for (int i=0; i<a;a++){
-//		Sensor v = lista.get(i);
-//		
-//		sockManager.Escribir("ELEM:"+i+1+":"+v.getDef()+" ; "+v.getFuncion()+" ; "+v.getEstado()+" ; "+v.getUltima_accion()+'\n');
-//				
-//	}
-//	sockManager.Escribir("      ");
-//	sockManager.Escribir("202 FINLISTA"+'\n');
-//	
-//}
 
 private void sendBytes(FileInputStream fis) throws Exception {
     // Construct a 1K buffer to hold bytes on their way to the socket.
@@ -255,6 +225,7 @@ private void sendBytes(FileInputStream fis) throws Exception {
     }
     return "application/octet-stream";
   }
+  
   public static void main(String argv[]) throws Exception
 	{
 	  System.out.println("main");

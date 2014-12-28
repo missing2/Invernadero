@@ -5,8 +5,10 @@ import java.net.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.List;
+import java.awt.image.BufferedImage;
 import java.io.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -161,16 +163,18 @@ public class Client {
 	            	    	System.out.println("bot5 clicado");
 	            	    	vent.boton=0;
 	            	    	sm.Escribir("imagen"+'\n');
-	            	 	            	    	
+	            	    	String foto = sm.Leer();
+	            	    //	BufferedImage bufferedImage = ImageIO.read();// tengo que pasar aqui una imagen formada por string foto
+	 			          //  ImageIO.write(bufferedImage,"png", new FileOutputStream("fotos recibidas/image.png"));       	    	
 	            	    }else if(vent.boton==6){// salir
 	            			estado=4;
-	            			sm.Escribir("adios"+'\n'); // mando al server que quiere salir
+	        
 	            		}
             	}
 
             	case 4:// salir
-            		System.exit(0); 
             		sm.Escribir("adios"+'\n'); // mando al server que quiere salir
+            		System.exit(0); 
                 break;
             	}        
             }
