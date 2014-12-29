@@ -155,6 +155,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		}else if(e.getSource().equals(bDesactivar)){
 			boton = 2;
 			int index = table.getSelectedRow();
+			System.out.println(index);
 			id = (String) table.getValueAt(index, 2);
 			
 		}else if(e.getSource().equals(bActuar)){

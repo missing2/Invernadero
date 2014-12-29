@@ -237,10 +237,10 @@ public class DataBaseControler {
 	public void apagarSensor(String ids) throws SQLException {
 		
 		Statement st = conn.createStatement();
-		System.out.println("me pasan el id sensor para encenderlo: "+ids);
-		ResultSet rs2 = st.executeQuery("UPDATE Sensor SET estado ='off' WHERE id_sensor='"+ids+"';");
- 		st.close();
- 		rs2.close();
+		System.out.println("me pasan el id sensor para apagarlo: "+ids);
+		String sql = "UPDATE Sensor SET estado ='"+"off"+"' WHERE id_sensor='"+ids+"'";
+		System.out.println(sql);
+		st.close();
 	}
 	
 

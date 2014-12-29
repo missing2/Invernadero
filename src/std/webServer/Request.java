@@ -138,6 +138,7 @@ final class Request implements Runnable {
 						 Thread.sleep(100);
 						 base.conectar();
 						 String listaActualizada= base.sacarlista();
+						 System.out.println("Activar:"+listaActualizada);
 						 base.desconectar();
 						 sockManager.Escribir(listaActualizada+'\n'); //mando lista actualizada al cliente
 						
@@ -145,11 +146,13 @@ final class Request implements Runnable {
 						System.out.println("entroo");
 						String id = sockManager.Leer(); // id del sensor que voy a desactivar
 						 base.conectar();
+						 System.out.println("Request id:"+id);
 						 base.apagarSensor(id);
 						 base.desconectar();
 						 Thread.sleep(100);
 						 base.conectar();
 						 String listaActualizada= base.sacarlista();
+						 System.out.println("Desactivar: "+listaActualizada);
 						 base.desconectar();
 						 sockManager.Escribir(listaActualizada+'\n');
 						
