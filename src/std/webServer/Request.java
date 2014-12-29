@@ -125,17 +125,16 @@ final class Request implements Runnable {
 				
 			 }
 			
-			 requestLine  = sockManager.Leer();// lee el comando (boton) que e has pasado por socket desde el cliente
+			
 			 
 			 while (true) { // queda en bucle para poder seguir haciendo cosas
 				 System.out.println("esperando ");
-				 
+				 requestLine  = sockManager.Leer();// lee el comando (boton) que e has pasado por socket desde el cliente
 					if (requestLine.equals("activar")){
 						String id = sockManager.Leer(); // id del sensor que voy a activar
 						 base.conectar();
 						 base.encenderSensor(id);
 						 base.desconectar();
-						 Thread.sleep(100);
 						 base.conectar();
 						 String listaActualizada= base.sacarlista();
 						 System.out.println("Activar:"+listaActualizada);
@@ -149,7 +148,6 @@ final class Request implements Runnable {
 						 System.out.println("Request id:"+id);
 						 base.apagarSensor(id);
 						 base.desconectar();
-						 Thread.sleep(100);
 						 base.conectar();
 						 String listaActualizada= base.sacarlista();
 						 System.out.println("Desactivar: "+listaActualizada);

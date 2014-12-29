@@ -128,10 +128,11 @@ public class Client {
             				if (JOptionPane.OK_OPTION == confirmado){
             					sm.Escribir("activar"+'\n');
   								String id = vent.id; //id del sensor que tengo que activar  
+  								System.out.println("Cliente id"+id);
            						sm.Escribir(id+'\n');
            						System.out.println("Cargo la lista?");
            						String stringLista = sm.Leer();
-           						System.out.println(stringLista);
+           						System.out.println("Leyendo lista aqui "+stringLista);
            						ArrayList<String> df = new ArrayList<String>();
            						String Sensor[] = stringLista.split(",");// separo sensores
            						for(int i=0;i<Sensor.length;i++){
@@ -151,7 +152,7 @@ public class Client {
            						sm.Escribir(id+'\n');
            						System.out.println("Cargo la lista?");
            						String stringLista = sm.Leer();
-           						System.out.println(stringLista);
+           						System.out.println("Leyendo lista aqui "+stringLista);
            						ArrayList<String> df = new ArrayList<String>();
            						String Sensor[] = stringLista.split(",");// separo sensores
            						for(int i=0;i<Sensor.length;i++){

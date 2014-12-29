@@ -230,8 +230,9 @@ public class DataBaseControler {
 		
 		Statement st = conn.createStatement();
 		System.out.println("me pasan el id sensor para encenderlo: "+ids);
-		ResultSet rs2 = st.executeQuery("UPDATE Sensor SET estado ='on' WHERE id_sensor='"+ids+"';");
-		rs2.close();
+		String sql = "UPDATE Sensor SET estado ='"+"on"+"' WHERE id_sensor='"+ids+"'";
+		st.executeUpdate(sql);
+		System.out.println("Hago el update");
  		st.close();
  		
 	}
@@ -240,7 +241,7 @@ public class DataBaseControler {
 		Statement st = conn.createStatement();
 		System.out.println("me pasan el id sensor para apagarlo: "+ids);
 		String sql = "UPDATE Sensor SET estado ='"+"off"+"' WHERE id_sensor='"+ids+"'";
-		int rs2 = st.executeUpdate(sql);
+		st.executeUpdate(sql);
 		System.out.println("Hago el update");
 		st.close();
 	}
