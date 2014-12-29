@@ -16,12 +16,10 @@ import javax.swing.JOptionPane;
 
 
 public class Client {
+	static SocketManager sm;
     public static void main(String[] args) throws Exception {
      
         try {
-            //Se crea el socket, pasando el nombre del servidor y el puerto de conexión
-            SocketManager sm = new SocketManager("127.0.0.1", 2345);   
-
             //Se declara un buffer de lectura del dato escrito por el usuario por teclado
             //es necesario pq no es un buffer propio de los sockets
             BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
@@ -31,8 +29,12 @@ public class Client {
             while (estado!=4) {
             	
             	switch(estado){
-            	case 0: // comprobar user
+            	case 0: // comprobar user y creo el socket
             		ventanaLoggin ventanaloggin = new ventanaLoggin();
+            		//Se crea el socket, pasando el nombre del servidor y el puerto de conexión
+            		String ip = ventanaloggin.txtFIP.getText();
+             		String numeros[] = ip.split(",");
+            		sm = new SocketManager(numeros[0]+"."+numeros[1]+"."+numeros[2]+"."+numeros[3],2345);
             		while (ventanaloggin.boton==0){
             			System.out.println("");// espero a que rellene los datos y pulse boton loggin
             		}    
@@ -113,6 +115,8 @@ public class Client {
             		System.out.println("lista "+listae);
             		ventanaAccion vent = new ventanaAccion();
             		vent.cargarTabla(listae);
+            		
+            		
             		while (vent.boton!=6){
             			while (vent.boton==0){
             			//estoy en la vent sin mas
@@ -125,27 +129,54 @@ public class Client {
             					sm.Escribir("activar"+'\n');
   								String id = vent.id; //id del sensor que tengo que activar  
            						sm.Escribir(id+'\n');
-            					listae = cargarLista(sm);	
-            					vent.cargarTabla(listae);
-            				}
+           						System.out.println("Cargo la lista?");
+           						String stringLista = sm.Leer();
+           						System.out.println(stringLista);
+           						ArrayList<String> df = new ArrayList<String>();
+           						String Sensor[] = stringLista.split(",");// separo sensores
+           						for(int i=0;i<Sensor.length;i++){
+           							df.add(Sensor[i]);
+           						}
+           						System.out.println("los datos de la lista"+df);
+           						vent.cargarTabla(df);
+           					   }
+            				
             							
             			}else if(vent.boton==2){// desactivar
             				vent.boton=0;
             				int confirmado = JOptionPane.showConfirmDialog(vent, "¿Confirmar?");
         					if (JOptionPane.OK_OPTION == confirmado){
         						sm.Escribir("desactivar"+'\n');
-        						String id = vent.id; //id del sensor que tengo que activar 
-        						sm.Escribir(id+'\n');
-        						listae = cargarLista(sm);
-        						vent.cargarTabla(listae);
-        					}
+        						String id = vent.id; //id del sensor que tengo que activar  
+           						sm.Escribir(id+'\n');
+           						System.out.println("Cargo la lista?");
+           						String stringLista = sm.Leer();
+           						System.out.println(stringLista);
+           						ArrayList<String> df = new ArrayList<String>();
+           						String Sensor[] = stringLista.split(",");// separo sensores
+           						for(int i=0;i<Sensor.length;i++){
+           							df.add(Sensor[i]);
+           						}
+           						System.out.println("los datos de la lista"+df);
+           						vent.cargarTabla(df);
+           					   }
+        					
 	               		}else if(vent.boton==3){//bActuar
 	               			vent.boton=0;
 	               			System.out.println("bot3 clicado");
 	            			sm.Escribir("actuar"+'\n');
 	            	    	sm.Escribir(vent.id+'\n'); // paso el id que voy a cambiar la accion
-	            	    	cargarLista(sm);
-	            	    	
+	            	    	System.out.println("Cargo la lista?");
+       						String stringLista = sm.Leer();
+       						System.out.println(stringLista);
+       						ArrayList<String> df = new ArrayList<String>();
+       						String Sensor[] = stringLista.split(",");// separo sensores
+       						for(int i=0;i<Sensor.length;i++){
+       							df.add(Sensor[i]);
+       						}
+       						System.out.println("los datos de la lista"+df);
+       						vent.cargarTabla(df);
+       					   
 	            	    }else if(vent.boton==4){//bBuscar
 	            	    	vent.boton=0;
 	            	    	System.out.println("bot4 clicado");
@@ -190,9 +221,7 @@ public class Client {
 
 	private static ArrayList<String> cargarLista(SocketManager sm) throws IOException {
 		// TODO Auto-generated method stub
-		System.out.println("Cargo la lista?");
 		String stringLista = sm.Leer();
-		System.out.println(stringLista);
 		ArrayList<String> df = new ArrayList<String>();
 		String Sensor[] = stringLista.split(",");// separo sensores
 		for(int i=0;i<Sensor.length;i++){
@@ -203,60 +232,3 @@ public class Client {
 	   }
 	
 }
-		
-		
-		
-	
-
-	
-
-
-//private boolean enActivado = false;
-//
-//// Método privado utilizado para activar o desactivar los componentes de acuerdo al modo de activación
-//private void setModoActivado( boolean on ) {
-//	enActivado = on;
-//	bActuar.setEnabled( !on );
-//	bImagenPlaca.setEnabled( !on );
-//	bBuscar.setEnabled( !on );
-//	bListar.setEnabled( !on );
-//	listaVariables.setEnabled( !on );
-//	//nick.setEnabled( on );
-//	if (on)
-//		bActivar.setText( "OFF" );
-//	else
-//		bActivar.setText( "ON" );
-//}
-////dentro del actioner boton 1
-//if(!enActivado){
-//	 setModoActivado(true);
-//	 //aqui cambiar el valor de la tabla a off
-//	 int index = table.getSelectedRow();
-//	 String  idv = (String) table.getValueAt(index, 1);
-//	 Data_base_controler prueba = Data_base_controler.getInstance();
-//	 try {
-//		prueba.conectar();
-//		prueba.apagarVariable(idv);
-//		prueba.desconectar();
-//			
-//	} catch (ClassNotFoundException | SQLException e1) {
-//		// TODO Auto-generated catch block
-//		System.out.println("Algun error con la conexion BD");
-//		e1.printStackTrace();
-//	}
-//}else{
-//	 //aqui a on
-//	 int index = table.getSelectedRow();
-//	 String  idv = (String) table.getValueAt(index, 1);
-//	 Data_base_controler prueba = Data_base_controler.getInstance();
-//		
-//		try {
-//			prueba.conectar();
-//			prueba.encenderVariable(idv);
-//			prueba.desconectar();
-//			
-//		} catch (ClassNotFoundException | SQLException e1) {
-//			// TODO Auto-generated catch block
-//			System.out.println("Algun error con la conexion BD");
-//			e1.printStackTrace();
-//		}
