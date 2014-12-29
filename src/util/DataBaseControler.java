@@ -231,15 +231,17 @@ public class DataBaseControler {
 		Statement st = conn.createStatement();
 		System.out.println("me pasan el id sensor para encenderlo: "+ids);
 		ResultSet rs2 = st.executeQuery("UPDATE Sensor SET estado ='on' WHERE id_sensor='"+ids+"';");
+		rs2.close();
  		st.close();
- 		rs2.close();
+ 		
 	}
 	public void apagarSensor(String ids) throws SQLException {
 		
 		Statement st = conn.createStatement();
 		System.out.println("me pasan el id sensor para apagarlo: "+ids);
 		String sql = "UPDATE Sensor SET estado ='"+"off"+"' WHERE id_sensor='"+ids+"'";
-		System.out.println(sql);
+		int rs2 = st.executeUpdate(sql);
+		System.out.println("Hago el update");
 		st.close();
 	}
 	
