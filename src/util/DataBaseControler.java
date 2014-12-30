@@ -276,9 +276,9 @@ public class DataBaseControler {
 			else
 				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"Subir intensidad luz"+"' WHERE id_sensor='"+id+"';");
 			
-		}else if(a.getFuncion_principal().equals("Sistema de riego")){
+		}else if(a.getFuncion_principal().equals("Regulación de Aire acondicionado")){ // cambiar por 
 			
-			if(a.getUltima_accion().equals("Activar sistema de riego"))
+			if(a.getUltima_accion().equals("Activar aire acondicionado"))
 				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"Desactivar sistema de riego"+"' WHERE id_sensor='"+id+"';");
 			else 
 				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"Activar sistema de riego"+"' WHERE id_sensor='"+id+"';");
