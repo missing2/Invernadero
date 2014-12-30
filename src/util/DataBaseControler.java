@@ -297,16 +297,13 @@ public class DataBaseControler {
 	 	st.close();
 				
 	}
-	public String foto() throws SQLException {
-		String resultado = "";
+	public void foto(String id) throws SQLException {
+		
 		Statement st = conn.createStatement();
-		ResultSet rs2 = st.executeQuery("SELECT P.foto from Placa P, Sensor S  where S.id_placa=P.id_placa");
-		ResultSetMetaData rsmd = rs2.getMetaData();
-			if (rs2.next())
-				resultado = "archivos/";
-			rs2.close();
-			st.close();
-		return resultado;
+		ResultSet rs2 = st.executeQuery("SELECT P.foto from Placa P, Sensor S  where P.id_placa=S.id_placa and S.id_sensor='"+id+"';");
+		rs2.close();
+		st.close();
+		
 	}
 	public static void main(String[] args){
 		
