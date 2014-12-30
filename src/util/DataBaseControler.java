@@ -3,6 +3,7 @@ package util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -254,29 +255,49 @@ public class DataBaseControler {
 		
 		Statement st = conn.createStatement();
 		ResultSet rs2 = st.executeQuery ( "Select * from Sensor WHERE id_sensor='"+id+"';");// Saco la info del sensor que quieren que cambie
-		 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
-					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
+		Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
+				rs2.getString("func_principal"),rs2.getString("estado"),rs2.getString("ultima_accion"));
 		 
-		if ( a.getUltima_accion().compareTo(a.getFuncion_principal())==0){
-			st.executeUpdate("UPDATE Sensor SET UltimaAccion ='"+a.getFuncion_principal()+"' WHERE id_sensor='"+id+"';");
-			rs2.close();
-		}else {
-			if (id.equals("s1"))
-				st.executeUpdate("UPDATE Sensor SET UltimaAccion ='subir calefaccion' WHERE id_sensor='"+id+"';");
-			else if (id.equals("s2"))
-				st.executeUpdate("UPDATE Sensor SET UltimaAccion ='apagar calefaccion' WHERE id_sensor='"+id+"';");
-			else if (id.equals("s3"))
-				st.executeUpdate("UPDATE Sensor SET UltimaAccion ='bajar intensidad luz' WHERE id_sensor='"+id+"';");
-			else if (id.equals("s4"))
-				st.executeQuery ("UPDATE Sensor SET UltimaAccion ='apagar luz' WHERE id_sensor='"+id+"';");
-			else if (id.equals("s5"))
-				st.executeUpdate("UPDATE Sensor SET UltimaAccion ='bajar aire acondicionado' WHERE id_sensor='"+id+"';");
-			else if (id.equals("s6"))
-				st.executeUpdate("UPDATE Sensor SET UltimaAccion ='apagar aire acondicionado' WHERE id_sensor='"+id+"';");
+		if ( a.getFuncion_principal().equals("Regulación climatización")){
+			
+			if(a.getUltima_accion().equals("Bajar calefaccion"))
+				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"Subir calefaccion"+"' WHERE id_sensor='"+id+"';");
+			else
+				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"Bajar calefaccion"+"' WHERE id_sensor='"+id+"';");
+		
+		}else if(a.getFuncion_principal().equals("Regulación de Luminosidad")){
+			
+			if(a.getUltima_accion().equals("Encender luz"))
+				st.executeQuery ("UPDATE Sensor SET ultima_accion ='"+"Apagar luz"+"' WHERE id_sensor='"+id+"';");
+			else if(a.getUltima_accion().equals("Apagar luz"))
+				st.executeQuery ("UPDATE Sensor SET ultima_accion ='"+"Encender luz"+"' WHERE id_sensor='"+id+"';");
+			else if(a.getUltima_accion().equals("Subir intensidad luz"))
+				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"Bajar intensidad luz"+"' WHERE id_sensor='"+id+"';");
+			else
+				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"Subir intensidad luz"+"' WHERE id_sensor='"+id+"';");
+			
+		}else if(a.getFuncion_principal().equals("Sistema de riego")){
+			
+			if(a.getUltima_accion().equals("Activar sistema de riego"))
+				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"Desactivar sistema de riego"+"' WHERE id_sensor='"+id+"';");
+			else 
+				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"Activar sistema de riego"+"' WHERE id_sensor='"+id+"';");
 		}
-								
-	 	 		st.close();
+		
+		rs2.close();			
+	 	st.close();
 				
+	}
+	public String foto() throws SQLException {
+		String resultado = "";
+		Statement st = conn.createStatement();
+		ResultSet rs2 = st.executeQuery("SELECT P.foto from Placa P, Sensor S  where S.id_placa=P.id_placa");
+		ResultSetMetaData rsmd = rs2.getMetaData();
+			if (rs2.next())
+				resultado = "archivos/";
+			rs2.close();
+			st.close();
+		return resultado;
 	}
 	public static void main(String[] args){
 		
