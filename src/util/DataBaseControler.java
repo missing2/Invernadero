@@ -260,28 +260,37 @@ public class DataBaseControler {
 		 
 		if ( a.getFuncion_principal().equals("Regulación climatización")){
 			
-			if(a.getUltima_accion().equals("Bajar calefaccion"))
-				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"Subir calefaccion"+"' WHERE id_sensor='"+id+"';");
-			else
-				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"Bajar calefaccion"+"' WHERE id_sensor='"+id+"';");
+			if(a.getUltima_accion().equals("bajar calefaccion"))
+				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"subir calefaccion"+"' WHERE id_sensor='"+id+"';");
+			else if(a.getUltima_accion().equals("subir calefaccion"))
+				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"bajar calefaccion"+"' WHERE id_sensor='"+id+"';");
+			else if(a.getUltima_accion().equals("encender calefaccion"))
+				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"apagar calefaccion"+"' WHERE id_sensor='"+id+"';");
+			else if(a.getUltima_accion().equals("apagar calefaccion"))
+				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"encender calefaccion"+"' WHERE id_sensor='"+id+"';");
 		
 		}else if(a.getFuncion_principal().equals("Regulación de Luminosidad")){
 			
-			if(a.getUltima_accion().equals("Encender luz"))
-				st.executeQuery ("UPDATE Sensor SET ultima_accion ='"+"Apagar luz"+"' WHERE id_sensor='"+id+"';");
-			else if(a.getUltima_accion().equals("Apagar luz"))
-				st.executeQuery ("UPDATE Sensor SET ultima_accion ='"+"Encender luz"+"' WHERE id_sensor='"+id+"';");
-			else if(a.getUltima_accion().equals("Subir intensidad luz"))
-				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"Bajar intensidad luz"+"' WHERE id_sensor='"+id+"';");
+			if(a.getUltima_accion().equals("encender luz"))
+				st.executeQuery ("UPDATE Sensor SET ultima_accion ='"+"apagar luz"+"' WHERE id_sensor='"+id+"';");
+			else if(a.getUltima_accion().equals("apagar luz"))
+				st.executeQuery ("UPDATE Sensor SET ultima_accion ='"+"encender luz"+"' WHERE id_sensor='"+id+"';");
+			else if(a.getUltima_accion().equals("subir intensidad"))
+				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"bajar intensidad"+"' WHERE id_sensor='"+id+"';");
 			else
-				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"Subir intensidad luz"+"' WHERE id_sensor='"+id+"';");
+				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"subir intensidad"+"' WHERE id_sensor='"+id+"';");
 			
 		}else if(a.getFuncion_principal().equals("Sistema de riego")){
 			
 			if(a.getUltima_accion().equals("Activar sistema de riego"))
 				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"Desactivar sistema de riego"+"' WHERE id_sensor='"+id+"';");
-			else 
+			else if(a.getUltima_accion().equals("Desactivar sistema de riego"))
 				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"Activar sistema de riego"+"' WHERE id_sensor='"+id+"';");
+			else if(a.getUltima_accion().equals("Aumentar presion de riego"))
+				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"Bajar presion de riego"+"' WHERE id_sensor='"+id+"';");
+			else if(a.getUltima_accion().equals("Bajar presion de riego"))
+				st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"Aumentar presion de riego"+"' WHERE id_sensor='"+id+"';");
+			
 		}
 		
 		rs2.close();			
