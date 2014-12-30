@@ -195,6 +195,7 @@ public class Client {
 	            	    	System.out.println("bot5 clicado");
 	            	    	vent.boton=0;
 	            	    	sm.Escribir("imagen"+'\n');
+	            	    	sm.Escribir(vent.id+'\n');
 	            	    	String foto = sm.Leer();
 	            	    //	BufferedImage bufferedImage = ImageIO.read();// tengo que pasar aqui una imagen formada por string foto
 	 			          //  ImageIO.write(bufferedImage,"png", new FileOutputStream("fotos recibidas/image.png"));       	    	
