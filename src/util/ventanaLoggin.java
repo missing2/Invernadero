@@ -77,7 +77,7 @@ public ventanaLoggin(){
 	getContentPane().add(lblIp);
 	
 	txtFIP = new JTextField();
-	txtFIP.setText("127,0,0,1");
+	txtFIP.setText("127.0.0.1");
 	txtFIP.setBackground(Color.LIGHT_GRAY);
 	txtFIP.setBounds(82, 189, 67, 20);
 	getContentPane().add(txtFIP);

@@ -4,12 +4,14 @@ import util.*;
 import java.net.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.awt.Image;
 import java.awt.List;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
@@ -33,8 +35,9 @@ public class Client {
             		ventanaLoggin ventanaloggin = new ventanaLoggin();
             		//Se crea el socket, pasando el nombre del servidor y el puerto de conexión
             		String ip = ventanaloggin.txtFIP.getText();
-             		String numeros[] = ip.split(",");
-            		sm = new SocketManager(numeros[0]+"."+numeros[1]+"."+numeros[2]+"."+numeros[3],2345);
+             		
+            		sm = new SocketManager(ip,2345);
+            		
             		while (ventanaloggin.boton==0){
             			System.out.println("");// espero a que rellene los datos y pulse boton loggin
             		}    
@@ -192,14 +195,18 @@ public class Client {
 	            	    	vent.cargarTabla(df);
 	            	    	
 	            	    }else if(vent.boton==5){// imagen
+	            	    	vent.boton=0;
 	            	    	System.out.println("bot5 clicado");
 	            	    	vent.boton=0;
 	            	    	sm.Escribir("imagen"+'\n');
 	            	    	sm.Escribir(vent.id+'\n');
-	            	    	String foto = sm.Leer();
-	            	    //	BufferedImage bufferedImage = ImageIO.read();// tengo que pasar aqui una imagen formada por string foto
-	 			          //  ImageIO.write(bufferedImage,"png", new FileOutputStream("fotos recibidas/image.png"));       	    	
+	            	    	String url= sm.Leer();
+	            	    	
+	            	    	Image imagenExterna = new ImageIcon(url).getImage();
+	            	    	// falta mostrarla
+	 			               	    	
 	            	    }else if(vent.boton==6){// salir
+	            	    	vent.boton=0;
 	            			estado=4;
 	        
 	            		}

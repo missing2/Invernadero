@@ -304,6 +304,7 @@ public class DataBaseControler {
 		String foto = rs2.getString("foto"+".jpg");
 		rs2.close();
 		st.close();
+		System.out.println("foto:"+foto);
 		return foto;
 		
 	}

@@ -170,7 +170,6 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 			boton = 5;
 			int index = table.getSelectedRow();
 			id = (String) table.getValueAt(index, 1);
-			
 		}else if(e.getSource().equals(bSalir)){
 			boton = 6;
 			System.exit(0);
