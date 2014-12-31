@@ -165,13 +165,13 @@ final class Request implements Runnable {
 					}else if (requestLine.contains("imagen")){
 						// ni idea de pasar de la bd a aqui una imagen...
 						System.out.println("imagen");
+						BufferedImage img;
 						requestLine = sockManager.Leer(); // recivo que se sensor quiere buscar en la bd
 						 base.conectar();
-						 base.foto(requestLine);
+						 img = ImageIO.read(new File(base.foto(requestLine)));
 						 base.desconectar();
-						BufferedImage img = ImageIO.read(new File("src/Icons/placa.gif"));
 					
-						// sockManager.Escribir(img,);
+						 //sockManager.Escribir(img, bytes);
 					
 					}else if (requestLine.contains("actuar")){
 						requestLine = sockManager.Leer(); // recivo el id que quiero camn¡biar de accion
