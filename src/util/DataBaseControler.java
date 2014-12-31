@@ -301,7 +301,8 @@ public class DataBaseControler {
 		
 		Statement st = conn.createStatement();
 		ResultSet rs2 = st.executeQuery("SELECT P.foto from Placa P, Sensor S  where P.id_placa=S.id_placa and S.id_sensor='"+id+"';");
-		String foto = rs2.getString("foto"+".jpg");
+		String foto = rs2.getString("foto");// falla
+		foto = foto+(".jpg");
 		rs2.close();
 		st.close();
 		System.out.println("foto:"+foto);
