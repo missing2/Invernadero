@@ -33,7 +33,7 @@ public class Client {
             	switch(estado){
             	case 0: // comprobar user y creo el socket
             		ventanaLoggin ventanaloggin = new ventanaLoggin();
-            		//Se crea el socket, pasando el nombre del servidor y el puerto de conexión
+            		//Se crea el socket, pasando la ip del server manualmente
             		String ip = ventanaloggin.txtFIP.getText();
              		
             		sm = new SocketManager(ip,2345);

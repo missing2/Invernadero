@@ -313,10 +313,19 @@ public class DataBaseControler {
 	}
 	
 	//___________________________________ventana controlador_______________________
-	public DefaultTableModel echarUsuario(String id) throws SQLException {
+	public DefaultTableModel echarUsuario(String nick) throws SQLException {
 		
 		Statement st = conn.createStatement();
-		ResultSet rs2 = st.executeQuery("UPDATE User SET estado ='"+"offline"+"' WHERE nick='"+id+"';");
+		ResultSet rs2 = st.executeQuery("UPDATE User SET estado ='"+"offline"+"' WHERE nick='"+nick+"';");
+		
+		DefaultTableModel tabla = this.sacarUsuarios();
+		return tabla;
+	}
+	
+	public DefaultTableModel conectarUsuario(String nick) throws SQLException {
+		
+		Statement st = conn.createStatement();
+		ResultSet rs2 = st.executeQuery("UPDATE User SET estado ='"+"online"+"' WHERE nick='"+nick+"';");
 		
 		DefaultTableModel tabla = this.sacarUsuarios();
 		return tabla;

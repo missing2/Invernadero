@@ -13,18 +13,20 @@ import java.awt.BorderLayout;
 import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
+                                                     // NECESITARA UN THREAD O ALGO, PERO QUE SE PUEDA COMUNICAR CON DATABASE Y CLIENTE
 public class VentanaControl extends JFrame implements ActionListener, ComponentListener{
 	private JTable table;
 	private JButton btnEchar;
-	public VentanaControl(DefaultTableModel tabla) {
+	public int boton = 0;
+	public String nick;
+	public VentanaControl() {
+		
+		table = new JTable();
+		getContentPane().add(table, BorderLayout.CENTER);
 		
 		btnEchar = new JButton("Echar");
 		getContentPane().add(btnEchar, BorderLayout.SOUTH);
 		btnEchar.addActionListener(this);
-		
-		table = new JTable(tabla);
-		getContentPane().add(table, BorderLayout.CENTER);
 	}
 
 
@@ -56,12 +58,21 @@ public void componentHidden(ComponentEvent e) {
 @Override
 public void actionPerformed(ActionEvent e) {
 	// TODO Auto-generated method stub
-	if(e.getSource().equals(btnEchar)){
-		// pasar al request que haga la consulta
+	if(e.getSource().equals(btnEchar)){ 
+		boton=1;
+		int index = table.getSelectedRow();
+		nick = (String) table.getValueAt(index, 1);
     }
-
+	
 }
 
+public void cargarTabla(DefaultTableModel tabla){
+
+	table.setModel(tabla);
+	repaint();
+	
+
+}
 
 
 
