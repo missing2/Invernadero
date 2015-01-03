@@ -250,7 +250,7 @@ public class DataBaseControler {
 	}
 	
 
-	
+
 
 	public void cambiarEstado(String id) throws SQLException { // depurarlo y mirar consultas...
 		// TODO Auto-generated method stub
@@ -311,7 +311,8 @@ public class DataBaseControler {
 		return foto;
 		
 	}
-
+	
+	//___________________________________ventana controlador_______________________
 	public DefaultTableModel echarUsuario(String id) throws SQLException {
 		
 		Statement st = conn.createStatement();
