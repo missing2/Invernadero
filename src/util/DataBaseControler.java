@@ -7,6 +7,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.table.DefaultTableModel;
+
 public class DataBaseControler {
 	private static DataBaseControler instance = null;
 	private Connection conn;
@@ -309,6 +311,35 @@ public class DataBaseControler {
 		return foto;
 		
 	}
+
+	public DefaultTableModel echarUsuario(String id) throws SQLException {
+		
+		Statement st = conn.createStatement();
+		ResultSet rs2 = st.executeQuery("UPDATE User SET estado ='"+"offline"+"' WHERE nick='"+id+"';");
+		
+		DefaultTableModel tabla = this.sacarUsuarios();
+		return tabla;
+	}
+	
+	public DefaultTableModel sacarUsuarios() throws SQLException {
+		DefaultTableModel tabla = new DefaultTableModel();
+		Statement st = conn.createStatement();
+		ResultSet rs2 = st.executeQuery("SELECT * from User;");
+		String[] fila= new String [2];
+		fila[0]="nick";
+		fila[1]="estado";
+		tabla.addRow(fila);
+		while (rs2.next()){
+			fila[0]= rs2.getString("nick");
+			fila[1]= rs2.getString("estado");
+			tabla.addRow(fila);
+		}
+		rs2.close();
+		st.close();
+		
+		return tabla;
+	}
+	
 	public static void main(String[] args){
 		
 	}

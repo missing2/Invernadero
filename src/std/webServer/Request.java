@@ -10,6 +10,7 @@ import java.util.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
 import util.*;
 
@@ -38,11 +39,8 @@ final class Request implements Runnable {
   }
 
   private void processRequest() throws Exception {
-	  
-	System.out.println("processRequest");
-	
-    int estado=0;
-	Usuario user = new Usuario();
+	  int estado=0;
+	  Usuario user = new Usuario();
 	
   while (true){
    
