@@ -15,6 +15,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
                                                      // NECESITARA UN THREAD O ALGO, PERO QUE SE PUEDA COMUNICAR CON DATABASE Y CLIENTE
 public class VentanaControl extends JFrame implements ActionListener, ComponentListener{
+	
 	private JTable table;
 	private JButton btnEchar;
 	public int boton = 0;

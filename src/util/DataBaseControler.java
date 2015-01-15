@@ -252,13 +252,15 @@ public class DataBaseControler {
 
 
 
-	public void cambiarEstado(String id) throws SQLException { // depurarlo y mirar consultas...
+	public String cambiarEstado(String id) throws SQLException { // depurarlo y mirar consultas...
 		// TODO Auto-generated method stub
 		
 		Statement st = conn.createStatement();
+		System.out.println(id);
 		ResultSet rs2 = st.executeQuery ( "Select * from Sensor WHERE id_sensor='"+id+"';");// Saco la info del sensor que quieren que cambie
+
 		Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
-				rs2.getString("func_principal"),rs2.getString("estado"),rs2.getString("ultima_accion"));
+				rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
 		 
 		if ( a.getFuncion_principal().equals("Regulación climatización")){
 			
@@ -295,9 +297,10 @@ public class DataBaseControler {
 			
 		}
 		
+		String listaActualizada = this.sacarlista();
 		rs2.close();			
 	 	st.close();
-				
+		return listaActualizada;	
 	}
 	public String foto(String id) throws SQLException {
 		
