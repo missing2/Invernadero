@@ -177,14 +177,17 @@ public class Client {
 	            	    	System.out.println("Cargo la lista?");
        						String stringLista = sm.Leer();
        						System.out.println(stringLista);
-       						ArrayList<String> df = new ArrayList<String>();
-       						String Sensor[] = stringLista.split(",");// separo sensores
-       						for(int i=0;i<Sensor.length;i++){
-       							df.add(Sensor[i]);
+       						if(stringLista.equals("sin parametro")){
+       							JOptionPane.showMessageDialog(vent, "falta parametro");
+       						}else{
+	       						ArrayList<String> df = new ArrayList<String>();
+	       						String Sensor[] = stringLista.split(",");// separo sensores
+	       						for(int i=0;i<Sensor.length;i++){
+	       							df.add(Sensor[i]);
+	       						}
+	       						System.out.println("los datos de la lista"+df);
+	       						vent.cargarTabla(df);
        						}
-       						System.out.println("los datos de la lista"+df);
-       						vent.cargarTabla(df);
-       					   
 	            	    }else if(vent.boton==4){//bBuscar
 	            	    	vent.boton=0;
 	            	    	System.out.println("bot4 clicado");
