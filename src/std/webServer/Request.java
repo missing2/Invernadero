@@ -172,7 +172,8 @@ final class Request implements Runnable {
 					}else if (requestLine.contains("actuar")){
 						requestLine = sockManager.Leer(); // recivo el id que quiero cambiar de accion
 						base.conectar();
-						String lista = base.cambiarEstado(requestLine);
+						String parametro = sockManager.Leer();
+						String lista = base.cambiarEstado(requestLine,parametro);
 						base.desconectar();
 						sockManager.Escribir(lista+'\n');
 						

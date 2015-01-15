@@ -161,12 +161,12 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		}else if(e.getSource().equals(bActuar)){
 			boton = 3;
 			int index = table.getSelectedRow();
-			id = (String) table.getValueAt(index, 2);// este no se si esta bien??
+			id = (String) table.getValueAt(index, 2);
 			txt = palabra.getText();
 
 		}else if(e.getSource().equals(bBuscar)){
 			boton = 4;
-		}else if(e.getSource().equals(bImagenPlaca)){
+		}else if(e.getSource().equals(bImagenPlaca)){ // mirar si la columna es la correcta
 			boton = 5;
 			int index = table.getSelectedRow();
 			id = (String) table.getValueAt(index, 1);
