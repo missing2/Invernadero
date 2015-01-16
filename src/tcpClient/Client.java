@@ -172,14 +172,16 @@ public class Client {
 	               			System.out.println("bot3 clicado");
 	            			sm.Escribir("actuar"+'\n');
 	            	    	sm.Escribir(vent.id+'\n'); // paso el id que voy a cambiar la accion 
-	               	    	//sm.Escribir(parametro);
-	            	    	
+	               	    	sm.Escribir(vent.txt);
+	            	    	String respuesta = sm.Leer();
 	            	    	System.out.println("Cargo la lista?");
        						String stringLista = sm.Leer();
        						System.out.println(stringLista);
-       						if(stringLista.equals("sin parametro")){
+       						if(respuesta.equals("409 ERR Faltan datos."))
        							JOptionPane.showMessageDialog(vent, "falta parametro");
-       						}else{
+       						else if (respuesta.equals("407 ERROR accion ya ejecutada"))
+           							JOptionPane.showMessageDialog(vent, "accion repetida");
+       						else if (respuesta.equals("206 OK Acción sobre el sensor confirmada")){
 	       						ArrayList<String> df = new ArrayList<String>();
 	       						String Sensor[] = stringLista.split(",");// separo sensores
 	       						for(int i=0;i<Sensor.length;i++){

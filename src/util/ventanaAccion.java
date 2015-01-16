@@ -190,7 +190,14 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 			boton = 3;
 			int index = table.getSelectedRow();
 			id = (String) table.getValueAt(index, 2);
-			txt = palabra.getText();
+			if (rbApagar.isSelected())
+				txt = "apagar";
+			else if (rbEncender.isSelected())
+				txt = "encender";
+			else if (rbBajar.isSelected())
+				txt = "bajar";
+			else if (rbSubir.isSelected())
+				txt = "subir";
 
 		}else if(e.getSource().equals(bBuscar)){
 			boton = 4;

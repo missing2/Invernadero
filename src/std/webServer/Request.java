@@ -170,18 +170,22 @@ final class Request implements Runnable {
 						 sockManager.Escribir(url+'\n');
 					
 					}else if (requestLine.contains("actuar")){
-						requestLine = sockManager.Leer(); // recivo el id que quiero cambiar de accion
+						String id = sockManager.Leer(); // recivo el id que quiero cambiar de accion
 						base.conectar();
 						
 						String parametro = sockManager.Leer();
 						if (!parametro.equals("")){
-						String respuesta = base.cambiarEstado(requestLine,parametro);
+						String respuesta = base.cambiarEstado(id,parametro);
 						String lista = base.sacarlista();
 						base.desconectar();
 						sockManager.Escribir(respuesta+'\n');
 						sockManager.Escribir(lista+'\n');
 						}else{
 						sockManager.Escribir("409 ERR Faltan datos."+'\n');
+						base.conectar();
+						String lista = base.sacarlista();
+						base.desconectar();
+						sockManager.Escribir(lista+'\n');
 						}
 					}else if (requestLine.contains("salir")){
 						estado=4;
