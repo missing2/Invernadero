@@ -175,11 +175,13 @@ final class Request implements Runnable {
 						
 						String parametro = sockManager.Leer();
 						if (!parametro.equals("")){
-						String lista = base.cambiarEstado(requestLine,parametro);
+						String respuesta = base.cambiarEstado(requestLine,parametro);
+						String lista = base.sacarlista();
 						base.desconectar();
+						sockManager.Escribir(respuesta+'\n');
 						sockManager.Escribir(lista+'\n');
 						}else{
-						sockManager.Escribir("sin parametro"+'\n');
+						sockManager.Escribir("409 ERR Faltan datos."+'\n');
 						}
 					}else if (requestLine.contains("salir")){
 						estado=4;

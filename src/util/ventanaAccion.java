@@ -35,6 +35,13 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.JRadioButton;
+import javax.swing.BoxLayout;
+import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 public class ventanaAccion extends JFrame implements ActionListener, ComponentListener{
 
@@ -45,6 +52,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 	JPanel panelInferior;
 	JPanel panelCentral;
 	JPanel panelBotonera;
+	JPanel panelIzquierda;
 
 	JScrollPane scrollLista; 
 	JList listaVariables;
@@ -64,12 +72,18 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 
 	public String  id;
 	public String txt;
+	private JRadioButton rbApagar;
+	private JRadioButton rbEncender;
+	private JRadioButton rbBajar;
+	private JRadioButton rbSubir;
+	
 
 	public ventanaAccion(){
 		
 		panelInferior = new JPanel();
 		panelCentral = new JPanel();
 		panelBotonera = new JPanel();
+		panelIzquierda = new JPanel();
 
 		palabra = new JTextField(10);
 
@@ -97,15 +111,29 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		table = new JTable();
 		scroll = new JScrollPane(table, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panelCentral.add(scroll);
-		scroll.setVisible(true);
 
 
 		this.getContentPane().setLayout(new BorderLayout());
 		this.getContentPane().add(panelBotonera,"North");
 		this.getContentPane().add(panelCentral,"Center");
 		this.getContentPane().add(panelInferior,"South");
+		this.getContentPane().add(panelIzquierda,"West");
+		
+		rbApagar = new JRadioButton("Apagar");
+		
+		rbEncender = new JRadioButton("Encender");
+		
+		rbBajar = new JRadioButton("Bajar");
+		panelIzquierda.setLayout(new GridLayout(0, 1, 0, 0));
+		panelIzquierda.add(rbApagar);
+		panelIzquierda.add(rbEncender);
+		panelIzquierda.add(rbBajar);
+		
+		rbSubir = new JRadioButton("Subir");
+		panelIzquierda.add(rbSubir);
+		
 
-		this.setSize(600,320);
+		this.setSize(800,600);
 		this.setResizable(false);
 		this.setVisible(true);
 
@@ -186,7 +214,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		}
 
 		DefaultTableModel modelo = new DefaultTableModel();
-		String[] columTitulo =	{" ","Placa","Id sensor", "Sensor","Función","Estado","Ultima acción"};
+		String[] columTitulo =	{" ","  Placa  ","  Id sensor  ", "  Sensor  ","  Función  ","  Estado  ","  Ultima acción  "};
 		modelo.setColumnIdentifiers(columTitulo);
 		String[] Sensor = new String[listae.size()];
 		Sensor = listae.toArray(Sensor);

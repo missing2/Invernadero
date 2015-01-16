@@ -172,9 +172,7 @@ public class Client {
 	               			System.out.println("bot3 clicado");
 	            			sm.Escribir("actuar"+'\n');
 	            	    	sm.Escribir(vent.id+'\n'); // paso el id que voy a cambiar la accion 
-	            	    	
-	            	    	String parametro = JOptionPane.showInputDialog( vent, "¿Accion que quiere realizar?", JOptionPane.QUESTION_MESSAGE);  // el icono sera un iterrogante
-	            	    	sm.Escribir(parametro);
+	               	    	//sm.Escribir(parametro);
 	            	    	
 	            	    	System.out.println("Cargo la lista?");
        						String stringLista = sm.Leer();
