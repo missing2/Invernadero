@@ -259,8 +259,8 @@ public class DataBaseControler {
 		System.out.println("id del sensor que va a actuar:"+id);
 		String respuesta="";
 		ResultSet rs2 = st.executeQuery ( "Select * from Sensor WHERE id_sensor='"+id+"';");// Saco la info del sensor que quieren que cambie
-		ResultSet rs = st.executeQuery("Select * from Placa p, Sensor s WHERE p.id_placa = s.id_placa and s.id_sensor='"+id+"';");
-		
+//		ResultSet rs = st.executeQuery("Select * from Placa p, Sensor s WHERE p.id_placa = s.id_placa and s.id_sensor='"+id+"';");
+		ResultSet rs = st.executeQuery("Select * from Placa  WHERE id_placa = '"+rs2.getString("id_placa")+"';");
 		Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
 				rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
 		
@@ -273,9 +273,11 @@ public class DataBaseControler {
 				
 				if(a.getUltima_accion().equals("bajar calefaccion") && parametro.equals("subir")){
 					st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"subir calefaccion"+"' WHERE id_sensor='"+id+"';");
+					System.out.println("Subir: "+a.getUltima_accion());
 					respuesta = "206 OK Acción sobre el sensor confirmada";
 				}else if(a.getUltima_accion().equals("subir calefaccion") && parametro.equals("bajar")){
 					st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"bajar calefaccion"+"' WHERE id_sensor='"+id+"';");
+					System.out.println("Bajar : "+a.getUltima_accion());
 					respuesta = "206 OK Acción sobre el sensor confirmada";
 				}else if(a.getUltima_accion().equals("encender calefaccion") && parametro.equals("apagar")){
 					st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"apagar calefaccion"+"' WHERE id_sensor='"+id+"';");

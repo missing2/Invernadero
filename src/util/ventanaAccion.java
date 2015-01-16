@@ -46,6 +46,11 @@ import javax.swing.GroupLayout.Alignment;
 public class ventanaAccion extends JFrame implements ActionListener, ComponentListener{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4079650453536016725L;
+	
 	public JTable table;
 	JScrollPane scroll;
 
@@ -111,6 +116,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		table = new JTable();
 		scroll = new JScrollPane(table, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		panelCentral.add(scroll);
+		//panelCentral.add(table);
 
 
 		this.getContentPane().setLayout(new BorderLayout());
@@ -221,7 +227,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		}
 
 		DefaultTableModel modelo = new DefaultTableModel();
-		String[] columTitulo =	{" ","  Placa  ","  Id sensor  ", "  Sensor  ","  Función  ","  Estado  ","  Ultima acción  "};
+		String[] columTitulo =	{" ","  Placa  ","  Id sensor  ", "  Sensor  ","  Ultima acción  ","  Estado  ","  Función  "};
 		modelo.setColumnIdentifiers(columTitulo);
 		String[] Sensor = new String[listae.size()];
 		Sensor = listae.toArray(Sensor);

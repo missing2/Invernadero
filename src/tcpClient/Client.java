@@ -172,7 +172,9 @@ public class Client {
 	               			System.out.println("bot3 clicado");
 	            			sm.Escribir("actuar"+'\n');
 	            	    	sm.Escribir(vent.id+'\n'); // paso el id que voy a cambiar la accion 
-	               	    	sm.Escribir(vent.txt);
+	            	    	System.out.println("id "+vent.id);
+	               	    	sm.Escribir(vent.txt+'\n');
+	               	    	System.out.println("txt "+vent.txt);
 	            	    	String respuesta = sm.Leer();
 	            	    	System.out.println("Cargo la lista?");
        						String stringLista = sm.Leer();

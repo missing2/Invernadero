@@ -171,9 +171,11 @@ final class Request implements Runnable {
 					
 					}else if (requestLine.contains("actuar")){
 						String id = sockManager.Leer(); // recivo el id que quiero cambiar de accion
-						base.conectar();
-						
+						System.out.println(id);
 						String parametro = sockManager.Leer();
+						System.out.println("parametro"+parametro);
+						base.conectar();
+						System.out.println("actuo");
 						if (!parametro.equals("")){
 						String respuesta = base.cambiarEstado(id,parametro);
 						String lista = base.sacarlista();
