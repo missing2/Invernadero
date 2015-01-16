@@ -41,7 +41,7 @@ final class Request implements Runnable {
   private void processRequest() throws Exception {
 	  int estado=0;
 	  Usuario user = new Usuario();
-	
+	  VentanaControl controlador = new VentanaControl();
   while (true){
    
 		switch (estado) {
