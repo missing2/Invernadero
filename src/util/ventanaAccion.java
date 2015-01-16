@@ -225,7 +225,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		if(listae.isEmpty()){
 			
 		}
-
+		try{
 		DefaultTableModel modelo = new DefaultTableModel();
 		String[] columTitulo =	{" ","  Placa  ","  Id sensor  ", "  Sensor  ","  Ultima acción  ","  Estado  ","  Función  "};
 		modelo.setColumnIdentifiers(columTitulo);
@@ -244,7 +244,9 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		modelo.fireTableDataChanged();
 		table.setModel(modelo);
 		repaint();
-		
+		}catch (Exception e2) {
+			
+		}
 
 	}
 }

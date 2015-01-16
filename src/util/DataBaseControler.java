@@ -274,11 +274,9 @@ public class DataBaseControler {
 				
 				if(a.getUltima_accion().equals("bajar calefaccion") && parametro.equals("subir")){
 					st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"subir calefaccion"+"' WHERE id_sensor='"+id+"';");
-					System.out.println("Subir: "+a.getUltima_accion());
 					respuesta = "206 OK Acción sobre el sensor confirmada";
 				}else if(a.getUltima_accion().equals("subir calefaccion") && parametro.equals("bajar")){
 					st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"bajar calefaccion"+"' WHERE id_sensor='"+id+"';");
-					System.out.println("Bajar : "+a.getUltima_accion());
 					respuesta = "206 OK Acción sobre el sensor confirmada";
 				}else if(a.getUltima_accion().equals("encender calefaccion") && parametro.equals("apagar")){
 					st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"apagar calefaccion"+"' WHERE id_sensor='"+id+"';");
@@ -292,10 +290,10 @@ public class DataBaseControler {
 			}else if(a.getFuncion_principal().equals("Regulación de Luminosidad")){
 				
 				if(a.getUltima_accion().equals("encender luz")&& parametro.equals("apagar")){
-					st.executeQuery ("UPDATE Sensor SET ultima_accion ='"+"apagar luz"+"' WHERE id_sensor='"+id+"';");
+					st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"apagar luz"+"' WHERE id_sensor='"+id+"';");
 					respuesta = "206 OK Acción sobre el sensor confirmada";
 				}else if(a.getUltima_accion().equals("apagar luz")&& parametro.equals("encender")){
-					st.executeQuery ("UPDATE Sensor SET ultima_accion ='"+"encender luz"+"' WHERE id_sensor='"+id+"';");
+					st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"encender luz"+"' WHERE id_sensor='"+id+"';");
 					respuesta = "206 OK Acción sobre el sensor confirmada";
 				}else if(a.getUltima_accion().equals("subir intensidad")&& parametro.equals("bajar")){
 					st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+"bajar intensidad"+"' WHERE id_sensor='"+id+"';");
