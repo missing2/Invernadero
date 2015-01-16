@@ -21,6 +21,7 @@ public class VentanaAltasBajas extends JFrame implements ActionListener, Compone
 	JButton btnSalir;
 	
 	public VentanaAltasBajas() {
+		this.setSize(480, 280);
 		getContentPane().setBackground(Color.BLACK);
 		getContentPane().setLayout(null);
 		

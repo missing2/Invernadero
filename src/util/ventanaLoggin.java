@@ -116,7 +116,6 @@ public ventanaLoggin(){
 		// TODO Auto-generated method stub	
 		if(e.getSource().equals(btnLoggin)){
 			boton=1;
-		
 		}else if(e.getSource().equals(btnSalir)){
 			boton=2;
 		}else if(e.getSource().equals(btnAltasBajas)){

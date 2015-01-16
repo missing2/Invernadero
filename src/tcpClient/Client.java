@@ -70,9 +70,11 @@ public class Client {
             			
             		}else if (ventanaloggin.boton==3){// pulso para altas bajas
             			ventanaloggin.dispose();
+            			System.out.println("quiero entrarr");
             			VentanaAltasBajas vent = new VentanaAltasBajas();
+            			vent.setVisible(true);
             			
-            			while (ventanaloggin.boton==0){
+            			while (vent.boton==0){
                 			// espero a que rellene los datos y pulse boton loggin
                 		}
             			if (vent.boton==1){// Alta
