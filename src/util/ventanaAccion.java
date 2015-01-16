@@ -111,17 +111,19 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 
 		panelInferior.add(bBuscar);
 		panelInferior.add(bSalir);
-
-
-		table = new JTable();
-		scroll = new JScrollPane(table, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		panelCentral.add(scroll);
+		panelCentral.setLayout(null);
 		//panelCentral.add(table);
 
 
 		this.getContentPane().setLayout(new BorderLayout());
 		this.getContentPane().add(panelBotonera,"North");
 		this.getContentPane().add(panelCentral,"Center");
+		
+		
+				table = new JTable();
+				scroll = new JScrollPane(table, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+				scroll.setBounds(10, 10, 690, 300);
+				panelCentral.add(scroll);
 		this.getContentPane().add(panelInferior,"South");
 		this.getContentPane().add(panelIzquierda,"West");
 		
@@ -130,7 +132,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		rbEncender = new JRadioButton("Encender");
 		
 		rbBajar = new JRadioButton("Bajar");
-		panelIzquierda.setLayout(new GridLayout(0, 1, 0, 0));
+		panelIzquierda.setLayout(new BoxLayout(panelIzquierda,BoxLayout.Y_AXIS));
 		panelIzquierda.add(rbApagar);
 		panelIzquierda.add(rbEncender);
 		panelIzquierda.add(rbBajar);
