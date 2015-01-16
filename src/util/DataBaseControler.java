@@ -256,11 +256,11 @@ public class DataBaseControler {
 		// TODO Auto-generated method stub
 		
 		Statement st = conn.createStatement();
-		System.out.println("id del sensor que va a actuar:"+id);
+		System.out.println("id del sensor que va a actuar: "+id);
 		String respuesta="";
-		ResultSet rs2 = st.executeQuery ( "Select * from Sensor WHERE id_sensor='"+id+"';");// Saco la info del sensor que quieren que cambie
-//		ResultSet rs = st.executeQuery("Select * from Placa p, Sensor s WHERE p.id_placa = s.id_placa and s.id_sensor='"+id+"';");
+		ResultSet rs2 = st.executeQuery ( "Select * from Sensor WHERE id_sensor ='"+id+"';");// Saco la info del sensor que quieren que cambie
 		ResultSet rs = st.executeQuery("Select * from Placa  WHERE id_placa = '"+rs2.getString("id_placa")+"';");
+		System.out.println("------"+rs2.getString("id_placa"));
 		Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
 				rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
 		
