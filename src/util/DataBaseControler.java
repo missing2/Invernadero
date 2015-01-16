@@ -256,13 +256,14 @@ public class DataBaseControler {
 		// TODO Auto-generated method stub
 		
 		Statement st = conn.createStatement();
+		Statement st2 = conn.createStatement();
 		System.out.println("id del sensor que va a actuar: "+id);
 		String respuesta="";
 		ResultSet rs2 = st.executeQuery ( "Select * from Sensor WHERE id_sensor ='"+id+"';");// Saco la info del sensor que quieren que cambie
-		ResultSet rs = st.executeQuery("Select * from Placa  WHERE id_placa = '"+rs2.getString("id_placa")+"';");
+		ResultSet rs = st2.executeQuery("Select * from Placa  WHERE id_placa = '"+rs2.getString("id_placa")+"';");
 		System.out.println("------"+rs2.getString("id_placa"));
 		Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
-				rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
+				rs2.getString("ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
 		
 		Placa p = new Placa(rs.getString("id_placa"), rs.getString("estado_placa"), rs.getString("foto"));
   		 
@@ -329,6 +330,7 @@ public class DataBaseControler {
 		rs2.close();
 		rs.close();
 	 	st.close();
+	 	st2.close();
 	 	return respuesta;
 	}
 	public String foto(String id) throws SQLException {
