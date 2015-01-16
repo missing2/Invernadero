@@ -256,15 +256,14 @@ public class DataBaseControler {
 		// TODO Auto-generated method stub
 		
 		Statement st = conn.createStatement();
-		System.out.println(id);
-		ResultSet rs2 = st.executeQuery ( "Select * from Sensor WHERE id_sensor='"+id+"';");// Saco la info del sensor que quieren que cambie
+		System.out.println("id del sensor que va a actuar:"+id);
+//		ResultSet rs2 = st.executeQuery ( "Select * from Sensor WHERE id_sensor='"+id+"';");// Saco la info del sensor que quieren que cambie
 
-		Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
-				rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
+//		Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
+//				rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
   		 
-		 st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+a.getFuncion_principal()+"' WHERE id_sensor='"+id+"';");
-		 st.executeUpdate("UPDATE Sensor SET func_principal ='"+parametro+"' WHERE id_sensor='"+id+"';"); // cambio los parametros en la bd
-		 
+		st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+parametro+"' WHERE id_sensor='"+id+"';");
+
 //		if ( a.getFuncion_principal().equals("Regulación climatización")){
 //			
 //			if(a.getUltima_accion().equals("bajar calefaccion"))
@@ -301,7 +300,7 @@ public class DataBaseControler {
 //		}
 		
 		String listaActualizada = this.sacarlista();
-		rs2.close();			
+		//rs2.close();			
 	 	st.close();
 		return listaActualizada;	
 	}
