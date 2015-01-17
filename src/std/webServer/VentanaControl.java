@@ -1,6 +1,7 @@
 package std.webServer;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -10,7 +11,6 @@ import javax.swing.JButton;
 
 import java.awt.BorderLayout;
 
-import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
                                                      // NECESITARA UN THREAD O ALGO, PERO QUE SE PUEDA COMUNICAR CON DATABASE Y CLIENTE

@@ -70,7 +70,6 @@ public class Client {
             			
             		}else if (ventanaloggin.boton==3){// pulso para altas bajas
             			ventanaloggin.dispose();
-            			System.out.println("quiero entrarr");
             			VentanaAltasBajas vent = new VentanaAltasBajas();
             			vent.setVisible(true);
             			
@@ -79,17 +78,35 @@ public class Client {
                 		}
             			if (vent.boton==1){// Alta
             				sm.Escribir("alta"+'\n');
-            				String nick = vent.textNick.toString();
-            				String pass = vent.textPass.toString();
-            				
+            				String nick = vent.textNick.getText();
+            				sm.Escribir(nick+'\n');
+            				String pass = vent.textPass.getText();
+            				sm.Escribir(pass+'\n');
+            				String resp = sm.Leer();
+            				if (resp.equals("211.OK Usuario insertado correctamente")){
+            					estado=3;
+            					vent.dispose();
+
+            				}else{
+            					estado=3;
+            				}
             			}else if (vent.boton==2){// Salir
             				estado=4;
 	            			sm.Escribir("adios"+'\n'); // mando al server que quiere salir
 	            			
             			}else if (vent.boton==3){ //Baja
             				sm.Escribir("baja"+'\n');
-            				String nick = vent.textNick.toString();
-            				String pass = vent.textPass.toString();
+            				String nick = vent.textNick.getText();
+            				sm.Escribir(nick+'\n');
+            				String pass = vent.textPass.getText();
+            				sm.Escribir(pass+'\n');
+            				String resp = sm.Leer();
+            				if (resp.equals("210.OK Usuario eliminado correctamente")){
+            					vent.dispose();
+            					estado=3;
+            				}else{
+            					estado=3;
+            				}
             			}
             		}
             		

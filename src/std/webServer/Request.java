@@ -1,17 +1,8 @@
 package std.webServer;
 
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
-import java.nio.Buffer;
-import java.sql.Array;
 import java.sql.SQLException;
-import java.util.*;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.table.DefaultTableModel;
-
 import util.*;
 
 final class Request implements Runnable {
@@ -56,15 +47,17 @@ final class Request implements Runnable {
 					base.conectar();
 					String nick= sockManager.Leer();
 					String pass= sockManager.Leer();
-					base.alta(nick,pass);
+			    	String respuesta=base.alta(nick,pass);
 					base.desconectar();
+					sockManager.Escribir(respuesta);
 				}
 				else if (requestLine.equals("baja")){
 					base.conectar();
 					String nick= sockManager.Leer();
 					String pass= sockManager.Leer();
-					base.baja(nick,pass);
+					String respuesta=base.baja(nick,pass);
 					base.desconectar();
+					sockManager.Escribir(respuesta);
 						
 				}else {//requestLine!=null---> contiene un nombre de usuario
 					 base.conectar();

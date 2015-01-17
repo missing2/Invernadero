@@ -25,7 +25,7 @@ public class VentanaAltasBajas extends JFrame implements ActionListener, Compone
 		getContentPane().setBackground(Color.BLACK);
 		getContentPane().setLayout(null);
 		
-		textNick = new JTextField();
+		textNick = new JTextField("paco");
 		textNick.setBounds(66, 61, 105, 20);
 		getContentPane().add(textNick);
 		textNick.setColumns(10);
@@ -36,7 +36,7 @@ public class VentanaAltasBajas extends JFrame implements ActionListener, Compone
 		lblNick.setBounds(10, 62, 46, 14);
 		getContentPane().add(lblNick);
 		
-		textPass = new JTextField();
+		textPass = new JTextField("1");
 		textPass.setBounds(101, 135, 105, 20);
 		getContentPane().add(textPass);
 		textPass.setColumns(10);
