@@ -237,8 +237,43 @@ public class Client {
 	            	    	vent.boton=0;
 	            			estado=4;
 	        
+	            		}else if(vent.boton==7){//bdesactivar placa
+	               			vent.boton=0;
+	               			int confirmado = JOptionPane.showConfirmDialog(vent, "¿Confirmar?");
+        					if (JOptionPane.OK_OPTION == confirmado){
+		               			sm.Escribir("desactivarplaca"+'\n');
+		               			sm.Escribir(vent.id+'\n');
+		               			System.out.println("Cargo la lista?");
+           						String stringLista = sm.Leer();
+           						System.out.println("Leyendo lista aqui "+stringLista);
+           						ArrayList<String> df = new ArrayList<String>();
+           						String Sensor[] = stringLista.split(",");// separo sensores
+           						for(int i=0;i<Sensor.length;i++){
+           							df.add(Sensor[i]);
+           						}
+           						System.out.println("los datos de la lista"+df);
+           						vent.cargarTabla(df);
+        					}
+	            		}else if(vent.boton==8){//bActivarplaca
+	               			vent.boton=0;
+	               			int confirmado = JOptionPane.showConfirmDialog(vent, "¿Confirmar?");
+        					if (JOptionPane.OK_OPTION == confirmado){
+		               			sm.Escribir("activarplaca"+'\n');
+		               			sm.Escribir(vent.id+'\n');
+		               			System.out.println("Cargo la lista?");
+           						String stringLista = sm.Leer();
+           						System.out.println("Leyendo lista aqui "+stringLista);
+           						ArrayList<String> df = new ArrayList<String>();
+           						String Sensor[] = stringLista.split(",");// separo sensores
+           						for(int i=0;i<Sensor.length;i++){
+           							df.add(Sensor[i]);
+           						}
+           						System.out.println("los datos de la lista"+df);
+           						vent.cargarTabla(df);
+           					   }
+        					}
 	            		}
-            	}
+            	
 
             	case 4:// salir
             		sm.Escribir("adios"+'\n'); // mando al server que quiere salir

@@ -262,7 +262,25 @@ public class DataBaseControler {
 		st.close();
 	}
 	
+	public void encenderPlaca(String id) throws SQLException {
+		// TODO Auto-generated method stub
+		Statement st = conn.createStatement();
+		System.out.println("me pasan el id placa para apagarlo: "+id);
+		String sql = "UPDATE Placa SET estado_placa ='"+"on"+"' WHERE id_placa='"+id+"'";
+		st.executeUpdate(sql);
+		System.out.println("Hago el update");
+		st.close();
+	}
 
+	public void apagarPlaca(String id) throws SQLException {
+		// TODO Auto-generated method stub
+		Statement st = conn.createStatement();
+		System.out.println("me pasan el id placa para apagarlo: "+id);
+		String sql = "UPDATE Placa SET estado_placa ='"+"off"+"' WHERE id_placa='"+id+"'";
+		st.executeUpdate(sql);
+		System.out.println("Hago el update");
+		st.close();
+	}
 
 
 	public String cambiarEstado(String id, String parametro) throws SQLException { // depurarlo y mirar consultas...
@@ -395,9 +413,8 @@ public class DataBaseControler {
 		return tabla;
 	}
 	
-	public static void main(String[] args){
-		
-	}
+
+
 }
 	 	
 	 	

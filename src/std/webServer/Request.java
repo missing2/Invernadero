@@ -176,12 +176,38 @@ final class Request implements Runnable {
 						sockManager.Escribir(respuesta+'\n');
 						sockManager.Escribir(lista+'\n');
 						}else{
-						sockManager.Escribir("409 ERR Faltan datos."+'\n');
-						base.conectar();
-						String lista = base.sacarlista();
-						base.desconectar();
-						sockManager.Escribir(lista+'\n');
+							sockManager.Escribir("409 ERR Faltan datos."+'\n');
+							base.conectar();
+							String lista = base.sacarlista();
+							base.desconectar();
+							sockManager.Escribir(lista+'\n');
 						}
+					}else if (requestLine.equals("activarplaca")){
+							System.out.println("activar placa");
+							String id = sockManager.Leer(); // id de la placa que voy a desactivar
+							 base.conectar();
+							 System.out.println("Request id:"+id);
+							 base.encenderPlaca(id);
+							 base.desconectar();
+							 base.conectar();
+							 String listaActualizada= base.sacarlista();
+							 System.out.println("Desactivar: "+listaActualizada);
+							 base.desconectar();
+							 sockManager.Escribir(listaActualizada+'\n');
+							 
+					}else if (requestLine.equals("desactivarplaca")){
+						System.out.println("desactivar placa");
+						String id = sockManager.Leer();  // id de la placa que voy a desactivar
+						 base.conectar();
+						 System.out.println("Request id:"+id);
+						 base.apagarPlaca(id);
+						 base.desconectar();
+						 base.conectar();
+						 String listaActualizada= base.sacarlista();
+						 System.out.println("Desactivar: "+listaActualizada);
+						 base.desconectar();
+						 sockManager.Escribir(listaActualizada+'\n');
+					
 					}else if (requestLine.contains("salir")){
 						estado=4;
 					}

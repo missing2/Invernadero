@@ -68,6 +68,8 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 	JButton bActuar;
 	JButton bSalir;
 	JButton bBuscar;
+	JButton btnActivarPlaca;
+	JButton btnDesactivarPlaca;
 
 
 	public JTextField palabra;
@@ -92,12 +94,18 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 
 		palabra = new JTextField(10);
 
-		bActivar = new JButton ("Activar");
-		bDesactivar = new JButton ("Desactivar");
+		bActivar = new JButton ("Activar Sensor");
+		bDesactivar = new JButton ("Desactivar Sensor");
 		bImagenPlaca = new JButton ("Imagen Placa"); 
 		bActuar = new JButton("Actuar");
 		bBuscar = new JButton("Buscar");
 		bSalir = new JButton("Salir");
+		btnActivarPlaca = new JButton("Activar Placa");
+		panelBotonera.add(btnActivarPlaca);
+		
+		btnDesactivarPlaca = new JButton("Desactivar placa");
+		panelBotonera.add(btnDesactivarPlaca);
+		
 
 		panelBotonera.setLayout(new FlowLayout());
 		panelBotonera.add(bActivar);
@@ -117,7 +125,8 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 
 		this.getContentPane().setLayout(new BorderLayout());
 		this.getContentPane().add(panelBotonera,"North");
-		this.getContentPane().add(panelCentral,"Center");
+		
+		
 		
 		
 				table = new JTable();
@@ -151,8 +160,11 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		bBuscar.addActionListener(this);
 		bImagenPlaca.addActionListener(this);
 		bSalir.addActionListener(this);
-		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+		btnDesactivarPlaca.addActionListener(this);
+		btnActivarPlaca.addActionListener(this);
 		
+		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+		this.getContentPane().add(panelCentral,"Center");
 	}
 
 	@Override
@@ -216,8 +228,17 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		}else if(e.getSource().equals(bSalir)){
 			boton = 6;
 			System.exit(0);
+			
+		}else if(e.getSource().equals(btnDesactivarPlaca)){
+			boton = 7;
+			int index = table.getSelectedRow();
+			id = (String) table.getValueAt(index, 1);
+			
+		}else if(e.getSource().equals(btnActivarPlaca)){
+			boton = 8;
+			int index = table.getSelectedRow();
+			id = (String) table.getValueAt(index, 1);
 		}
-
 
 	}
 
