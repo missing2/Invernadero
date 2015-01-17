@@ -48,17 +48,17 @@ public class VentanaAltasBajas extends JFrame implements ActionListener, Compone
 		getContentPane().add(lblPassword);
 		
 	    btnCrear = new JButton("crear");
-		btnCrear.setBounds(326, 87, 89, 23);
+		btnCrear.setBounds(326, 87, 105, 23);
 		getContentPane().add(btnCrear);
 		btnCrear.addActionListener(this);
 		
 		btnDarDeBaja = new JButton("dar de baja");
-		btnDarDeBaja.setBounds(326, 121, 89, 23);
+		btnDarDeBaja.setBounds(326, 121, 105, 23);
 		getContentPane().add(btnDarDeBaja);
 		btnDarDeBaja.addActionListener(this);
 		
 		btnSalir = new JButton("salir");
-		btnSalir.setBounds(326, 53, 89, 23);
+		btnSalir.setBounds(326, 53, 105, 23);
 		getContentPane().add(btnSalir);
 		btnSalir.addActionListener(this);
 	}
