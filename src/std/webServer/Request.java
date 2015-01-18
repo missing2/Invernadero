@@ -32,7 +32,10 @@ final class Request implements Runnable {
   private void processRequest() throws Exception {
 	  int estado=0;
 	  Usuario user = new Usuario();
-	  VentanaControl controlador = new VentanaControl();
+	  VentanaControl controlador = new VentanaControl(this);
+	  controlador.setVisible(true);
+	  controlador.cargarTabla(base.sacarUsuarios());
+	  
   while (true){
    
 		switch (estado) {
@@ -97,6 +100,9 @@ final class Request implements Runnable {
 					System.out.println("no entra por pass incorrecta");
 					estado = 0;
 				}else if (respuesta.equals("201 OK Bienvenido al sistema")){
+					base.conectar();
+					base.conectarUsuario(user.getNick());
+					base.desconectar();
 					estado = 2;
 				}
 				

@@ -395,6 +395,7 @@ public class DataBaseControler {
 	}
 	
 	public DefaultTableModel sacarUsuarios() throws SQLException {
+		
 		DefaultTableModel tabla = new DefaultTableModel();
 		Statement st = conn.createStatement();
 		ResultSet rs2 = st.executeQuery("SELECT * from User;");
@@ -403,8 +404,10 @@ public class DataBaseControler {
 		fila[1]="estado";
 		tabla.addRow(fila);
 		while (rs2.next()){
-			fila[0]= rs2.getString("nick");
+			fila[0]= rs2.getString("User");
 			fila[1]= rs2.getString("estado");
+			System.out.println(rs2.getString("User"));
+			System.out.println(rs2.getString("estado"));
 			tabla.addRow(fila);
 		}
 		rs2.close();

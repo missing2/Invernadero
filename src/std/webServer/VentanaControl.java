@@ -20,7 +20,10 @@ public class VentanaControl extends JFrame implements ActionListener, ComponentL
 	private JButton btnEchar;
 	public int boton = 0;
 	public String nick;
-	public VentanaControl() {
+	
+	
+	
+	public VentanaControl(Request a) {
 		
 		table = new JTable();
 		getContentPane().add(table, BorderLayout.CENTER);
@@ -28,7 +31,9 @@ public class VentanaControl extends JFrame implements ActionListener, ComponentL
 		btnEchar = new JButton("Echar");
 		getContentPane().add(btnEchar, BorderLayout.SOUTH);
 		btnEchar.addActionListener(this);
+		this.setSize(309,314);
 	}
+	
 
 
 
@@ -68,10 +73,8 @@ public void actionPerformed(ActionEvent e) {
 }
 
 public void cargarTabla(DefaultTableModel tabla){
-
 	table.setModel(tabla);
-	repaint();
-	
+	this.repaint();
 
 }
 
