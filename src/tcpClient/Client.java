@@ -228,9 +228,7 @@ public class Client {
 	            	    	vent.boton=0;
 	            	    	sm.Escribir("imagen"+'\n');
 	            	    	sm.Escribir(vent.id+'\n');
-	            	    	String url= sm.Leer();
-	            	    	System.out.println(url);
-	            	    	ventanaImagen ttt= new ventanaImagen(url);
+	            	    	
 	            	    	
 	            	    	
 	            	    }else if(vent.boton==6){// salir
