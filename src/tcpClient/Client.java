@@ -38,7 +38,7 @@ public class Client {
             		sm = new SocketManager(ip,2345);
             		
             		while (ventanaloggin.boton==0){
-            			System.out.println("");// espero a que rellene los datos y pulse boton loggin
+            			
             		}    
             		if(ventanaloggin.boton==1){ // pulso boton loggearme
             			
@@ -283,9 +283,7 @@ public class Client {
                 break;
             	}        
             }
-            	
-            System.out.println("Fin de la práctica");
-            sm.CerrarSocket();
+                   
         } catch (Exception e) {
 			System.err.println("main: " + e);
 			e.printStackTrace();

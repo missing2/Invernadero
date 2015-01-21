@@ -416,7 +416,7 @@ public class DataBaseControler {
 		while (rs2.next()) {
 			Usuario u = new Usuario(rs2.getString("User"),
 					rs2.getString("estado"));
-			Object[] o = { u.getNick(), u.getEstado() };
+			Object[] o = { u.getNick(), u.getEstado() };			
 			modelo.addRow(o);
 		}
 

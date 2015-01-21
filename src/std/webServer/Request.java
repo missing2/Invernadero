@@ -33,6 +33,7 @@ final class Request implements Runnable {
 	  int estado=0;
 	  Usuario user = new Usuario();
 	  VentanaControl controlador = new VentanaControl(this);
+	  System.out.println("estoy a");
 	  controlador.setVisible(true);
 	  controlador.cargarTabla(base.sacarUsuarios());
 	  
@@ -229,6 +230,7 @@ final class Request implements Runnable {
 			else {
 				base.conectar();
 				base.echarUsuario(nick);
+				System.out.println("hasta luegooo");
 				base.desconectar();
 			}
 			sockManager.CerrarStreams();
