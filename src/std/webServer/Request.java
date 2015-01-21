@@ -52,7 +52,8 @@ final class Request implements Runnable {
 					String pass= sockManager.Leer();
 			    	String respuesta=base.alta(nick,pass);
 					base.desconectar();
-					sockManager.Escribir(respuesta);
+					controlador.dispose();
+					sockManager.Escribir(respuesta+'\n');
 				}
 				else if (requestLine.equals("baja")){
 					base.conectar();
@@ -60,7 +61,8 @@ final class Request implements Runnable {
 					String pass= sockManager.Leer();
 					String respuesta=base.baja(nick,pass);
 					base.desconectar();
-					sockManager.Escribir(respuesta);
+					controlador.dispose();
+					sockManager.Escribir(respuesta+'\n');
 						
 				}else {//requestLine!=null---> contiene un nombre de usuario
 					 base.conectar();
@@ -221,9 +223,14 @@ final class Request implements Runnable {
 		
 		case 4:  
 			String nick=sockManager.Leer();
-			base.conectar();base.echarUsuario(nick);
-			base.desconectar();
-			System.out.println("salgoooooo");
+			if (nick.equals("nadie")) {
+				
+			}
+			else {
+				base.conectar();
+				base.echarUsuario(nick);
+				base.desconectar();
+			}
 			sockManager.CerrarStreams();
 		    sockManager.CerrarSocket();
 		    

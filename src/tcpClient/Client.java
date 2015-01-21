@@ -35,7 +35,6 @@ public class Client {
             		ventanaLoggin ventanaloggin = new ventanaLoggin();
             		//Se crea el socket, pasando la ip del server manualmente
             		String ip = ventanaloggin.txtFIP.getText();
-             		
             		sm = new SocketManager(ip,2345);
             		
             		while (ventanaloggin.boton==0){
@@ -65,7 +64,6 @@ public class Client {
             		}else if(ventanaloggin.boton==2){// pulso boton salir
             			ventanaloggin.boton=0;
             			ventanaloggin.dispose();// salgo de la app
-            			sm.Escribir("adios"+'\n'); // mando al server que quiere salir
             			estado= 4;
             			
             		}else if (ventanaloggin.boton==3){// pulso para altas bajas
@@ -84,15 +82,19 @@ public class Client {
             				sm.Escribir(pass+'\n');
             				String resp = sm.Leer();
             				if (resp.equals("211.OK Usuario insertado correctamente")){
-            					estado=3;
             					vent.dispose();
+            					sm.CerrarSocket();
+            					estado=0;
 
             				}else{
-            					estado=3;
+            					System.out.println("usuario no insertado");
+            					sm.CerrarSocket();
+            					estado=0;
             				}
             			}else if (vent.boton==2){// Salir
-            				estado=4;
 	            			sm.Escribir("adios"+'\n'); // mando al server que quiere salir
+	            			sm.Escribir("nadie");
+	            			estado=4;
 	            			
             			}else if (vent.boton==3){ //Baja
             				sm.Escribir("baja"+'\n');
@@ -103,9 +105,12 @@ public class Client {
             				String resp = sm.Leer();
             				if (resp.equals("210.OK Usuario eliminado correctamente")){
             					vent.dispose();
-            					estado=3;
+            					sm.CerrarSocket();
+            					estado=0;
             				}else{
-            					estado=3;
+            					sm.CerrarSocket();
+            					estado=0;
+            					
             				}
             			}
             		}

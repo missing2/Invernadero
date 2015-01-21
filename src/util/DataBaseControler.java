@@ -66,7 +66,7 @@ public class DataBaseControler {
 		String respuesta;
 		Statement st = conn.createStatement();
 		if (!nick.equals("")&& !pass.equals("")){
-			st.executeUpdate("Delete from User where User ='"+nick+"' and contrasena ='"+pass+"';");
+			st.execute("Delete from User where User ='"+nick+"' and contrasena ='"+pass+"';");
 			respuesta = "210.OK Usuario eliminado correctamente";
 			
 		}else{
