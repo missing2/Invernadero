@@ -379,7 +379,7 @@ public class DataBaseControler {
 	public DefaultTableModel echarUsuario(String nick) throws SQLException {
 		
 		Statement st = conn.createStatement();
-		ResultSet rs2 = st.executeQuery("UPDATE User SET estado ='"+"offline"+"' WHERE nick='"+nick+"';");
+		st.executeUpdate("UPDATE User SET estado ='"+"offline"+"' WHERE nick='"+nick+"';");
 		
 		DefaultTableModel tabla = this.sacarUsuarios();
 		return tabla;
@@ -388,7 +388,7 @@ public class DataBaseControler {
 	public DefaultTableModel conectarUsuario(String nick) throws SQLException {
 		
 		Statement st = conn.createStatement();
-		ResultSet rs2 = st.executeQuery("UPDATE User SET estado ='"+"online"+"' WHERE nick='"+nick+"';");
+		st.executeUpdate("UPDATE User SET estado ='"+"online"+"' WHERE nick='"+nick+"';");
 		
 		DefaultTableModel tabla = this.sacarUsuarios();
 		return tabla;
