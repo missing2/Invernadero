@@ -53,7 +53,7 @@ public class DataBaseControler {
 		Statement st = conn.createStatement();
 		
 		if (!nick.equals("")&& !pass.equals("")){
-			st.executeQuery("Insert into User values('"+nick+"','"+pass+"','"+"offline"+"');");
+			st.execute("Insert into User values('"+nick+"','"+pass+"','"+"offline"+"');");
 			respuesta = "211.OK Usuario insertado correctamente";
 		}else{
 			respuesta = "411.ERR Faltan datos";
@@ -66,7 +66,7 @@ public class DataBaseControler {
 		String respuesta;
 		Statement st = conn.createStatement();
 		if (!nick.equals("")&& !pass.equals("")){
-			st.executeQuery("Delete from User where User ='"+nick+"' and contrasena ='"+pass+"';");
+			st.executeUpdate("Delete from User where User ='"+nick+"' and contrasena ='"+pass+"';");
 			respuesta = "210.OK Usuario eliminado correctamente";
 			
 		}else{
