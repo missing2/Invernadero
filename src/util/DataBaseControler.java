@@ -52,7 +52,7 @@ public class DataBaseControler {
 		String respuesta;
 		if (!nick.equals("")&& !pass.equals("")){
 		Statement st = conn.createStatement();
-		ResultSet rs2 = st.executeQuery("Insert into User values('"+nick+"','"+pass+"','"+"offline"+"';");
+		ResultSet rs2 = st.executeQuery("Insert into User values('"+nick+"','"+pass+"','"+"offline"+"');");
 		respuesta = "211.OK Usuario insertado correctamente";
 		}else{
 			respuesta = "411.ERR Faltan datos";
