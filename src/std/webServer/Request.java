@@ -223,7 +223,7 @@ final class Request implements Runnable {
 			String nick=sockManager.Leer();
 			base.conectar();base.echarUsuario(nick);
 			base.desconectar();
-			
+			System.out.println("salgoooooo");
 			sockManager.CerrarStreams();
 		    sockManager.CerrarSocket();
 		    
