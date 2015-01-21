@@ -220,8 +220,10 @@ final class Request implements Runnable {
 			 }
 		
 		case 4:  
-			System.exit(0);
-			   // Close streams and socket.
+			String nick=sockManager.Leer();
+			base.conectar();base.echarUsuario(nick);
+			base.desconectar();
+			
 			sockManager.CerrarStreams();
 		    sockManager.CerrarSocket();
 		    

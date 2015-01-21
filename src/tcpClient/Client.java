@@ -229,8 +229,6 @@ public class Client {
 	            	    	sm.Escribir("imagen"+'\n');
 	            	    	sm.Escribir(vent.id+'\n');
 	            	    	
-	            	    	
-	            	    	
 	            	    }else if(vent.boton==6){// salir
 	            	    	vent.boton=0;
 	            			estado=4;
@@ -275,7 +273,8 @@ public class Client {
 
             	case 4:// salir
             		sm.Escribir("adios"+'\n'); // mando al server que quiere salir
-            		System.exit(0); 
+            		sm.Escribir(user.getNick()); 
+            		sm.CerrarSocket();
                 break;
             	}        
             }
