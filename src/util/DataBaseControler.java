@@ -50,24 +50,27 @@ public class DataBaseControler {
 	
 	public String alta(String nick,String pass) throws SQLException{
 		String respuesta;
-		if (!nick.equals("")&& !pass.equals("")){
 		Statement st = conn.createStatement();
-		st.executeQuery("Insert into User values('"+nick+"','"+pass+"','"+"offline"+"');");
-		respuesta = "211.OK Usuario insertado correctamente";
+		
+		if (!nick.equals("")&& !pass.equals("")){
+			st.executeQuery("Insert into User values('"+nick+"','"+pass+"','"+"offline"+"');");
+			respuesta = "211.OK Usuario insertado correctamente";
 		}else{
 			respuesta = "411.ERR Faltan datos";
 		}
+		st.close();
 		return respuesta;
 	}
 	public String  baja(String nick,String pass) throws SQLException{
 		String respuesta;
-		if (!nick.equals("")&& !pass.equals("")){
 		Statement st = conn.createStatement();
-		st.executeQuery("Delete from User where User ='"+nick+"' and contrasena ='"+pass+"';");
-		respuesta = "210.OK Usuario eliminado correctamente";
+		if (!nick.equals("")&& !pass.equals("")){
+			st.executeQuery("Delete from User where User ='"+nick+"' and contrasena ='"+pass+"';");
+			respuesta = "210.OK Usuario eliminado correctamente";
 		}else{
 			respuesta = "410.ERR Faltan datos";
 		}
+		st.close();
 		return respuesta;
 	}
 
@@ -94,10 +97,10 @@ public class DataBaseControler {
 	public String ConsultarPasword(String nombre,int pass)throws SQLException{
 			
 		String existe="";
+		Statement st = conn.createStatement();
 		
     	if (!Integer.toString(pass).isEmpty()){// si la clave no esta vacia...
-    		
-    		Statement st = conn.createStatement(); 
+    		 
 			ResultSet rs2 = st.executeQuery("SELECT * from User WHERE User = '"+nombre+"';");  
 			int contra = rs2.getInt("contrasena");
 		 	if (contra==pass){
@@ -107,8 +110,9 @@ public class DataBaseControler {
 		 		rs2.close();
 	    }else
 			existe="402 ERR Falta la clave";
-		
-    	return existe;   	
+    	
+    	st.close();
+    	return existe;
 	  }
 	
 //___________________________________VENTANA ACCION________________________________________//
@@ -136,7 +140,7 @@ public class DataBaseControler {
 			
 		}
 		rs2.close();
-		System.out.println(fin);
+		st.close();
 		return fin;
 		
 		
@@ -237,6 +241,7 @@ public class DataBaseControler {
  		
  		fin=fin+"/";
  		rs2.close();
+ 		
 		return fin;
 	}
 	
@@ -382,6 +387,7 @@ public class DataBaseControler {
 		st.executeUpdate("UPDATE User SET estado ='"+"offline"+"' WHERE User='"+nick+"';");
 		
 		DefaultTableModel tabla = this.sacarUsuarios();
+		st.close();
 		return tabla;
 	}
 	
@@ -391,6 +397,7 @@ public class DataBaseControler {
 		st.executeUpdate("UPDATE User SET estado ='"+"online"+"' WHERE User='"+nick+"';");
 		
 		DefaultTableModel tabla = this.sacarUsuarios();
+		st.close();
 		return tabla;
 	}
 	
