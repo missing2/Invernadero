@@ -63,7 +63,7 @@ public class DataBaseControler {
 		String respuesta;
 		if (!nick.equals("")&& !pass.equals("")){
 		Statement st = conn.createStatement();
-		st.executeQuery("Delete from User where User ='"+nick+"' and where contrasena ='"+pass+"';");
+		st.executeQuery("Delete from User where User ='"+nick+"' and contrasena ='"+pass+"';");
 		respuesta = "210.OK Usuario eliminado correctamente";
 		}else{
 			respuesta = "410.ERR Faltan datos";
