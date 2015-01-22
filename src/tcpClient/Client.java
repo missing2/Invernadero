@@ -224,7 +224,9 @@ public class Client {
 	            	    	for(int i=0;i<Sensor.length;i++){
 	            	    		df.add(Sensor[i]);
 	            	    	}
+	            	    	System.out.println("lista antes de cargartabla "+df);
 	            	    	vent.cargarTabla(df);
+	            	    	
 	            	    	
 	            	    }else if(vent.boton==5){// imagen
 	            	    	vent.boton=0;
