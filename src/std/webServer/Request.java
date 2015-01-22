@@ -158,7 +158,9 @@ final class Request implements Runnable {
 							requestLine = sockManager.Leer(); // recivo que se sensor quiere buscar en la bd
 							 base.conectar();
 							 String lista=base.buscarSensor(requestLine);
+							 System.out.println("Lo que le paso"+requestLine);
 							 base.desconectar();
+							 System.out.println("lo que deberia devolver"+lista);
 							sockManager.Escribir(lista+'\n');
 						
 					}else if (requestLine.contains("imagen")){

@@ -38,7 +38,7 @@ public class Client {
             		sm = new SocketManager(ip,2345);
             		
             		while (ventanaloggin.boton==0){
-            			
+            			System.out.println();
             		}    
             		if(ventanaloggin.boton==1){ // pulso boton loggearme
             			
