@@ -216,9 +216,8 @@ public class Client {
        						}
 	            	    }else if(vent.boton==4){//bBuscar
 	            	    	vent.boton=0;
-	            	    	System.out.println("bot4 clicado");
 	            	    	sm.Escribir("buscar"+'\n');
-	            	    	sm.Escribir(vent.palabra.toString()+'\n');
+	            	    	sm.Escribir(vent.palabra.getText()+'\n');
 	            	    	String recibido=sm.Leer();
 	            	    	ArrayList<String> df = new ArrayList<String>();
 	            	    	String Sensor[] = recibido.split(",");// separo sensores

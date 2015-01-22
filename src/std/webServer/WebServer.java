@@ -6,6 +6,8 @@ import util.*;
 
 public final class WebServer
 {
+	public static int actuales= 0;
+	public static int maximas = 2;
 	public static void main(String argv[]) throws Exception
 	{
 		
@@ -17,12 +19,19 @@ public final class WebServer
 		{
 			
 			SocketManager sockManager = new SocketManager(wellcomeSocket.accept());
-
-			Request request = new Request(sockManager);
-
-			Thread thre = new Thread(request); 
-
-			thre.start();
+			if (actuales<maximas) {
+				
+			
+				Request request = new Request(sockManager);
+	
+				Thread thre = new Thread(request); 
+	
+				thre.start();
+				actuales++;
+			}else {
+				wellcomeSocket.close();
+				System.out.println("servidor completo");
+			}
 		  }
 		}
    }

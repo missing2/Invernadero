@@ -93,6 +93,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 		panelIzquierda = new JPanel();
 
 		palabra = new JTextField(10);
+		palabra.setText("id_placa,p1");
 
 		bActivar = new JButton ("Activar Sensor");
 		bDesactivar = new JButton ("Desactivar Sensor");
