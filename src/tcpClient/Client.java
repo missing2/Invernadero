@@ -219,6 +219,7 @@ public class Client {
 	            	    	sm.Escribir("buscar"+'\n');
 	            	    	sm.Escribir(vent.palabra.getText()+'\n');
 	            	    	String recibido=sm.Leer();
+	            	    	System.out.println("lo que recibo cuando busco:"+recibido);
 	            	    	ArrayList<String> df = new ArrayList<String>();
 	            	    	String Sensor[] = recibido.split(",");// separo sensores
 	            	    	for(int i=0;i<Sensor.length;i++){
@@ -226,6 +227,7 @@ public class Client {
 	            	    	}
 	            	    	System.out.println("lista antes de cargartabla "+df);
 	            	    	vent.cargarTabla(df);
+	            	    	
 	            	    	
 	            	    	
 	            	    }else if(vent.boton==5){// imagen
