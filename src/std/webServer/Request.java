@@ -3,6 +3,7 @@ package std.webServer;
 import java.io.*;
 import java.net.*;
 import java.sql.SQLException;
+
 import util.*;
 
 final class Request implements Runnable {
@@ -44,7 +45,7 @@ final class Request implements Runnable {
 		
 			String  requestLine  = sockManager.Leer();// lee el user que le has pasado por socket desde el cliente
 			
-			if (! requestLine.equals("208Ok.adios")) {
+			if (!requestLine.equals("adios")) {
 				
 				if (requestLine.equals("alta")){// estoy en la ventana altas bajas
 					base.conectar();
@@ -123,11 +124,7 @@ final class Request implements Runnable {
 				 sockManager.Escribir(lista+'\n'); // mando la lista al cliente para que inicie la ventana
 				
 			 }
-			
-			
-			 
 			 while (true) { // queda en bucle para poder seguir haciendo cosas
-				 System.out.println("esperando ");
 				 requestLine  = sockManager.Leer();// lee el comando (boton) que e has pasado por socket desde el cliente
 					if (requestLine.equals("activar")){
 						String id = sockManager.Leer(); // id del sensor que voy a activar
@@ -136,12 +133,10 @@ final class Request implements Runnable {
 						 base.desconectar();
 						 base.conectar();
 						 String listaActualizada= base.sacarlista();
-						 System.out.println("Activar:"+listaActualizada);
 						 base.desconectar();
 						 sockManager.Escribir(listaActualizada+'\n'); //mando lista actualizada al cliente
 						
 					}else if (requestLine.equals("desactivar")){
-						System.out.println("entroo");
 						String id = sockManager.Leer(); // id del sensor que voy a desactivar
 						 base.conectar();
 						 System.out.println("Request id:"+id);
@@ -149,18 +144,14 @@ final class Request implements Runnable {
 						 base.desconectar();
 						 base.conectar();
 						 String listaActualizada= base.sacarlista();
-						 System.out.println("Desactivar: "+listaActualizada);
 						 base.desconectar();
 						 sockManager.Escribir(listaActualizada+'\n');
 						
 					}else if (requestLine.contains("buscar")){
-						System.out.println("buscando");
 							requestLine = sockManager.Leer(); // recivo que se sensor quiere buscar en la bd
 							 base.conectar();
 							 String lista=base.buscarSensor(requestLine);
-							 System.out.println("Lo que le paso"+requestLine);
 							 base.desconectar();
-							 System.out.println("lo que deberia devolver"+lista);
 							sockManager.Escribir(lista+'\n');
 						
 					}else if (requestLine.contains("imagen")){
@@ -174,11 +165,8 @@ final class Request implements Runnable {
 					
 					}else if (requestLine.contains("actuar")){
 						String id = sockManager.Leer(); // recivo el id que quiero cambiar de accion
-						System.out.println(id);
 						String parametro = sockManager.Leer();
-						System.out.println("parametro"+parametro);
 						base.conectar();
-						System.out.println("actuo");
 						if (!parametro.equals("")){
 						String respuesta = base.cambiarEstado(id,parametro);
 						String lista = base.sacarlista();
@@ -193,37 +181,33 @@ final class Request implements Runnable {
 							sockManager.Escribir(lista+'\n');
 						}
 					}else if (requestLine.equals("activarplaca")){
-							System.out.println("activar placa");
 							String id = sockManager.Leer(); // id de la placa que voy a desactivar
 							 base.conectar();
-							 System.out.println("Request id:"+id);
 							 base.encenderPlaca(id);
 							 base.desconectar();
 							 base.conectar();
 							 String listaActualizada= base.sacarlista();
-							 System.out.println("Desactivar: "+listaActualizada);
 							 base.desconectar();
 							 sockManager.Escribir(listaActualizada+'\n');
 							 
 					}else if (requestLine.equals("desactivarplaca")){
-						System.out.println("desactivar placa");
-						String id = sockManager.Leer();  // id de la placa que voy a desactivar
+						 String id = sockManager.Leer();  // id de la placa que voy a desactivar
 						 base.conectar();
 						 System.out.println("Request id:"+id);
 						 base.apagarPlaca(id);
 						 base.desconectar();
 						 base.conectar();
 						 String listaActualizada= base.sacarlista();
-						 System.out.println("Desactivar: "+listaActualizada);
 						 base.desconectar();
 						 sockManager.Escribir(listaActualizada+'\n');
 					
 					}else if (requestLine.contains("salir")){
 						estado=4;
+						System.out.println("me piden que adios");
 					}
 			 }
 		
-		case 4:  
+		case 4: //salir 
 			String nick=sockManager.Leer();
 			if (nick.equals("nadie")) {
 				
@@ -236,6 +220,7 @@ final class Request implements Runnable {
 			}
 			sockManager.CerrarStreams();
 		    sockManager.CerrarSocket();
+		  
 		    
 		break;
 			

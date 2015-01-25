@@ -28,8 +28,8 @@ public class Client {
             
             int estado = 0;
             Usuario user = new Usuario();
-            while (estado!=4) {
-            	
+            
+            while (true) {	
             	switch(estado){
             	case 0: // comprobar user y creo el socket
             		ventanaLoggin ventanaloggin = new ventanaLoggin();
@@ -38,7 +38,7 @@ public class Client {
             		sm = new SocketManager(ip,2345);
             		
             		while (ventanaloggin.boton==0){
-            			System.out.println();
+            			Thread.sleep(1000);
             		}    
             		if(ventanaloggin.boton==1){ // pulso boton loggearme
             			
@@ -63,7 +63,8 @@ public class Client {
 	            		
             		}else if(ventanaloggin.boton==2){// pulso boton salir
             			ventanaloggin.boton=0;
-            			ventanaloggin.dispose();// salgo de la app
+            			user.setNick("nadie");
+            			ventanaloggin.dispose();
             			estado= 4;
             			
             		}else if (ventanaloggin.boton==3){// pulso para altas bajas
@@ -92,9 +93,11 @@ public class Client {
             					estado=0;
             				}
             			}else if (vent.boton==2){// Salir
-	            			sm.Escribir("adios"+'\n'); // mando al server que quiere salir
-	            			sm.Escribir("nadie");
-	            			estado=4;
+	            			vent.dispose();
+	            			user.setNick("nadie");
+	            			ventanaloggin.boton=0;
+	            			ventanaloggin.dispose();
+	            			estado= 4;
 	            			
             			}else if (vent.boton==3){ //Baja
             				sm.Escribir("baja"+'\n');
@@ -144,7 +147,7 @@ public class Client {
             		vent.cargarTabla(listae);
             		
             		
-            		while (vent.boton!=6){
+            		while (true){
             			while (vent.boton==0){
             			//estoy en la vent sin mas
             				Thread.sleep(1000);
@@ -165,7 +168,6 @@ public class Client {
            						for(int i=0;i<Sensor.length;i++){
            							df.add(Sensor[i]);
            						}
-           						System.out.println("los datos de la lista"+df);
            						vent.cargarTabla(df);
            					   }
             				
@@ -177,30 +179,22 @@ public class Client {
         						sm.Escribir("desactivar"+'\n');
         						String id = vent.id; //id del sensor que tengo que activar  
            						sm.Escribir(id+'\n');
-           						System.out.println("Cargo la lista?");
            						String stringLista = sm.Leer();
-           						System.out.println("Leyendo lista aqui "+stringLista);
            						ArrayList<String> df = new ArrayList<String>();
            						String Sensor[] = stringLista.split(",");// separo sensores
            						for(int i=0;i<Sensor.length;i++){
            							df.add(Sensor[i]);
            						}
-           						System.out.println("los datos de la lista"+df);
            						vent.cargarTabla(df);
            					   }
         					
 	               		}else if(vent.boton==3){//bActuar
 	               			vent.boton=0;
-	               			System.out.println("bot3 clicado");
 	            			sm.Escribir("actuar"+'\n');
 	            	    	sm.Escribir(vent.id+'\n'); // paso el id que voy a cambiar la accion 
-	            	    	System.out.println("id "+vent.id);
 	               	    	sm.Escribir(vent.txt+'\n');
-	               	    	System.out.println("txt "+vent.txt);
 	            	    	String respuesta = sm.Leer();
-	            	    	System.out.println("Cargo la lista?");
        						String stringLista = sm.Leer();
-       						System.out.println(stringLista);
        						if(respuesta.equals("409 ERR Faltan datos."))
        							JOptionPane.showMessageDialog(vent, "falta parametro");
        						else if (respuesta.equals("407 ERROR accion ya ejecutada"))
@@ -211,21 +205,19 @@ public class Client {
 	       						for(int i=0;i<Sensor.length;i++){
 	       							df.add(Sensor[i]);
 	       						}
-	       						System.out.println("los datos de la lista"+df);
 	       						vent.cargarTabla(df);
        						}
+       						
 	            	    }else if(vent.boton==4){//bBuscar
 	            	    	vent.boton=0;
 	            	    	sm.Escribir("buscar"+'\n');
 	            	    	sm.Escribir(vent.palabra.getText()+'\n');
 	            	    	String recibido=sm.Leer();
-	            	    	System.out.println("lo que recibo cuando busco:"+recibido);
 	            	    	ArrayList<String> df = new ArrayList<String>();
 	            	    	String Sensor[] = recibido.split(",");// separo sensores
 	            	    	for(int i=0;i<Sensor.length;i++){
 	            	    		df.add(Sensor[i]);
 	            	    	}
-	            	    	System.out.println("lista antes de cargartabla "+df);
 	            	    	vent.cargarTabla(df);
 	            	    	
 	            	    	
@@ -239,6 +231,7 @@ public class Client {
 	            	    	
 	            	    }else if(vent.boton==6){// salir
 	            	    	vent.boton=0;
+	            	    	System.out.println("quiero salirrrr");
 	            			estado=4;
 	        
 	            		}else if(vent.boton==7){//bdesactivar placa
@@ -247,15 +240,12 @@ public class Client {
         					if (JOptionPane.OK_OPTION == confirmado){
 		               			sm.Escribir("desactivarplaca"+'\n');
 		               			sm.Escribir(vent.id+'\n');
-		               			System.out.println("Cargo la lista?");
            						String stringLista = sm.Leer();
-           						System.out.println("Leyendo lista aqui "+stringLista);
            						ArrayList<String> df = new ArrayList<String>();
            						String Sensor[] = stringLista.split(",");// separo sensores
            						for(int i=0;i<Sensor.length;i++){
            							df.add(Sensor[i]);
            						}
-           						System.out.println("los datos de la lista"+df);
            						vent.cargarTabla(df);
         					}
 	            		}else if(vent.boton==8){//bActivarplaca
@@ -266,13 +256,11 @@ public class Client {
 		               			sm.Escribir(vent.id+'\n');
 		               			System.out.println("Cargo la lista?");
            						String stringLista = sm.Leer();
-           						System.out.println("Leyendo lista aqui "+stringLista);
            						ArrayList<String> df = new ArrayList<String>();
            						String Sensor[] = stringLista.split(",");// separo sensores
            						for(int i=0;i<Sensor.length;i++){
            							df.add(Sensor[i]);
            						}
-           						System.out.println("los datos de la lista"+df);
            						vent.cargarTabla(df);
            					   }
         					}
@@ -281,8 +269,8 @@ public class Client {
 
             	case 4:// salir
             		sm.Escribir("adios"+'\n'); // mando al server que quiere salir
-            		sm.Escribir(user.getNick()); 
-            		sm.CerrarSocket();
+            		sm.Escribir(user.getNick()); //mando el nombre del user que soy para que me desconecte en la bd
+            		System.out.println("mando adios");
                 break;
             	}        
             }
@@ -302,7 +290,6 @@ public class Client {
 		for(int i=0;i<Sensor.length;i++){
 			df.add(Sensor[i]);
 		}
-		System.out.println("los datos de la lista"+df);
 		return df;
 	   }
 	

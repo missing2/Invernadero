@@ -247,7 +247,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 	public void cargarTabla(ArrayList<String> listae){
 		
 		if(listae.isEmpty()){
-			
+			System.out.println("vacia");
 		}
 		try{
 		DefaultTableModel modelo = new DefaultTableModel();

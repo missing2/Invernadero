@@ -163,7 +163,7 @@ public class DataBaseControler {
 		} 
 		else if(parametro.contains("?")){
 			parametro.replace('?','_');
-			parametro=parametro+"__";// añado 2 mas parq que sumen 3 _
+			parametro=parametro+"__";// añado 2 mas parq que sumen 3x_
 		} 
 		else {
 			// consulta normal sin caracteres raros
@@ -171,90 +171,26 @@ public class DataBaseControler {
 		
  		Statement stat = conn.createStatement();
  		
- 		System.out.println("colum "+ colum);
  		ResultSet rs2 = stat.executeQuery("Select * from Sensor where "+colum+" like '"+parametro+"';"); // columna en la que quiero buscar y parametro que quiero buscar
- 		//ResultSet rs2 = stat.executeQuery("Select * from Sensor where id_placa like '"+parametro+"';");
- 		System.out.println("param " + parametro);
- 		while (rs2.next()) {
- 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
- 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
- 			 System.out.println("sensor "+ a);
- 			 temp = (a.getId_placa()+";"+a.getDef()+";"+a.getFuncion_principal()+";"+a.getEstado()+";"+a.getUltima_accion());
- 			 
+ 		int conta =1; 
+ 		
+		while (rs2.next()) {
+			Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
+					rs2.getString("func_principal"),rs2.getString("estado"),rs2.getString("ultima_accion"));
+			
+			temp = ("ELEM:"+""+conta+";"+a.getId_placa()+";"+a.getId_sensor()+";"+a.getDef()+";"+a.getFuncion_principal()+";"+a.getEstado()+";"+a.getUltima_accion());
+			conta++;
+			fin=fin+temp+",";
+			
  			if (!fin.contains(temp)){ // si no esta insertado ya por la anterior consulta
  				fin=fin+temp+",";
  	 			}
  	 		}
- 		System.out.println("lista de busqueda:"+fin);
+ 	
  		stat.close();
- 		//stat = conn.createStatement();
+ 		
  		rs2.close();
-// 		rs2 = stat.executeQuery("Select * from Sensor where id_Placa like '"+requestLine+"';");
-// 		while (rs2.next()) {
-// 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
-// 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
-// 			 
-// 			 temp = (a.getId_placa()+";"+a.getDef()+";"+a.getFuncion_principal()+";"+a.getEstado()+";"+a.getUltima_accion());
-// 			 
-// 			if (!fin.contains(temp)){ // si no esta insertado ya por la anterior consulta
-// 				fin=fin+temp+",";
-// 	 			}
-// 		}
-// 		stat.close();
-// 		stat = conn.createStatement();
-// 		rs2.close();
-// 		rs2 = stat.executeQuery("Select * from Sensor where def_variable like '"+requestLine+"';");
-// 		while (rs2.next()) {
-// 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
-// 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
-// 			 
-// 			 temp = (a.getId_placa()+";"+a.getDef()+";"+a.getFuncion_principal()+";"+a.getEstado()+";"+a.getUltima_accion());
-// 			 
-// 			if (!fin.contains(temp)){ // si no esta insertado ya por la anterior consulta
-// 				fin=fin+temp+",";
-// 	 			}
-// 		}
-// 		rs2.close();
-// 		rs2 = stat.executeQuery("Select * from Sensor where Ultima_accion like '"+requestLine+"';");
-// 		
-// 		while (rs2.next()) {
-// 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
-// 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
-// 			 
-// 			 temp = (a.getId_placa()+";"+a.getDef()+";"+a.getFuncion_principal()+";"+a.getEstado()+";"+a.getUltima_accion());
-// 			 
-// 			if (!fin.contains(temp)){ // si no esta insertado ya por la anterior consulta
-// 				fin=fin+temp+",";
-// 	 			}
-// 		}
-// 		rs2.close();
-// 		rs2 = stat.executeQuery("Select * from Sensor where estado like '"+requestLine+"';");
-// 		while (rs2.next()) {
-// 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
-// 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
-// 			 
-// 			 temp = (a.getId_placa()+";"+a.getDef()+";"+a.getFuncion_principal()+";"+a.getEstado()+";"+a.getUltima_accion());
-// 			 
-// 			if (!fin.contains(temp)){ // si no esta insertado ya por la anterior consulta
-// 				fin=fin+temp+",";
-// 	 			}
-// 		}
-// 		rs2.close();
-// 		rs2 = stat.executeQuery("Select * from Sensor where func_principal like '"+requestLine+"';");
-// 		while (rs2.next()) {
-// 			 Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
-// 					 rs2.getString("Ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
-// 			 
-// 			 temp = (a.getId_placa()+";"+a.getDef()+";"+a.getFuncion_principal()+";"+a.getEstado()+";"+a.getUltima_accion());
-// 			 
-// 			if (!fin.contains(temp)){ // si no esta insertado ya por la anterior consulta
-// 				fin=fin+temp+",";
-// 	 			}
-// 		}
-// 		
-// 		fin=fin+"/";
-// 		rs2.close();
-// 		
+
 		return fin;
 	}
 	

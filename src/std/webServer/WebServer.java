@@ -19,9 +19,8 @@ public final class WebServer
 		{
 			
 			SocketManager sockManager = new SocketManager(wellcomeSocket.accept());
-			if (actuales<maximas) {
+			if (actuales<maximas) {// control de numero de nuevos clientes
 				
-			
 				Request request = new Request(sockManager);
 	
 				Thread thre = new Thread(request); 
