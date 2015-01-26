@@ -207,7 +207,7 @@ final class Request implements Runnable {
 		case 4: //salir 
 			String nick=sockManager.Leer();
 			if (nick.equals("nadie")) {
-				
+				System.out.println("nadie");
 			}
 			else {
 				base.conectar();

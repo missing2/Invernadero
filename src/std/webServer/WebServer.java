@@ -37,7 +37,7 @@ public final class WebServer extends Thread
 				try {
 					request = new Request(sockManager);
 					VentanaControl.listaRequest.add(request); // meto el request creado en la lista
-					
+					System.out.println("cargo nuevo request");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

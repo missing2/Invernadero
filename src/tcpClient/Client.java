@@ -83,13 +83,12 @@ public class Client {
             				sm.Escribir(pass+'\n');
             				String resp = sm.Leer();
             				if (resp.equals("211.OK Usuario insertado correctamente")){
+            					JOptionPane.showMessageDialog(ventanaloggin,"Usuario insertado correctamente");
             					vent.dispose();
-            					sm.CerrarSocket();
             					estado=0;
-
             				}else{
-            					System.out.println("usuario no insertado");
-            					sm.CerrarSocket();
+            					JOptionPane.showMessageDialog(ventanaloggin,"Usuario no insertado por algun motivo");
+            					vent.dispose();
             					estado=0;
             				}
             			}else if (vent.boton==2){// Salir
@@ -107,11 +106,12 @@ public class Client {
             				sm.Escribir(pass+'\n');
             				String resp = sm.Leer();
             				if (resp.equals("210.OK Usuario eliminado correctamente")){
+            					JOptionPane.showMessageDialog(ventanaloggin,"Usuario eliminado correctamente");
             					vent.dispose();
-            					sm.CerrarSocket();
             					estado=0;
             				}else{
-            					sm.CerrarSocket();
+            					JOptionPane.showMessageDialog(ventanaloggin,"Usuario no eliminado por algun motivo");
+            					vent.dispose();
             					estado=0;
             					
             				}
@@ -269,7 +269,7 @@ public class Client {
 
             	case 4:// salir
             		sm.Escribir("adios"+'\n'); // mando al server que quiere salir
-            		sm.Escribir(user.getNick()); //mando el nombre del user que soy para que me desconecte en la bd
+            		sm.Escribir(user.getNick()+'\n'); //mando el nombre del user que soy para que me desconecte en la bd
             		System.out.println("mando adios");
                 break;
             	}        

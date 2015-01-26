@@ -17,27 +17,49 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import util.DataBaseControler;
+
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
+
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+
+import net.miginfocom.swing.MigLayout;
+
+import java.awt.FlowLayout;
                                                      // NECESITARA UN THREAD O ALGO, PERO QUE SE PUEDA COMUNICAR CON DATABASE Y CLIENTE
 public class VentanaControl extends JFrame implements ActionListener, ComponentListener{
 	
 	private JTable table;
 	private JButton btnEchar;
+	JButton btnActualizar;
 	public int boton = 0;
 	public String nick;
 	public static LinkedList<Request> listaRequest = new LinkedList<Request>(); // lista que contendra los requets de los clientes
 	 public DataBaseControler base = DataBaseControler.getInstance();
 	
 	public VentanaControl() {
+		
 		 WebServer web = new WebServer();
 	     web.start();
 	     
-	     this.setVisible(true);
+	    this.setVisible(true);
 		table = new JTable();
 		getContentPane().add(table, BorderLayout.CENTER);
 		
+		JPanel panel = new JPanel();
+		getContentPane().add(panel, BorderLayout.SOUTH);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
 		btnEchar = new JButton("Echar");
-		getContentPane().add(btnEchar, BorderLayout.SOUTH);
+		panel.add(btnEchar);
 		btnEchar.addActionListener(this);
+		
+	    btnActualizar = new JButton("Actualizar");
+		panel.add(btnActualizar);
+		btnActualizar.addActionListener(this);
+		
 		this.setSize(309,314);
 		
 		try { // cargo la tabla de inicio de los clientes
@@ -83,11 +105,27 @@ public void actionPerformed(ActionEvent e) {
 	if(e.getSource().equals(btnEchar)){ 
 		boton=1;
 		int index = table.getSelectedRow();
-		nick = (String) table.getValueAt(index, 1);
+		nick = (String) table.getValueAt(index, 0);
+		try {
+			base.echarUsuario(nick);
+			// aqui falta meter algo para eliminar el request de la lista
+			
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+    }else if(e.getSource().equals(btnActualizar)){ 
+		try {
+			DefaultTableModel a = base.sacarUsuarios();
+			this.cargarTabla(a);
+			System.out.println("actualizado");
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
     }
-	
 }
-
 public void cargarTabla(DefaultTableModel tabla){
 	table.setModel(tabla);
 	this.repaint();
