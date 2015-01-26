@@ -21,9 +21,8 @@ final class Request implements Runnable {
   public void run() {
     try {
     	System.out.println("run");
-      processRequest();
-      WebServer web = new WebServer();
-      web.start();
+        processRequest();
+     
     }
     catch (Exception e) {
       e.printStackTrace();
@@ -33,9 +32,7 @@ final class Request implements Runnable {
   private void processRequest() throws Exception {
 	  int estado=0;
 	  Usuario user = new Usuario();
-	  VentanaControl controlador = new VentanaControl(this);
-	  controlador.setVisible(true);
-	  controlador.cargarTabla(base.sacarUsuarios());
+	
 	  
   while (true){
    
@@ -53,7 +50,7 @@ final class Request implements Runnable {
 					String pass= sockManager.Leer();
 			    	String respuesta=base.alta(nick,pass);
 					base.desconectar();
-					controlador.dispose();
+			
 					sockManager.Escribir(respuesta+'\n');
 				}
 				else if (requestLine.equals("baja")){
@@ -62,7 +59,7 @@ final class Request implements Runnable {
 					String pass= sockManager.Leer();
 					String respuesta=base.baja(nick,pass);
 					base.desconectar();
-					controlador.dispose();
+					
 					sockManager.Escribir(respuesta+'\n');
 						
 				}else {//requestLine!=null---> contiene un nombre de usuario
@@ -217,6 +214,7 @@ final class Request implements Runnable {
 				base.echarUsuario(nick);
 				System.out.println("hasta luegooo");
 				base.desconectar();
+				VentanaControl.listaRequest.remove(this);
 			}
 			sockManager.CerrarStreams();
 		    sockManager.CerrarSocket();
