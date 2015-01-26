@@ -8,8 +8,6 @@ import util.*;
 
 final class Request implements Runnable {
 	
-
-	
   final static String CRLF = "\r\n";
   SocketManager sockManager;
   public DataBaseControler base = DataBaseControler.getInstance();
@@ -19,11 +17,13 @@ final class Request implements Runnable {
     sockManager = sockMan;
   }
 
-  // Implement the run() method of the Runnable interface.
+  
   public void run() {
     try {
     	System.out.println("run");
       processRequest();
+      WebServer web = new WebServer();
+      web.start();
     }
     catch (Exception e) {
       e.printStackTrace();
