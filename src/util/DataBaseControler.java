@@ -26,8 +26,7 @@ public class DataBaseControler {
 		Class.forName("org.sqlite.JDBC");
 		
 		//Creo la conexion con la BD
-		conn = DriverManager.getConnection("jdbc:sqlite:res/ProyectoRedesBds.s3db");
-		System.out.println("connection done!");	 
+		conn = DriverManager.getConnection("jdbc:sqlite:res/ProyectoRedesBds.s3db");	 
 	}
 	
 	//Método para cerrar la conexion de la BD
