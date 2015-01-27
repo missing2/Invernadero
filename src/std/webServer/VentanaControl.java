@@ -39,7 +39,7 @@ public class VentanaControl extends JFrame implements ActionListener, ComponentL
 	public static LinkedList<Request> listaRequest = new LinkedList<Request>(); // lista que contendra los requets de los clientes
 	 public DataBaseControler base = DataBaseControler.getInstance();
 	
-	public VentanaControl() {
+	public VentanaControl() throws ClassNotFoundException {
 		
 		 WebServer web = new WebServer();
 	     web.start();
@@ -64,7 +64,9 @@ public class VentanaControl extends JFrame implements ActionListener, ComponentL
 		
 		try { // cargo la tabla de inicio de los clientes
 			
+			base.conectar();
 			DefaultTableModel a = base.sacarUsuarios();
+			base.desconectar();
 			this.cargarTabla(a);
 			
 		} catch (SQLException e) {
@@ -117,10 +119,15 @@ public void actionPerformed(ActionEvent e) {
 		
     }else if(e.getSource().equals(btnActualizar)){ 
 		try {
+			base.conectar();
 			DefaultTableModel a = base.sacarUsuarios();
+			base.desconectar();
 			this.cargarTabla(a);
 			System.out.println("actualizado");
 		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
@@ -131,7 +138,7 @@ public void cargarTabla(DefaultTableModel tabla){
 	this.repaint();
 
 }
-public static void main(String[]args) {
+public static void main(String[]args) throws ClassNotFoundException {
 	
 	VentanaControl ventana = new VentanaControl();
 	

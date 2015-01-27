@@ -142,7 +142,6 @@ public class Client {
                		sm.Escribir("sacalista"+'\n'); // manda al server un comando para que me mande la lista
             		 // recibe la lista en string
             		ArrayList<String> listae = cargarLista(sm);
-            		System.out.println("lista "+listae);
             		ventanaAccion vent = new ventanaAccion();
             		vent.cargarTabla(listae);
             		
