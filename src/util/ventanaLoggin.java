@@ -23,7 +23,6 @@ public class ventanaLoggin extends JFrame implements ActionListener, ComponentLi
 	JButton btnLoggin;
 	JButton btnSalir;
 	JButton btnAltasBajas;
-	public JTextField txtFIP;
 	
 public ventanaLoggin(){
 	getContentPane().setBackground(Color.BLACK);	
@@ -68,20 +67,6 @@ public ventanaLoggin(){
 	btnAltasBajas = new JButton("Altas/bajas");
 	btnAltasBajas.setBounds(395, 52, 108, 31);
 	getContentPane().add(btnAltasBajas);
-	
-	JLabel lblIp = new JLabel("IP:");
-	lblIp.setFont(new Font("Tahoma", Font.BOLD, 20));
-	lblIp.setForeground(Color.CYAN);
-	lblIp.setBackground(Color.BLACK);
-	lblIp.setBounds(26, 188, 46, 14);
-	getContentPane().add(lblIp);
-	
-	txtFIP = new JTextField();
-	txtFIP.setText("127.0.0.1");
-	txtFIP.setBackground(Color.LIGHT_GRAY);
-	txtFIP.setBounds(82, 189, 67, 20);
-	getContentPane().add(txtFIP);
-	txtFIP.setColumns(10);
 	btnAltasBajas.addActionListener(this);
 	
 		this.setTitle("M&V");
