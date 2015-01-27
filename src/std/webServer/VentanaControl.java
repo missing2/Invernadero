@@ -25,10 +25,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-import net.miginfocom.swing.MigLayout;
-
 import java.awt.FlowLayout;
-                                                     // NECESITARA UN THREAD O ALGO, PERO QUE SE PUEDA COMUNICAR CON DATABASE Y CLIENTE
+                                                     
 public class VentanaControl extends JFrame implements ActionListener, ComponentListener{
 	
 	private JTable table;
