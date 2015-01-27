@@ -28,17 +28,19 @@ public class Client {
             
             int estado = 0;
             Usuario user = new Usuario();
-         
-           
-                     
+            boolean creado = false;
            
             while (true) {	
             	switch(estado){
             	case 0: // comprobar user y creo el socket
             		ventanaLoggin ventanaloggin = new ventanaLoggin();
+            		
+            		if (!creado) {
             		 String seleccion = JOptionPane.showInputDialog(ventanaloggin,"Introduce host del servidor (127.0.0.1)",JOptionPane.QUESTION_MESSAGE); 
             		//Se crea el socket, pasando el host del server manualmente
                		sm = new SocketManager(seleccion,2345);
+               		creado=true;
+            		}
             		
             		while (ventanaloggin.boton==0){
             			Thread.sleep(1000);
