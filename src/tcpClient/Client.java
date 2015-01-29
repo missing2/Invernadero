@@ -2,23 +2,18 @@ package tcpClient;
 import util.*;
 
 import java.net.*;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.awt.Image;
-import java.awt.List;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
 import javax.imageio.ImageIO;
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 
 
 public class Client {
 	static SocketManager sm;
+	static ServerSocket ss;
     public static void main(String[] args) throws Exception {
      
         try {
@@ -232,6 +227,13 @@ public class Client {
 	            	    	vent.boton=0;
 	            	    	sm.Escribir("imagen"+'\n');
 	            	    	sm.Escribir(vent.id+'\n');
+	            	    	
+	            	    	Socket socket = ss.accept();
+				            BufferedImage bufferedImage = ImageIO.read(socket.getInputStream());
+				            ImageIO.write(bufferedImage,"png", new FileOutputStream("fotos recibidas/image.png"));
+				            socket.close();
+				            ss.close();
+
 	            	    	
 	            	    }else if(vent.boton==6){// salir
 	            	    	vent.boton=0;

@@ -1,9 +1,12 @@
 package std.webServer;
 
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 import util.*;
 
@@ -162,6 +165,8 @@ final class Request implements Runnable {
 					     String url = base.foto(requestLine);
 						 base.desconectar();
 						 sockManager.Escribir(url+'\n');
+						 
+						 enviarFoto(ip, puerto);
 					
 					}else if (requestLine.contains("actuar")){
 						String id = sockManager.Leer(); // recivo el id que quiero cambiar de accion
@@ -267,6 +272,20 @@ private void sendBytes(FileInputStream fis) throws Exception {
     }
     return "application/octet-stream";
   }
+  
+	private void enviarFoto(String ip, int puerto) {
+		try {
+			@SuppressWarnings("resource")
+			Socket socket = new Socket(ip, puerto);
+			BufferedImage bufferedImage = ImageIO.read(new File("fotos enviadas/image.png"));
+			ImageIO.write(bufferedImage, "png", socket.getOutputStream());
+			socket.getOutputStream().flush();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
   
   public static void main(String argv[]) throws Exception
 	{
