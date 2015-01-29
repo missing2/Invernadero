@@ -24,17 +24,17 @@ import javax.swing.BoxLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-
 import java.awt.FlowLayout;
+import java.io.IOException;
                                                      
 public class VentanaControl extends JFrame implements ActionListener, ComponentListener{
 	
 	private JTable table;
 	private JButton btnEchar;
 	JButton btnActualizar;
-	public int boton = 0;
 	public String nick;
 	public static LinkedList<Request> listaRequest = new LinkedList<Request>(); // lista que contendra los requets de los clientes
+	public static LinkedList<String> listanombres = new LinkedList<String>(); // lista que contendra el orden de insercion de los clientes
 	 public DataBaseControler base = DataBaseControler.getInstance();
 	
 	public VentanaControl() throws ClassNotFoundException {
@@ -61,11 +61,8 @@ public class VentanaControl extends JFrame implements ActionListener, ComponentL
 		this.setSize(309,314);
 		
 		try { // cargo la tabla de inicio de los clientes
-			
-			base.conectar();
-			DefaultTableModel a = base.sacarUsuarios();
-			base.desconectar();
-			this.cargarTabla(a);
+		
+			this.cargarTabla();
 			
 		} catch (SQLException e) {
 			System.out.println("fallo bd");
@@ -103,37 +100,48 @@ public void componentHidden(ComponentEvent e) {
 public void actionPerformed(ActionEvent e) {
 	// TODO Auto-generated method stub
 	if(e.getSource().equals(btnEchar)){ 
-		boton=1;
+		
 		int index = table.getSelectedRow();
 		nick = (String) table.getValueAt(index, 0);
 		try {
+			base.conectar();
 			base.echarUsuario(nick);
-			// aqui falta meter algo para eliminar el request de la lista
+			base.desconectar();
+			int pos = 0;
+			for (int i=0; pos<= this.listanombres.size();i++) {// busco la pos en la que esta el nombre que busco
+				 if (nick.equals(this.listanombres.get(i)))
+						 pos=i;
+			}
 			
-		} catch (SQLException e1) {
+			Request aeliminar = this.listaRequest.get(pos);
+			aeliminar.sockManager.CerrarSocket();
+			
+			
+			
+		} catch (SQLException | IOException | ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
-    }else if(e.getSource().equals(btnActualizar)){ 
-		try {
-			base.conectar();
-			DefaultTableModel a = base.sacarUsuarios();
-			base.desconectar();
-			this.cargarTabla(a);
-			System.out.println("actualizado");
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (ClassNotFoundException e1) {
+    }else if(e.getSource().equals(btnActualizar)){
+    	try {
+			this.cargarTabla();
+		} catch (ClassNotFoundException | SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
     }
+		
 }
-public void cargarTabla(DefaultTableModel tabla){
-	table.setModel(tabla);
+public void cargarTabla() throws SQLException, ClassNotFoundException{
+
+	base.conectar();
+	DefaultTableModel a = base.sacarUsuarios();
+	base.desconectar();
+	
+	table.setModel(a);
 	this.repaint();
+	System.out.println("actualizado");
 
 }
 public static void main(String[]args) throws ClassNotFoundException {

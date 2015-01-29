@@ -105,6 +105,7 @@ final class Request implements Runnable {
 					base.conectar();
 					base.conectarUsuario(user.getNick());
 					base.desconectar();
+					VentanaControl.listanombres.add(user.getNick());// inserto el nombre del usuario para luego buscar su request	
 					estado = 2;
 				}
 				
