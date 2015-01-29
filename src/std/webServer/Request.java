@@ -3,6 +3,7 @@ package std.webServer;
 import java.io.*;
 import java.net.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import util.*;
 
@@ -11,6 +12,8 @@ final class Request implements Runnable {
   final static String CRLF = "\r\n";
   SocketManager sockManager;
   public DataBaseControler base = DataBaseControler.getInstance();
+  
+  ArrayList<Usuario> listaClientesConectados = new ArrayList<>();
   
   // Constructor
   public Request(SocketManager sockMan) throws Exception {
@@ -32,6 +35,8 @@ final class Request implements Runnable {
   private void processRequest() throws Exception {
 	  int estado=0;
 	  Usuario user = new Usuario();
+	  Usuario c = new Usuario("Desconocido", "on");
+	  listaClientesConectados.add(c);
 	
 	  
   while (true){
@@ -39,7 +44,7 @@ final class Request implements Runnable {
 		switch (estado) {
 	
 		case 0://(USER)
-		
+			
 			String  requestLine  = sockManager.Leer();// lee el user que le has pasado por socket desde el cliente
 			
 			if (!requestLine.equals("adios")) {
@@ -72,6 +77,14 @@ final class Request implements Runnable {
 							String[] a= respuesta.split(":");
 							user.setNick(a[1]); // me dan el nick separado por : por lo que lo saco con un split ("200OK.Bienvenido:"+nombre;)
 							estado = 1;
+							
+							int pos = listaClientesConectados.indexOf(c);
+							Usuario aux = listaClientesConectados.get(pos);
+							listaClientesConectados.remove(pos);
+							aux.setNick(a[1]);
+							listaClientesConectados.add(pos, aux);
+							c = aux;
+							//aqui actualizo
 						}else{//respuesta.contains("400ERR.Falta el nombre de usuario")
 							estado = 0;
 						}
@@ -216,6 +229,8 @@ final class Request implements Runnable {
 				base.desconectar();
 				VentanaControl.listaRequest.remove(this);
 			}
+			listaClientesConectados.remove(listaClientesConectados.indexOf(c));
+			//aqui actualizo
 			sockManager.CerrarStreams();
 		    sockManager.CerrarSocket();
 		  
