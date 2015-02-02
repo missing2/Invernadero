@@ -159,14 +159,15 @@ final class Request implements Runnable {
 						
 					}else if (requestLine.contains("imagen")){
 						// ni idea de pasar de la bd a aqui una imagen...
+						// ni idea de pasar de la bd a aqui una imagen...
 						System.out.println("imagen");
 						requestLine = sockManager.Leer(); // recivo que se sensor quiere buscar en la bd
-						 base.conectar();
-					     String url = base.foto(requestLine);
-						 base.desconectar();
-						 sockManager.Escribir(url+'\n');
+						base.conectar();
+						String url = base.foto(requestLine);
+						base.desconectar();
+						sockManager.Escribir(url + '\n');
 						 
-						 enviarFoto(ip, puerto);
+						 enviarFoto(requestLine);
 					
 					}else if (requestLine.contains("actuar")){
 						String id = sockManager.Leer(); // recivo el id que quiero cambiar de accion
@@ -273,15 +274,13 @@ private void sendBytes(FileInputStream fis) throws Exception {
     return "application/octet-stream";
   }
   
-	private void enviarFoto(String ip, int puerto) {
+  private void enviarFoto(String foto) {
 		try {
 			@SuppressWarnings("resource")
-			Socket socket = new Socket(ip, puerto);
-			BufferedImage bufferedImage = ImageIO.read(new File("fotos enviadas/image.png"));
-			ImageIO.write(bufferedImage, "png", socket.getOutputStream());
-			socket.getOutputStream().flush();
+			FileInputStream fis =new FileInputStream(foto);
+			sendBytes(fis);
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
