@@ -320,17 +320,7 @@ public class DataBaseControler {
 		Statement st = conn.createStatement();
 		ResultSet rs2 = st.executeQuery("SELECT P.foto from Placa P, Sensor S  where P.id_placa=S.id_placa and S.id_sensor='"+id+"';");
 		String foto = rs2.getString("foto");// falla
-		 try 
-	     {
-	        return ImageIO.read(foto);
-	     } 
-	     catch (Exception e) 
-	     {
-	        System.out.println("No se pudo cargar la imagen de "+foto);
-	        System.out.println("El error fue : "+e.getClass().getName()+" "+e.getMessage());
-	        System.exit(0);
-	        return null;
-	     }
+		
 		rs2.close();
 		st.close();
 		System.out.println("foto:"+foto);
