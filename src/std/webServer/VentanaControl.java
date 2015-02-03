@@ -108,14 +108,18 @@ public void actionPerformed(ActionEvent e) {
 			base.echarUsuario(nick);
 			base.desconectar();
 			int pos = 0;
-			for (int i=1; pos< this.listanombres.size();i++) {// busco la pos en la que esta el nombre que busco
-				 if (nick.equals(this.listanombres.get(i)))
-						 pos=i;
+			//System.out.println("tam: "+listanombres.size());
+			for (int i=0; i<listanombres.size(); i++) {
+				System.out.println("esta en la linked: "+listanombres.get(i));
+				
+			 if (nick.equals(this.listanombres.get(i)))
+					 pos=i;
 			}
-			
+		
 			Request aeliminar = this.listaRequest.get(pos);
 			aeliminar.sockManager.CerrarSocket();
-			
+			this.listanombres.remove(pos);
+			this.listaRequest.remove(pos);
 			
 			
 		} catch (SQLException | IOException | ClassNotFoundException e1) {
