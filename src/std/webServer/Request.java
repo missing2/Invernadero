@@ -168,7 +168,7 @@ final class Request implements Runnable {
 						base.desconectar();
 						sockManager.Escribir(url + '\n');
 						 
-						 enviarFoto(requestLine);
+						enviarFoto(requestLine);
 					
 					}else if (requestLine.contains("actuar")){
 						String id = sockManager.Leer(); // recivo el id que quiero cambiar de accion
@@ -278,19 +278,17 @@ private void sendBytes(FileInputStream fis) throws Exception {
     }
   }
 
-  private static String contentType(String fileName) {
-       
-    if (fileName.endsWith(".ram") || fileName.endsWith(".ra")) {
-      return "audio/x-pn-realaudio";
-    }
-    return "application/octet-stream";
-  }
-  
-  private void enviarFoto(String foto) {
+	private void enviarFoto(String foto) {
 		try {
 			@SuppressWarnings("resource")
-			FileInputStream fis =new FileInputStream(foto);
-			sendBytes(fis);
+			File fichero = new File(foto);
+			FileInputStream fis = new FileInputStream(fichero);
+			byte[] buffer = new byte[1024];
+			int bytes = 0;
+
+			while ((bytes = fis.read(buffer)) != -1) {
+				sockManager.Escribir(buffer, bytes);
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();

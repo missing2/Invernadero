@@ -229,11 +229,15 @@ public class Client {
 	            	    	sm.Escribir("imagen"+'\n');
 	            	    	sm.Escribir(vent.id+'\n');
 	            	    	
-	            	    	Socket socket = ss.accept();
-				            BufferedImage bufferedImage = ImageIO.read(socket.getInputStream());
-				            ImageIO.write(bufferedImage,"png", new FileOutputStream("fotos recibidas/image.png"));
-				            socket.close();
-				            ss.close();
+	            	    	byte[] fileBytes = sm.Leer();
+	            	    	String archivoDestino = "fotos recibidas/image.png";
+	            	    	escribirImagen(fileBytes, archivoDestino);
+	            	    	
+//	            	    	Socket socket = ss.accept();
+//				            BufferedImage bufferedImage = ImageIO.read(socket.getInputStream());
+//				            ImageIO.write(bufferedImage,"png", new FileOutputStream("fotos recibidas/image.png"));
+//				            socket.close();
+//				            ss.close();
 
 	            	    	
 	            	    }else if(vent.boton==6){// salir
@@ -301,5 +305,17 @@ public class Client {
 		}
 		return df;
 	   }
+	public static boolean escribirImagen(byte[] fileBytes, String archivoDestino){
+		   boolean correcto = false;
+		   try {
+		     OutputStream out = new FileOutputStream(archivoDestino);
+		     out.write(fileBytes);
+		     out.close();        
+		     correcto = true;
+		   } catch (Exception e) {
+		     e.printStackTrace();
+		   }        
+		     return correcto;
+		}
 	
 }
