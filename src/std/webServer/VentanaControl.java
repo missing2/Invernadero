@@ -117,6 +117,7 @@ public void actionPerformed(ActionEvent e) {
 			}
 		
 			Request aeliminar = this.listaRequest.get(pos);
+			System.out.println("expulsado: "+nick);
 			aeliminar.sockManager.CerrarSocket();
 			this.listanombres.remove(pos);
 			this.listaRequest.remove(pos);

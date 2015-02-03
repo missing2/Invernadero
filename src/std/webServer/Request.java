@@ -166,8 +166,6 @@ final class Request implements Runnable {
 						base.conectar();
 						String url = base.foto(requestLine);
 						base.desconectar();
-						sockManager.Escribir(url + '\n');
-						 
 						enviarFoto(requestLine);
 					
 					}else if (requestLine.contains("actuar")){

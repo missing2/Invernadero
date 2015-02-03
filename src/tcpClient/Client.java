@@ -229,9 +229,15 @@ public class Client {
 	            	    	sm.Escribir("imagen"+'\n');
 	            	    	sm.Escribir(vent.id+'\n');
 	            	    	
-	            	    	byte[] fileBytes = sm.Leer();
-	            	    	String archivoDestino = "fotos recibidas/image.png";
-	            	    	escribirImagen(fileBytes, archivoDestino);
+	            	    	byte[] buffer = new byte[1024];          				            	    	
+	            	    	
+	            	    	String recibido = sm.Leer();
+	            	    	String [] fotobites = recibido.split(",");
+	            	    	buffer = fotobites[0];
+	            	    	
+//	            	    	byte[] fileBytes = sm.Leer();
+//	            	    	String archivoDestino = "fotos recibidas/image.png";
+//	            	    	escribirImagen(fileBytes, archivoDestino);
 	            	    	
 //	            	    	Socket socket = ss.accept();
 //				            BufferedImage bufferedImage = ImageIO.read(socket.getInputStream());
