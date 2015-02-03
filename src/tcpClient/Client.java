@@ -151,6 +151,7 @@ public class Client {
             			//estoy en la vent sin mas
             				Thread.sleep(1000);
             			}
+            			
             			if (vent.boton==1){//Activar
             				vent.boton=0;
             				int confirmado = JOptionPane.showConfirmDialog(vent,"¿confirmar?");
@@ -238,6 +239,7 @@ public class Client {
 	            	    }else if(vent.boton==6){// salir
 	            	    	vent.boton=0;
 	            	    	System.out.println("quiero salirrrr");
+	            	    	vent.dispose();
 	            			estado=4;
 	        
 	            		}else if(vent.boton==7){//bdesactivar placa
@@ -278,7 +280,8 @@ public class Client {
             		sm.Escribir(user.getNick()+'\n'); //mando el nombre del user que soy para que me desconecte en la bd
             		System.out.println("mando adios");
                 break;
-            	}        
+            	}    
+            	
             }
                    
         } catch (Exception e) {

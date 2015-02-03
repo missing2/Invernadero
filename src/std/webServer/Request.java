@@ -109,6 +109,7 @@ final class Request implements Runnable {
 					base.conectarUsuario(user.getNick());
 					base.desconectar();
 					VentanaControl.listanombres.add(user.getNick());// inserto el nombre del usuario para luego buscar su request	
+					System.out.println("meto usuario en lista");
 					estado = 2;
 				}
 				
@@ -223,7 +224,7 @@ final class Request implements Runnable {
 				base.echarUsuario(nick);
 				System.out.println("hasta luegooo");
 				base.desconectar();
-				VentanaControl.listaRequest.remove(this);
+				this.salir(user.getNick());
 			}
 			
 			sockManager.CerrarStreams();
@@ -243,7 +244,18 @@ final class Request implements Runnable {
 
  
 
-  private String sacarListado() throws SQLException,IOException,ClassNotFoundException
+  private void salir(String nick) {
+	// TODO Auto-generated method stub
+	  int pos=0;
+	  for (int i=1; pos< VentanaControl.listanombres.size();i++) {// busco la pos en la que esta el nombre que busco
+			 if (nick.equals(VentanaControl.listanombres.get(i)))
+					 pos=i;
+		}
+	  VentanaControl.listaRequest.remove(pos);  
+}
+
+
+private String sacarListado() throws SQLException,IOException,ClassNotFoundException
   {
 	  base.conectar();
 	  String lista = base.sacarlista();

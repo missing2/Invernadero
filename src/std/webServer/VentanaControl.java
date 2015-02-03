@@ -108,7 +108,7 @@ public void actionPerformed(ActionEvent e) {
 			base.echarUsuario(nick);
 			base.desconectar();
 			int pos = 0;
-			for (int i=0; pos<= this.listanombres.size();i++) {// busco la pos en la que esta el nombre que busco
+			for (int i=1; pos< this.listanombres.size();i++) {// busco la pos en la que esta el nombre que busco
 				 if (nick.equals(this.listanombres.get(i)))
 						 pos=i;
 			}
