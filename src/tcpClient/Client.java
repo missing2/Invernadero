@@ -153,34 +153,38 @@ public class Client {
             				Thread.sleep(1000);
             			}
             			
-            			if (vent.boton==1){//Activar
+            			if (vent.boton==1){//Activar sensor
             				vent.boton=0;
             				int confirmado = JOptionPane.showConfirmDialog(vent,"¿confirmar?");
             				if (JOptionPane.OK_OPTION == confirmado){
             					sm.Escribir("activar"+'\n');
   								String id = vent.id; //id del sensor que tengo que activar  
-  								System.out.println("Cliente id"+id);
            						sm.Escribir(id+'\n');
-           						System.out.println("Cargo la lista?");
-           						String stringLista = sm.Leer();
-           						System.out.println("Leyendo lista aqui "+stringLista);
+           						String respuesta  = sm.Leer();
+           						String stringLista = sm.Leer();          					
            						ArrayList<String> df = new ArrayList<String>();
            						String Sensor[] = stringLista.split(",");// separo sensores
            						for(int i=0;i<Sensor.length;i++){
            							df.add(Sensor[i]);
            						}
            						vent.cargarTabla(df);
-           						JOptionPane.showMessageDialog(vent, "sensor activado");
+           						if (respuesta.equals("203 OK Control activo")){
+           							JOptionPane.showMessageDialog(vent, "sensor activado");
+           						}else{
+           							JOptionPane.showMessageDialog(vent, "sensor ya esta activo");
+           						}
+           						
            					   }
             				
             							
-            			}else if(vent.boton==2){// desactivar
+            			}else if(vent.boton==2){// desactivar sensor
             				vent.boton=0;
             				int confirmado = JOptionPane.showConfirmDialog(vent, "¿Confirmar?");
         					if (JOptionPane.OK_OPTION == confirmado){
         						sm.Escribir("desactivar"+'\n');
         						String id = vent.id; //id del sensor que tengo que desactivar  
            						sm.Escribir(id+'\n');
+           						String respuesta  = sm.Leer();
            						String stringLista = sm.Leer();
            						ArrayList<String> df = new ArrayList<String>();
            						String Sensor[] = stringLista.split(",");// separo sensores
@@ -188,30 +192,38 @@ public class Client {
            							df.add(Sensor[i]);
            						}
            						vent.cargarTabla(df);
-           						JOptionPane.showMessageDialog(vent, "sensor desactivado");
+           						if (respuesta.equals("204 OK Control desactivado")){
+           							JOptionPane.showMessageDialog(vent, "sensor desactivado");
+           						}else{
+           							JOptionPane.showMessageDialog(vent, "sensor ya esta inactivo");
+           						}
+           						
            					   }
         					
 	               		}else if(vent.boton==3){//bActuar
 	               			vent.boton=0;
-	            			sm.Escribir("actuar"+'\n');
-	            	    	sm.Escribir(vent.id+'\n'); // paso el id que voy a cambiar la accion 
-	               	    	sm.Escribir(vent.txt+'\n');
-	            	    	String respuesta = sm.Leer();
-       						String stringLista = sm.Leer();
-       						if(respuesta.equals("409 ERR Faltan datos."))
-       							JOptionPane.showMessageDialog(vent, "falta parametro");
-       						else if (respuesta.equals("407 ERROR accion ya ejecutada"))
-           							JOptionPane.showMessageDialog(vent, "accion repetida");
-       						else if (respuesta.equals("206 OK Acción sobre el sensor confirmada")){
-	       						ArrayList<String> df = new ArrayList<String>();
-	       						String Sensor[] = stringLista.split(",");// separo sensores
-	       						for(int i=0;i<Sensor.length;i++){
-	       							df.add(Sensor[i]);
+	               			int confirmado = JOptionPane.showConfirmDialog(vent, "¿Confirmar?");
+        					if (JOptionPane.OK_OPTION == confirmado){
+		            			sm.Escribir("actuar"+'\n');
+		            	    	sm.Escribir(vent.id+'\n'); // paso el id que voy a cambiar la accion 
+		               	    	sm.Escribir(vent.txt+'\n');
+		            	    	String respuesta = sm.Leer();
+	       						String stringLista = sm.Leer();
+	       						if(respuesta.equals("409 ERR Faltan datos."))
+	       							JOptionPane.showMessageDialog(vent, "falta parametro");
+	       						else if (respuesta.equals("407 ERROR accion ya ejecutada"))
+	           						JOptionPane.showMessageDialog(vent, "accion repetida");
+	       						else if (respuesta.equals("206 OK Acción sobre el sensor confirmada")){
+		       						ArrayList<String> df = new ArrayList<String>();
+		       						String Sensor[] = stringLista.split(",");// separo sensores
+		       						for(int i=0;i<Sensor.length;i++){
+		       							df.add(Sensor[i]);
+		       						}
+		       						vent.cargarTabla(df);
+		       						JOptionPane.showMessageDialog(vent, "accion realizada");
 	       						}
-	       						vent.cargarTabla(df);
-	       						JOptionPane.showMessageDialog(vent, "accion realizada");
-       						}
-       						
+        					}
+        					
 	            	    }else if(vent.boton==4){//bBuscar
 	            	    	vent.boton=0;
 	            	    	sm.Escribir("buscar"+'\n');

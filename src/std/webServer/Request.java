@@ -133,22 +133,23 @@ final class Request implements Runnable {
 					if (requestLine.equals("activar")){
 						String id = sockManager.Leer(); // id del sensor que voy a activar
 						 base.conectar();
-						 base.encenderSensor(id);
+						 String resp= base.encenderSensor(id);
 						 base.desconectar();
 						 base.conectar();
 						 String listaActualizada= base.sacarlista();
 						 base.desconectar();
+						 sockManager.Escribir(resp+'\n');
 						 sockManager.Escribir(listaActualizada+'\n'); //mando lista actualizada al cliente
 						
 					}else if (requestLine.equals("desactivar")){
 						String id = sockManager.Leer(); // id del sensor que voy a desactivar
 						 base.conectar();
-						 System.out.println("Request id:"+id);
-						 base.apagarSensor(id);
+						 String resp= base.apagarSensor(id);
 						 base.desconectar();
 						 base.conectar();
 						 String listaActualizada= base.sacarlista();
 						 base.desconectar();
+						 sockManager.Escribir(resp+'\n');
 						 sockManager.Escribir(listaActualizada+'\n');
 						
 					}else if (requestLine.contains("buscar")){

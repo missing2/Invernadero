@@ -195,43 +195,59 @@ public class DataBaseControler {
 	
 	
 
-	public void encenderSensor(String ids) throws SQLException {
+	public String encenderSensor(String ids) throws SQLException {
+		String respuesta= "404 ERROR id_variable en estado ON";
 		
-		Statement st = conn.createStatement();
-		System.out.println("me pasan el id sensor para encenderlo: "+ids);
-		String sql = "UPDATE Sensor SET estado ='"+"on"+"' WHERE id_sensor='"+ids+"'";
-		st.executeUpdate(sql);
-		System.out.println("Hago el update");
- 		st.close();
+		Statement st2 = conn.createStatement();
+		ResultSet rs2 = st2.executeQuery("Select * from Sensor where WHERE id_sensor='"+ids+"'");
+		String estado = rs2.getString("estado");
+ 		st2.close();
+ 		
+ 		if (estado.equals("off")) {
+ 			
+			Statement st = conn.createStatement();
+			String sql = "UPDATE Sensor SET estado ='"+"on"+"' WHERE id_sensor='"+ids+"'";
+			st.executeUpdate(sql);
+	 		st.close();
+	 		respuesta = "203 OK Control activo";
+ 		}
+		
+ 		return respuesta;
  		
 	}
-	public void apagarSensor(String ids) throws SQLException {
+	public String apagarSensor(String ids) throws SQLException {
 		
-		Statement st = conn.createStatement();
-		System.out.println("me pasan el id sensor para apagarlo: "+ids);
-		String sql = "UPDATE Sensor SET estado ='"+"off"+"' WHERE id_sensor='"+ids+"'";
-		st.executeUpdate(sql);
-		System.out.println("Hago el update");
-		st.close();
+	String respuesta= "406 ERROR id_variable en estado OFF";
+		
+		Statement st2 = conn.createStatement();
+		ResultSet rs2 = st2.executeQuery("Select * from Sensor where id_sensor='"+ids+"'");
+ 		String estado = rs2.getString("estado");
+ 		st2.close();
+ 		if (estado.equals("on")) {
+	 			
+			Statement st = conn.createStatement();
+			String sql = "UPDATE Sensor SET estado ='"+"off"+"' where id_sensor='"+ids+"'";
+			st.executeUpdate(sql);
+	 		st.close();
+	 		respuesta = "204 OK Control desactivado";
+ 		}
+		
+ 		return respuesta;
 	}
 	
 	public void encenderPlaca(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		Statement st = conn.createStatement();
-		System.out.println("me pasan el id placa para apagarlo: "+id);
-		String sql = "UPDATE Placa SET estado_placa ='"+"on"+"' WHERE id_placa='"+id+"'";
+		String sql = "UPDATE Placa SET estado_placa ='"+"on"+"' where id_placa='"+id+"'";
 		st.executeUpdate(sql);
-		System.out.println("Hago el update");
 		st.close();
 	}
 
 	public void apagarPlaca(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		Statement st = conn.createStatement();
-		System.out.println("me pasan el id placa para apagarlo: "+id);
 		String sql = "UPDATE Placa SET estado_placa ='"+"off"+"' WHERE id_placa='"+id+"'";
 		st.executeUpdate(sql);
-		System.out.println("Hago el update");
 		st.close();
 	}
 
@@ -251,7 +267,7 @@ public class DataBaseControler {
 		
 		Placa p = new Placa(rs.getString("id_placa"), rs.getString("estado_placa"), rs.getString("foto"));
   		 
-//		st.executeUpdate("UPDATE Sensor SET ultima_accion ='"+parametro+"' WHERE id_sensor='"+id+"';");
+
 		if(a.getEstado().equals("on") && p.getEstado_placa().equals("on")){
 
 			if ( a.getFuncion_principal().equals("Regulación climatización")){
