@@ -139,12 +139,13 @@ public class Client {
                 
                 
             	case 2:// accion
+            		
                		sm.Escribir("sacalista"+'\n'); // manda al server un comando para que me mande la lista
             		 // recibe la lista en string
             		ArrayList<String> listae = cargarLista(sm);
             		ventanaAccion vent = new ventanaAccion();
             		vent.cargarTabla(listae);
-            		
+            		JOptionPane.showMessageDialog(vent, "bienvenido al sistema");
             		
             		while (true){
             			while (vent.boton==0){
@@ -169,6 +170,7 @@ public class Client {
            							df.add(Sensor[i]);
            						}
            						vent.cargarTabla(df);
+           						JOptionPane.showMessageDialog(vent, "sensor activado");
            					   }
             				
             							
@@ -177,7 +179,7 @@ public class Client {
             				int confirmado = JOptionPane.showConfirmDialog(vent, "¿Confirmar?");
         					if (JOptionPane.OK_OPTION == confirmado){
         						sm.Escribir("desactivar"+'\n');
-        						String id = vent.id; //id del sensor que tengo que activar  
+        						String id = vent.id; //id del sensor que tengo que desactivar  
            						sm.Escribir(id+'\n');
            						String stringLista = sm.Leer();
            						ArrayList<String> df = new ArrayList<String>();
@@ -186,6 +188,7 @@ public class Client {
            							df.add(Sensor[i]);
            						}
            						vent.cargarTabla(df);
+           						JOptionPane.showMessageDialog(vent, "sensor desactivado");
            					   }
         					
 	               		}else if(vent.boton==3){//bActuar
@@ -206,6 +209,7 @@ public class Client {
 	       							df.add(Sensor[i]);
 	       						}
 	       						vent.cargarTabla(df);
+	       						JOptionPane.showMessageDialog(vent, "accion realizada");
        						}
        						
 	            	    }else if(vent.boton==4){//bBuscar
@@ -233,7 +237,7 @@ public class Client {
 	            	    	
 	            	    	String recibido = sm.Leer();
 	            	    	String [] fotobites = recibido.split(",");
-	            	    	buffer = fotobites[0];
+	            	   // 	buffer = fotobites[0];
 	            	    	
 //	            	    	byte[] fileBytes = sm.Leer();
 //	            	    	String archivoDestino = "fotos recibidas/image.png";
@@ -265,6 +269,7 @@ public class Client {
            							df.add(Sensor[i]);
            						}
            						vent.cargarTabla(df);
+           						JOptionPane.showMessageDialog(vent, "placa desactivada");
         					}
 	            		}else if(vent.boton==8){//bActivarplaca
 	               			vent.boton=0;
@@ -280,6 +285,7 @@ public class Client {
            							df.add(Sensor[i]);
            						}
            						vent.cargarTabla(df);
+           						JOptionPane.showMessageDialog(vent, "placa activada");
            					   }
         					}
 	            		}
