@@ -235,20 +235,47 @@ public class DataBaseControler {
  		return respuesta;
 	}
 	
-	public void encenderPlaca(String id) throws SQLException {
+	public String encenderPlaca(String id) throws SQLException {
 		// TODO Auto-generated method stub
-		Statement st = conn.createStatement();
-		String sql = "UPDATE Placa SET estado_placa ='"+"on"+"' where id_placa='"+id+"'";
-		st.executeUpdate(sql);
-		st.close();
+		
+		String respuesta= "406 ERROR id_variable en estado ON";
+		
+		Statement st2 = conn.createStatement();
+		ResultSet rs2 = st2.executeQuery("Select * from Placa where id_placa='"+id+"'");
+ 		String estado = rs2.getString("estado_placa");
+ 		st2.close();
+ 		
+ 		if (estado.equals("on")) {
+			Statement st = conn.createStatement();
+			String sql = "UPDATE Placa SET estado_placa ='"+"on"+"' where id_placa='"+id+"'";
+			st.executeUpdate(sql);
+			st.close();
+			
+			respuesta= "203 OK Control activo";
+ 		}
+ 		
+ 		return respuesta;
 	}
 
-	public void apagarPlaca(String id) throws SQLException {
+	public String apagarPlaca(String id) throws SQLException {
 		// TODO Auto-generated method stub
-		Statement st = conn.createStatement();
-		String sql = "UPDATE Placa SET estado_placa ='"+"off"+"' WHERE id_placa='"+id+"'";
-		st.executeUpdate(sql);
-		st.close();
+		String respuesta= "406 ERROR id_variable en estado OFF";
+		
+		Statement st2 = conn.createStatement();
+		ResultSet rs2 = st2.executeQuery("Select * from Placa where id_placa='"+id+"'");
+ 		String estado = rs2.getString("estado_placa");
+ 		st2.close();
+ 		
+ 		if (estado.equals("off")) {
+			Statement st = conn.createStatement();
+			String sql = "UPDATE Placa SET estado_placa ='"+"off"+"' where id_placa='"+id+"'";
+			st.executeUpdate(sql);
+			st.close();
+			
+			respuesta= "203 OK Control desactivado";
+ 		}
+ 		
+ 		return respuesta;
 	}
 
 

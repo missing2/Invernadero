@@ -189,22 +189,23 @@ final class Request implements Runnable {
 					}else if (requestLine.equals("activarplaca")){
 							String id = sockManager.Leer(); // id de la placa que voy a desactivar
 							 base.conectar();
-							 base.encenderPlaca(id);
+							 String respuesta = base.encenderPlaca(id);
 							 base.desconectar();
 							 base.conectar();
 							 String listaActualizada= base.sacarlista();
 							 base.desconectar();
+							 sockManager.Escribir(respuesta+'\n');
 							 sockManager.Escribir(listaActualizada+'\n');
 							 
 					}else if (requestLine.equals("desactivarplaca")){
 						 String id = sockManager.Leer();  // id de la placa que voy a desactivar
 						 base.conectar();
-						 System.out.println("Request id:"+id);
-						 base.apagarPlaca(id);
+						 String respuesta = base.apagarPlaca(id);
 						 base.desconectar();
 						 base.conectar();
 						 String listaActualizada= base.sacarlista();
 						 base.desconectar();
+						 sockManager.Escribir(respuesta+'\n');
 						 sockManager.Escribir(listaActualizada+'\n');
 					
 					}else if (requestLine.contains("salir")){

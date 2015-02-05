@@ -274,6 +274,7 @@ public class Client {
         					if (JOptionPane.OK_OPTION == confirmado){
 		               			sm.Escribir("desactivarplaca"+'\n');
 		               			sm.Escribir(vent.id+'\n');
+		               			String respuesta = sm.Leer();
            						String stringLista = sm.Leer();
            						ArrayList<String> df = new ArrayList<String>();
            						String Sensor[] = stringLista.split(",");// separo sensores
@@ -281,8 +282,14 @@ public class Client {
            							df.add(Sensor[i]);
            						}
            						vent.cargarTabla(df);
-           						JOptionPane.showMessageDialog(vent, "placa desactivada");
-        					}
+           						if (respuesta.equals("204 OK Control desactivado")){
+           							JOptionPane.showMessageDialog(vent, "placa desactivada");
+           						}else{
+           							JOptionPane.showMessageDialog(vent, "la placa ya esta inactiva");
+           						}
+           						
+           					   }
+        					
 	            		}else if(vent.boton==8){//bActivarplaca
 	               			vent.boton=0;
 	               			int confirmado = JOptionPane.showConfirmDialog(vent, "¿Confirmar?");
@@ -290,6 +297,7 @@ public class Client {
 		               			sm.Escribir("activarplaca"+'\n');
 		               			sm.Escribir(vent.id+'\n');
 		               			System.out.println("Cargo la lista?");
+		               			String respuesta = sm.Leer();
            						String stringLista = sm.Leer();
            						ArrayList<String> df = new ArrayList<String>();
            						String Sensor[] = stringLista.split(",");// separo sensores
@@ -297,7 +305,13 @@ public class Client {
            							df.add(Sensor[i]);
            						}
            						vent.cargarTabla(df);
-           						JOptionPane.showMessageDialog(vent, "placa activada");
+           						
+           						if (respuesta.equals("204 OK Control desactivado")){
+           							JOptionPane.showMessageDialog(vent, "placa activada");
+           						}else{
+           							JOptionPane.showMessageDialog(vent, "la placa ya esta activa");
+           						}
+           						
            					   }
         					}
 	            		}
