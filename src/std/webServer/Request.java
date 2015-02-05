@@ -24,7 +24,6 @@ final class Request implements Runnable {
   
   public void run() {
     try {
-    	System.out.println("run");
         processRequest();
      
     }
@@ -296,15 +295,4 @@ private void sendBytes(FileInputStream fis) throws Exception {
 	}
 	
   
-  public static void main(String argv[]) throws Exception
-	{
-	  System.out.println("main");
-	  ServerSocket s = new ServerSocket(2345);
-	  SocketManager sockManager =  new SocketManager(s.accept());
-	  System.out.println("socket manager creado");
-	  Request r = new Request(sockManager);
-	  System.out.println("ejecutando run");
-	  r.run();
-	  System.out.println();
-	}
 }

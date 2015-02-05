@@ -296,7 +296,7 @@ public class Client {
         					if (JOptionPane.OK_OPTION == confirmado){
 		               			sm.Escribir("activarplaca"+'\n');
 		               			sm.Escribir(vent.id+'\n');
-		               			System.out.println("Cargo la lista?");
+		               		
 		               			String respuesta = sm.Leer();
            						String stringLista = sm.Leer();
            						ArrayList<String> df = new ArrayList<String>();
