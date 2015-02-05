@@ -236,7 +236,7 @@ public class DataBaseControler {
 	}
 
 
-	public String cambiarEstado(String id, String parametro) throws SQLException { // depurarlo y mirar consultas...
+	public String cambiarEstado(String id, String parametro) throws SQLException { 
 		// TODO Auto-generated method stub
 		
 		Statement st = conn.createStatement();

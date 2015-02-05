@@ -253,8 +253,8 @@ public class Client {
 	            	    }else if(vent.boton==6){// salir
 	            	    
 	            	    	vent.boton=0;
-	            	    	vent.dispose();
 	            			estado=4;
+	            			vent.dispose();
 	        
 	            		}else if(vent.boton==7){//bdesactivar placa
 	               			vent.boton=0;
@@ -295,7 +295,6 @@ public class Client {
             		System.out.println("llego");
             		sm.Escribir("adios"+'\n'); // mando al server que quiere salir
             		sm.Escribir(user.getNick()+'\n'); //mando el nombre del user que soy para que me desconecte en la bd
-            		System.out.println("mando adios");
                 break;
             	}    
             	
