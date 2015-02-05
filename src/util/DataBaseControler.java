@@ -251,7 +251,7 @@ public class DataBaseControler {
 			st.executeUpdate(sql);
 			st.close();
 			
-			respuesta= "203 OK Control activo";
+			respuesta= "214 OK Control activo";
  		}
  		
  		return respuesta;
@@ -272,7 +272,7 @@ public class DataBaseControler {
 			st.executeUpdate(sql);
 			st.close();
 			
-			respuesta= "203 OK Control desactivado";
+			respuesta= "215 OK Control desactivado";
  		}
  		
  		return respuesta;

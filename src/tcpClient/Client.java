@@ -282,7 +282,7 @@ public class Client {
            							df.add(Sensor[i]);
            						}
            						vent.cargarTabla(df);
-           						if (respuesta.equals("204 OK Control desactivado")){
+           						if (respuesta.equals("215 OK Control desactivado")){
            							JOptionPane.showMessageDialog(vent, "placa desactivada");
            						}else{
            							JOptionPane.showMessageDialog(vent, "la placa ya esta inactiva");
@@ -306,7 +306,7 @@ public class Client {
            						}
            						vent.cargarTabla(df);
            						
-           						if (respuesta.equals("204 OK Control desactivado")){
+           						if (respuesta.equals("214 OK Control activo")){
            							JOptionPane.showMessageDialog(vent, "placa activada");
            						}else{
            							JOptionPane.showMessageDialog(vent, "la placa ya esta activa");
