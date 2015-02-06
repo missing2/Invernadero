@@ -35,9 +35,9 @@ final class Request implements Runnable {
   private void processRequest() throws Exception {
 	  int estado=0;
 	  Usuario user = new Usuario();
-	
+	  boolean sigo = true;
 	  
-  while (true){
+  while (sigo){
    
 		switch (estado) {
 	
@@ -207,27 +207,29 @@ final class Request implements Runnable {
 						 sockManager.Escribir(respuesta+'\n');
 						 sockManager.Escribir(listaActualizada+'\n');
 					
-					}else if (requestLine.contains("salir")){
+					}else if (requestLine.equals("salir")){
 						estado=4;
 						System.out.println("me piden que adios");
 					}
 			 }
 		
 		case 4: //salir 
+			System.out.println("hasta luegooo");
 			String nick=sockManager.Leer();
 			if (nick.equals("nadie")) {
 				System.out.println("nadie");
-			}
-			else {
+			}else {
+			
+				System.out.println("off la bd");
 				base.conectar();
 				base.echarUsuario(nick);
-				System.out.println("hasta luegooo");
 				base.desconectar();
 				this.salir(user.getNick());
 			}
 			
 			sockManager.CerrarStreams();
 		    sockManager.CerrarSocket();
+		    
 		  
 		    
 		break;
@@ -245,12 +247,14 @@ final class Request implements Runnable {
 
   private void salir(String nick) {
 	// TODO Auto-generated method stub
+	  System.out.println("elimino usuario de la lista");
 	  int pos=0;
 	  for (int i=1; pos< VentanaControl.listanombres.size();i++) {// busco la pos en la que esta el nombre que busco
 			 if (nick.equals(VentanaControl.listanombres.get(i)))
 					 pos=i;
 		}
 	  VentanaControl.listaRequest.remove(pos);  
+	  VentanaControl.listanombres.remove(pos);  
 }
 
 

@@ -24,8 +24,9 @@ public class Client {
             int estado = 0;
             Usuario user = new Usuario();
             boolean creado = false;
-           
-            while (true) {	
+            boolean sigo = true;
+            boolean sigo2=true;
+            while (sigo2) {	
             	switch(estado){
             	case 0: // comprobar user y creo el socket
             		ventanaLoggin ventanaloggin = new ventanaLoggin();
@@ -147,7 +148,7 @@ public class Client {
             		vent.cargarTabla(listae);
             		JOptionPane.showMessageDialog(vent, "bienvenido al sistema");
             		
-            		while (true){
+            		while (sigo){
             			while (vent.boton==0){
             			//estoy en la vent sin mas
             				Thread.sleep(1000);
@@ -265,9 +266,11 @@ public class Client {
 	            	    }else if(vent.boton==6){// salir
 	            	    
 	            	    	vent.boton=0;
-	            			estado=4;
+	            			sigo= false;
+	            			System.out.println("sigo false");
 	            			vent.dispose();
-	        
+	            			estado=4;
+	            			
 	            		}else if(vent.boton==7){//bdesactivar placa
 	               			vent.boton=0;
 	               			int confirmado = JOptionPane.showConfirmDialog(vent, "¿Confirmar?");
@@ -318,9 +321,10 @@ public class Client {
             	
 
             	case 4:// salir
-            		System.out.println("llego");
-            		sm.Escribir("adios"+'\n'); // mando al server que quiere salir
+            		sm.Escribir("salir"+'\n'); // mando al server que quiere salir
             		sm.Escribir(user.getNick()+'\n'); //mando el nombre del user que soy para que me desconecte en la bd
+            		System.out.println("estoy desconectado");
+            		sigo2=false;
                 break;
             	}    
             	
