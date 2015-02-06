@@ -8,6 +8,7 @@ import java.awt.event.ComponentListener;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
 import java.sql.SQLException;
@@ -108,16 +109,14 @@ public void actionPerformed(ActionEvent e) {
 			base.echarUsuario(nick);
 			base.desconectar();
 			int pos = 0;
-			//System.out.println("tam: "+listanombres.size());
-			for (int i=0; i<listanombres.size(); i++) {
-				System.out.println("esta en la linked: "+listanombres.get(i));
-				
+		
+			for (int i=0; i<listanombres.size(); i++) {				
 			 if (nick.equals(this.listanombres.get(i)))
 					 pos=i;
 			}
 		
 			Request aeliminar = this.listaRequest.get(pos);
-			System.out.println("expulsado: "+nick);
+			JOptionPane.showMessageDialog(this, "expulsado"+nick);
 			aeliminar.sockManager.CerrarSocket();
 			this.listanombres.remove(pos);
 			this.listaRequest.remove(pos);
@@ -146,7 +145,6 @@ public void cargarTabla() throws SQLException, ClassNotFoundException{
 	
 	table.setModel(a);
 	this.repaint();
-	System.out.println("actualizado");
 
 }
 public static void main(String[]args) throws ClassNotFoundException {

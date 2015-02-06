@@ -45,7 +45,7 @@ final class Request implements Runnable {
 			
 			String  requestLine  = sockManager.Leer();// lee el user que le has pasado por socket desde el cliente
 			
-			if (!requestLine.equals("adios")) {
+			if (!requestLine.equals("salir")) {
 				
 				if (requestLine.equals("alta")){// estoy en la ventana altas bajas
 					base.conectar();
@@ -82,7 +82,7 @@ final class Request implements Runnable {
 					sockManager.Escribir(respuesta+'\n');					
 					}
 				  
-	     	}else { // request = adios
+	     	}else { // request = salir
 	     		estado = 4;
 	    	}
 			
@@ -92,7 +92,7 @@ final class Request implements Runnable {
 			
 			 requestLine  = sockManager.Leer();// lee el pasword que le has pasado por socket desde el cliente
 		
-			if (!requestLine.equals("adios")) {
+			if (!requestLine.equals("salir")) {
 				
 				int pass = Integer.parseInt(requestLine);
 				base.conectar();
@@ -108,13 +108,12 @@ final class Request implements Runnable {
 					base.conectarUsuario(user.getNick());
 					base.desconectar();
 					VentanaControl.listanombres.add(user.getNick());// inserto el nombre del usuario para luego buscar su request	
-					System.out.println("meto usuario en lista");
 					estado = 2;
 				}
 				
 				sockManager.Escribir(respuesta+'\n');
 				
-	    	}else if (requestLine.equals("adios")){
+	    	}else if (requestLine.equals("salir")){
 	    		estado=4;
 	    	}
 			
@@ -127,7 +126,8 @@ final class Request implements Runnable {
 				 sockManager.Escribir(lista+'\n'); // mando la lista al cliente para que inicie la ventana
 				
 			 }
-			 while (true) { // queda en bucle para poder seguir haciendo cosas
+			 boolean sigo2 =true;
+			 while (sigo) { // queda en bucle para poder seguir haciendo cosas
 				 requestLine  = sockManager.Leer();// lee el comando (boton) que e has pasado por socket desde el cliente
 					if (requestLine.equals("activar")){
 						String id = sockManager.Leer(); // id del sensor que voy a activar
@@ -209,18 +209,15 @@ final class Request implements Runnable {
 					
 					}else if (requestLine.equals("salir")){
 						estado=4;
-						System.out.println("me piden que adios");
+						sigo=false;
 					}
 			 }
 		
 		case 4: //salir 
-			System.out.println("hasta luegooo");
+			
 			String nick=sockManager.Leer();
 			if (nick.equals("nadie")) {
-				System.out.println("nadie");
 			}else {
-			
-				System.out.println("off la bd");
 				base.conectar();
 				base.echarUsuario(nick);
 				base.desconectar();
@@ -229,6 +226,7 @@ final class Request implements Runnable {
 			
 			sockManager.CerrarStreams();
 		    sockManager.CerrarSocket();
+		    
 		    
 		  
 		    
@@ -247,14 +245,19 @@ final class Request implements Runnable {
 
   private void salir(String nick) {
 	// TODO Auto-generated method stub
-	  System.out.println("elimino usuario de la lista");
-	  int pos=0;
-	  for (int i=1; pos< VentanaControl.listanombres.size();i++) {// busco la pos en la que esta el nombre que busco
+	  
+	  if (nick=="nadie") {
+		  
+	  }else {
+	  
+		  int pos=0;
+		  for (int i=0; i<VentanaControl.listanombres.size(); i++) {				
 			 if (nick.equals(VentanaControl.listanombres.get(i)))
 					 pos=i;
-		}
-	  VentanaControl.listaRequest.remove(pos);  
-	  VentanaControl.listanombres.remove(pos);  
+			}
+		  VentanaControl.listaRequest.remove(pos);  
+		  VentanaControl.listanombres.remove(pos);  
+	  }
 }
 
 
