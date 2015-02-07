@@ -1,13 +1,16 @@
 package tcpClient;
+
 import util.*;
 
 import java.net.*;
 import java.util.ArrayList;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+
 
 
 
@@ -245,11 +248,17 @@ public class Client {
 	            	    	vent.boton=0;
 	            	    	sm.Escribir("imagen"+'\n');
 	            	    	sm.Escribir(vent.id+'\n');
-	            	    	
-	            	    	byte[] buffer = new byte[1024];          				            	    	
+	            	    	//Sensor sen = new Sensor(, vent.id, def, ultima_accion, estado, funcion_principal);
 	            	    	
 	            	    	String recibido = sm.Leer();
-	            	    	String [] fotobites = recibido.split(",");
+	            	    	System.out.println(recibido);
+	            	    	
+	            	    	byte[] imagen = sm.LeerBytes();
+	            	    	Image temp = ImageIO.read(new ByteArrayInputStream(imagen));
+	            	    	//Placa visualizar = new Placa(sen.getId_Placa(), temp);
+	            	    	//ventanaImagen ventana = new ventanaImagen(visualizar);
+	            	    	//ventana.setVisible(true);
+	            	    			
 	            	   // 	buffer = fotobites[0];
 	            	    	
 //	            	    	byte[] fileBytes = sm.Leer();

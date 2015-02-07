@@ -356,18 +356,33 @@ public class DataBaseControler {
 	 	st2.close();
 	 	return respuesta;
 	}
-	public String foto(String id) throws SQLException {
+	public byte[] foto(String id) throws SQLException {
 		
 		Statement st = conn.createStatement();
-		ResultSet rs2 = st.executeQuery("SELECT P.foto from Placa P, Sensor S  where P.id_placa=S.id_placa and S.id_sensor='"+id+"';");
-		String foto = rs2.getString("foto");// falla
-		
+		ResultSet rs2 = st.executeQuery("SELECT foto from Placa where id_placa = (select id_placa from Sensor where id_sensor ='"+id+"');");
+		byte[] foto = null;
+		if(rs2.next()){
+			foto = rs2.getBytes("foto");
+		}		
 		rs2.close();
 		st.close();
 		System.out.println("foto:"+foto);
 		return foto;
 		
 	}
+	
+	/*public String url(String id) throws SQLException {
+		
+		Statement st = conn.createStatement();
+		ResultSet rs2 = st.executeQuery("SELECT foto from Placa where id = (select id_placa from Sensor where id_sensor ='"+id+"');");
+		String foto = null;
+		if(rs2.next()){
+			foto = rs2.getString("foto");
+		}
+		rs2.close();
+		st.close();
+		return foto;
+	}*/
 	
 	//___________________________________ventana controlador_______________________
 	public DefaultTableModel echarUsuario(String nick) throws SQLException {
