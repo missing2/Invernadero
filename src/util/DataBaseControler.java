@@ -290,7 +290,7 @@ public class DataBaseControler {
 		Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
 				rs2.getString("ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
 		
-		Placa p = new Placa(rs.getString("id_placa"), rs.getString("estado_placa"), rs.getString("foto"));
+		Placa p = new Placa(rs.getString("id_placa"), rs.getString("estado_placa"));
   		 
 
 		if(a.getEstado().equals("on") && p.getEstado_placa().equals("on")){
@@ -359,7 +359,7 @@ public class DataBaseControler {
 	public byte[] foto(String id) throws SQLException {
 		
 		Statement st = conn.createStatement();
-		ResultSet rs2 = st.executeQuery("SELECT foto from Placa where id_placa = (select id_placa from Sensor where id_sensor ='"+id+"');");
+		ResultSet rs2 = st.executeQuery("SELECT foto from Placa where id_placa ='"+id+"';");
 		byte[] foto = null;
 		if(rs2.next()){
 			foto = rs2.getBytes("foto");

@@ -229,8 +229,6 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 			boton = 5;
 			int index = table.getSelectedRow();
 			id = (String) table.getValueAt(index, 1);
-			Sensor s = new Sensor((String)table.getValueAt(index, 1), (String)table.getValueAt(index, 2), (String) table.getValueAt(index,3), (String) table.getValueAt(index,4), (String) table.getValueAt(index,5), (String) table.getValueAt(index,6));
-			lineaSelec = s.toString();
 		}else if(e.getSource().equals(bSalir)){
 			boton = 6;
 			

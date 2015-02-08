@@ -245,17 +245,13 @@ public class Client {
 	            	    }else if(vent.boton==5){// imagen
 	            	    	vent.boton=0;
 	            	    	System.out.println("bot5 clicado");
-	            	    	vent.boton=0;
 	            	    	sm.Escribir("imagen"+'\n');
 	            	    	sm.Escribir(vent.id+'\n');
-	            	    	sm.Escribir(vent.lineaSelec+'\n');
-	            	    	
-	            	    	String recibido = sm.Leer();
-	            	    	System.out.println(recibido);
 	            	    	
 	            	    	byte[] imagen = sm.LeerBytes();
+	            	    	System.out.println(imagen);
 	            	    	Image temp = ImageIO.read(new ByteArrayInputStream(imagen));
-	            	    	Placa p = new Placa(vent.lineaSelec., temp);
+	            	    	Placa p = new Placa(vent.id, temp);
 	            	    	ventanaImagen ventana = new ventanaImagen(p);
 	            	    	ventana.setVisible(true);
 	            	    			

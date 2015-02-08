@@ -191,12 +191,10 @@ final class Request implements Runnable {
 						sockManager.Escribir(lista + '\n');
 
 					} else if (requestLine.contains("imagen")) {
-						// ni idea de pasar de la bd a aqui una imagen...
-						// ni idea de pasar de la bd a aqui una imagen...
+						
 						System.out.println("imagen");
-						requestLine = sockManager.Leer(); // recivo que se
-															// sensor quiere
-															// buscar en la bd
+						requestLine = sockManager.Leer(); // recivo que se sensor quiere buscar en la bd
+						System.out.println(requestLine);
 						base.conectar();
 						byte[] bfoto = base.foto(requestLine);
 						base.desconectar();
@@ -321,6 +319,7 @@ final class Request implements Runnable {
 		try {
 			
 			int bytes = bfoto.length;
+			System.out.println("Estoy en enviar foto");
 
 			if (bytes > 0)
 				sockManager.Escribir(bfoto, bytes);
