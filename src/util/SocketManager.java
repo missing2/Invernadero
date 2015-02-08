@@ -83,6 +83,7 @@ public class SocketManager {
 		if (len > 0) {
 			dis.readFully(data);
 		}
+		System.out.println(data);
 		return data;
     	
     }

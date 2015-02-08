@@ -319,7 +319,7 @@ final class Request implements Runnable {
 		try {
 			
 			int bytes = bfoto.length;
-			System.out.println("Estoy en enviar foto");
+			System.out.println("bytes"+ bytes);
 
 			if (bytes > 0)
 				sockManager.Escribir(bfoto, bytes);
