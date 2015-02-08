@@ -77,11 +77,14 @@ public class SocketManager {
     	
     	InputStream in = mySocket.getInputStream();
 		DataInputStream dis = new DataInputStream(in);
+		System.out.println(in);
 
 		int len = dis.readInt();
 		byte[] data = new byte[len];
+		System.out.println("len "+len);
 		if (len > 0) {
 			dis.readFully(data);
+			System.out.println("data "+ data);
 		}
 		System.out.println(data);
 		return data;
