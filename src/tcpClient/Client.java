@@ -248,29 +248,18 @@ public class Client {
 	            	    	vent.boton=0;
 	            	    	sm.Escribir("imagen"+'\n');
 	            	    	sm.Escribir(vent.id+'\n');
-	            	    	//Sensor sen = new Sensor(, vent.id, def, ultima_accion, estado, funcion_principal);
+	            	    	sm.Escribir(vent.lineaSelec+'\n');
 	            	    	
 	            	    	String recibido = sm.Leer();
 	            	    	System.out.println(recibido);
 	            	    	
 	            	    	byte[] imagen = sm.LeerBytes();
 	            	    	Image temp = ImageIO.read(new ByteArrayInputStream(imagen));
-	            	    	//Placa visualizar = new Placa(sen.getId_Placa(), temp);
-	            	    	//ventanaImagen ventana = new ventanaImagen(visualizar);
-	            	    	//ventana.setVisible(true);
+	            	    	Placa p = new Placa(vent.lineaSelec., temp);
+	            	    	ventanaImagen ventana = new ventanaImagen(p);
+	            	    	ventana.setVisible(true);
 	            	    			
 	            	   // 	buffer = fotobites[0];
-	            	    	
-//	            	    	byte[] fileBytes = sm.Leer();
-//	            	    	String archivoDestino = "fotos recibidas/image.png";
-//	            	    	escribirImagen(fileBytes, archivoDestino);
-	            	    	
-//	            	    	Socket socket = ss.accept();
-//				            BufferedImage bufferedImage = ImageIO.read(socket.getInputStream());
-//				            ImageIO.write(bufferedImage,"png", new FileOutputStream("fotos recibidas/image.png"));
-//				            socket.close();
-//				            ss.close();
-
 	            	    	
 	            	    }else if(vent.boton==6){// salir
 	            	    

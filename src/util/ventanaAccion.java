@@ -36,10 +36,12 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.JRadioButton;
 import javax.swing.BoxLayout;
+
 import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
@@ -79,6 +81,7 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 
 	public String  id;
 	public String txt;
+	public String lineaSelec;
 	private JRadioButton rbApagar;
 	private JRadioButton rbEncender;
 	private JRadioButton rbBajar;
@@ -226,6 +229,8 @@ public class ventanaAccion extends JFrame implements ActionListener, ComponentLi
 			boton = 5;
 			int index = table.getSelectedRow();
 			id = (String) table.getValueAt(index, 1);
+			Sensor s = new Sensor((String)table.getValueAt(index, 1), (String)table.getValueAt(index, 2), (String) table.getValueAt(index,3), (String) table.getValueAt(index,4), (String) table.getValueAt(index,5), (String) table.getValueAt(index,6));
+			lineaSelec = s.toString();
 		}else if(e.getSource().equals(bSalir)){
 			boton = 6;
 			
