@@ -197,6 +197,7 @@ final class Request implements Runnable {
 						System.out.println(requestLine);
 						base.conectar();
 						byte[] bfoto = base.foto(requestLine);
+						//sockManager.Escribir("206 OK " + bfoto.length + " bytes\n");
 						base.desconectar();
 						enviarFoto(bfoto);
 
@@ -319,10 +320,11 @@ final class Request implements Runnable {
 		try {
 			
 			int bytes = bfoto.length;
-			System.out.println("bytes"+ bytes);
 
-			if (bytes > 0)
-				sockManager.Escribir(bfoto, bytes);
+			if (bytes >= 0){
+				sockManager.EscribirBytes(bfoto, bytes);
+			}
+				
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

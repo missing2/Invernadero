@@ -73,16 +73,29 @@ public class SocketManager {
     public void Escribir(byte[] buffer, int bytes) throws IOException {
         bufferEscritura.write(buffer, 0, bytes);
     }
+    public void EscribirBytes(byte[] buffer, int bytes) throws IOException{
+    	
+    	if (bytes< 0)
+			throw new IllegalArgumentException("Negative length not allowed");
+		if (0 >= buffer.length)
+			throw new IndexOutOfBoundsException("Out of bounds: " + 0);
+    	
+    	bufferEscritura = new DataOutputStream(mySocket.getOutputStream());
+    	bufferEscritura.writeInt(bytes);
+    	if(bytes > 0)
+    		bufferEscritura.write(buffer, 0, bytes);
+    	
+    }
     public byte[] LeerBytes() throws IOException{
     	
-    	InputStream in = mySocket.getInputStream();
-		DataInputStream dis = new DataInputStream(in);
-		System.out.println(in);
+		DataInputStream dis = new DataInputStream(mySocket.getInputStream());
+	
 
 		int len = dis.readInt();
 		byte[] data = new byte[len];
 		System.out.println("len "+len);
 		if (len > 0) {
+			System.out.println("entro en el if");
 			dis.readFully(data);
 			System.out.println("data "+ data);
 		}
