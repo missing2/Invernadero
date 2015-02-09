@@ -229,18 +229,22 @@ public class Client {
 	       						}
         					}
         					
+
 	            	    }else if(vent.boton==4){//bBuscar
 	            	    	vent.boton=0;
 	            	    	sm.Escribir("buscar"+'\n');
 	            	    	sm.Escribir(vent.palabra.getText()+'\n');
 	            	    	String recibido=sm.Leer();
-	            	    	ArrayList<String> df = new ArrayList<String>();
-	            	    	String Sensor[] = recibido.split(",");// separo sensores
-	            	    	for(int i=0;i<Sensor.length;i++){
-	            	    		df.add(Sensor[i]);
+	            	    	if (!recibido.equals("vacio")){
+		            	    	ArrayList<String> df = new ArrayList<String>();
+		            	    	String Sensor[] = recibido.split(",");// separo sensores
+		            	    	for(int i=0;i<Sensor.length;i++){
+		            	    		df.add(Sensor[i]);
 	            	    	}
 	            	    	vent.cargarTabla(df);
-	            	    	
+	            	    	}else{
+	            	    		JOptionPane.showMessageDialog(vent, "no hay pametros con esa descripcion");
+	            	    	}
 	            	    	
 	            	    	
 	            	    }else if(vent.boton==5){// imagen

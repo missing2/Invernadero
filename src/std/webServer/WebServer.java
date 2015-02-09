@@ -7,7 +7,7 @@ import util.*;
 public final class WebServer extends Thread
 {
 	public static int actuales= 0;
-	public static int maximas = 2;
+	public static int maximas = 1;
 	int port = 2345; 
 	ServerSocket wellcomeSocket;
 	

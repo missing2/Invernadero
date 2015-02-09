@@ -174,12 +174,14 @@ public class DataBaseControler {
  		
  		ResultSet rs2 = stat.executeQuery("Select * from Sensor where "+colum+" like '"+parametro+"';"); // columna en la que quiero buscar y parametro que quiero buscar
  		int conta =1; 
- 		System.out.println("Select * from Sensor where "+colum+" like '"+parametro+"';");
- 		
+ 		if (rs2.getRow()==0){
+ 			fin = "vacio";
+ 			System.out.println("vacia");
+
+ 		}else{
 		while (rs2.next()) {
 			Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
 					rs2.getString("func_principal"),rs2.getString("estado"),rs2.getString("ultima_accion"));
-			System.out.println(a.toString());
 			
 			temp = ("ELEM:"+""+conta+";"+a.getId_placa()+";"+a.getId_sensor()+";"+a.getDef()+";"+a.getFuncion_principal()+";"+a.getEstado()+";"+a.getUltima_accion());
 			conta++;
@@ -189,6 +191,7 @@ public class DataBaseControler {
  				fin=fin+temp+",";
  	 			}
  	 		}
+}
  	
  		stat.close();
  		

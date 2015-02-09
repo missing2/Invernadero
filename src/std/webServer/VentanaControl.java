@@ -116,7 +116,7 @@ public void actionPerformed(ActionEvent e) {
 			}
 		
 			Request aeliminar = this.listaRequest.get(pos);
-			JOptionPane.showMessageDialog(this, "expulsado"+nick);
+			JOptionPane.showMessageDialog(this, "expulsado "+nick);
 			aeliminar.sockManager.CerrarSocket();
 			this.listanombres.remove(pos);
 			this.listaRequest.remove(pos);
