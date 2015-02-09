@@ -1,5 +1,6 @@
 package std.webServer;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
@@ -199,6 +200,7 @@ final class Request implements Runnable {
 						byte[] bfoto = base.foto(requestLine);
 						//sockManager.Escribir("206 OK " + bfoto.length + " bytes\n");
 						base.desconectar();
+						System.out.println("enviar foto");
 						enviarFoto(bfoto);
 
 					} else if (requestLine.contains("actuar")) {
@@ -316,18 +318,9 @@ final class Request implements Runnable {
 		}
 	}
 
-	private void enviarFoto(byte[] bfoto) {
-		try {
-			
-			int bytes = bfoto.length;
+	private void enviarFoto(byte[] bfoto) throws IOException {
+		sockManager.EscribirBytes(bfoto, bfoto.length);
 
-			if (bytes >= 0){
-				sockManager.EscribirBytes(bfoto, bytes);
-			}
-				
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
+}
 }
