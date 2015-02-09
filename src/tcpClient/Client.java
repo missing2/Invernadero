@@ -6,6 +6,7 @@ import java.net.*;
 import java.util.ArrayList;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.*;
 
 import javax.imageio.ImageIO;
@@ -253,12 +254,11 @@ public class Client {
 								System.out.println(imagen[i]);
 						}
 	            	    	Image temp = ImageIO.read(new ByteArrayInputStream(imagen));
+	            	    	//ImageIO.write((RenderedImage) temp, "jpg", new File("archivos/"));
 	            	    	Placa p = new Placa(vent.id, temp);
 	            	    	System.out.println("p "+p);
 	            	    	ventanaImagen ventana = new ventanaImagen(p);
 	            	    	ventana.setVisible(true);
-	            	    			
-	            	   // 	buffer = fotobites[0];
 	            	    	
 	            	    }else if(vent.boton==6){// salir
 	            	    

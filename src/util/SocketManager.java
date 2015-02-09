@@ -75,11 +75,6 @@ public class SocketManager {
     }
     public void EscribirBytes(byte[] buffer, int bytes) throws IOException{
     	
-    	if (bytes< 0)
-			throw new IllegalArgumentException("Negative length not allowed");
-		if (0 >= buffer.length)
-			throw new IndexOutOfBoundsException("Out of bounds: " + 0);
-    	
     	bufferEscritura = new DataOutputStream(mySocket.getOutputStream());
     	bufferEscritura.writeInt(bytes);
     	System.out.println("escribir bytes");
@@ -92,6 +87,7 @@ public class SocketManager {
 	
 
 		int bytes = dis.readInt();
+		System.out.println(bytes);
 		byte[] data = new byte[bytes];
 		System.out.println("leer ");
 		if (bytes > 0) {
