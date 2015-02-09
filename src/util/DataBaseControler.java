@@ -366,7 +366,6 @@ public class DataBaseControler {
 		}		
 		rs2.close();
 		st.close();
-		System.out.println("foto:"+foto);
 		return foto;
 		
 	}

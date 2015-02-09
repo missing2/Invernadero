@@ -198,10 +198,9 @@ final class Request implements Runnable {
 						System.out.println(requestLine);
 						base.conectar();
 						byte[] bfoto = base.foto(requestLine);
-						//sockManager.Escribir("206 OK " + bfoto.length + " bytes\n");
-						base.desconectar();
-						System.out.println("enviar foto");
 						enviarFoto(bfoto);
+						base.desconectar();
+						
 
 					} else if (requestLine.contains("actuar")) {
 						String id = sockManager.Leer(); // recivo el id que
@@ -307,20 +306,9 @@ final class Request implements Runnable {
 		return lista;
 	}
 
-	private void sendBytes(FileInputStream fis) throws Exception {
-		// Construct a 1K buffer to hold bytes on their way to the socket.
-		byte[] buffer = new byte[1024];
-		int bytes = 0;
-
-		// Copy requested file into the socket's output stream.
-		while ((bytes = fis.read(buffer)) != -1) {
-			sockManager.Escribir(buffer, bytes);
-		}
-	}
-
 	private void enviarFoto(byte[] bfoto) throws IOException {
+		
 		sockManager.EscribirBytes(bfoto, bfoto.length);
 
-
-}
+	}
 }

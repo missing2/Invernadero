@@ -82,24 +82,21 @@ public class SocketManager {
     	
     	bufferEscritura = new DataOutputStream(mySocket.getOutputStream());
     	bufferEscritura.writeInt(bytes);
+    	System.out.println("escribir bytes");
     	if(bytes > 0)
     		bufferEscritura.write(buffer, 0, bytes);
-    	
     }
     public byte[] LeerBytes() throws IOException{
     	
 		DataInputStream dis = new DataInputStream(mySocket.getInputStream());
 	
 
-		int len = dis.readInt();
-		byte[] data = new byte[len];
-		System.out.println("len "+len);
-		if (len > 0) {
-			System.out.println("entro en el if");
+		int bytes = dis.readInt();
+		byte[] data = new byte[bytes];
+		System.out.println("leer ");
+		if (bytes > 0) {
 			dis.readFully(data);
-			System.out.println("data "+ data);
 		}
-		System.out.println(data);
 		return data;
     	
     }
