@@ -158,10 +158,11 @@ public class DataBaseControler {
 		
 		 // adecuo las consultas especiales que me pasan, a consultas adaptadas a sql
 		if (parametro.contains("*")){
-			parametro.replace('*','%');
+			parametro=parametro.replace('*','%');
+			System.out.println(parametro);
 		} 
 		else if(parametro.contains("?")){
-			parametro.replace('?','_');
+			parametro=parametro.replace('?','_');
 			parametro=parametro+"__";// añado 2 mas parq que sumen 3x_
 		} 
 		else {
@@ -169,13 +170,16 @@ public class DataBaseControler {
 		}
 		
  		Statement stat = conn.createStatement();
+ 		System.out.println(parametro);
  		
  		ResultSet rs2 = stat.executeQuery("Select * from Sensor where "+colum+" like '"+parametro+"';"); // columna en la que quiero buscar y parametro que quiero buscar
  		int conta =1; 
+ 		System.out.println("Select * from Sensor where "+colum+" like '"+parametro+"';");
  		
 		while (rs2.next()) {
 			Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
 					rs2.getString("func_principal"),rs2.getString("estado"),rs2.getString("ultima_accion"));
+			System.out.println(a.toString());
 			
 			temp = ("ELEM:"+""+conta+";"+a.getId_placa()+";"+a.getId_sensor()+";"+a.getDef()+";"+a.getFuncion_principal()+";"+a.getEstado()+";"+a.getUltima_accion());
 			conta++;
@@ -199,7 +203,7 @@ public class DataBaseControler {
 		String respuesta= "404 ERROR id_variable en estado ON";
 		
 		Statement st2 = conn.createStatement();
-		ResultSet rs2 = st2.executeQuery("Select * from Sensor where WHERE id_sensor='"+ids+"'");
+		ResultSet rs2 = st2.executeQuery("Select * from Sensor where id_sensor='"+ids+"'");
 		String estado = rs2.getString("estado");
  		st2.close();
  		
@@ -245,7 +249,7 @@ public class DataBaseControler {
  		String estado = rs2.getString("estado_placa");
  		st2.close();
  		
- 		if (estado.equals("on")) {
+ 		if (estado.equals("off")) {
 			Statement st = conn.createStatement();
 			String sql = "UPDATE Placa SET estado_placa ='"+"on"+"' where id_placa='"+id+"'";
 			st.executeUpdate(sql);
@@ -266,7 +270,7 @@ public class DataBaseControler {
  		String estado = rs2.getString("estado_placa");
  		st2.close();
  		
- 		if (estado.equals("off")) {
+ 		if (estado.equals("on")) {
 			Statement st = conn.createStatement();
 			String sql = "UPDATE Placa SET estado_placa ='"+"off"+"' where id_placa='"+id+"'";
 			st.executeUpdate(sql);
@@ -286,12 +290,14 @@ public class DataBaseControler {
 		Statement st2 = conn.createStatement();
 		String respuesta="";
 		ResultSet rs2 = st.executeQuery ( "Select * from Sensor WHERE id_sensor ='"+id+"';");// Saco la info del sensor que quieren que cambie
-		ResultSet rs = st2.executeQuery("Select * from Placa  WHERE id_placa = '"+rs2.getString("id_placa")+"';");
+		ResultSet rs = st2.executeQuery("Select id_placa,estado_placa from Placa  WHERE id_placa = '"+rs2.getString("id_placa")+"';");
 		Sensor a = new Sensor(rs2.getString("id_placa"),rs2.getString("id_sensor"),rs2.getString("def_variable"),
 				rs2.getString("ultima_accion"),rs2.getString("estado"),rs2.getString("func_principal"));
 		
 		Placa p = new Placa(rs.getString("id_placa"), rs.getString("estado_placa"));
   		 
+		System.out.println(a.getEstado());
+		System.out.println(p.getEstado_placa());
 
 		if(a.getEstado().equals("on") && p.getEstado_placa().equals("on")){
 
