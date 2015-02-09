@@ -249,10 +249,11 @@ public class Client {
 	            	    	sm.Escribir(vent.id+'\n');
 	            	    	
 	            	    	byte[] imagen = sm.LeerBytes();
-	            	    	System.out.println("im "+imagen);
+	            	    	for (int i = 0; i < imagen.length; i++) {
+								System.out.println(imagen[i]);
+						}
 	            	    	Image temp = ImageIO.read(new ByteArrayInputStream(imagen));
 	            	    	Placa p = new Placa(vent.id, temp);
-	            	    	System.out.println("id "+vent.id+" temp "+temp);
 	            	    	System.out.println("p "+p);
 	            	    	ventanaImagen ventana = new ventanaImagen(p);
 	            	    	ventana.setVisible(true);

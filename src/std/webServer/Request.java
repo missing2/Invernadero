@@ -200,6 +200,10 @@ final class Request implements Runnable {
 						byte[] bfoto = base.foto(requestLine);
 						enviarFoto(bfoto);
 						base.desconectar();
+						for (int i = 0; i < bfoto.length; i++) {
+								System.out.println(bfoto[i]);
+						}
+					
 						
 
 					} else if (requestLine.contains("actuar")) {

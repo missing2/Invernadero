@@ -16,7 +16,12 @@ public class Placa {
 
 	public Placa(String id, Image imagen) {
 		// TODO Auto-generated constructor stub
+		this.id_placa = id;	
+		this.estado_placa = "";
 		this.imagen = imagen;
+	
+		
+		
 	}
 
 	public String getId_placa() {
