@@ -163,18 +163,19 @@ public class DataBaseControler {
 		} 
 		else if(parametro.contains("?")){
 			parametro=parametro.replace('?','_');
-			parametro=parametro+"__";// añado 2 mas parq que sumen 3x_
+			parametro=parametro+'_';
+			
 		} 
 		else {
 			// consulta normal sin caracteres raros
 		}
 		
  		Statement stat = conn.createStatement();
- 		System.out.println(parametro);
+ 		System.out.println("param: "+parametro);
  		
  		ResultSet rs2 = stat.executeQuery("Select * from Sensor where "+colum+" like '"+parametro+"';"); // columna en la que quiero buscar y parametro que quiero buscar
  		int conta =1; 
- 		if (rs2.getRow()==0){
+ 		if (rs2.getRow()+1==0){
  			fin = "vacio";
  			System.out.println("vacia");
 
